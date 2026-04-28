@@ -12,7 +12,7 @@ This account comes from two sources within the family:
 - **Marvin Miller himself** — told the broad outline of the story to family
   at some point before his death in 2004, though he never disclosed the
   specific infraction.
-- **Marvin's sister** — believed the infraction involved marijuana, and
+- **Marvin's daughter** — believed the infraction involved marijuana, and
   that Marvin refused to identify who was smoking it.
 
 Marvin's characteristic reticence about his service means this is one of
@@ -61,7 +61,7 @@ He found this ironic. He said so.
 
 **The charge and the character:**
 Marvin never told his family what exactly he was accused of. The refusal
-to name names — if his sister's interpretation is correct — is entirely
+to name names — if his daughter's interpretation is correct — is entirely
 consistent with every other account of him in this archive. In the M60
 incident, he stopped a shot to protect his own point men without making
 a sound. In the April 20 contact, Cat Platoon held fire rather than risk
