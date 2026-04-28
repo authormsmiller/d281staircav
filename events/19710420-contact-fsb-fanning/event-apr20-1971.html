@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 April 1971 — Contact North of FSB Fanning | D/2-8 Cav</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f2ead8; --paper-dark:#e8dcc4; --ink:#1a1410; --ink-faded:#4a3f35;
+    --ink-light:#7a6a5a; --olive:#4a5240; --olive-light:#6b7260;
+    --gold:#8a7040; --gold-light:#c4a84a; --red:#7a2020; --border:#b8a880;
+    --shadow:rgba(26,20,16,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#2a2520; font-family:'Source Sans 3',sans-serif; color:var(--ink); }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.4; }
+
+  .site-bar { background:var(--olive); border-bottom:3px solid var(--gold); padding:12px 40px; display:flex; align-items:center; justify-content:space-between; }
+  .site-bar .unit-name { font-family:'Special Elite',monospace; color:var(--paper); font-size:13px; letter-spacing:3px; text-transform:uppercase; }
+  .site-bar .unit-name span { color:var(--gold-light); }
+  .site-bar nav { display:flex; gap:24px; }
+  .site-bar nav a { color:var(--paper-dark); text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:0.8; transition:opacity 0.2s; }
+  .site-bar nav a:hover { opacity:1; color:var(--gold-light); }
+
+  .breadcrumb { background:var(--paper-dark); border-bottom:1px solid var(--border); padding:10px 40px; max-width:1100px; margin:0 auto; font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
+  .breadcrumb a { color:var(--olive); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--gold); }
+  .breadcrumb span { color:var(--ink-light); margin:0 8px; }
+
+  /* Hero */
+  .event-hero { background:var(--ink); padding:48px 40px 40px; max-width:1100px; margin:0 auto; position:relative; border-bottom:4px solid var(--red); }
+  .event-hero::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--red); }
+  .event-date-stamp { font-family:'Special Elite',monospace; font-size:11px; letter-spacing:4px; color:rgba(242,234,216,0.5); text-transform:uppercase; margin-bottom:12px; }
+  .event-hero h1 { font-family:'Playfair Display',serif; font-size:44px; font-weight:700; color:var(--paper); line-height:1.1; margin-bottom:12px; }
+  .event-hero .location { font-family:'Special Elite',monospace; font-size:11px; letter-spacing:3px; color:rgba(242,234,216,0.5); text-transform:uppercase; margin-bottom:28px; }
+  .event-hero .lead { font-family:'IM Fell English',serif; font-style:italic; font-size:18px; color:rgba(242,234,216,0.85); line-height:1.7; max-width:680px; }
+
+  .casualty-banner { background:var(--red); padding:16px 40px; max-width:1100px; margin:0 auto; display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
+  .casualty-banner .kia-label { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:3px; color:rgba(242,234,216,0.7); text-transform:uppercase; flex-shrink:0; }
+  .kia-names { display:flex; gap:24px; flex-wrap:wrap; }
+  .kia-name { font-family:'Playfair Display',serif; font-size:18px; color:var(--paper); text-decoration:none; border-bottom:1px solid rgba(242,234,216,0.3); transition:border-color 0.2s; }
+  .kia-name:hover { border-color:var(--paper); }
+
+  .main { max-width:1100px; margin:0 auto; background:var(--paper); display:grid; grid-template-columns:1fr 300px; }
+
+  /* Accounts */
+  .accounts { padding:0; border-right:1px solid var(--border); }
+  .accounts-intro { padding:32px 40px; border-bottom:1px solid var(--border); background:var(--paper-dark); }
+  .accounts-intro h2 { font-family:'Playfair Display',serif; font-size:24px; font-weight:400; margin-bottom:12px; }
+  .accounts-intro p { font-size:14px; color:var(--ink-faded); line-height:1.7; }
+
+  .source-master-notice { margin:0; padding:16px 40px; background:#f5f0e0; border-bottom:1px solid #e0d4a8; border-left:none; }
+  .source-master-notice p { font-size:13px; color:var(--ink-faded); line-height:1.6; }
+  .source-master-notice strong { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px; }
+
+  .account { padding:40px; border-bottom:1px solid var(--border); }
+  .account:last-child { border-bottom:none; }
+  .account-header { display:flex; gap:20px; align-items:flex-start; margin-bottom:24px; }
+  .account-badge { width:52px; height:52px; background:var(--olive); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .account-badge span { font-family:'Playfair Display',serif; font-size:22px; color:var(--paper); }
+  .account-meta {}
+  .account-name { font-family:'Playfair Display',serif; font-size:22px; color:var(--ink); margin-bottom:2px; }
+  .account-role { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; color:var(--olive); text-transform:uppercase; margin-bottom:4px; }
+  .account-source { font-size:12px; color:var(--ink-light); font-style:italic; }
+
+  .account-body { font-size:15px; line-height:1.9; color:var(--ink-faded); }
+  .account-body p { margin-bottom:16px; }
+  .account-body p:last-child { margin-bottom:0; }
+  .account-body .pullquote { font-family:'IM Fell English',serif; font-style:italic; font-size:18px; color:var(--ink); border-left:3px solid var(--red); padding-left:20px; margin:24px 0; line-height:1.6; }
+
+  .account-discrepancies { margin-top:24px; padding:14px 16px; background:var(--paper-dark); border:1px solid var(--border); }
+  .discrepancies-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .discrepancy-item { font-size:12px; color:var(--ink-faded); line-height:1.6; margin-bottom:6px; padding-left:12px; border-left:2px solid var(--border); }
+
+  .add-account-prompt { padding:40px; background:var(--paper-dark); border-top:1px solid var(--border); }
+  .add-account-prompt h3 { font-family:'Playfair Display',serif; font-size:20px; font-weight:400; margin-bottom:8px; }
+  .add-account-prompt p { font-size:14px; color:var(--ink-faded); line-height:1.6; margin-bottom:16px; }
+  .btn { font-family:'Special Elite',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:10px 20px; cursor:pointer; border:none; text-decoration:none; display:inline-block; transition:all 0.2s; }
+  .btn-primary { background:var(--olive); color:var(--paper); }
+  .btn-primary:hover { background:var(--olive-light); }
+
+  /* Sidebar */
+  .event-sidebar { padding:28px 24px; }
+  .sidebar-block { margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .sidebar-block:last-child { border-bottom:none; }
+  .sidebar-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--ink-light); margin-bottom:12px; }
+
+  .sidebar-soldier { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(184,168,128,0.3); text-decoration:none; color:inherit; transition:color 0.15s; }
+  .sidebar-soldier:last-child { border-bottom:none; }
+  .sidebar-soldier:hover .soldier-name-link { color:var(--olive); }
+  .sidebar-avatar { width:32px; height:32px; border-radius:50%; background:var(--paper-dark); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Playfair Display',serif; font-size:14px; color:var(--ink-light); overflow:hidden; }
+  .sidebar-avatar.kia { border-color:var(--red); }
+  .sidebar-avatar img { width:100%; height:100%; object-fit:cover; filter:sepia(20%); }
+  .soldier-name-link { font-size:13px; font-weight:600; color:var(--ink); display:block; }
+  .soldier-role-link { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:1px; color:var(--ink-light); text-transform:uppercase; }
+  .kia-flag { font-family:'Special Elite',monospace; font-size:8px; letter-spacing:1px; padding:1px 5px; background:var(--red); color:var(--paper); }
+
+  .fsb-chip { display:block; padding:8px 12px; background:var(--paper-dark); border:1px solid var(--border); margin-bottom:6px; text-decoration:none; color:var(--olive); font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; transition:all 0.15s; }
+  .fsb-chip:hover { background:var(--olive); color:var(--paper); }
+
+  .nav-events { display:flex; flex-direction:column; gap:6px; }
+  .nav-event { text-decoration:none; padding:10px 12px; border:1px solid var(--border); background:var(--paper-dark); transition:all 0.15s; }
+  .nav-event:hover { border-color:var(--olive); }
+  .nav-event-date { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; color:var(--ink-light); text-transform:uppercase; }
+  .nav-event-title { font-size:12px; color:var(--ink-faded); margin-top:2px; line-height:1.4; }
+
+  footer { background:var(--ink); color:rgba(242,234,216,0.5); text-align:center; padding:24px; font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; max-width:1100px; margin:0 auto; }
+  footer span { color:rgba(242,234,216,0.25); margin:0 8px; }
+</style>
+</head>
+<body>
+
+<div class="site-bar">
+  <div class="unit-name">D/2-8 CAV <span>·</span> 1ST CAVALRY DIVISION <span>·</span> <em style="font-style:normal;color:#c4a84a;">ANGRY SKIPPER</em></div>
+  <nav>
+    <a href="roster.html">Roster</a>
+    <a href="unit-history.html">Unit History</a>
+    <a href="#">Photo Archive</a>
+    <a href="#">Never Forgotten</a>
+    <a href="#">Contribute</a>
+  </nav>
+</div>
+
+<div style="background:var(--paper-dark);">
+<div class="breadcrumb">
+  <a href="unit-history.html">Unit History</a>
+  <span>›</span>
+  <a href="#">1971</a>
+  <span>›</span>
+  20 April 1971
+</div>
+</div>
+
+<div style="background:var(--ink);">
+<div class="event-hero">
+  <div class="event-date-stamp">20 April 1971 · Combat Action · Long Khanh Province, Republic of Vietnam</div>
+  <h1>Contact North<br>of FSB Fanning</h1>
+  <div class="location">North of Route 1 · East of Gia Rai Mountain · Long Khanh Province</div>
+  <p class="lead">Delta Company, on patrol north of the nearly-complete FSB Fanning, made contact with a fortified NVA base camp concealed along a major supply trail. Three soldiers were killed and multiple others severely wounded in ten minutes of intense fighting. The engagement shaped the company for the remainder of its 1971 deployment.</p>
+</div>
+</div>
+
+<div style="background:var(--red);">
+<div class="casualty-banner">
+  <div class="kia-label">Killed in Action</div>
+  <div class="kia-names">
+    <a href="#" class="kia-name">CPL James M. Cardwell</a>
+    <a href="#" class="kia-name">CPL Danny G. Drinkard</a>
+    <a href="#" class="kia-name">CPL Joseph L. Hall</a>
+  </div>
+</div>
+</div>
+
+<div class="main">
+
+  <div class="accounts">
+
+    <div class="accounts-intro">
+      <h2>Accounts of 20 April 1971</h2>
+      <p>The following accounts were provided separately by participants and witnesses. Each represents one person's experience and recollection of the same events. They are presented here as submitted, without editorial reconciliation. Where they agree, that agreement strengthens the record. Where they differ, both versions are preserved.</p>
+    </div>
+
+    <div class="source-master-notice">
+      <strong>⚠ Source Notice — Three Perspectives, No Definitive Version</strong>
+      <p>The following accounts were provided separately by participants and one close associate. Details of sequence, positioning, timing, and the interpretation of Cat Platoon's actions vary significantly between accounts — particularly regarding why Cat did not fire on the NVA soldiers and whether that decision was sound tactical judgment or hesitation. No single account is presented as definitive. Additional recollections from veterans present that day are actively sought.</p>
+    </div>
+
+    <!-- NEAL ACCOUNT -->
+    <div class="account" id="account-neal">
+      <div class="account-header">
+        <div class="account-badge"><span>N</span></div>
+        <div class="account-meta">
+          <div class="account-name">Captain Bill Neal</div>
+          <div class="account-role">Company Commander — Skipper 6 · D/2-8 Cav</div>
+          <div class="account-source">Written deposition provided to family of SGT Marvin Miller · Received 2025</div>
+        </div>
+      </div>
+      <div class="account-body">
+        <p>Fire Support Base Fanning was in the last stages of completion, located just north of Route 1 to the east of Gia Rai Mountain in Long Khanh Province. On the morning of April 20 I was ordered to take Delta Company to patrol due north to see what was out there and report any signs of enemy activity. Intel had only vague reports of "possible enemy activity" in the area.</p>
+        <p>The Angry Skipper Company had three maneuver platoons — 1st (White Skull), 2nd (Rifle Range), and 3rd (Wild Cat). Skull Platoon had peeled off for another mission. As the two remaining platoons moved into the tree line, we went into trail formation with Range in front, followed by Cat.</p>
+        <p>By noon we were five clicks out when lead elements of Range reported a very heavy east-west trail running on the south side of a fairly deep and wide stream. The trail was almost two meters wide with heavy use. I ordered Range to cross to the north side to see what was there — they reported a similar trail on that side. I had patrolled this area extensively in 1967 and 1968 and had never seen a supply trail this large around Gia Rai Mountain.</p>
+        <p>At about 400 meters to the east, Cat's patrol spotted enemy soldiers bathing in the stream, their uniforms and AK's on the bank. I ordered them to lay low unless the enemy started moving out, then fire them up.</p>
+        <div class="pullquote">"I remember grabbing the radio mike and growling at them to fire up the dinks."</div>
+        <p>As we got close to Cat's patrol, they opened up. I heard just one or two M-60 rounds go off, then a long pause before a few M-16s started firing. The M-60 had jammed. Then all hell broke loose on the north side of the stream — first intense AK fire, then at least two Chicom claymores, then RPGs, accompanied by the screams of the wounded.</p>
+        <p>Word came that Range Six, LT Bott, was hit. Then Range Five — SSgt Dillon — was down. I knew Range was now in very serious trouble with both their platoon leader and platoon sergeant hit. The medic moving with the CP wouldn't cross the stream under fire, so PFC Tom Vollmar grabbed his medical kit and some ammo and crossed over. I thought he was hit but he got back up and disappeared into the jungle on the north side.</p>
+        <p>The three KIAs were CPL James Melvin Cardwell, CPL Danny George Drinkard, and CPL Joseph Lindsey Hall. Cardwell and Drinkard had been walking point and caught the full blast of one of the NVA claymore mines. Hall had scrambled forward past the other troops to help Dillon, and was killed by enemy fire while laying down cover for the other men.</p>
+        <p>Not knowing for sure the status of those three men has been a source of great personal anguish since that day. I could not risk more men under these circumstances to attempt retrieval under fire, and I prayed the reports were right — that they were not still alive waiting for help.</p>
+        <p>I could only tell myself that this was no time in the war to be assaulting enemy base camps. US withdrawal seemed inevitable, winning was not in the cards, and sending our men home alive to their families clearly influenced how we tried to fulfill our mission.</p>
+      </div>
+      <div class="account-discrepancies">
+        <div class="discrepancies-label">Notes &amp; Discrepancies vs. Other Accounts</div>
+        <div class="discrepancy-item">Neal states Cat's patrol "held fire" until ordered. Dillon's account suggests Cat's patrol opened up but does not comment on initial hesitation.</div>
+        <div class="discrepancy-item">Neal was "incorrectly told" LT Bott was being medevaced — Bott was in fact among the last to cross back.</div>
+        <div class="discrepancy-item">The date header on Dillon's account reads "April 30" — this appears to be a transcription error; all contextual evidence places the engagement on April 20.</div>
+      </div>
+    </div>
+
+    <!-- DILLON ACCOUNT -->
+    <div class="account" id="account-dillon">
+      <div class="account-header">
+        <div class="account-badge"><span>D</span></div>
+        <div class="account-meta">
+          <div class="account-name">Staff Sergeant Stan Dillon</div>
+          <div class="account-role">Platoon Sergeant — Range Platoon · D/2-8 Cav</div>
+          <div class="account-source">Written account provided to family of SGT Marvin Miller · Received 2025</div>
+        </div>
+      </div>
+      <div class="account-body">
+        <p>This was to be my first mission back after a week in Hawaii on R&R and a few days on the coast with the company. In the briefing, intelligence advised us that movement was suspected not far from the new firebase and we were to go check it out. Range was to be the lead platoon, with LT Bott as platoon leader — in my opinion the most knowledgeable platoon leader in the company.</p>
+        <p>We had, in my opinion, the most experienced men in the company in Dan Drinkard and Jim Cardwell. They could find about anything in the bush and they really didn't seem to mind walking point. They worked well together and it was rare to see one without the other.</p>
+        <p>We took our first squad down the creek along with a scout dog and handler — something new in my platoon. The dog took off running right down the middle of the creek. I remember Jim Cardwell turning back to me and saying, "We need to shoot that dog, he's going to give us away and get us all killed."</p>
+        <p>We moved into thicker underbrush. Walking about 30 meters in and parallel to the stream, we walked upon a fresh NVA latrine — a hole dug in the ground with bamboo sticks and a hole in the middle, built within the last few days. We must be on top of a bunker complex. We had to be real quiet and try to back out without being seen.</p>
+        <p>As I handed the radio receiver back to the RTO, the first enemy rounds came from the bunker complex hidden from view. One of those first rounds hit under my chin and spun me around. The blood spilled all over me. I remember thinking it felt like a bee sting.</p>
+        <div class="pullquote">"Jim Cardwell was just to the right of me and Dan Drinkard to the front and left of me within a few meters. Joe Hall came up from the rear and asked me, 'Where do you want me to go, Sgt. Dillon?'"</div>
+        <p>I placed Hall to my left about 10 meters. I yelled for someone to bring up a M72 LAW to clear some brush. Then I heard what I thought was an RPG — but I later learned it was a Chinese mine like a Claymore. A ringing in my ears and a hot flash through my body. I reached over to Dan Drinkard and looked to my left for Joe Hall. They were not moving. Jim Cardwell was motionless also.</p>
+        <p>I got up and fell flat on my face. I couldn't find my arm — found it was under my back, broken and shattered at the collar bone. My knee cap was blown out. I couldn't breathe; my lung was punctured and my ear drum had ruptured. I just knew if I didn't get back to cover I wasn't going to make it.</p>
+        <p>An American Indian from North Carolina, PFC Gary "Indian" Collins, called to another soldier to help carry me across the creek. The soldier was frozen in shock. Collins said, "Listen, if you don't help me carry Sergeant Dillon across the creek, I'm going to shoot you myself." The man got up and helped carry me across.</p>
+        <p>I told the Skipper, "You have to get me out of here, I'm hurt really bad." He told me I was second in line for medevac — he had to get a priority one with a severe head wound out first. On the way up in the hoist I remember sliding out of the rig — the straps were missing — and holding onto the cable to keep from falling. Tom Vollmar had taken off his belt to strap me in. The chopper was taking small arms fire but held its hover, waiting for me. I made it.</p>
+        <p>LT Bott never received a medal for his heroic leadership that day. He is deserving of the Silver Star. Knowing him, he probably blames it all on himself. I always said that he hid his leadership and talents in the bosom of his modesty.</p>
+      </div>
+      <div class="account-discrepancies">
+        <div class="discrepancies-label">Notes &amp; Discrepancies vs. Other Accounts</div>
+        <div class="discrepancy-item">Dillon's header reads "April 30" — this is believed to be a transcription error; all contextual evidence places this on April 20.</div>
+        <div class="discrepancy-item">Dillon does not mention the scout dog incident appearing in any other account — this detail is unique to his telling.</div>
+        <div class="discrepancy-item">Dillon describes Cat's patrol as not firing until spotted by the enemy; Neal's account suggests they were ordered to fire and hesitated.</div>
+      </div>
+    </div>
+
+    <!-- GARVIN NOTE -->
+    <div class="account" id="account-garvin">
+      <div class="account-header">
+        <div class="account-badge" style="background:var(--gold);"><span>G</span></div>
+        <div class="account-meta">
+          <div class="account-name">James Garvin</div>
+          <div class="account-role">Company Armor · HHC · D/2-8 Cav · At FSB Fanning during engagement</div>
+          <div class="account-source">Written account provided in context of April 24, 1971 Huey crash · Received 2025</div>
+        </div>
+      </div>
+      <div class="account-body">
+        <p>Jim Garvin was serving as Company Armor and was at FSB Fanning on April 20 — not in the field with the patrol. His written account focuses primarily on the events of April 24, but provides important context for the aftermath of the April 20 contact:</p>
+        <p>"As you know Delta Company had a major contact with the enemy on April 20th, 1971. The company directed a lot of ordnance on the enemy bunker complex for three days and were finally able to extract the three bodies lost in the first few minutes of the battle. On April 23 the company was able to return to FSB Fontaine."</p>
+        <p>Garvin's account confirms that the bodies of the three KIA were not recovered until April 23 — three days after the engagement — and that the company returned to Fontaine on that date. This timeline is consistent with Neal's account of directing artillery and air strikes on the bunker complex overnight.</p>
+      </div>
+    </div>
+
+    <!-- WEAVER ACCOUNT -->
+    <div class="account" id="account-weaver">
+      <div class="account-header">
+        <div class="account-badge" style="background:var(--gold);"><span>W</span></div>
+        <div class="account-meta">
+          <div class="account-name">Ken Weaver</div>
+          <div class="account-role">Cat Platoon · D/2-8 Cav · 1971 · Present on April 20, 1971 · DEROS approximately December 1971</div>
+          <div class="account-source">Oral account provided to son of SGT Marvin Miller · Received 2024–2025</div>
+        </div>
+      </div>
+      <div class="account-body">
+        <p>Ken Weaver's account specifically addresses Cat Platoon's actions on April 20 and reframes the question of why Cat did not fire on the NVA soldiers spotted bathing in the creek.</p>
+
+        <p>Weaver contends that Cat Platoon did not fire for two distinct reasons, both grounded in tactical judgment rather than hesitation or disobedience.</p>
+
+        <div class="pullquote">"The NVA were unarmed and bathing — but it may have been a trap to get the patrol to reveal its location to a waiting ambush."</div>
+
+        <p>First: the apparent vulnerability of unarmed men bathing was itself suspicious. Presenting an exposed, seemingly defenseless target to draw a patrol into revealing its position — or into an advance toward a prepared ambush — was a documented NVA tactic. A patrol leader recognizing this possibility and choosing not to fire was making a sound tactical read, not showing weakness.</p>
+
+        <p>Second: once firing began on the north bank, Cat's position made effective support geometrically impossible. Weaver states that Cat's squad was approximately twenty feet lower in elevation than the opposite bank where the NVA bunker complex was located. From that position, there was no clear line of fire into the bunkers. Any rounds fired across the creek also risked hitting Range Platoon soldiers who were already engaged on the north bank. Firing under those conditions would have risked blue-on-blue casualties without providing effective support.</p>
+
+        <p>Taken together, Weaver's account suggests that what Captain Neal heard on the radio as reluctance to engage was in fact a rapid tactical assessment: don't fire because it may be a trap, and if not, we cannot support effectively from this position without endangering our own men. The squad's discipline in not firing may have prevented additional casualties rather than contributing to the outcome.</p>
+      </div>
+      <div class="account-discrepancies">
+        <div class="discrepancies-label">Relationship to Other Accounts</div>
+        <div class="discrepancy-item">Neal's account describes Cat's patrol as "reluctant to initiate a firefight" and says he had to get on the radio and order them to fire. Neal interpreted this as a failure of aggressiveness requiring correction from command. Weaver's account provides the ground-level tactical context Neal did not have — specifically the terrain geometry and the NVA trap possibility — which reframes the same hesitation as sound field judgment.</div>
+        <div class="discrepancy-item">Dillon's account focuses on Range Platoon's engagement on the north bank and does not address Cat's actions in detail. His account is not in conflict with Weaver's.</div>
+        <div class="discrepancy-item">Weaver was present on April 20, 1971 — his service in Cat Platoon overlapped with Marvin Miller's by a few weeks at the start, and he remained with the unit until approximately December 1971, going home shortly before Christmas. His account is direct eyewitness testimony from the south bank, not reconstruction from secondary sources. He would have had firsthand knowledge of Cat's position, the terrain geometry, and the tactical reasoning in the patrol at the time.</div>
+      </div>
+    </div>
+      <h3>Were you there on April 20, 1971?</h3>
+      <p>We are actively collecting additional accounts of this engagement from veterans of any platoon present that day, as well as from family members who may have received letters or other information about it. Every perspective — however partial — contributes to the historical record.</p>
+      <a href="#" class="btn btn-primary">Submit Your Account</a>
+    </div>
+
+  </div><!-- /accounts -->
+
+  <!-- Sidebar -->
+  <div class="event-sidebar">
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Killed in Action</div>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar kia">C</div>
+        <div>
+          <span class="soldier-name-link">Cardwell, James M. <span class="kia-flag">KIA</span></span>
+          <span class="soldier-role-link">CPL · Range · Walking point</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar kia">D</div>
+        <div>
+          <span class="soldier-name-link">Drinkard, Danny G. <span class="kia-flag">KIA</span></span>
+          <span class="soldier-role-link">CPL · Range · Walking point</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar kia">H</div>
+        <div>
+          <span class="soldier-name-link">Hall, Joseph L. <span class="kia-flag">KIA</span></span>
+          <span class="soldier-role-link">CPL · Range · Covering withdrawal</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Severely Wounded</div>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">D</div>
+        <div>
+          <span class="soldier-name-link">Dillon, Stan</span>
+          <span class="soldier-role-link">SSgt · Range Plt Sgt</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">B</div>
+        <div>
+          <span class="soldier-name-link">Bott, Bill</span>
+          <span class="soldier-role-link">LT · Range Plt Leader</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">S</div>
+        <div>
+          <span class="soldier-name-link">Schneck, Steve</span>
+          <span class="soldier-role-link">PFC · Range · M-60 gunner</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Others Present</div>
+      <a href="marvin-miller-profile.html" class="sidebar-soldier">
+        <div class="sidebar-avatar"><img src="/mnt/user-data/uploads/bill-small.jpg" alt="Marvin Miller"></div>
+        <div>
+          <span class="soldier-name-link">Miller, Marvin</span>
+          <span class="soldier-role-link">SGT · Cat Plt · South bank</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">C</div>
+        <div>
+          <span class="soldier-name-link">Collins, Gary</span>
+          <span class="soldier-role-link">PFC · Range · Took over M-60</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">V</div>
+        <div>
+          <span class="soldier-name-link">Vollmar, Tom</span>
+          <span class="soldier-role-link">PFC · HHC · Crossed with medical kit</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">N</div>
+        <div>
+          <span class="soldier-name-link">Neal, Bill</span>
+          <span class="soldier-role-link">CPT · Skipper 6 · CO</span>
+        </div>
+      </a>
+      <a href="#" class="sidebar-soldier">
+        <div class="sidebar-avatar">K</div>
+        <div>
+          <span class="soldier-name-link">Kahnke, Steve</span>
+          <span class="soldier-role-link">SGT · FO · Directed arty overnight</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Locations</div>
+      <a href="#" class="fsb-chip">FSB Fanning</a>
+      <a href="#" class="fsb-chip">Gia Rai Mountain area</a>
+      <a href="#" class="fsb-chip">Long Khanh Province</a>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Adjacent Events</div>
+      <div class="nav-events">
+        <a href="#" class="nav-event">
+          <div class="nav-event-date">23 Apr 1971</div>
+          <div class="nav-event-title">Company returns to FSB Fontaine · Bodies recovered</div>
+        </a>
+        <a href="#" class="nav-event">
+          <div class="nav-event-date">24 Apr 1971</div>
+          <div class="nav-event-title">Huey crash at FSB Fontaine — 3 killed</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Sources in This Record</div>
+      <div style="font-size:12px;color:var(--ink-faded);line-height:1.7;">
+        <div style="margin-bottom:6px;">📝 <strong>Capt. Bill Neal</strong> — written deposition, 2025</div>
+        <div style="margin-bottom:6px;">📝 <strong>SSgt Stan Dillon</strong> — written account, 2025</div>
+        <div>📝 <strong>James Garvin</strong> — written account (April 24 focus), 2025</div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  D/2-8 Cav · 1st Cavalry Division · Angry Skipper
+  <span>·</span>
+  Event record compiled 2025–2026 · All accounts preserved as submitted
+  <span>·</span>
+  <a href="#" style="color:rgba(242,234,216,0.4);text-decoration:none;">Admin</a>
+</footer>
+
+</body>
+</html>

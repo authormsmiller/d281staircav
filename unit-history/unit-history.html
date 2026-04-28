@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit History — D/2-8 Cav, Angry Skipper</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2ead8; --paper-dark: #e8dcc4; --ink: #1a1410; --ink-faded: #4a3f35;
+    --ink-light: #7a6a5a; --olive: #4a5240; --olive-light: #6b7260;
+    --gold: #8a7040; --gold-light: #c4a84a; --red: #7a2020; --border: #b8a880;
+    --shadow: rgba(26,20,16,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#2a2520; font-family:'Source Sans 3',sans-serif; color:var(--ink); }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.4; }
+
+  .site-bar { background:var(--olive); border-bottom:3px solid var(--gold); padding:12px 40px; display:flex; align-items:center; justify-content:space-between; }
+  .site-bar .unit-name { font-family:'Special Elite',monospace; color:var(--paper); font-size:13px; letter-spacing:3px; text-transform:uppercase; }
+  .site-bar .unit-name span { color:var(--gold-light); }
+  .site-bar nav { display:flex; gap:24px; }
+  .site-bar nav a { color:var(--paper-dark); text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:0.8; transition:opacity 0.2s; }
+  .site-bar nav a:hover, .site-bar nav a.active { opacity:1; color:var(--gold-light); }
+
+  .page-header { background:var(--paper-dark); border-bottom:2px solid var(--border); padding:48px 40px 36px; max-width:1100px; margin:0 auto; position:relative; }
+  .page-header::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--olive),var(--gold),var(--olive)); }
+  .page-header h1 { font-family:'Playfair Display',serif; font-size:42px; font-weight:400; color:var(--ink); margin-bottom:8px; }
+  .page-header p { font-family:'IM Fell English',serif; font-style:italic; font-size:16px; color:var(--ink-faded); max-width:640px; line-height:1.7; }
+
+  .main { max-width:1100px; margin:0 auto; background:var(--paper); display:grid; grid-template-columns:280px 1fr; min-height:80vh; }
+
+  /* Sidebar */
+  .sidebar { border-right:1px solid var(--border); padding:28px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .sidebar-section { margin-bottom:8px; }
+  .sidebar-heading { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--ink-light); padding:10px 20px 6px; }
+  .sidebar-year { font-family:'Playfair Display',serif; font-size:22px; color:var(--olive); padding:4px 20px 2px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; transition:color 0.15s; }
+  .sidebar-year:hover { color:var(--gold); }
+  .sidebar-year.active { color:var(--ink); }
+  .sidebar-year .count { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:1px; color:var(--ink-light); }
+  .sidebar-events { padding:0 20px 8px; }
+  .sidebar-event { display:block; padding:6px 0; border-bottom:1px solid rgba(184,168,128,0.3); cursor:pointer; text-decoration:none; transition:color 0.15s; }
+  .sidebar-event:last-child { border-bottom:none; }
+  .sidebar-event-date { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:1px; color:var(--ink-light); text-transform:uppercase; }
+  .sidebar-event-title { font-size:12px; color:var(--ink-faded); line-height:1.4; margin-top:2px; }
+  .sidebar-event:hover .sidebar-event-title { color:var(--olive); }
+  .sidebar-event.combat .sidebar-event-date { color:var(--red); }
+
+  /* Filter pills */
+  .filter-pills { padding:12px 20px; border-bottom:1px solid var(--border); display:flex; flex-wrap:wrap; gap:6px; }
+  .pill { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; border:1px solid var(--border); cursor:pointer; text-transform:uppercase; background:none; color:var(--ink-light); transition:all 0.15s; }
+  .pill:hover { border-color:var(--olive); color:var(--olive); }
+  .pill.active { background:var(--olive); color:var(--paper); border-color:var(--olive); }
+  .pill.combat.active { background:var(--red); border-color:var(--red); }
+
+  /* Content */
+  .content { padding:0; }
+  .year-block { border-bottom:2px solid var(--border); }
+  .year-banner { padding:20px 40px; background:var(--olive); position:sticky; top:0; z-index:50; display:flex; align-items:baseline; gap:16px; }
+  .year-banner h2 { font-family:'Playfair Display',serif; font-size:32px; color:var(--paper); font-weight:400; }
+  .year-banner p { font-family:'IM Fell English',serif; font-style:italic; font-size:14px; color:rgba(242,234,216,0.7); }
+
+  .event-entry { padding:32px 40px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:140px 1fr; gap:32px; transition:background 0.15s; }
+  .event-entry:last-child { border-bottom:none; }
+  .event-entry:hover { background:rgba(232,220,196,0.4); }
+  .event-entry.combat { border-left:3px solid var(--red); }
+  .event-entry.incident { border-left:3px solid var(--gold); }
+  .event-entry.movement { border-left:3px solid var(--olive); }
+  .event-entry.morale { border-left:3px solid #5a7a5a; }
+
+  .event-date-col { text-align:right; padding-top:4px; }
+  .event-date-main { font-family:'Playfair Display',serif; font-size:22px; color:var(--olive); line-height:1; }
+  .event-date-year { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; color:var(--ink-light); margin-top:3px; }
+  .event-type-dot { width:10px; height:10px; border-radius:50%; margin:10px 0 0 auto; }
+  .dot-combat { background:var(--red); }
+  .dot-incident { background:var(--gold); }
+  .dot-movement { background:var(--olive); }
+  .dot-morale { background:#5a7a5a; }
+
+  .event-body {}
+  .event-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .event-tag { font-family:'Special Elite',monospace; font-size:8px; letter-spacing:2px; padding:2px 8px; text-transform:uppercase; }
+  .tag-combat { background:#f5e8e8; color:var(--red); border:1px solid #e8c8c8; }
+  .tag-movement { background:#eaede8; color:var(--olive); border:1px solid #c8d0c4; }
+  .tag-morale { background:#eef0ee; color:#4a6a4a; border:1px solid #c4d4c4; }
+  .tag-incident { background:#f5f0e0; color:var(--gold); border:1px solid #e0d4a8; }
+  .tag-photo { background:#e8edf5; color:#3a5070; border:1px solid #c4d0e0; }
+  .tag-disputed { background:#fdf0e8; color:#8a4020; border:1px solid #e8c8a8; }
+
+  .event-title { font-family:'Playfair Display',serif; font-size:22px; color:var(--ink); margin-bottom:8px; line-height:1.2; }
+  .event-location { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; color:var(--ink-light); text-transform:uppercase; margin-bottom:12px; }
+  .event-location::before { content:'📍 '; font-size:10px; }
+  .event-summary { font-size:14px; line-height:1.8; color:var(--ink-faded); margin-bottom:16px; }
+
+  .event-casualties { background:#fdf0f0; border:1px solid #e8c8c8; padding:12px 16px; margin-bottom:14px; }
+  .casualties-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; color:var(--red); text-transform:uppercase; margin-bottom:6px; }
+  .casualty-name { font-size:13px; color:var(--ink); font-weight:600; display:inline-block; margin-right:16px; }
+  .casualty-name a { color:var(--red); text-decoration:none; }
+  .casualty-name a:hover { text-decoration:underline; }
+  .casualty-role { font-size:12px; color:var(--ink-faded); }
+
+  .event-soldiers { margin-bottom:14px; }
+  .soldiers-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; color:var(--ink-light); text-transform:uppercase; margin-bottom:6px; }
+  .soldier-chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .soldier-chip { font-size:11px; color:var(--olive); background:var(--paper-dark); border:1px solid var(--border); padding:2px 8px; text-decoration:none; transition:all 0.15s; }
+  .soldier-chip:hover { background:var(--olive); color:var(--paper); }
+  .soldier-chip.deceased { color:var(--ink-light); }
+
+  .source-notice { background:#f5f0e0; border:1px solid #e0d4a8; border-left:3px solid var(--gold); padding:10px 14px; margin-bottom:14px; font-size:12px; color:var(--ink-faded); line-height:1.6; }
+  .source-notice strong { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px; }
+
+  .event-links { display:flex; gap:16px; flex-wrap:wrap; }
+  .event-link { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--olive); text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:color 0.15s; }
+  .event-link::after { content:'→'; }
+  .event-link:hover { color:var(--gold); }
+
+  /* Media thumbnails */
+  .event-media { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  .media-thumb { width:80px; height:60px; overflow:hidden; border:1px solid var(--border); cursor:pointer; }
+  .media-thumb img { width:100%; height:100%; object-fit:cover; filter:sepia(20%); transition:filter 0.2s; }
+  .media-thumb:hover img { filter:sepia(5%); }
+
+  footer { background:var(--ink); color:rgba(242,234,216,0.5); text-align:center; padding:24px; font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; max-width:1100px; margin:0 auto; }
+  footer span { color:rgba(242,234,216,0.25); margin:0 8px; }
+</style>
+</head>
+<body>
+
+<div class="site-bar">
+  <div class="unit-name">D/2-8 CAV <span>·</span> 1ST CAVALRY DIVISION <span>·</span> <em style="font-style:normal;color:#c4a84a;">ANGRY SKIPPER</em></div>
+  <nav>
+    <a href="roster.html">Roster</a>
+    <a href="#" class="active">Unit History</a>
+    <a href="#">Photo Archive</a>
+    <a href="#">Never Forgotten</a>
+    <a href="#">Contribute</a>
+  </nav>
+</div>
+
+<div style="background:var(--paper-dark);border-bottom:1px solid var(--border);">
+<div class="page-header">
+  <h1>Unit History</h1>
+  <p>A chronological record of Delta Company's movements, actions, and significant events — drawn from official records, personal accounts, letters, and the memories of the men who were there. Where accounts conflict, all versions are preserved.</p>
+</div>
+</div>
+
+<div class="main">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="filter-pills">
+      <button class="pill active" onclick="toggleFilter(this,'all')">All</button>
+      <button class="pill combat" onclick="toggleFilter(this,'combat')">Combat</button>
+      <button class="pill" onclick="toggleFilter(this,'movement')">Movement</button>
+      <button class="pill" onclick="toggleFilter(this,'morale')">Morale</button>
+      <button class="pill" onclick="toggleFilter(this,'incident')">Incidents</button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">1970</div>
+      <a class="sidebar-event movement" href="#evt-dec1970">
+        <div class="sidebar-event-date">Dec 1970</div>
+        <div class="sidebar-event-title">Arrives FSB Mace</div>
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">1971</div>
+      <a class="sidebar-event morale" href="#evt-jan1971">
+        <div class="sidebar-event-date">24 Jan 1971</div>
+        <div class="sidebar-event-title">USO Show — FSB Silver</div>
+      </a>
+      <a class="sidebar-event movement" href="#evt-feb1971">
+        <div class="sidebar-event-date">Late Jan 1971</div>
+        <div class="sidebar-event-title">Silver stands down — move to Fontaine</div>
+      </a>
+      <a class="sidebar-event combat" href="#evt-apr20">
+        <div class="sidebar-event-date">20 Apr 1971</div>
+        <div class="sidebar-event-title">Contact N. of FSB Fanning — 3 KIA</div>
+      </a>
+      <a class="sidebar-event incident" href="#evt-apr24">
+        <div class="sidebar-event-date">24 Apr 1971</div>
+        <div class="sidebar-event-title">Huey crash FSB Fontaine — 3 killed</div>
+      </a>
+      <a class="sidebar-event movement" href="#evt-may1971">
+        <div class="sidebar-event-date">30 May 1971</div>
+        <div class="sidebar-event-title">At FSB King — moving to Fanning</div>
+      </a>
+      <a class="sidebar-event movement" href="#evt-sep1971">
+        <div class="sidebar-event-date">3 Sep 1971</div>
+        <div class="sidebar-event-title">Move to FSB Jeffreys</div>
+      </a>
+      <a class="sidebar-event movement" href="#evt-dec1971">
+        <div class="sidebar-event-date">2 Dec 1971</div>
+        <div class="sidebar-event-title">Miller departs — tour ends</div>
+      </a>
+    </div>
+
+    <div class="sidebar-section" style="padding:16px 20px;border-top:1px solid var(--border);margin-top:8px;">
+      <p style="font-size:11px;color:var(--ink-light);line-height:1.6;">Timeline based on letters of Marvin D. Miller (Dec 1970–Dec 1971) and unit accounts. Earlier and later periods need additional sources.</p>
+      <a href="#" style="display:inline-block;margin-top:8px;font-family:'Special Elite',monospace;font-size:9px;letter-spacing:2px;color:var(--olive);text-decoration:none;text-transform:uppercase;">Contribute an event →</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <div class="year-block" id="year-1970">
+      <div class="year-banner">
+        <h2>1970</h2>
+        <p>Delta Company active in III Corps — Long Khanh Province</p>
+      </div>
+
+      <div class="event-entry movement" id="evt-dec1970">
+        <div class="event-date-col">
+          <div class="event-date-main">Dec</div>
+          <div class="event-date-year">1970</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags">
+            <span class="event-tag tag-movement">Arrival</span>
+            <span class="event-tag tag-movement">FSB Movement</span>
+          </div>
+          <div class="event-title">Delta Company at FSB Mace</div>
+          <div class="event-location">FSB Mace, Long Khanh Province</div>
+          <div class="event-summary">New arrivals processed through the replacement depot at Bien Hoa before assignment to FSB Mace. Among those arriving in December 1970 was PFC Marvin D. Miller, Cat Platoon, reporting a few days before December 15.</div>
+          <div class="event-soldiers">
+            <div class="soldiers-label">Known arrivals this period</div>
+            <div class="soldier-chips">
+              <a href="marvin-miller-profile.html" class="soldier-chip">Miller, Marvin (Cat)</a>
+              <span class="soldier-chip deceased">Cate, Larry (Cat)</span>
+              <span class="soldier-chip deceased">Sells, Leroy (Cat)</span>
+            </div>
+          </div>
+          <div class="event-links">
+            <a href="#" class="event-link">FSB Mace page</a>
+            <a href="#" class="event-link">All soldiers present</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="year-block" id="year-1971">
+      <div class="year-banner">
+        <h2>1971</h2>
+        <p>Patrol operations, Long Khanh Province — drawdown begins</p>
+      </div>
+
+      <div class="event-entry morale" id="evt-jan1971">
+        <div class="event-date-col">
+          <div class="event-date-main">24 Jan</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-morale"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-morale">Morale</span></div>
+          <div class="event-title">USO Show — FSB Silver</div>
+          <div class="event-location">FSB Silver, Long Khanh Province</div>
+          <div class="event-summary">A USO show was held at FSB Silver, described in letters home as a rare and welcome break. The company had been operating from Silver since arriving in-country.</div>
+          <div class="event-links"><a href="#" class="event-link">FSB Silver page</a></div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-feb1971">
+        <div class="event-date-col">
+          <div class="event-date-main">Late Jan</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">FSB Movement</span></div>
+          <div class="event-title">FSB Silver Stands Down — Cat Platoon Last to Leave</div>
+          <div class="event-location">FSB Silver → FSB Fontaine, Long Khanh Province</div>
+          <div class="event-summary">FSB Silver was dismantled and the company relocated to the newly established FSB Fontaine. A letter dated January 30 confirmed the move was complete. Cat Platoon was the last unit to leave Silver. Notably, SGT Marvin Miller was asked by the Colonel to draw a scaled model of the new base at Fontaine — a detail suggesting he had recognized drafting or spatial skills.</div>
+          <div class="event-soldiers">
+            <div class="soldiers-label">Documented involvement</div>
+            <div class="soldier-chips">
+              <a href="marvin-miller-profile.html" class="soldier-chip">Miller, Marvin · Drew FSB model</a>
+            </div>
+          </div>
+          <div class="event-links">
+            <a href="#" class="event-link">FSB Fontaine page</a>
+            <a href="#" class="event-link">FSB Silver page</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- APRIL 20 — THE BIG ONE -->
+      <div class="event-entry combat" id="evt-apr20">
+        <div class="event-date-col">
+          <div class="event-date-main">20 Apr</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-combat"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags">
+            <span class="event-tag tag-combat">Combat Action</span>
+            <span class="event-tag tag-disputed">Multiple Accounts</span>
+          </div>
+          <div class="event-title">Contact North of FSB Fanning — Three Killed in Action</div>
+          <div class="event-location">North of Route 1, east of Gia Rai Mountain, Long Khanh Province</div>
+
+          <div class="event-summary">
+            Delta Company, ordered to patrol north of the nearly-complete FSB Fanning, made contact with a fortified NVA base camp along a major supply trail running parallel to a stream. Range Platoon, crossing to the north bank of the creek, walked into an ambush at a bunker complex. Three soldiers were killed and multiple others severely wounded before the company withdrew, called in artillery and air strikes, and eventually recovered the bodies.
+          </div>
+
+          <div class="event-casualties">
+            <div class="casualties-label">Killed in Action</div>
+            <div><span class="casualty-name"><a href="#">Cardwell, James M.</a></span><span class="casualty-role">CPL · Range Plt · Walking point when claymore detonated</span></div>
+            <div style="margin-top:6px;"><span class="casualty-name"><a href="#">Drinkard, Danny G.</a></span><span class="casualty-role">CPL · Range Plt · Walking point alongside Cardwell</span></div>
+            <div style="margin-top:6px;"><span class="casualty-name"><a href="#">Hall, Joseph L.</a></span><span class="casualty-role">CPL · Range Plt · Moved forward to assist Dillon; killed covering withdrawal</span></div>
+            <div style="margin-top:10px;font-family:'Special Elite',monospace;font-size:9px;letter-spacing:2px;color:#8a4020;text-transform:uppercase;">Severely Wounded</div>
+            <div style="margin-top:4px;"><span class="casualty-name"><a href="#">Dillon, Stan</a></span><span class="casualty-role">SSgt E6 · Range Plt Sgt · Struck by Chicom claymore and small arms · Survived</span></div>
+            <div style="margin-top:4px;"><span class="casualty-name"><a href="#">Bott, Bill</a></span><span class="casualty-role">LT · Range Plt Leader · Wounded · Last to leave north bank · Survived</span></div>
+            <div style="margin-top:4px;"><span class="casualty-name"><a href="#">Schneck, Steve</a></span><span class="casualty-role">PFC · Range Plt · Severely wounded, continued to man M-60 covering withdrawal · Survived</span></div>
+          </div>
+
+          <div class="event-soldiers">
+            <div class="soldiers-label">Others with documented involvement</div>
+            <div class="soldier-chips">
+              <a href="marvin-miller-profile.html" class="soldier-chip">Miller, Marvin · Cat Plt, south bank</a>
+              <a href="#" class="soldier-chip">Collins, Gary · Took over Schneck's M-60</a>
+              <a href="#" class="soldier-chip">Vollmar, Tom · Crossed creek with medical kit</a>
+              <a href="#" class="soldier-chip">Brothers, Harvey · Medic (Doc)</a>
+              <a href="#" class="soldier-chip">Kahnke, Steve · FO, directed arty overnight</a>
+              <a href="#" class="soldier-chip">Neal, Bill · CO, Skipper 6</a>
+              <a href="#" class="soldier-chip">Martin, Michael · Skull Plt Ldr, choppered in after</a>
+            </div>
+          </div>
+
+          <div class="source-notice">
+            <strong>⚠ Multiple Accounts — No Single Version is Definitive</strong>
+            The summary above draws from the depositions of Capt. Bill Neal and SSgt Stan Dillon, written accounts submitted separately. These perspectives differ on several details of sequence, timing, and positioning. Additional accounts from other soldiers present are welcomed. All versions are preserved as submitted without editorial reconciliation.
+          </div>
+
+          <div class="event-links">
+            <a href="event-apr20-1971.html" class="event-link">Full event record with all accounts</a>
+            <a href="#" class="event-link">FSB Fanning page</a>
+            <a href="#" class="event-link">Never Forgotten — Cardwell, Drinkard, Hall</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-entry incident" id="evt-apr24">
+        <div class="event-date-col">
+          <div class="event-date-main">24 Apr</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-incident"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags">
+            <span class="event-tag tag-incident">Incident</span>
+            <span class="event-tag tag-photo">Photographed — Only Known Record</span>
+          </div>
+          <div class="event-title">Huey Crash at FSB Fontaine — Pilot, Co-pilot, and SP4 Colburn Killed</div>
+          <div class="event-location">FSB Fontaine, Long Khanh Province</div>
+          <div class="event-summary">A UH-1 Huey departed FSB Fontaine and crashed shortly after takeoff. The pilot, co-pilot, and Battalion Armor SP4 Richard Colburn were killed. Door gunner Nathan Stanfield survived with his arm pinned under the skid. Company Armor SGT James Garvin had been bumped from the flight moments before departure and watched the helicopter go down from the firebase. SGT Marvin Miller, among the first soldiers on scene after casualties were removed, photographed the wreckage through the recovery operation — producing what are believed to be the only known photographs of this incident.</div>
+
+          <div class="event-casualties">
+            <div class="casualties-label">Killed</div>
+            <div><span class="casualty-name"><a href="#">Fanning, [First Name]</a></span><span class="casualty-role">Pilot · KIA · FSB Fanning named in his honor</span></div>
+            <div style="margin-top:6px;"><span class="casualty-name">[Co-pilot name needed]</span><span class="casualty-role">Co-pilot · KIA</span></div>
+            <div style="margin-top:6px;"><span class="casualty-name"><a href="#">Colburn, Richard</a></span><span class="casualty-role">SP4 · Battalion Armor · Had come to Fontaine to personally help repair weapons after April 20 contact · KIA</span></div>
+          </div>
+
+          <div class="event-media">
+            <div class="media-thumb" onclick="openPhoto()"><img src="/mnt/user-data/uploads/042471-hueycrash3.jpg" alt="Crash wreckage"></div>
+            <div class="media-thumb" onclick="openPhoto()"><img src="/mnt/user-data/uploads/042471-hueycrash4.jpg" alt="Recovery"></div>
+          </div>
+
+          <div class="event-soldiers">
+            <div class="soldiers-label">Documented involvement</div>
+            <div class="soldier-chips">
+              <a href="marvin-miller-profile.html" class="soldier-chip">Miller, Marvin · Photographer — first on scene</a>
+              <a href="#" class="soldier-chip">Garvin, James · Witnessed crash from firebase</a>
+              <a href="#" class="soldier-chip">Stanfield, Nathan · Door gunner, survived</a>
+            </div>
+          </div>
+
+          <div class="event-links">
+            <a href="#" class="event-link">Jim Garvin's full account</a>
+            <a href="#" class="event-link">Richard Colburn — Never Forgotten</a>
+            <a href="marvin-miller-profile.html" class="event-link">Photos — Marvin Miller's profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-apr29-drawdown">
+        <div class="event-date-col">
+          <div class="event-date-main">29 Apr</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">Division Drawdown</span></div>
+          <div class="event-title">1st Cavalry Division Withdraws — D/2-8 Remains</div>
+          <div class="event-location">Long Khanh Province, Vietnam</div>
+          <div class="event-summary">The bulk of the 1st Cavalry Division (Airmobile) departed Vietnam for Fort Hood, Texas — nine days after the April 20 contact north of FSB Fanning. The 3rd Brigade, 1st Cavalry Division (Separate), including the 2nd Battalion, 8th Cavalry, remained in-country as part of the Vietnamization rearguard. D Company, 2/8 Cav was among the final US ground combat units remaining in Vietnam. The battalion continued to operate east of Bien Hoa in Long Khanh Province, standing down in June 1972 — a full year after the main division left. At the time of this drawdown, SGT Marvin Miller had approximately eight months remaining in his tour.</div>
+          <div class="source-notice" style="margin-top:12px;">
+            <strong>Source Note</strong>
+            Division withdrawal date confirmed by 1st Cavalry Division Association records and Wikipedia unit history. Battalion stand-down date (June 1972) confirmed by GlobalSecurity.org unit history for 2nd Battalion, 8th Cavalry.
+          </div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-may1971">
+        <div class="event-date-col">
+          <div class="event-date-main">30 May</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">FSB Movement</span></div>
+          <div class="event-title">Company at FSB King — Returning to Fanning</div>
+          <div class="event-location">FSB King, Long Khanh Province</div>
+          <div class="event-summary">A letter from May 30 places the company at FSB King, with a chapel service noted as a rarity. The unit was preparing to tear down King and return to FSB Fanning. FSB King does not appear in the current official site record and is documented here solely from Marvin Miller's letters.</div>
+          <div class="source-notice" style="margin-top:12px;">
+            <strong>Source Note</strong>
+            FSB King is referenced only in letters of Marvin D. Miller. No other documentation has been located. If you have additional information about this firebase, please contribute it.
+          </div>
+          <div class="event-links"><a href="#" class="event-link">Contribute information about FSB King</a></div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-sep1971">
+        <div class="event-date-col">
+          <div class="event-date-main">3 Sep</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">FSB Movement</span></div>
+          <div class="event-title">Move to FSB Jeffreys</div>
+          <div class="event-location">FSB Jeffreys — near Vietnamese village, Long Khanh Province</div>
+          <div class="event-summary">The unit established at FSB Jeffreys, noted in a letter as being not far from a Vietnamese village. A USO show occurred a few days prior to a September 8 letter. Like FSB King, FSB Jeffreys does not appear in the current official site record and is documented here from Marvin Miller's letters.</div>
+          <div class="event-links"><a href="#" class="event-link">Contribute information about FSB Jeffreys</a></div>
+        </div>
+      </div>
+
+      <div class="event-entry combat" id="evt-oct21-1971">
+        <div class="event-date-col">
+          <div class="event-date-main">21 Oct</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-combat"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-combat">KIA</span><span class="event-tag tag-movement">Cat at CP</span></div>
+          <div class="event-title">Contact — PFC Bill Makowski KIA</div>
+          <div class="event-location">Long Khanh Province (exact location to be confirmed)</div>
+          <div class="event-summary">PFC Bill Makowski, Range 71, was killed in a firefight. He had been in the field only one month and had just turned 20. During the same engagement, a bullet passed through Doug Hilts' helmet lining leaving him stunned with limited memory of events, and Dizzy Blais sustained shrapnel wounds to his face. Cat Platoon was near Captain Wolf Kutter and the command post during this contact and was not in a forward position to address the ambush — consistent with the pattern observed on April 20, 1971. A written account of this incident by Captain Kutter exists and will be added to this record when accessible. This contact may have been one of Marvin Miller's last field operations before being stood down as a short-timer.</div>
+          <div class="source-notice" style="margin-top:12px;">
+            <strong>Source Note</strong>
+            Primary account: COL Wolf Kutter (Ret.) — document in possession of Marvin Miller's son, not yet transcribed. Supporting detail: 2022 ASA Newsletter (Garvin account of 2021 memorial). Cat Platoon positioning: family recollection of Kutter account. Short-timer context: confirmed by Kutter and Val Romani.
+          </div>
+          <div class="event-links"><a href="#" class="event-link">Contribute information about this contact</a></div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-shorttimer-1971">
+        <div class="event-date-col">
+          <div class="event-date-main">~Nov</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">Short-Timer Policy</span></div>
+          <div class="event-title">Stood Down — Battalion HQ for Final Weeks</div>
+          <div class="event-location">Battalion Headquarters, Long Khanh Province</div>
+          <div class="event-summary">Per confirmed policy described by both Captain Kutter and Val Romani, soldiers approaching their DEROS date were not sent to the bush. With his December 2 DEROS approaching, SGT Marvin Miller was stood down from field operations approximately one month before departure and assigned to Battalion HQ. His November 24 letter home described a "short-timer's attitude" and asked his family to stop writing — not just a psychological state, but the literal reality of a soldier in an administrative holding pattern, waiting out his final days in-country. The boredom and quietness of his final letters reflects this period at HQ rather than field operations.</div>
+          <div class="source-notice" style="margin-top:12px;">
+            <strong>Source Note</strong>
+            Short-timer policy confirmed by COL Wolf Kutter (Ret.) and Val Romani. Letter of November 24, 1971 provides Marvin's own description of this period. Approximate stand-down date estimated from DEROS of December 2, 1971.
+          </div>
+        </div>
+      </div>
+
+      <div class="event-entry movement" id="evt-dec1971">
+        <div class="event-date-col">
+          <div class="event-date-main">2 Dec</div>
+          <div class="event-date-year">1971</div>
+          <div class="event-type-dot dot-movement"></div>
+        </div>
+        <div class="event-body">
+          <div class="event-tags"><span class="event-tag tag-movement">Departure</span></div>
+          <div class="event-title">SGT Marvin Miller Departs — Honorable Discharge</div>
+          <div class="event-location">US Army Personnel Center, Oakland, California</div>
+          <div class="event-summary">SGT Marvin Dale Miller, Cat Platoon, was honorably discharged after exactly one year in-country. In his final letter home, dated November 24, he had described having a "short-timer's attitude" and asked family to stop writing. He returned to Kittanning, Armstrong County, Pennsylvania. He passed away in 2004 without discussing his service in detail with his family. Ken Weaver's photographs from a going-away party held in the rear in mid-December 1971 do not include Marvin — he was already home in Kittanning when the party took place. Weaver himself departed shortly before Christmas 1971, appearing in those photographs as one of the men being sent off.</div>
+          <div class="event-links">
+            <a href="marvin-miller-profile.html" class="event-link">Marvin Miller's profile</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /year-1971 -->
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<footer>
+  D/2-8 Cav · 1st Cavalry Division · Angry Skipper
+  <span>·</span>
+  Timeline compiled from letters of Marvin D. Miller and unit accounts · Contributions welcome
+  <span>·</span>
+  <a href="#" style="color:rgba(242,234,216,0.4);text-decoration:none;">Admin</a>
+</footer>
+
+<script>
+function toggleFilter(btn, type) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+}
+function openPhoto() { alert('Photo lightbox would open here — connected to the media archive.'); }
+
+// Smooth scroll for sidebar links
+document.querySelectorAll('.sidebar-event').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+});
+
+// Highlight active event on scroll
+const events = document.querySelectorAll('.event-entry');
+const sidebarLinks = document.querySelectorAll('.sidebar-event');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      sidebarLinks.forEach(l => {
+        l.style.background = l.getAttribute('href') === `#${id}` ? 'rgba(74,82,64,0.1)' : '';
+      });
+    }
+  });
+}, { threshold: 0.5 });
+events.forEach(e => observer.observe(e));
+</script>
+</body>
+</html>
