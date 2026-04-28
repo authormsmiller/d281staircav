@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roster — D/2-8 Cav, Angry Skipper</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2ead8;
+    --paper-dark: #e8dcc4;
+    --ink: #1a1410;
+    --ink-faded: #4a3f35;
+    --ink-light: #7a6a5a;
+    --olive: #4a5240;
+    --olive-light: #6b7260;
+    --gold: #8a7040;
+    --gold-light: #c4a84a;
+    --red: #7a2020;
+    --border: #b8a880;
+    --shadow: rgba(26,20,16,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#2a2520; font-family:'Source Sans 3',sans-serif; color:var(--ink); }
+
+  body::before {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:1000; opacity:0.4;
+  }
+
+  .site-bar {
+    background:var(--olive); border-bottom:3px solid var(--gold);
+    padding:12px 40px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .site-bar .unit-name { font-family:'Special Elite',monospace; color:var(--paper); font-size:13px; letter-spacing:3px; text-transform:uppercase; }
+  .site-bar .unit-name span { color:var(--gold-light); }
+  .site-bar nav { display:flex; gap:24px; }
+  .site-bar nav a { font-family:'Source Sans 3',sans-serif; color:var(--paper-dark); text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:0.8; transition:opacity 0.2s; }
+  .site-bar nav a:hover, .site-bar nav a.active { opacity:1; color:var(--gold-light); }
+
+  .page-header {
+    background:var(--paper-dark); border-bottom:2px solid var(--border);
+    padding:48px 40px 36px; max-width:1100px; margin:0 auto; position:relative;
+  }
+  .page-header::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--olive),var(--gold),var(--olive)); }
+
+  .page-header h1 { font-family:'Playfair Display',serif; font-size:42px; font-weight:400; color:var(--ink); margin-bottom:8px; }
+  .page-header p { font-family:'IM Fell English',serif; font-style:italic; font-size:16px; color:var(--ink-faded); max-width:600px; line-height:1.7; }
+  .page-header .stats { display:flex; gap:32px; margin-top:24px; }
+  .stat { text-align:left; }
+  .stat-num { font-family:'Playfair Display',serif; font-size:32px; color:var(--olive); line-height:1; }
+  .stat-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:3px; color:var(--ink-light); text-transform:uppercase; margin-top:3px; }
+
+  .main { max-width:1100px; margin:0 auto; background:var(--paper); }
+
+  /* Search & Filter Bar */
+  .filter-bar {
+    padding:24px 40px; background:var(--paper-dark); border-bottom:1px solid var(--border);
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100;
+    box-shadow:0 2px 12px var(--shadow);
+  }
+
+  .search-wrap { position:relative; flex:1; min-width:240px; }
+  .search-wrap::before { content:'⌕'; position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--ink-light); font-size:18px; pointer-events:none; }
+
+  .search-input {
+    width:100%; padding:10px 12px 10px 36px;
+    background:var(--paper); border:1px solid var(--border);
+    font-family:'Source Sans 3',sans-serif; font-size:14px; color:var(--ink);
+    outline:none; transition:border-color 0.2s;
+  }
+  .search-input:focus { border-color:var(--olive); }
+  .search-input::placeholder { color:var(--ink-light); }
+
+  .filter-select {
+    padding:10px 14px; background:var(--paper); border:1px solid var(--border);
+    font-family:'Special Elite',monospace; font-size:11px; letter-spacing:1px;
+    color:var(--ink-faded); outline:none; cursor:pointer; text-transform:uppercase;
+    transition:border-color 0.2s;
+  }
+  .filter-select:focus { border-color:var(--olive); }
+
+  .alpha-bar { display:flex; gap:4px; flex-wrap:wrap; padding:16px 40px; border-bottom:1px solid var(--border); background:var(--paper); }
+  .alpha-btn {
+    font-family:'Special Elite',monospace; font-size:12px; letter-spacing:1px;
+    padding:4px 8px; background:none; border:1px solid transparent;
+    color:var(--ink-light); cursor:pointer; transition:all 0.15s;
+  }
+  .alpha-btn:hover { border-color:var(--border); color:var(--olive); }
+  .alpha-btn.active { background:var(--olive); color:var(--paper); border-color:var(--olive); }
+  .alpha-btn.has-entries { color:var(--ink); font-weight:600; }
+
+  /* Results count */
+  .results-bar { padding:12px 40px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .results-count { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; color:var(--ink-light); text-transform:uppercase; }
+  .view-toggle { display:flex; gap:8px; }
+  .view-btn { background:none; border:1px solid var(--border); padding:4px 10px; cursor:pointer; font-family:'Special Elite',monospace; font-size:10px; color:var(--ink-light); letter-spacing:1px; transition:all 0.15s; }
+  .view-btn.active { background:var(--olive); color:var(--paper); border-color:var(--olive); }
+
+  /* Alpha section headers */
+  .alpha-section { padding:0; }
+  .alpha-heading {
+    padding:10px 40px; background:var(--paper-dark); border-bottom:1px solid var(--border);
+    font-family:'Playfair Display',serif; font-size:28px; color:var(--olive);
+    position:sticky; top:73px; z-index:50; display:flex; align-items:baseline; gap:12px;
+  }
+  .alpha-heading span { font-family:'Special Elite',monospace; font-size:11px; letter-spacing:2px; color:var(--ink-light); text-transform:uppercase; }
+
+  /* Grid view */
+  .roster-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+
+  .soldier-card {
+    padding:16px 20px; border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+    cursor:pointer; transition:background 0.15s; display:flex; gap:14px; align-items:flex-start;
+    text-decoration:none; color:inherit;
+  }
+  .soldier-card:hover { background:var(--paper-dark); }
+  .soldier-card:nth-child(4n) { border-right:none; }
+
+  .card-photo {
+    width:48px; height:48px; flex-shrink:0; overflow:hidden;
+    background:var(--paper-dark); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card-photo img { width:100%; height:100%; object-fit:cover; filter:sepia(20%); }
+  .card-photo .initial { font-family:'Playfair Display',serif; font-size:20px; color:var(--ink-light); }
+
+  .card-info { flex:1; min-width:0; }
+  .card-name { font-family:'Source Sans 3',sans-serif; font-size:14px; font-weight:600; color:var(--ink); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .card-meta { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:1.5px; color:var(--ink-light); text-transform:uppercase; line-height:1.6; }
+  .card-platoon { display:inline-block; }
+
+  .badge-kia { display:inline-block; font-family:'Special Elite',monospace; font-size:8px; letter-spacing:1px; padding:1px 5px; background:var(--red); color:var(--paper); margin-left:4px; vertical-align:middle; }
+  .badge-rich { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-left:4px; vertical-align:middle; title:"Has additional materials"; }
+
+  /* List view */
+  .roster-list { display:none; }
+  .roster-list.active { display:block; }
+  .roster-grid.active { display:grid; }
+
+  .list-row {
+    display:grid; grid-template-columns:200px 80px 140px 120px 100px 1fr;
+    gap:0; border-bottom:1px solid var(--border);
+    align-items:center; text-decoration:none; color:inherit;
+    transition:background 0.15s; cursor:pointer;
+  }
+  .list-row:hover { background:var(--paper-dark); }
+  .list-header {
+    background:var(--olive); color:var(--paper);
+    font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+    position:sticky; top:73px; z-index:50;
+  }
+  .list-header .list-cell { color:var(--paper); opacity:0.8; }
+  .list-cell { padding:12px 16px; font-size:13px; color:var(--ink-faded); border-right:1px solid var(--border); }
+  .list-cell:last-child { border-right:none; }
+  .list-cell.name { font-weight:600; color:var(--ink); font-size:14px; }
+
+  /* No results */
+  .no-results { padding:60px 40px; text-align:center; display:none; }
+  .no-results.visible { display:block; }
+  .no-results p { font-family:'IM Fell English',serif; font-style:italic; font-size:18px; color:var(--ink-light); }
+
+  /* Legend */
+  .legend { padding:16px 40px; border-top:1px solid var(--border); background:var(--paper-dark); display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--ink-light); }
+
+  footer { background:var(--ink); color:rgba(242,234,216,0.5); text-align:center; padding:24px; font-family:'Special Elite',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; max-width:1100px; margin:0 auto; }
+  footer span { color:rgba(242,234,216,0.25); margin:0 8px; }
+</style>
+</head>
+<body>
+
+<div class="site-bar">
+  <div class="unit-name">D/2-8 CAV <span>·</span> 1ST CAVALRY DIVISION <span>·</span> <em style="font-style:normal;color:#c4a84a;">ANGRY SKIPPER</em></div>
+  <nav>
+    <a href="#" class="active">Roster</a>
+    <a href="#">Unit History</a>
+    <a href="#">Photo Archive</a>
+    <a href="#">Never Forgotten</a>
+    <a href="#">Contribute</a>
+  </nav>
+</div>
+
+<div style="background:var(--paper-dark);border-bottom:1px solid var(--border);">
+<div class="page-header">
+  <h1>The Roster</h1>
+  <p>Every soldier known to have served with Delta Company, 2nd Battalion, 8th Cavalry, 1st Cavalry Division — and the attached and supporting personnel who served alongside them.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">312</div><div class="stat-label">Soldiers Recorded</div></div>
+    <div class="stat"><div class="stat-num">47</div><div class="stat-label">With Profiles</div></div>
+    <div class="stat"><div class="stat-num">14</div><div class="stat-label">KIA</div></div>
+    <div class="stat"><div class="stat-num">1965–1972</div><div class="stat-label">Years of Service</div></div>
+  </div>
+</div>
+</div>
+
+<div class="main">
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <input class="search-input" type="text" placeholder="Search by name…" id="searchInput" oninput="filterRoster()">
+    </div>
+    <select class="filter-select" id="platoonFilter" onchange="filterRoster()">
+      <option value="">All Platoons</option>
+      <option value="Cat">Cat (Wild Cat — 3rd)</option>
+      <option value="Range">Range (Rifle Range — 2nd)</option>
+      <option value="Skull">Skull (White Skull — 1st)</option>
+      <option value="Skipper">Skipper</option>
+      <option value="Skipper 6">Skipper 6 (Command)</option>
+      <option value="Stone Mountain">Stone Mountain (Regt. Cmd)</option>
+      <option value="HHC">Battalion HQ (HHC)</option>
+      <option value="8th Eng">8th Engineer (Attached)</option>
+    </select>
+    <select class="filter-select" id="yearFilter" onchange="filterRoster()">
+      <option value="">All Years</option>
+      <option value="1965">1965–66</option>
+      <option value="1966">1966–67</option>
+      <option value="1967">1967–68</option>
+      <option value="1968">1968–69</option>
+      <option value="1969">1969–70</option>
+      <option value="1970">1970–71</option>
+      <option value="1971">1971–72</option>
+    </select>
+    <select class="filter-select" id="statusFilter" onchange="filterRoster()">
+      <option value="">All</option>
+      <option value="living">Living</option>
+      <option value="deceased">Deceased</option>
+      <option value="kia">KIA</option>
+      <option value="profile">Has Profile</option>
+    </select>
+  </div>
+
+  <div class="alpha-bar" id="alphaBar">
+    <button class="alpha-btn active has-entries" onclick="jumpToLetter('ALL',this)">All</button>
+    <!-- Generated by JS -->
+  </div>
+
+  <div class="results-bar">
+    <div class="results-count" id="resultsCount">Showing 312 soldiers</div>
+    <div class="view-toggle">
+      <button class="view-btn active" onclick="setView('grid',this)">Grid</button>
+      <button class="view-btn" onclick="setView('list',this)">List</button>
+    </div>
+  </div>
+
+  <div id="rosterContainer"></div>
+  <div class="no-results" id="noResults"><p>No soldiers found matching your search.</p></div>
+
+  <div class="legend">
+    <div class="legend-item"><span style="display:inline-block;width:16px;height:10px;background:var(--red);"></span> KIA — Killed in Action</div>
+    <div class="legend-item"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);"></span> Has expanded profile</div>
+    <div class="legend-item"><span style="display:inline-block;width:16px;height:10px;background:var(--olive);opacity:0.5;"></span> Deceased (post-service)</div>
+    <div class="legend-item" style="margin-left:auto;font-size:8px;">Click any soldier to view their profile</div>
+  </div>
+
+</div>
+
+<footer>
+  D/2-8 Cav · 1st Cavalry Division · Angry Skipper
+  <span>·</span>
+  312 soldiers recorded · Archive maintained by D/2-8 Brotherhood
+  <span>·</span>
+  <a href="#" style="color:rgba(242,234,216,0.4);text-decoration:none;">Admin</a>
+</footer>
+
+<script>
+// Sample roster data — in production this comes from Airtable/Git
+const soldiers = [
+  { last:"Adams", first:"Jimmy", platoon:"Skipper", years:"1967-68", status:"kia", profile:false },
+  { last:"Adams", first:"Roy", platoon:"Cat", years:"1968-69", status:"deceased", profile:false },
+  { last:"Adamson", first:"George", platoon:"Range", years:"1969-70", status:"living", profile:false },
+  { last:"Ahern", first:"Raymond", platoon:"Cat", years:"1970-71", status:"living", profile:false },
+  { last:"Alloway", first:"Dennis", platoon:"Cat", years:"1970-71", status:"deceased", profile:false },
+  { last:"Alsup", first:"Stephen", platoon:"Skull", years:"1968-69", status:"living", profile:false },
+  { last:"Amaral", first:"Greg", platoon:"Range", years:"1969-70", status:"living", profile:false },
+  { last:"Anderson", first:"David", platoon:"HHC", years:"1970-71", status:"living", profile:false },
+  { last:"Anderson", first:"John", platoon:"Skull", years:"1971-72", status:"living", profile:false },
+  { last:"Apprill", first:"Dennis", platoon:"Cat", years:"1969-70", status:"living", profile:false },
+  { last:"Baily", first:"Joseph", platoon:"Skull", years:"1967-68", status:"deceased", profile:false },
+  { last:"Barnett", first:"Danny", platoon:"Range", years:"1970-71", status:"living", profile:true },
+  { last:"Batts", first:"Robert", platoon:"Cat", years:"1971-72", status:"living", profile:true },
+  { last:"Beasley", first:"Glenn", platoon:"Skull", years:"1968-69", status:"living", profile:false },
+  { last:"Bennett", first:"Michael", platoon:"Range", years:"1970-71", status:"living", profile:false },
+  { last:"Berry", first:"David", platoon:"Skull", years:"1971-72", status:"living", profile:false },
+  { last:"Bishop", first:"Eddie", platoon:"Range", years:"1969-70", status:"living", profile:false },
+  { last:"Blair", first:"John", platoon:"Cat", years:"1968-69", status:"living", profile:false },
+  { last:"Bott", first:"Bill", platoon:"Range", years:"1970-71", status:"living", profile:true },
+  { last:"Boyle", first:"Patrick", platoon:"Skull", years:"1969-70", status:"deceased", profile:false },
+  { last:"Brown", first:"Allen", platoon:"Cat", years:"1970-71", status:"living", profile:false },
+  { last:"Brown", first:"George", platoon:"Range", years:"1968-69", status:"living", profile:false },
+  { last:"Burchett", first:"Mark", platoon:"Skull", years:"1971-72", status:"living", profile:false },
+  { last:"Burke", first:"Pierce", platoon:"Cat", years:"1970-71", status:"living", profile:false },
+  { last:"Cardwell", first:"James", platoon:"Range", years:"1970-71", status:"kia", profile:true },
+  { last:"Cate", first:"Larry", platoon:"Cat", years:"1970-71", status:"deceased", profile:false },
+  { last:"Clark", first:"Tom", platoon:"Skull", years:"1968-69", status:"living", profile:false },
+  { last:"Colburn", first:"Richard", platoon:"HHC", years:"1970-71", status:"kia", profile:true },
+  { last:"Collins", first:"Gary", platoon:"Range", years:"1970-71", status:"living", profile:true },
+  { last:"Cooper", first:"Jim", platoon:"Cat", years:"1969-70", status:"living", profile:false },
+  { last:"Dillon", first:"Stan", platoon:"Range", years:"1970-71", status:"living", profile:true },
+  { last:"Drinkard", first:"Danny", platoon:"Range", years:"1970-71", status:"kia", profile:true },
+  { last:"Emery", first:"Tom", platoon:"Range", years:"1971-72", status:"living", profile:false },
+  { last:"Garvin", first:"James", platoon:"HHC", years:"1970-71", status:"living", profile:true },
+  { last:"Hall", first:"Joseph", platoon:"Range", years:"1970-71", status:"kia", profile:true },
+  { last:"Kahnke", first:"Steve", platoon:"Skull", years:"1970-71", status:"living", profile:false },
+  { last:"Martin", first:"Michael", platoon:"Skull", years:"1970-71", status:"living", profile:false },
+  { last:"Miller", first:"Marvin", platoon:"Cat", years:"1970-71", status:"deceased", profile:true },
+  { last:"Neal", first:"Bill", platoon:"Skipper 6", years:"1970-71", status:"living", profile:true },
+  { last:"Schneck", first:"Steve", platoon:"Range", years:"1970-71", status:"living", profile:true },
+  { last:"Sells", first:"Leroy", platoon:"Cat", years:"1970-71", status:"deceased", profile:false },
+  { last:"Vollmar", first:"Tom", platoon:"HHC", years:"1970-71", status:"living", profile:true },
+  { last:"Waterman", first:"Craig", platoon:"Skull", years:"1968-69", status:"kia", profile:true },
+  { last:"Weaver", first:"Ken", platoon:"Cat", years:"1971-72", status:"living", profile:true },
+  { last:"Wheeler", first:"John", platoon:"Range", years:"1969-70", status:"living", profile:false },
+  { last:"Williams", first:"Charlie", platoon:"Cat", years:"1970-71", status:"living", profile:false },
+  { last:"Wolfchild", first:"Sheldon", platoon:"Skull", years:"1971-72", status:"living", profile:false },
+];
+
+let currentView = 'grid';
+let currentLetter = 'ALL';
+
+function filterRoster() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const platoon = document.getElementById('platoonFilter').value;
+  const year = document.getElementById('yearFilter').value;
+  const status = document.getElementById('statusFilter').value;
+
+  const filtered = soldiers.filter(s => {
+    const name = `${s.last} ${s.first}`.toLowerCase();
+    const matchSearch = !search || name.includes(search);
+    const matchPlatoon = !platoon || s.platoon === platoon;
+    const matchYear = !year || s.years.includes(year);
+    const matchStatus = !status ||
+      (status === 'kia' && s.status === 'kia') ||
+      (status === 'deceased' && s.status === 'deceased') ||
+      (status === 'living' && s.status === 'living') ||
+      (status === 'profile' && s.profile);
+    const matchLetter = currentLetter === 'ALL' || s.last.charAt(0).toUpperCase() === currentLetter;
+    return matchSearch && matchPlatoon && matchYear && matchStatus && matchLetter;
+  });
+
+  renderRoster(filtered);
+  document.getElementById('resultsCount').textContent = `Showing ${filtered.length} of ${soldiers.length} soldiers`;
+  document.getElementById('noResults').classList.toggle('visible', filtered.length === 0);
+}
+
+function renderRoster(list) {
+  const container = document.getElementById('rosterContainer');
+  if (list.length === 0) { container.innerHTML = ''; return; }
+
+  // Group by first letter
+  const grouped = {};
+  list.forEach(s => {
+    const l = s.last.charAt(0).toUpperCase();
+    if (!grouped[l]) grouped[l] = [];
+    grouped[l].push(s);
+  });
+
+  const letters = Object.keys(grouped).sort();
+
+  if (currentView === 'grid') {
+    container.innerHTML = letters.map(letter => `
+      <div class="alpha-section" id="section-${letter}">
+        <div class="alpha-heading">${letter} <span>${grouped[letter].length} soldier${grouped[letter].length !== 1 ? 's' : ''}</span></div>
+        <div class="roster-grid active">
+          ${grouped[letter].map(s => `
+            <a href="${s.profile ? 'marvin-miller-profile.html' : '#'}" class="soldier-card">
+              <div class="card-photo">
+                <span class="initial">${s.last.charAt(0)}</span>
+              </div>
+              <div class="card-info">
+                <div class="card-name">
+                  ${s.last}, ${s.first}
+                  ${s.status === 'kia' ? '<span class="badge-kia">KIA</span>' : ''}
+                  ${s.profile ? '<span class="badge-rich" title="Has expanded profile"></span>' : ''}
+                </div>
+                <div class="card-meta">
+                  <span class="card-platoon">${s.platoon}</span> · ${s.years}
+                  <br>${s.status === 'deceased' ? '<span style="color:var(--red);opacity:0.7;">Deceased</span>' : s.status === 'kia' ? '<span style="color:var(--red);">KIA</span>' : '<span style="color:var(--olive);">Living</span>'}
+                </div>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  } else {
+    container.innerHTML = `
+      <div class="roster-list active">
+        <div class="list-row list-header">
+          <div class="list-cell">Name</div>
+          <div class="list-cell">Rank</div>
+          <div class="list-cell">Platoon</div>
+          <div class="list-cell">Years</div>
+          <div class="list-cell">Status</div>
+          <div class="list-cell">Profile</div>
+        </div>
+        ${list.map(s => `
+          <a href="${s.profile ? 'marvin-miller-profile.html' : '#'}" class="list-row">
+            <div class="list-cell name">${s.last}, ${s.first} ${s.status === 'kia' ? '<span class="badge-kia">KIA</span>' : ''}</div>
+            <div class="list-cell">SGT</div>
+            <div class="list-cell">${s.platoon}</div>
+            <div class="list-cell">${s.years}</div>
+            <div class="list-cell" style="color:${s.status === 'kia' ? 'var(--red)' : s.status === 'deceased' ? 'var(--ink-faded)' : 'var(--olive)'}">${s.status.charAt(0).toUpperCase() + s.status.slice(1)}</div>
+            <div class="list-cell">${s.profile ? '<span style="color:var(--olive);font-family:Special Elite,monospace;font-size:10px;letter-spacing:1px;">VIEW →</span>' : '<span style="color:var(--ink-light);font-size:12px;">Basic record</span>'}</div>
+          </a>
+        `).join('')}
+      </div>
+    `;
+  }
+}
+
+function setView(view, btn) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterRoster();
+}
+
+function jumpToLetter(letter, btn) {
+  currentLetter = letter;
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterRoster();
+  if (letter !== 'ALL') {
+    const section = document.getElementById(`section-${letter}`);
+    if (section) section.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function buildAlphaBar() {
+  const letters = [...new Set(soldiers.map(s => s.last.charAt(0).toUpperCase()))].sort();
+  const bar = document.getElementById('alphaBar');
+  letters.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'alpha-btn has-entries';
+    btn.textContent = l;
+    btn.onclick = () => jumpToLetter(l, btn);
+    bar.appendChild(btn);
+  });
+}
+
+buildAlphaBar();
+filterRoster();
+</script>
+</body>
+</html>
