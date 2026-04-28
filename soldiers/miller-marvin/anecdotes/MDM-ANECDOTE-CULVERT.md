@@ -9,13 +9,13 @@
 
 **Larry Cate** — Cat Platoon, D/2-8 Cav, 1971. Rank at time of incident: likely E-4 (Specialist). Primary source and participant in this incident. Lifelong friend of Marvin Miller — the only member of the unit with whom Marvin maintained a sustained postwar friendship. Larry Cate died in 2011. His account was shared directly with Marvin's son prior to Cate's death and is reproduced here from memory of that conversation. **This document is the only known record of Cate's account.**
 
-**Captain Wolf Kutter** — Commanding Officer, D Company, 2/8 Cav (preceded Capt. William Neal, who arrived ~April 13, 1971). Confirmed independently that Battalion CO Lt. Col. Thomas Blagg made a practice of ensuring his men received ice cream after returning from the bush. This detail corroborates the plausibility of the setting. Kutter did not confirm the sniper incident itself; his contribution is the ice cream context only.
+**Captain Wolf Kutter** — Commanding Officer, D Company, 2/8 Cav (preceded Capt. William Neal, who arrived ~April 13, 1971). Confirmed independently that ice cream was a standing provision on log days, originating as a Brigade-level order from BG Burton and implemented through the battalion by LTC Blagg. Kutter did not confirm the sniper incident itself; his contribution is the ice cream context only.
 
 ---
 
 ### Context
 
-The presence of ice cream on a firebase may seem incongruous, but it was not accidental. Captain Wolf Kutter confirmed independently that Lieutenant Colonel Thomas Blagg — Battalion Commanding Officer, 2nd Battalion, 8th Cavalry — made a consistent practice of getting ice cream to his men after they returned from operations in the field. This was a deliberate morale measure by Blagg, and it explains how three soldiers came to be sitting on a culvert on a firebase eating ice cream.
+The presence of ice cream on a firebase may seem incongruous, but it was not accidental. Captain Wolf Kutter confirmed independently that ice cream was provided to the men on log days in the field — a standing order originating with Brigadier General Burton, the Brigade Commander, which was implemented through the battalion by Lieutenant Colonel Thomas Blagg. This explains how three soldiers came to be sitting on a culvert on a firebase eating ice cream.
 
 **On timing:** Larry Cate was reassigned from the unit when rotations came through in late July 1971. Given this, the incident most likely occurred sometime in the window of **mid-to-late July 1971**, when the unit had returned from the field and Cate was still present. This also aligns with the period when Marvin was still an E-4, shortly before his promotion to E-5 on August 4, 1971.
 
@@ -43,8 +43,8 @@ The buzzing-then-thump sequence Cate described is consistent with the sound of a
 **On the mess hall geometry:**
 The account implies the culvert was positioned in front of the mess hall, with the men sitting on it facing away from the building. The sniper's rounds were passing over or around the men and traveling into the mess hall through its rear or side, where stored canned goods were being struck and knocked from shelves. The person who came out — presumably a cook or mess worker — had been inside observing the cans falling and correctly identified the cause before the men outside did.
 
-**On Blagg and the ice cream:**
-Lt. Col. Thomas Blagg is named here as a Battalion CO who took a personal interest in soldier morale at the small-unit level. The ice cream detail — confirmed by Kutter independently of Cate's account — suggests Blagg was not merely an administrative figure to the men but someone whose decisions were felt and remembered at the squad level. This is worth noting in any broader account of the battalion's character and leadership.
+**On the ice cream — Burton and Blagg:**
+The ice cream was not a spontaneous gesture but a standing Brigade-level order from Brigadier General Burton, the Brigade Commander, carried out through the battalion by LTC Blagg on log days in the field. Both men are worth noting: Burton for mandating it from above, and Blagg for implementing it faithfully as part of a broader pattern of genuine concern for his soldiers.
 
 **On Larry Cate as source:**
 As with MDM-ANECDOTE-CLAYMORE, this account exists solely because Cate told it to Marvin's son before his death in 2011. There is no other known record of it. The tone of the story — wry, self-deprecating, the men obliviously eating ice cream while being shot at — is consistent with how combat veterans often frame close calls in retrospect: as absurdity rather than danger.
@@ -58,7 +58,7 @@ Cate said "perhaps another soldier" was present. He did not name this person. Gi
 
 - [ ] Ask Fishell: does he remember this incident? Was he the third man on the culvert?
 - [ ] Ask Capt. Neal or Kutter: can they identify which firebase this occurred at, and approximately when?
-- [ ] Ask Kutter: any additional recollections of Lt. Col. Blagg and the ice cream practice — how often, how it was arranged logistically?
+- [ ] Ask Kutter: any additional recollections of the ice cream logistics — how it was kept cold, how often it reached the field, whether it ever failed to arrive?
 - [ ] Was the sniper ever identified or engaged? Or did the incident simply end when the men got down?
 - [ ] Can Lt. Col. Thomas Blagg be located or researched further? His name appears here as a named officer with a specific morale practice worth documenting.
 
@@ -68,7 +68,8 @@ Cate said "perhaps another soldier" was present. He did not name this person. Gi
 
 - SOLDIER: Larry Cate — primary source; deceased 2011; account held by son only
 - SOLDIER: Capt. Wolf Kutter — CO preceding Neal; confirmed ice cream / Blagg detail
-- SOLDIER: Lt. Col. Thomas Blagg — Battalion CO; named as originator of ice cream morale practice
+- SOLDIER: Lt. Col. Thomas Blagg — Battalion CO; implemented ice cream provision on log days per BG Burton's standing order
+- SOLDIER: BG Burton — Brigade Commander; originator of ice cream standing order
 - SOLDIER: Larry Fishell ("Pops") — possible third soldier on culvert; to be confirmed
 - EVENT: Late July 1971 — probable timing based on Cate's reassignment date
 - MDM-ANECDOTE-CLAYMORE — second Cate anecdote; same source, same caveat regarding sole surviving account
