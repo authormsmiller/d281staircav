@@ -1,5 +1,5 @@
 # Anecdote — The NCOC Dismissal
-## Source: Marvin D. Miller (told to family); sister's recollection
+## Source: Marvin D. Miller (told to family); daughter's recollection
 ## Archive ID: MDM-ANECDOTE-NCOC
 ## Recorded: Family knowledge, compiled April 2026
 
