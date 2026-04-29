@@ -6,13 +6,11 @@ permalink: /intake/
 
 <div class="contrib-hed">
   <div class="contrib-title">Start a<br><span>Soldier Profile</span></div>
-  <div class="contrib-deck">
-    Tell us about your soldier and what materials you have. The intake form takes about ten minutes.
-    We'll follow up within a few days to walk through next steps.
-  </div>
+  <div class="contrib-deck">Tell us about your soldier and what materials you have. Takes about ten minutes. We'll follow up within a few days.</div>
 </div>
 
-<div class="intake-wrap">
+<div style="background: var(--pg); padding: 48px;">
+<div style="max-width: 780px; margin: 0 auto;">
 
   <form name="profile-intake" method="POST" data-netlify="true"
         netlify-honeypot="bot-field"
@@ -21,15 +19,15 @@ permalink: /intake/
     <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
     {# ── SOLDIER IDENTITY ── #}
-    <div class="intake-section-hed">About the Soldier</div>
+    <div class="contrib-panel-hed" style="margin-bottom: 20px;">About the Soldier</div>
 
-    <div class="intake-row">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 16px;">
       <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="First name" required></div>
       <div class="fg"><label>Middle Name</label><input type="text" name="middle_name" placeholder="Middle name or initial"></div>
       <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Last name" required></div>
     </div>
 
-    <div class="intake-row">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;">
       <div class="fg">
         <label>Rank (if known)</label>
         <select name="rank">
@@ -54,16 +52,14 @@ permalink: /intake/
       <div class="fg"><label>MOS / Role (if known)</label><input type="text" name="mos" placeholder="e.g. 11B Infantryman, or leave blank"></div>
     </div>
 
-    <div class="intake-row">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;">
       <div class="fg"><label>Approximate Arrival in Vietnam</label><input type="text" name="arrived" placeholder="e.g. March 1969, or best guess"></div>
       <div class="fg"><label>Approximate Departure</label><input type="text" name="departed" placeholder="e.g. March 1970, or best guess"></div>
     </div>
 
-    <div class="fg"><label>Hometown (if known)</label><input type="text" name="hometown" placeholder="City, State"></div>
-
-    <div class="fg">
-      <label>Platoon or Assignment (if known)</label>
-      <input type="text" name="platoon" placeholder="e.g. Cat Platoon, HQ, Weapons Platoon — or leave blank">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;">
+      <div class="fg"><label>Hometown (if known)</label><input type="text" name="hometown" placeholder="City, State"></div>
+      <div class="fg"><label>Platoon or Assignment (if known)</label><input type="text" name="platoon" placeholder="e.g. Cat Platoon, HQ, Weapons Platoon"></div>
     </div>
 
     <div class="fg">
@@ -83,30 +79,30 @@ permalink: /intake/
 
     <div class="fg">
       <label>Anything else about his service you'd like us to know</label>
-      <textarea name="service_notes" placeholder="Awards, incidents, units within the unit, anything that stands out from letters or stories."></textarea>
+      <textarea name="service_notes" placeholder="Awards, incidents, anything that stands out from letters or stories."></textarea>
     </div>
 
     {# ── MATERIALS ── #}
-    <div class="intake-section-hed">Materials You Have</div>
-    <p class="intake-section-deck">Check everything that applies. You don't need everything — even one photograph is enough to start.</p>
+    <div class="contrib-panel-hed" style="margin: 36px 0 8px;">Materials You Have</div>
+    <p class="contrib-panel-deck">Check everything that applies. You don't need everything — even one photograph is enough to start.</p>
 
-    <div class="intake-checks">
-      <label class="intake-check"><input type="checkbox" name="has_photos" value="yes"> Photographs (in-country, unit, or personal)</label>
-      <label class="intake-check"><input type="checkbox" name="has_letters" value="yes"> Letters home or other written correspondence</label>
-      <label class="intake-check"><input type="checkbox" name="has_dd214" value="yes"> DD-214 or separation papers</label>
-      <label class="intake-check"><input type="checkbox" name="has_orders" value="yes"> Orders, citations, or official documents</label>
-      <label class="intake-check"><input type="checkbox" name="has_medals" value="yes"> Medals or decorations (can photograph)</label>
-      <label class="intake-check"><input type="checkbox" name="has_memoir" value="yes"> Memoir, diary, or field notes</label>
-      <label class="intake-check"><input type="checkbox" name="has_other" value="yes"> Other materials</label>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_photos" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Photographs (in-country, unit, or personal)</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_letters" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Letters home or other written correspondence</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_dd214" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> DD-214 or separation papers</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_orders" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Orders, citations, or official documents</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_medals" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Medals or decorations (can photograph)</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_memoir" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Memoir, diary, or field notes</label>
+      <label style="display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer;"><input type="checkbox" name="has_other" value="yes" style="width:16px;height:16px;accent-color:var(--y);"> Other materials</label>
     </div>
 
     <div class="fg">
       <label>Describe your materials in more detail (optional)</label>
-      <textarea name="materials_detail" placeholder="How many photos? Are letters dated? Any photos with names written on the back? Anything unusual or particularly significant?"></textarea>
+      <textarea name="materials_detail" placeholder="How many photos? Are letters dated? Any photos with names on the back? Anything particularly significant?"></textarea>
     </div>
 
     {# ── YOUR INFORMATION ── #}
-    <div class="intake-section-hed">Your Information</div>
+    <div class="contrib-panel-hed" style="margin: 36px 0 20px;">Your Information</div>
 
     <div class="fg"><label>Your Name</label><input type="text" name="submitter_name" placeholder="Full name" required></div>
 
@@ -125,8 +121,10 @@ permalink: /intake/
       </select>
     </div>
 
-    <div class="fg"><label>Your Email</label><input type="email" name="email" placeholder="We'll follow up here" required></div>
-    <div class="fg"><label>Your Phone (optional)</label><input type="tel" name="phone" placeholder="If you prefer a call"></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;">
+      <div class="fg"><label>Your Email</label><input type="email" name="email" placeholder="We'll follow up here" required></div>
+      <div class="fg"><label>Your Phone (optional)</label><input type="tel" name="phone" placeholder="If you prefer a call"></div>
+    </div>
 
     <div class="fg">
       <label>Best way to reach you</label>
@@ -139,15 +137,16 @@ permalink: /intake/
     </div>
 
     <div class="fg">
-      <label>Anything else you'd like us to know before we follow up?</label>
+      <label>Anything else before we follow up?</label>
       <textarea name="additional_notes" placeholder="Questions, concerns, timing — anything helpful."></textarea>
     </div>
 
     <button class="submit-btn" type="submit">Submit Intake Form</button>
-    <div class="priv-note">Your contact information will not be published. Originals will never be requested without your explicit consent. You retain ownership of all submitted materials. There is no cost to have a profile built.</div>
+    <div class="priv-note" style="margin-top: 16px;">Your contact information will not be published. Originals will never be requested without your explicit consent. You retain ownership of all submitted materials. There is no cost to have a profile built.</div>
 
   </form>
 
+</div>
 </div>
 
 <footer>
