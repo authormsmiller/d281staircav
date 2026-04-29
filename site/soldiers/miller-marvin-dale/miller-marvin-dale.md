@@ -282,10 +282,4 @@ brothers:
     dates: 1970–71
     status: "Deceased · This Profile"
     kia: false
-
-    - name: Bill Small
-    platoon: Cat
-    dates: 1970–71
-    status: Disabled
-    kia: false
 ---
