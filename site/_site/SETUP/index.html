@@ -1,0 +1,115 @@
+<h1>D Co. 2/8 CAV Archive — Deployment Guide</h1>
+<h2>What this does</h2>
+<p>Netlify watches your GitHub repo. Every time you push a change, it builds
+the site automatically and updates the live URL. You never touch a command
+line after the initial setup.</p>
+<p>The admin panel at /admin lets you add new soldier profiles through a web
+form — no code editing required.</p>
+<hr>
+<h2>Step 1 — Add these files to your GitHub repo</h2>
+<p>Copy the entire contents of this folder into your repo, maintaining the
+structure. The site/ folder should sit at the root of your repo:</p>
+<pre><code>D28FirstAirCav/
+├── netlify.toml          ← copy here
+└── site/
+    ├── .eleventy.js
+    ├── package.json
+    ├── admin/
+    │   ├── index.html
+    │   └── config.yml
+    ├── _data/
+    │   └── site.json
+    ├── _includes/
+    │   ├── base.njk
+    │   └── soldier.njk
+    ├── soldiers/
+    │   └── miller-marvin-dale/
+    │       ├── miller-marvin-dale.md
+    │       └── photos/
+    │           ├── bill-small.jpg
+    │           ├── 042471-hueycrash3.jpg
+    │           └── [all other Marvin photos]
+    ├── assets/
+    │   ├── css/main.css
+    │   └── js/main.js
+    ├── index.njk
+    ├── roster.njk
+    └── contribute.njk
+</code></pre>
+<p>Commit and push all of this to your main branch.</p>
+<hr>
+<h2>Step 2 — Connect to Netlify</h2>
+<ol>
+<li>Go to https://netlify.com and sign up (free) with your GitHub account</li>
+<li>Click &quot;Add new site&quot; → &quot;Import an existing project&quot;</li>
+<li>Choose GitHub → select D28FirstAirCav</li>
+<li>Netlify will read netlify.toml and auto-fill:
+<ul>
+<li>Base directory: site</li>
+<li>Build command: npm run build</li>
+<li>Publish directory: _site</li>
+</ul>
+</li>
+<li>Click &quot;Deploy site&quot;</li>
+</ol>
+<p>Netlify installs Eleventy on its own servers and builds the site.
+First build takes about 2 minutes. After that, rebuilds take ~30 seconds.</p>
+<p>Your site will be live at a URL like: https://d28firstaircav.netlify.app
+You can set a custom domain later for free.</p>
+<hr>
+<h2>Step 3 — Enable Netlify Identity (for /admin login)</h2>
+<ol>
+<li>In your Netlify dashboard, go to Site Settings → Identity</li>
+<li>Click &quot;Enable Identity&quot;</li>
+<li>Under Registration, set to &quot;Invite only&quot; (you don't want random people
+creating profiles)</li>
+<li>Under Services → Git Gateway, click &quot;Enable Git Gateway&quot;</li>
+<li>Go to Identity tab → Invite users → invite your own email address</li>
+<li>You'll get an email — click the link, set a password</li>
+<li>Visit https://yoursite.netlify.app/admin — log in with that email/password</li>
+</ol>
+<p>That's it. The admin panel is live.</p>
+<hr>
+<h2>Step 4 — Add your first profile through the admin</h2>
+<ol>
+<li>Go to https://yoursite.netlify.app/admin</li>
+<li>Log in</li>
+<li>Click &quot;Soldier Profiles&quot; → &quot;New Soldier Profile&quot;</li>
+<li>Fill out the form — every field has a hint explaining what goes there</li>
+<li>Upload photos using the media uploader</li>
+<li>Click &quot;Publish&quot;</li>
+</ol>
+<p>Netlify commits the data file to your GitHub repo automatically and
+triggers a rebuild. The new profile is live within ~60 seconds.</p>
+<hr>
+<h2>Adding a soldier without the admin panel</h2>
+<p>If you prefer to add soldiers by editing files directly (faster for
+someone comfortable with text files), copy the Miller data file:</p>
+<p>site/soldiers/miller-marvin-dale/miller-marvin-dale.md</p>
+<p>Rename the folder and file to match the new soldier:</p>
+<p>site/soldiers/smith-john-henry/smith-john-henry.md</p>
+<p>Edit the fields at the top of the file. Add photos to:</p>
+<p>site/soldiers/smith-john-henry/photos/</p>
+<p>Commit and push. Netlify rebuilds automatically.</p>
+<hr>
+<h2>How the profile photo works</h2>
+<p>In each soldier's data file, there is a field:</p>
+<p>profile_photo: bill-small.jpg</p>
+<p>Set this to the filename of whichever photo should appear in the hero.
+The file must exist in that soldier's photos/ folder.
+If left blank, the hero shows the soldier's initials instead.</p>
+<hr>
+<h2>Forms</h2>
+<p>The Contribute page forms (/contribute/) are handled by Netlify Forms.
+Submissions appear in your Netlify dashboard under Forms.
+You'll get an email notification for each submission.
+No backend, no server, no database needed.</p>
+<hr>
+<h2>Updating the site later</h2>
+<p>To change anything on the site:</p>
+<ul>
+<li>Content changes → use the /admin panel (no code)</li>
+<li>Style changes → edit site/assets/css/main.css and push to GitHub</li>
+<li>Template changes → edit the .njk files and push to GitHub</li>
+</ul>
+<p>Netlify rebuilds automatically every time you push.</p>
