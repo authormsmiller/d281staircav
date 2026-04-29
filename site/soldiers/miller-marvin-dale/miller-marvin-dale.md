@@ -23,7 +23,7 @@ year_deceased: 2004
 
 # ── PROFILE PHOTO ─────────────────────────────────
 # Filename of the hero photo — must exist in soldiers/miller-marvin-dale/photos/
-profile_photo: bill-small.jpg
+profile_photo: marvin-miller-selfie.jpg
 
 # ── DECORATIONS ───────────────────────────────────
 # List awards. Add "distinguished: true" to the ones shown in yellow.
@@ -187,7 +187,7 @@ photos:
       Recovery of the downed Huey. Marvin remained through the full recovery
       operation. These are the only known photographs of this incident.
     caption_short: Huey recovery — Marvin documented from arrival through extraction
-    credit: "Photographed by Marvin D. Miller · April 24, 1971 · Only known visual record"
+    credit: "Photographed by Marvin D. Miller · April 24, 1971"
 
   - filename: chopper-1.jpg
     caption: Soldiers loading into a UH-1 Huey during airmobile operations.
@@ -229,8 +229,8 @@ photos:
     wide: true
 
   - filename: bill-small.jpg
-    caption: Marvin Dale Miller wearing the 1st Cavalry Division patch, Vietnam 1970–71. Contributed by Ken Weaver.
-    caption_short: Marvin in the field — 1st Cav patch visible · Photo by Ken Weaver
+    caption: Bill Small.
+    caption_short: Bill Small in the field — 1st Cav patch visible · Photo by Ken Weaver
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
 
@@ -281,5 +281,11 @@ brothers:
     platoon: Cat
     dates: 1970–71
     status: "Deceased · This Profile"
+    kia: false
+
+    - name: Bill Small
+    platoon: Cat
+    dates: 1970–71
+    status: Disabled
     kia: false
 ---
