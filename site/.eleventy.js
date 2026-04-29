@@ -3,7 +3,7 @@ module.exports = function(eleventyConfig) {
   // Pass static assets through unchanged
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy("soldiers/*/photos");
+  eleventyConfig.addPassthroughCopy("soldiers");
 
   // Collections
   // All soldier profiles — sorted by last name
