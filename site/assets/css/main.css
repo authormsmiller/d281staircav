@@ -455,7 +455,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
   border-bottom: 4px solid var(--y);
   display: flex; justify-content: space-between; align-items: flex-end;
 }
-.intake-hed-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 2px; color: #F0EDD8; line-height: 1; }
+.intake-hed-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 2px; color: rgba(255,255,255,0.75); line-height: 1; }
 .intake-hed-title span { color: var(--y); }
 .intake-hed-deck { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 18px; color: rgba(240,237,216,0.6); max-width: 340px; line-height: 1.65; text-align: right; }
 .intake-body { display: grid; grid-template-columns: 1fr 280px; background: var(--pg); }
