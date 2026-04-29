@@ -28,7 +28,8 @@ permalink: /roster/
     </tr>
   </thead>
   <tbody>
-    {# Auto-generated rows from soldier data files #}
+
+    {# Auto-generated rows from soldier profile data files #}
     {% for soldier in collections.soldiers %}
       <tr onclick="window.location='{{ soldier.url }}'" style="cursor:pointer;">
         <td><div class="rname rname-link">{{ soldier.data.last_name }}, {{ soldier.data.first_name }}</div></td>
@@ -49,80 +50,45 @@ permalink: /roster/
             <span class="sdot sdot-kia">KIA</span>
           {% elif soldier.data.status == "Deceased" %}
             <span class="sdot sdot-kia">Deceased</span>
-          {% elif soldier.data.status == "Living" %}
-            <span class="sdot sdot-ok">Confirmed — Profile Live</span>
           {% else %}
-            <span class="sdot sdot-unk">Status Unknown</span>
+            <span class="sdot sdot-ok">Profile Live</span>
           {% endif %}
         </td>
       </tr>
     {% endfor %}
 
-    {# Static rows for soldiers without profiles yet #}
-    <tr>
-      <td><div class="rname">McGrew, Howard</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">SGT</span></td>
-      <td>Cat Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-ok">Confirmed</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Makowski, [First Name]</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"Ski"</span></td>
-      <td><span class="rank-tag">SP4</span></td>
-      <td>Cat Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-kia">KIA Oct 21 1971</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Cardwell, James</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">CPL</span></td>
-      <td>Range Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Drinkard, Danny</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">CPL</span></td>
-      <td>Range Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Hall, Joseph</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">CPL</span></td>
-      <td>Range Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Colburn, Richard</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">SP4</span></td>
-      <td>Battalion</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-kia">KIA Apr 24 1971</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">Dillon, Stan</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">SSGT</span></td>
-      <td>Range Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
-      <td><span class="sdot sdot-wip">WIA Apr 20 — Researching</span></td>
-    </tr>
-    <tr>
-      <td><div class="rname">— Additional Members —</div></td>
-      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
-      <td><span class="rank-tag">VAR</span></td>
-      <td>Cat Platoon</td>
-      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1970–72</td>
-      <td><span class="sdot sdot-unk">Researching</span></td>
-    </tr>
+    {# Rows from roster.json — edit that file to add/update soldiers #}
+    {% for s in roster %}
+      <tr>
+        <td><div class="rname">{{ s.last_name }}, {{ s.first_name }}</div></td>
+        <td>
+          {% if s.nickname %}
+            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"{{ s.nickname }}"</span>
+          {% else %}
+            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if s.rank %}
+            <span class="rank-tag">{{ s.rank }}</span>
+          {% else %}
+            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
+          {% endif %}
+        </td>
+        <td>{{ s.platoon }}</td>
+        <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">{{ s.years }}</td>
+        <td>
+          {% if s.status == "deceased" %}
+            <span class="sdot sdot-kia">{{ s.status_label }}</span>
+          {% elif s.status == "confirmed" %}
+            <span class="sdot sdot-ok">{{ s.status_label }}</span>
+          {% else %}
+            <span class="sdot sdot-unk">{{ s.status_label }}</span>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+
   </tbody>
 </table>
 
