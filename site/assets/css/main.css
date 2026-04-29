@@ -611,7 +611,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .tl-dot.combat { border-color: var(--red); background: var(--red); }
 .tl-dot.move { border-color: var(--ink2); background: var(--ink2); }
 .tl-dot.personal { border-color: var(--y2); background: var(--y2); }
-.tl-date { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 5px; }
+.tl-date { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 5px; }
 .tl-hed { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: rgba(255,255,255,0.75); margin-bottom: 6px; }
 .tl-body { font-family: 'Crimson Pro', serif; font-size: 17px; line-height: 1.8; color: var(--dim); max-width: 680px; }
 .tl-tag {
