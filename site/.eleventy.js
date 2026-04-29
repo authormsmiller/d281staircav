@@ -48,7 +48,11 @@ module.exports = function(eleventyConfig) {
     if (!nick) return "";
     return `"${nick}"`;
   });
-
+  // Limit array to N items
+  eleventyConfig.addFilter("limit", function(arr, n) {
+    if (!arr || !Array.isArray(arr)) return [];
+    return arr.slice(0, n);
+  });
   return {
     dir: {
       input:    ".",
