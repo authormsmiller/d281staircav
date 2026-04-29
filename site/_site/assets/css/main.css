@@ -53,15 +53,26 @@ body {
 }
 .masthead-nav {
   display: flex; align-items: stretch; flex: 1;
+  height: 56px;
 }
 .nav-btn {
   font-family: 'Space Grotesk', sans-serif; font-weight: 500;
   font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
   color: rgba(255,255,255,0.65);
+  height: 56px;
   background: transparent; border: none; border-right: 1px solid #1a1a1a;
   padding: 0 20px; cursor: pointer;
   transition: color 0.15s, background 0.15s;
   position: relative;
+  display: flex !important;
+  align-items: center !important;
+}
+.nav-btn a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 .nav-btn::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
@@ -444,16 +455,23 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
   border-bottom: 4px solid var(--y);
   display: flex; justify-content: space-between; align-items: flex-end;
 }
-.intake-hed-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 2px; color: #F0EDD8; line-height: 1; }
+.intake-hed-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 2px; color: rgba(255,255,255,0.75); line-height: 1; }
 .intake-hed-title span { color: var(--y); }
 .intake-hed-deck { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 18px; color: rgba(240,237,216,0.6); max-width: 340px; line-height: 1.65; text-align: right; }
 .intake-body { display: grid; grid-template-columns: 1fr 280px; background: var(--pg); }
 .intake-main { padding: 44px 48px; border-right: 1px solid var(--rule); }
 .intake-sidebar { background: var(--pg2); padding: 36px 28px; }
+.intake-wrap { max-width: 780px; margin: 0 auto; padding: 48px 40px; }
+.intake-section-hed { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--ink); border-bottom: 3px solid var(--y); padding-bottom: 8px; margin: 40px 0 20px; }
+.intake-section-deck { font-family: 'Crimson Pro', serif; font-size: 17px; color: var(--dim); margin: -12px 0 20px; }
+.intake-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 24px; }
+.intake-checks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.intake-check { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer; }
+.intake-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--y); flex-shrink: 0; }
 .form-section-hed {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
   font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--dim); padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  color: rgba(255,255,255,0.75); padding-bottom: 10px; border-bottom: 2px solid var(--ink);
   margin-bottom: 22px; margin-top: 36px;
 }
 .form-section-hed:first-child { margin-top: 0; }
@@ -463,7 +481,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .fg label {
   display: block;
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--dim); margin-bottom: 5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 5px;
 }
 .fg input, .fg textarea, .fg select {
   width: 100%; font-family: 'Crimson Pro', serif; font-size: 17px;
@@ -763,3 +781,5 @@ footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 4
 /* ── TOAST ── */
 .toast { position: fixed; bottom: 28px; right: 28px; background: var(--blk); border: 1px solid var(--y); border-left: 4px solid var(--y); color: #F0EDD8; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 20px; max-width: 340px; opacity: 0; transform: translateY(8px); transition: opacity 0.25s, transform 0.25s; pointer-events: none; z-index: 3000; }
 .toast.show { opacity: 1; transform: translateY(0); }
+
+
