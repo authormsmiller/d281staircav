@@ -64,8 +64,8 @@ body {
   padding: 0 20px; cursor: pointer;
   transition: color 0.15s, background 0.15s;
   position: relative;
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
 }
 .nav-btn a {
   display: flex;
