@@ -234,7 +234,7 @@ photos:
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
 
-    - filename: marvin-miller-selfie.jpg
+  - filename: marvin-miller-selfie.jpg
     caption: Marvin Dale Miller, Vietnam 1971. Self-portrait taken in the field.
     caption_short: Marvin — self-portrait, Vietnam 1971
     credit: "Photographed by Marvin D. Miller · 1971"
