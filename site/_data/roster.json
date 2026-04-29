@@ -1,0 +1,622 @@
+[
+  {
+    "last_name": "Adams",
+    "first_name": "Roy",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Alloway",
+    "first_name": "Dennis",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat 6",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Angelos",
+    "first_name": "Gus",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Armatige",
+    "first_name": "Rob",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Aulenbach",
+    "first_name": "Rick",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Bassford",
+    "first_name": "George",
+    "nickname": "",
+    "rank": "",
+    "years": "",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Bedsole",
+    "first_name": "Jim",
+    "nickname": "",
+    "rank": "",
+    "years": "70",
+    "platoon": "Skipper 6",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Bieberich",
+    "first_name": "Mark",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Blair",
+    "first_name": "John",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Boler",
+    "first_name": "Lane",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Brumbelow",
+    "first_name": "Glenn",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Bryram",
+    "first_name": "James",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Burchett",
+    "first_name": "Mark",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Buttermore",
+    "first_name": "Carl",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Cate",
+    "first_name": "Larry",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Clonch",
+    "first_name": "Robert",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Cobb",
+    "first_name": "Michael",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Cooke",
+    "first_name": "Peter",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Cooper",
+    "first_name": "Virgil",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "David",
+    "first_name": "Richard",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Dewey",
+    "first_name": "Victor",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Dismuke",
+    "first_name": "William",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Dyer",
+    "first_name": "Steven",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Fishell",
+    "first_name": "Larry",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Fitzpatrick",
+    "first_name": "Raymond",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Fults",
+    "first_name": "John",
+    "nickname": "Peanut",
+    "rank": "",
+    "years": "71-72",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Galway",
+    "first_name": "Mike",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Green",
+    "first_name": "James",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Hensley",
+    "first_name": "Kenneth",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Hryniw",
+    "first_name": "Theodre",
+    "nickname": "",
+    "rank": "",
+    "years": "71-72",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Hurst",
+    "first_name": "Fred",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "III",
+    "first_name": "Aaron",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Jackson",
+    "first_name": "Eugene",
+    "nickname": "",
+    "rank": "LT",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Johnson",
+    "first_name": "Jimmy",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Kint",
+    "first_name": "Joseph",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Kotzian",
+    "first_name": "John",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Kutter",
+    "first_name": "Wolf",
+    "nickname": "",
+    "rank": "",
+    "years": "71-72",
+    "platoon": "Skipper 6",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Lockhart",
+    "first_name": "Kyle",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Lyons",
+    "first_name": "William",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Moore",
+    "first_name": "Julius",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Murray",
+    "first_name": "Lynn",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Neal",
+    "first_name": "William",
+    "nickname": "",
+    "rank": "",
+    "years": "71",
+    "platoon": "Skipper 6",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Peszynski",
+    "first_name": "Jerome",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Price",
+    "first_name": "James",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Randt",
+    "first_name": "Lawrence",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Robinson",
+    "first_name": "Wayne",
+    "nickname": "",
+    "rank": "MSG",
+    "years": "71-72",
+    "platoon": "Wild Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Romani",
+    "first_name": "Waleriy",
+    "nickname": "",
+    "rank": "",
+    "years": "71-72",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Schaffer",
+    "first_name": "Roger",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Schofield",
+    "first_name": "William",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Sells",
+    "first_name": "Leroy",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Sheppard",
+    "first_name": "Billy",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Small",
+    "first_name": "William",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Smith",
+    "first_name": "Bradford",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Smith",
+    "first_name": "Kirby",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Skipper 6",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Snyder",
+    "first_name": "Albert",
+    "nickname": "",
+    "rank": "",
+    "years": "71",
+    "platoon": "Skipper 6",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Stevens",
+    "first_name": "Charles",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Sykora",
+    "first_name": "Bruce",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Tincher",
+    "first_name": "Dale",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Cat6",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Ward",
+    "first_name": "Jack",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "researching",
+    "status_label": "Researching"
+  },
+  {
+    "last_name": "Weaver",
+    "first_name": "Ken",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "confirmed",
+    "status_label": "Confirmed"
+  },
+  {
+    "last_name": "Webb",
+    "first_name": "Grant",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  },
+  {
+    "last_name": "Whiteside",
+    "first_name": "Stephen",
+    "nickname": "",
+    "rank": "",
+    "years": "70-71",
+    "platoon": "Wild/Cat",
+    "status": "deceased",
+    "status_label": "Deceased"
+  }
+]
