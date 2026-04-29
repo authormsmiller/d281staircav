@@ -461,6 +461,13 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .intake-body { display: grid; grid-template-columns: 1fr 280px; background: var(--pg); }
 .intake-main { padding: 44px 48px; border-right: 1px solid var(--rule); }
 .intake-sidebar { background: var(--pg2); padding: 36px 28px; }
+.intake-wrap { max-width: 780px; margin: 0 auto; padding: 48px 40px; }
+.intake-section-hed { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--ink); border-bottom: 3px solid var(--y); padding-bottom: 8px; margin: 40px 0 20px; }
+.intake-section-deck { font-family: 'Crimson Pro', serif; font-size: 17px; color: var(--dim); margin: -12px 0 20px; }
+.intake-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 24px; }
+.intake-checks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.intake-check { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer; }
+.intake-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--y); flex-shrink: 0; }
 .form-section-hed {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
   font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
