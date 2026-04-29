@@ -464,7 +464,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .form-section-hed {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
   font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--dim); padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  color: rgba(255,255,255,0.75); padding-bottom: 10px; border-bottom: 2px solid var(--ink);
   margin-bottom: 22px; margin-top: 36px;
 }
 .form-section-hed:first-child { margin-top: 0; }
@@ -474,7 +474,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .fg label {
   display: block;
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--dim); margin-bottom: 5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 5px;
 }
 .fg input, .fg textarea, .fg select {
   width: 100%; font-family: 'Crimson Pro', serif; font-size: 17px;
