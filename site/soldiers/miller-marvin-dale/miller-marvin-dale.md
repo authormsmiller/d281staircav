@@ -267,25 +267,25 @@ documents:
 brothers:
   - name: Larry Cate
     platoon: Cat
-    dates: 1970–71
+    dates: "1970–71"
     status: Deceased
     kia: false
 
   - name: Leroy Sells
     platoon: Cat
-    dates: 1970–71
+    dates: "1970–71"
     status: Deceased
     kia: false
 
   - name: Ken Weaver
     platoon: Cat
-    dates: 1971–72
+    dates: "1971–72"
     status: Archive Contributor
     kia: false
 
   - name: Marvin Miller
     platoon: Cat
-    dates: 1970–71
-    status: "Deceased · This Profile"
+    dates: "1970–71"
+    status: "Deceased - This Profile"
     kia: false
 ---
