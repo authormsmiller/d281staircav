@@ -1,0 +1,132 @@
+---
+layout: base.njk
+title: Roster
+permalink: /roster/
+---
+
+<div class="roster-masthead">
+  <div>
+    <div class="roster-hed">Cat Platoon<br><span>Roster</span></div>
+    <div class="roster-stamp">Sensitive — Contact Info Redacted</div>
+  </div>
+  <div class="roster-deck">
+    Compiled from unit records, the McGrew field calendar, ASA newsletters,
+    and ongoing contact research. Research status indicates current confidence level.
+    Personal contact details are maintained in restricted access only.
+  </div>
+</div>
+
+<table class="rtable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Known As</th>
+      <th>Rank</th>
+      <th>Platoon</th>
+      <th>Service Dates</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {# Auto-generated rows from soldier data files #}
+    {% for soldier in collections.soldiers %}
+      <tr onclick="window.location='{{ soldier.url }}'" style="cursor:pointer;">
+        <td><div class="rname rname-link">{{ soldier.data.last_name }}, {{ soldier.data.first_name }}</div></td>
+        <td>
+          {% if soldier.data.nickname %}
+            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"{{ soldier.data.nickname }}"</span>
+          {% else %}
+            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
+          {% endif %}
+        </td>
+        <td><span class="rank-tag">{{ soldier.data.rank }}</span></td>
+        <td>{{ soldier.data.platoon }}</td>
+        <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">
+          {{ soldier.data.arrived }} – {{ soldier.data.departed }}
+        </td>
+        <td>
+          {% if soldier.data.status == "KIA" %}
+            <span class="sdot sdot-kia">KIA</span>
+          {% elif soldier.data.status == "Deceased" %}
+            <span class="sdot sdot-kia">Deceased</span>
+          {% elif soldier.data.status == "Living" %}
+            <span class="sdot sdot-ok">Confirmed — Profile Live</span>
+          {% else %}
+            <span class="sdot sdot-unk">Status Unknown</span>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+
+    {# Static rows for soldiers without profiles yet #}
+    <tr>
+      <td><div class="rname">McGrew, Howard</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">SGT</span></td>
+      <td>Cat Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-ok">Confirmed</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Makowski, [First Name]</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"Ski"</span></td>
+      <td><span class="rank-tag">SP4</span></td>
+      <td>Cat Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-kia">KIA Oct 21 1971</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Cardwell, James</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">CPL</span></td>
+      <td>Range Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Drinkard, Danny</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">CPL</span></td>
+      <td>Range Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Hall, Joseph</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">CPL</span></td>
+      <td>Range Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-kia">KIA Apr 20 1971</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Colburn, Richard</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">SP4</span></td>
+      <td>Battalion</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-kia">KIA Apr 24 1971</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">Dillon, Stan</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">SSGT</span></td>
+      <td>Range Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1971</td>
+      <td><span class="sdot sdot-wip">WIA Apr 20 — Researching</span></td>
+    </tr>
+    <tr>
+      <td><div class="rname">— Additional Members —</div></td>
+      <td><span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span></td>
+      <td><span class="rank-tag">VAR</span></td>
+      <td>Cat Platoon</td>
+      <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">1970–72</td>
+      <td><span class="sdot sdot-unk">Researching</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<footer>
+  <div class="footer-left">D Co. 2/8 CAV · Angry Skipper</div>
+  <div class="footer-right">1st Cavalry Division (Airmobile) · Vietnam 1965–1972<br>Archive initiated April 2026 · Compiled by family</div>
+</footer>

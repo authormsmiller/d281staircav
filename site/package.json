@@ -1,0 +1,12 @@
+{
+  "name": "d28-archive",
+  "version": "1.0.0",
+  "description": "D Co. 2/8 CAV — Angry Skipper Archive",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
