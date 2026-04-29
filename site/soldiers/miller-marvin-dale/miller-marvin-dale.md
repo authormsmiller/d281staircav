@@ -1,4 +1,5 @@
 ---
+layout: layouts/soldier.njk
 title: SGT Marvin Dale Miller
 slug: miller-marvin-dale
 breadcrumb: SGT Marvin Dale Miller
