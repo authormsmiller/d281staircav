@@ -58,6 +58,7 @@ body {
   font-family: 'Space Grotesk', sans-serif; font-weight: 500;
   font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
   color: rgba(255,255,255,0.65);
+  height: 56px;
   background: transparent; border: none; border-right: 1px solid #1a1a1a;
   padding: 0 20px; cursor: pointer;
   transition: color 0.15s, background 0.15s;
