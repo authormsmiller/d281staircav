@@ -4,6 +4,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("soldiers");
+  eleventyConfig.addWatchTarget("assets/");
 
   // Collections
   // All soldier profiles — sorted by last name
