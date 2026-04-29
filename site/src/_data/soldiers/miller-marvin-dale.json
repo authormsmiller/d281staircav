@@ -1,0 +1,194 @@
+{
+  "slug":        "miller-marvin-dale",
+  "name":        "Marvin Dale Miller",
+  "nickname":    "",
+  "status":      "deceased",
+  "deceased_year": "2004",
+
+  "rank":        "SGT",
+  "rank_full":   "Sergeant",
+  "grade":       "E-5",
+  "mos":         "11F40",
+  "mos_title":   "Recon",
+  "platoon":     "Cat (Wild Cat) · 3rd",
+  "company":     "D Co., 2nd Bn., 8th Cavalry",
+  "division":    "1st Cavalry Division (Airmobile)",
+
+  "arrived":     "4 December 1970",
+  "departed":    "2 December 1971",
+  "hometown":    "Kittanning, Armstrong County, PA",
+  "service_character": "Honorable",
+
+  "profile_photo": "bill-small.jpg",
+  "photos": [
+    {
+      "file":    "042471-hueycrash3.jpg",
+      "caption": "Wreckage of the Huey that crashed at FSB Fontaine, April 24, 1971. Veterans who reviewed this photograph believe Marvin was among the first people on scene — the wreckage is undisturbed, casualties only just removed.",
+      "credit":  "Photographed by Marvin D. Miller · April 24, 1971 · Among first on scene",
+      "by_subject": true,
+      "wide":    true
+    },
+    {
+      "file":    "042471-hueycrash4.jpg",
+      "caption": "Recovery of the downed Huey by crane helicopter. Marvin remained at the crash site through the full recovery operation. These are the only known photographs of this incident.",
+      "credit":  "Photographed by Marvin D. Miller · April 24, 1971 · Only known visual record",
+      "by_subject": true,
+      "wide":    false
+    },
+    {
+      "file":    "chopper-1.jpg",
+      "caption": "Soldiers loading into a UH-1 Huey during airmobile operations.",
+      "credit":  "Photographed by Marvin D. Miller · 1970–1971",
+      "by_subject": true,
+      "wide":    false
+    },
+    {
+      "file":    "guy-walking-in-fsb.jpg",
+      "caption": "Interior of a fire support base, likely FSB Fontaine or Mace, 1971. Mountains of Long Khanh Province in the background.",
+      "credit":  "Photographed by Marvin D. Miller · 1971",
+      "by_subject": true,
+      "wide":    true
+    },
+    {
+      "file":    "larry-cate_leroy-sells_ken-weaver.jpg",
+      "caption": "Left to right: Larry Cate (Cat Plt, 1970–71), Leroy Sells (Cat Plt, 1970–71), and Ken Weaver (Cat Plt, 1971–72). Larry Cate and Leroy Sells are deceased. Ken Weaver contributed additional photographs to this archive.",
+      "credit":  "Photographed by Marvin D. Miller · 1971",
+      "by_subject": true,
+      "wide":    true
+    },
+    {
+      "file":    "soldiers-w-locals.jpg",
+      "caption": "American soldiers interact with Vietnamese civilians near a fire support base.",
+      "credit":  "Photographed by Marvin D. Miller · 1971",
+      "by_subject": true,
+      "wide":    false
+    },
+    {
+      "file":    "vc-prisoner-retouch.jpg",
+      "caption": "A Viet Cong prisoner attended to by soldiers. Historical documentation of ground combat operations.",
+      "credit":  "Photographed by Marvin D. Miller · 1971 · Wartime imagery",
+      "by_subject": true,
+      "wide":    false
+    },
+    {
+      "file":    "4-soldiers-retouch.jpg",
+      "caption": "Marvin Miller (far left) with three fellow soldiers in the field, likely Cat Platoon, 1970–71. If you can identify the other soldiers, please use the contribute form.",
+      "credit":  "Photographer unknown · Submitted to archive · Retouched 2024",
+      "by_subject": false,
+      "wide":    true
+    },
+    {
+      "file":    "bill-small.jpg",
+      "caption": "Marvin Dale Miller wearing the 1st Cavalry Division patch, Vietnam 1970–71.",
+      "credit":  "Contributed by Ken Weaver",
+      "by_subject": false,
+      "wide":    false
+    }
+  ],
+
+  "decorations": [
+    { "name": "Bronze Star Medal",                    "distinguished": true  },
+    { "name": "Combat Infantry Badge",                "distinguished": true  },
+    { "name": "Vietnam Service Medal w/2 Stars",      "distinguished": false },
+    { "name": "Vietnam Campaign Medal w/60 Device",   "distinguished": false },
+    { "name": "National Defense Service Medal",       "distinguished": false }
+  ],
+
+  "timeline": [
+    {
+      "date":  "15 December 1970",
+      "type":  "movement",
+      "title": "Arrives at FSB Mace",
+      "body":  "Marvin arrived at FSB Mace a few days after processing through the replacement depot at Bien Hoa. His first assignment with Delta Company."
+    },
+    {
+      "date":  "24 January 1971",
+      "type":  "personal",
+      "title": "USO Show at FSB Silver",
+      "body":  "The company attended a USO show at FSB Silver — a rare and welcome break from operations."
+    },
+    {
+      "date":  "Late January 1971",
+      "type":  "movement",
+      "title": "Silver Stands Down — Cat Platoon Last to Leave",
+      "body":  "FSB Silver was dismantled and the company moved to FSB Fontaine. Cat Platoon was the last unit to depart Silver. Marvin was asked by the Colonel to draw a scaled model of the new base at Fontaine — a task that drew on skills nobody had formally recognized until then."
+    },
+    {
+      "date":  "20 April 1971",
+      "type":  "combat",
+      "title": "Contact North of FSB Fanning — Three KIA",
+      "body":  "Delta Company made contact with an NVA base camp north of Route 1, east of Gia Rai Mountain. Cat Platoon's patrol spotted enemy soldiers bathing in a creek. Range Platoon, crossing to the north bank, walked into a fortified bunker complex. CPL James Cardwell, CPL Danny Drinkard, and CPL Joseph Hall were killed. SSgt Stan Dillon was severely wounded. Marvin was present with Cat Platoon on the south bank.",
+      "source_notice": "The summary above draws from written depositions of Capt. Bill Neal (Company Commander) and SSgt Stan Dillon (Range Platoon Sgt.), supplemented by accounts from other unit members. These represent individual perspectives recorded years after the event. Details of sequence, positioning, and circumstance vary between accounts. No single account should be read as a definitive record. Additional recollections are welcomed and will be preserved alongside existing accounts without editorial reconciliation."
+    },
+    {
+      "date":  "24 April 1971",
+      "type":  "combat",
+      "title": "Huey Crash at FSB Fontaine — Three Killed",
+      "body":  "A Huey departing FSB Fontaine crashed shortly after takeoff, killing the pilot, co-pilot, and Battalion Armor SP4 Richard Colburn. Company Armor Jim Garvin had been bumped from the flight minutes before departure and watched it go down from the firebase. Veterans who reviewed the photographs believe Marvin was among the first soldiers on scene — the wreckage is undisturbed, consistent with the moments just after casualties were removed. He remained through the full recovery operation, producing what are believed to be the only known photographs of this incident. FSB Fanning was later named in honor of the pilot who died."
+    },
+    {
+      "date":  "19 June 1971",
+      "type":  "personal",
+      "title": "Returns from R&R in Hong Kong",
+      "body":  "Marvin returned from R&R in Hong Kong. The company was at FSB Fanning and due to rotate to Vung Tau on June 21."
+    },
+    {
+      "date":  "3 September 1971",
+      "type":  "movement",
+      "title": "Company Moves to FSB Jeffreys",
+      "body":  "The unit established at FSB Jeffreys, not far from a Vietnamese village. This firebase does not appear in official unit records but is documented in Marvin's letters."
+    },
+    {
+      "date":  "24 November 1971",
+      "type":  "personal",
+      "title": "\"Short-Timer's Attitude\"",
+      "body":  "With departure set for December 4, Marvin wrote home asking family to stop writing. He noted it had gotten very cold — below 60 degrees — and that no one could sleep with only one blanket. He described having a \"short-timer's attitude\" as his tour wound down."
+    },
+    {
+      "date":  "2 December 1971",
+      "type":  "movement",
+      "title": "Returns Home — Honorable Discharge",
+      "body":  "Marvin Dale Miller was discharged at US Army Personnel Center, Oakland, California. He returned home to Kittanning, Pennsylvania."
+    }
+  ],
+
+  "documents": [
+    {
+      "title": "DD-214 Report of Transfer or Discharge",
+      "meta":  "Official Record · US Army · 2 December 1971",
+      "type":  "Official",
+      "restricted": true
+    },
+    {
+      "title": "\"Duds Hit Firebase\" — FSB Fontaine Incident",
+      "meta":  "Press Clipping · Military publication · Date unknown, 1971 · Submitted by Ken Weaver",
+      "quote": "I was there when this happened. Keep it for me. No one was hurt.",
+      "quote_attr": "Ken Weaver, handwritten",
+      "type":  "Press",
+      "restricted": false
+    },
+    {
+      "title": "Letters Home — Marvin to His Mother",
+      "meta":  "Personal correspondence · Dec 1970 – Nov 1971 · ~20 letters · Digitization in progress",
+      "type":  "Personal",
+      "restricted": false
+    },
+    {
+      "title": "D/2-8 Movement Timeline, Dec 1970 – Dec 1971",
+      "meta":  "Compiled by family from letters and unit records · 2024–2025",
+      "type":  "Compiled",
+      "restricted": false
+    }
+  ],
+
+  "brothers": [
+    { "name": "Larry Cate",    "platoon": "Cat", "dates": "1970–71", "status": "deceased",    "initials": "LC" },
+    { "name": "Leroy Sells",   "platoon": "Cat", "dates": "1970–71", "status": "deceased",    "initials": "LS" },
+    { "name": "Ken Weaver",    "platoon": "Cat", "dates": "1971–72", "status": "contributor", "initials": "KW" },
+    { "name": "Marvin Miller", "platoon": "Cat", "dates": "1970–71", "status": "this",        "initials": "MM" }
+  ],
+
+  "compiled_by": "Son of SGT Marvin Dale Miller",
+  "compiled_date": "2024–2025",
+  "archive_notes": "Reconstructed from letters Marvin wrote to his mother during his tour, supplemented by unit records and accounts from fellow soldiers."
+}

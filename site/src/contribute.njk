@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+title: Contribute
+---
+
+<div class="page">
+
+<div class="contrib-hed">
+  <div class="contrib-title">Contribute to<br><span>the Archive</span></div>
+  <div class="contrib-deck">If you served with D Co. 2/8 CAV, or have materials from a family member who did, we want to hear from you. All submissions are reviewed before being added.</div>
+</div>
+
+<div class="contrib-grid">
+
+  {# ── Memory / Account Form ── #}
+  <div class="contrib-panel">
+    <div class="contrib-panel-hed">Submit a Memory or Account</div>
+    <p class="contrib-panel-deck">A story, anecdote, or firsthand account involving a soldier or event from D Co. 2/8 CAV.</p>
+
+    <form name="memory" method="POST" netlify netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="memory">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+      <div class="fg">
+        <label>Your Relationship to the Unit</label>
+        <select name="relationship" required>
+          <option value="">Select...</option>
+          <option>I served with D Co. 2/8 CAV</option>
+          <option>Family member of a soldier</option>
+          <option>Researcher / Historian</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Soldier This Involves (if applicable)</label><input type="text" name="soldier" placeholder="Name as you knew them — nickname is fine"></div>
+      <div class="fg"><label>Account or Memory</label><textarea name="account" placeholder="Share as much detail as you're comfortable with — dates, locations, names, circumstances." required></textarea></div>
+      <div class="fg"><label>Your Email (not published)</label><input type="email" name="email" placeholder="For follow-up questions only" required></div>
+      <div class="fg">
+        <label>Permission to Publish</label>
+        <select name="permission">
+          <option value="">Select...</option>
+          <option>Yes — publish under my name</option>
+          <option>Yes — publish anonymously</option>
+          <option>No — for research use only</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn">Submit Account</button>
+      <div class="priv-note">Your email will not be published. Contact details for living veterans are held in restricted access only and never appear in any public view.</div>
+    </form>
+  </div>
+
+  {# ── Photo / Document Form ── #}
+  <div class="contrib-panel">
+    <div class="contrib-panel-hed">Submit a Photo or Document</div>
+    <p class="contrib-panel-deck">Photographs, letters, military documents, field notes, or other materials related to D Co. 2/8 CAV.</p>
+
+    <form name="materials" method="POST" netlify netlify-honeypot="bot-field" enctype="multipart/form-data">
+      <input type="hidden" name="form-name" value="materials">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+      <div class="fg">
+        <label>Type of Material</label>
+        <select name="material_type" required>
+          <option value="">Select...</option>
+          <option>Photograph</option>
+          <option>Letter (original)</option>
+          <option>Military document (DD-214, orders, etc.)</option>
+          <option>Newsletter or publication</option>
+          <option>Field notes or diary</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Soldier This Belongs To</label><input type="text" name="soldier" placeholder="Name or nickname"></div>
+      <div class="fg"><label>Approximate Date</label><input type="text" name="approx_date" placeholder="e.g. Spring 1971, or best guess"></div>
+      <div class="fg"><label>Caption or Description</label><textarea name="caption" placeholder="What does this show? Who is in it? Where was it taken?"></textarea></div>
+      <div class="fg">
+        <label>Upload File</label>
+        <input type="file" name="file" accept="image/*,.pdf,.doc,.docx" style="font-family:'Crimson Pro',serif;font-size:14px;color:var(--dim);width:100%;padding:8px 0;">
+      </div>
+      <div class="fg"><label>Your Email (not published)</label><input type="email" name="email" placeholder="For follow-up questions only" required></div>
+      <button type="submit" class="submit-btn">Submit Material</button>
+      <div class="priv-note">Originals will never be requested without explicit consent. You retain ownership of all submitted materials.</div>
+    </form>
+  </div>
+
+</div>
+</div>

@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.soldiers
+  size: 1
+  alias: soldier
+permalink: "soldiers/{{ soldier.slug }}/"
+eleventyComputed:
+  title: "{{ soldier.rank }} {{ soldier.name }}"
+---
+{% include "layouts/soldier.njk" %}

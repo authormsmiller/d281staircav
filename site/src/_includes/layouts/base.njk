@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} | D Co. 2/8 CAV Archive</title>
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+<div class="masthead">
+  <a class="masthead-brand" href="/">
+    <svg width="26" height="31" viewBox="0 0 26 31" fill="none">
+      <path d="M13 2L2 6.5v12c0 8 5.5 12.5 11 13.5 5.5-1 11-5.5 11-13.5v-12L13 2z" fill="#F5C400" stroke="#C8A800" stroke-width="0.8"/>
+      <path d="M2 6.5l22 0l-2.5 20" stroke="#0a0a08" stroke-width="9" fill="none"/>
+      <ellipse cx="21" cy="10" rx="5.5" ry="6" fill="#0a0a08"/>
+    </svg>
+    <div class="brand-lines">
+      <div class="brand-unit">D Co. 2/8 CAV</div>
+      <div class="brand-sub">Angry Skipper Archive</div>
+    </div>
+  </a>
+  <nav class="masthead-nav">
+    <a class="nav-btn {% if page.url == '/for-families/' %}active{% endif %}" href="/for-families/">For Families</a>
+    <a class="nav-btn {% if page.url == '/' %}active{% endif %}"            href="/">Overview</a>
+    <a class="nav-btn {% if page.url == '/roster/' %}active{% endif %}"     href="/roster/">Roster</a>
+    <a class="nav-btn {% if page.url == '/contribute/' %}active{% endif %}" href="/contribute/" class="cta">Contribute</a>
+  </nav>
+</div>
+
+{{ content | safe }}
+
+<div class="site-footer">
+  <div class="footer-left">D Co. 2/8 CAV · Angry Skipper</div>
+  <div class="footer-right">
+    1st Cavalry Division (Airmobile) · Vietnam 1965–1972<br>
+    Archive initiated April 2026 · Compiled by family
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="lbClose(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap">
+      <p id="lb-cap-p"></p>
+      <small id="lb-cap-s"></small>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toastEl"></div>
+
+<script>
+function lb(src, cap, src2) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-cap-p').textContent = cap;
+  document.getElementById('lb-cap-s').textContent = src2;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function lbClose(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lb-close')) {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') lbClose({ target: document.getElementById('lightbox') });
+});
+function showToast(msg) {
+  const t = document.getElementById('toastEl');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+// Timeline scroll reveal
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.tl-entry').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>

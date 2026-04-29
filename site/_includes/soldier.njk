@@ -1,0 +1,245 @@
+---
+layout: base.njk
+---
+
+{# ── PROFILE HERO ── #}
+<div class="prof-hero">
+
+  {# Photo column #}
+  <div class="prof-photo-col">
+    <div class="prof-photo-frame">
+      {% if profile_photo %}
+        <img
+          src="/soldiers/{{ slug }}/photos/{{ profile_photo }}"
+          alt="{{ first_name }} {{ last_name }}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        >
+      {% endif %}
+      <div class="prof-photo-placeholder" {% if profile_photo %}style="display:none"{% endif %}>
+        {{ first_name | first }}{{ last_name | first }}
+      </div>
+    </div>
+    <div class="prof-photo-cap">Then &amp; Now</div>
+  </div>
+
+  {# Info column #}
+  <div class="prof-info">
+
+    {% if status == "Deceased" or status == "KIA" %}
+      <div class="prof-deceased">
+        {% if status == "KIA" %}KIA · Vietnam
+        {% else %}Deceased{% if year_deceased %} · {{ year_deceased }}{% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="prof-name">{{ first_name }}<br>{{ last_name }}</div>
+    <div class="prof-rank">{{ rank }} &nbsp;·&nbsp; {{ mos }}</div>
+
+    {% if nickname %}
+      <div class="prof-nickname">Known as <span class="prof-nickname-val">"{{ nickname }}"</span></div>
+    {% endif %}
+
+    <div class="prof-grid">
+      <div class="pg-item">
+        <div class="pg-label">Platoon</div>
+        <div class="pg-value">{{ platoon }}</div>
+      </div>
+      <div class="pg-item">
+        <div class="pg-label">In-Country Service</div>
+        <div class="pg-value">{{ arrived }} – {{ departed }}</div>
+      </div>
+      <div class="pg-item">
+        <div class="pg-label">Home of Record</div>
+        <div class="pg-value">{{ hometown }}</div>
+      </div>
+      <div class="pg-item">
+        <div class="pg-label">Character of Service</div>
+        <div class="pg-value">{{ character_of_service | default("Honorable") }}</div>
+      </div>
+    </div>
+
+    {% if decorations and decorations.length %}
+      <div class="prof-medals-label">Decorations &amp; Awards</div>
+      <div class="prof-medals">
+        {% for medal in decorations %}
+          <span class="pmed {% if medal.distinguished %}{% else %}dim{% endif %}">{{ medal }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="prof-actions">
+      <a class="prof-btn prof-btn-primary" href="/contribute/">Share a Memory</a>
+      {% if family_contact %}
+        <a class="prof-btn prof-btn-ghost" href="mailto:{{ site.contact_email }}?subject=Re: {{ first_name }} {{ last_name }}">Contact Family</a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{# ── SERVICE TIMELINE ── #}
+{% if timeline and timeline.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Service Timeline</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">{{ arrived }} – {{ departed }}</div>
+  </div>
+
+  {% if timeline_source %}
+    <p class="timeline-intro">{{ timeline_source }}</p>
+  {% endif %}
+
+  <div class="tl">
+    {% for entry in timeline %}
+      <div class="tl-entry">
+        <div class="tl-dot {{ entry.type | default('move') }}"></div>
+        <div class="tl-date">{{ entry.date }}</div>
+        {% if entry.tags %}
+          {% for tag in entry.tags %}
+            <span class="tl-tag tl-tag-{{ tag.type }}">{{ tag.label }}</span>
+          {% endfor %}
+        {% endif %}
+        <div class="tl-hed">{{ entry.headline }}</div>
+        <div class="tl-body">{{ entry.body }}</div>
+        {% if entry.source_notice %}
+          <div class="source-notice">
+            <div class="sn-head">⚠ Source Notice — Multiple Accounts Exist</div>
+            <div class="sn-body">{{ entry.source_notice }}</div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{# ── PHOTO GALLERY ── #}
+{% if photos and photos.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Photographs</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">{{ photos.length }} Images</div>
+  </div>
+
+  {% if photo_intro %}
+    <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
+  {% endif %}
+
+  {# Separate "by him" from "of him" #}
+  {% set his_photos = [] %}
+  {% set of_photos  = [] %}
+  {% for p in photos %}
+    {% if p.photographer == "subject" or p.photographer == "unknown-of" %}
+      {% set of_photos = (of_photos.push(p), of_photos) %}
+    {% else %}
+      {% set his_photos = (his_photos.push(p), his_photos) %}
+    {% endif %}
+  {% endfor %}
+
+  {% if his_photos.length %}
+    <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
+    <div class="photo-grid">
+      {% for photo in his_photos %}
+        <div class="photo-card {% if photo.wide %}wide{% endif %}"
+             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption }}','{{ photo.credit }}')">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption }}" loading="lazy">
+          <div class="photo-overlay">
+            <div class="photo-cap-text">{{ photo.caption_short | default(photo.caption) }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if of_photos.length %}
+    <div class="gallery-sublabel">Among His Brothers — Photographs Others Took of {{ first_name }}</div>
+    <div class="photo-grid">
+      {% for photo in of_photos %}
+        <div class="photo-card {% if photo.wide %}wide{% endif %}"
+             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption }}','{{ photo.credit }}')">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption }}" loading="lazy">
+          <div class="photo-overlay">
+            <div class="photo-cap-text">{{ photo.caption_short | default(photo.caption) }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if wartime_content_notice %}
+    <div class="content-notice">
+      <div>
+        <strong>Note on Wartime Content</strong>
+        <p>This gallery includes photographs taken in a combat zone. Some images depict the realities of war. They are preserved here as historical documentation.</p>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{# ── DOCUMENTS ── #}
+{% if documents and documents.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Documents &amp; Records</div>
+    <div class="section-rule"></div>
+  </div>
+  <div class="doc-list">
+    {% for doc in documents %}
+      <div class="doc-item">
+        <div class="doc-icon">{{ doc.icon | default("📄") }}</div>
+        <div style="flex:1;">
+          <div class="doc-title">{{ doc.title }}</div>
+          <div class="doc-meta">{{ doc.meta }}</div>
+          {% if doc.note %}
+            <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);margin-top:5px;">{{ doc.note }}</div>
+          {% endif %}
+        </div>
+        <div class="doc-type">{{ doc.type }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{# ── SERVED ALONGSIDE ── #}
+{% if brothers and brothers.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">{{ platoon }}, {{ arrived | truncate(4, true, "") }}–{{ departed | truncate(4, true, "") }}</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Served Alongside</div>
+  </div>
+  <div class="bros-grid">
+    {% for bro in brothers %}
+      <div class="bro-card">
+        <div class="bro-circle {% if bro.kia %}kia{% endif %}">
+          <span class="bro-init {% if bro.kia %}kia{% endif %}">{{ bro.name | first }}</span>
+        </div>
+        <div class="bro-name">{{ bro.name }}</div>
+        <div class="bro-detail">{{ bro.platoon }} · {{ bro.dates }}</div>
+        {% if bro.status %}
+          <div class="bro-detail {% if bro.kia %}kia{% endif %}">{{ bro.status }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <div style="margin-top:20px;">
+    <a class="tl-link" href="/roster/">View full roster →</a>
+  </div>
+</div>
+{% endif %}
+
+{# ── PROFILE CTA ── #}
+<div class="prof-cta">
+  <div>
+    <h3>Did You Know {{ first_name }}, or Serve Alongside {{ first_name }}?</h3>
+    <p>We are actively collecting photographs, letters, and memories for this profile. Submissions are reviewed before publication. If you served with {{ first_name }} — or are a family member with materials — we'd be grateful to hear from you.</p>
+  </div>
+  <div class="prof-cta-btns">
+    <a class="land-cta" href="/contribute/">Submit Materials</a>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+---
+layout: base.njk
+title: Contribute
+permalink: /contribute/
+---
+
+<div class="contrib-hed">
+  <div class="contrib-title">Contribute to<br><span>the Archive</span></div>
+  <div class="contrib-deck">
+    If you served with D Co. 2/8 CAV, or have materials from a family member who did,
+    we want to hear from you. All submissions are reviewed before being added.
+  </div>
+</div>
+
+<div class="contrib-grid">
+
+  {# MEMORY / ACCOUNT FORM #}
+  <div class="contrib-panel">
+    <div class="contrib-panel-hed">Submit a Memory or Account</div>
+    <p class="contrib-panel-deck">A story, anecdote, or firsthand account involving a soldier or event from D Co. 2/8 CAV.</p>
+
+    <form name="memory-submission" method="POST" data-netlify="true"
+          netlify-honeypot="bot-field"
+          onsubmit="handleSubmit(event, 'Submission received — the archive team will follow up.')">
+      <input type="hidden" name="form-name" value="memory-submission">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+      <div class="fg">
+        <label>Your Relationship to the Unit</label>
+        <select name="relationship" required>
+          <option value="">Select...</option>
+          <option>I served with D Co. 2/8 CAV</option>
+          <option>Family member of a soldier</option>
+          <option>Researcher / Historian</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Soldier This Involves (if applicable)</label>
+        <input type="text" name="soldier_name" placeholder="Name as you knew them"></div>
+      <div class="fg"><label>Account or Memory</label>
+        <textarea name="account" placeholder="Share as much detail as you're comfortable with — dates, locations, names, circumstances." required></textarea></div>
+      <div class="fg"><label>Your Email (not published)</label>
+        <input type="email" name="email" placeholder="For follow-up questions only" required></div>
+      <div class="fg">
+        <label>Permission to Publish</label>
+        <select name="permission" required>
+          <option value="">Select...</option>
+          <option>Yes — publish under my name</option>
+          <option>Yes — publish anonymously</option>
+          <option>No — for research use only</option>
+        </select>
+      </div>
+      <button class="submit-btn" type="submit">Submit Account</button>
+      <div class="priv-note">Your email will not be published. Contact details for living veterans are held in restricted access only and never appear in any public view.</div>
+    </form>
+  </div>
+
+  {# PHOTO / DOCUMENT FORM #}
+  <div class="contrib-panel">
+    <div class="contrib-panel-hed">Submit a Photo or Document</div>
+    <p class="contrib-panel-deck">Photographs, letters, military documents, field notes, or other materials related to D Co. 2/8 CAV.</p>
+
+    <form name="material-submission" method="POST" data-netlify="true"
+          netlify-honeypot="bot-field"
+          onsubmit="handleSubmit(event, 'Material received — the archive team will follow up.')">
+      <input type="hidden" name="form-name" value="material-submission">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+      <div class="fg">
+        <label>Type of Material</label>
+        <select name="material_type" required>
+          <option value="">Select...</option>
+          <option>Photograph</option>
+          <option>Letter (original)</option>
+          <option>Military document (DD-214, orders, etc.)</option>
+          <option>Newsletter or publication</option>
+          <option>Field notes or diary</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Soldier This Belongs To</label>
+        <input type="text" name="soldier_name" placeholder="Name"></div>
+      <div class="fg"><label>Approximate Date</label>
+        <input type="text" name="approx_date" placeholder="e.g. Spring 1971, or best guess"></div>
+      <div class="fg"><label>Caption or Description</label>
+        <textarea name="description" placeholder="What does this show? Who is in it? Where was it taken?"></textarea></div>
+      <div class="fg"><label>Your Email (not published)</label>
+        <input type="email" name="email" placeholder="For follow-up questions only" required></div>
+      <div class="fg">
+        <label>Upload File</label>
+        <input type="file" name="file" accept="image/*,.pdf,.doc,.docx"
+               style="width:100%;padding:8px;background:#fff;border:1px solid var(--rule);border-bottom:2px solid var(--rule);">
+      </div>
+      <button class="submit-btn" type="submit">Submit Material</button>
+      <div class="priv-note">Originals will never be requested without explicit consent. You retain ownership of all submitted materials.</div>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">D Co. 2/8 CAV · Angry Skipper</div>
+  <div class="footer-right">1st Cavalry Division (Airmobile) · Vietnam 1965–1972<br>Archive initiated April 2026 · Compiled by family</div>
+</footer>
+
+<script>
+function handleSubmit(e, msg) {
+  e.preventDefault();
+  const form = e.target;
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(() => {
+    toast(msg);
+    form.reset();
+  }).catch(() => {
+    toast('Something went wrong — please try again or email us directly.');
+  });
+}
+</script>

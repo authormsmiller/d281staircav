@@ -1,0 +1,111 @@
+---
+layout: base.njk
+title: Overview
+---
+
+<div class="ov-hero">
+  <div class="ov-hero-text">
+    <div class="ov-dateline">Primary Source Archive · Initiated April 2026 · Active Collection · D Co. 2nd Bn. 8th Cavalry · 1st Cav Div (Airmobile)</div>
+    <div class="ov-headline">Delta<br><span>Company</span><br>Archive</div>
+    <div class="ov-deck">A permanent record of the men of D Co., 2/8 CAV — built one soldier at a time from the materials families have kept.</div>
+    <div class="ov-body">This archive collects primary source materials — letters, photographs, documents, firsthand accounts — from veterans and families of Delta Company. Compiled by the son of SGT Marvin Dale Miller, Cat Platoon, December 1970–1971.</div>
+    <div class="ov-stats">
+      <div class="ov-stat">
+        <div class="ov-stat-n">{{ collections.soldiers | length }}</div>
+        <div class="ov-stat-l">Soldier Profiles</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-n">3</div>
+        <div class="ov-stat-l">Combat Events</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-n">8</div>
+        <div class="ov-stat-l">KIA Documented</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-n">2</div>
+        <div class="ov-stat-l">Primary Sources</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ov-hero-side">
+    <div class="ov-side-label">
+      {% if collections.soldiers | length == 1 %}Soldier Profile — Example
+      {% else %}Recent Profiles{% endif %}
+    </div>
+    {% for soldier in collections.soldiers | reverse | limit(1) %}
+      <div class="ov-soldier-card" onclick="window.location='{{ soldier.url }}'">
+        <div class="ov-soldier-init">{{ soldier.data.first_name | first }}{{ soldier.data.last_name | first }}{{ soldier.data.middle_name | first }}</div>
+        <div class="ov-soldier-name">{{ soldier.data.first_name }} {{ soldier.data.last_name }}</div>
+        <div class="ov-soldier-rank">{{ soldier.data.rank }} · {{ soldier.data.platoon }}</div>
+        <div class="ov-soldier-field">
+          <div class="osfl">In-Country</div>
+          <div class="osfv">{{ soldier.data.arrived }} – {{ soldier.data.departed }}</div>
+        </div>
+        <div class="ov-soldier-field">
+          <div class="osfl">Home of Record</div>
+          <div class="osfv">{{ soldier.data.hometown }}</div>
+        </div>
+        {% if soldier.data.decorations %}
+          <div class="ov-soldier-field">
+            <div class="osfl">Decorations</div>
+            <div class="osfv">{{ soldier.data.distinguished_decorations | join(" · ") }}</div>
+          </div>
+        {% endif %}
+        <div class="ov-see-profile">View full profile</div>
+      </div>
+    {% endfor %}
+    <div class="ov-side-notice">Contact details for living veterans are held in restricted access only and do not appear in any public view.</div>
+  </div>
+</div>
+
+<div class="ov-body-grid">
+  <div class="ov-col">
+    <div class="ov-col-head">Documented Events</div>
+    <div class="ov-event">
+      <div class="ov-event-date">20 April 1971 · North of FSB Fanning</div>
+      <div class="ov-event-title">Contact — Bunker Complex</div>
+      <div class="ov-event-body">Cat Platoon spotted enemy at a creek. Range Platoon walked into a fortified bunker complex. <em class="ov-hl">4 KIA.</em> CPL Cardwell, CPL Drinkard, CPL Hall. Multiple accounts preserved without editorial reconciliation.</div>
+    </div>
+    <div class="ov-event">
+      <div class="ov-event-date">24 April 1971 · FSB Fontaine</div>
+      <div class="ov-event-title">Huey Crash — Only Known Photos</div>
+      <div class="ov-event-body">UH-1 crashed shortly after departure. <em class="ov-hl">3 KIA.</em> SGT Miller's photographs are the only known visual record. FSB Fanning named for the pilot who died.</div>
+    </div>
+    <div class="ov-event">
+      <div class="ov-event-date">21 October 1971 · Location Under Research</div>
+      <div class="ov-event-title">Contact — Makowski KIA</div>
+      <div class="ov-event-body">SP4 Makowski killed in action. <em class="ov-hl">1 KIA.</em> Circumstances and unit composition under ongoing research.</div>
+    </div>
+  </div>
+
+  <div class="ov-col">
+    <div class="ov-col-head">Primary Sources</div>
+    <div class="ov-source">
+      <div class="ov-source-title">McGrew Field Calendar, 1971</div>
+      <div class="ov-source-meta">SGT Howard McGrew · Handwritten · Jan–Dec 1971</div>
+    </div>
+    <div class="ov-source">
+      <div class="ov-source-title">ASA Newsletters, 1988–2026</div>
+      <div class="ov-source-meta">Association of Survivors · 38 years of unit correspondence</div>
+    </div>
+  </div>
+
+  <div class="ov-col">
+    <div class="ov-col-head">About This Archive</div>
+    <div class="ov-about-text">
+      All records are works in progress. Personal contact details for living veterans are maintained in restricted access only. Submissions from veterans, family members, and researchers are welcomed — all materials are reviewed before publication.
+      <br><br>
+      If you served with D Co. 2/8 CAV or have materials from a family member who did, this archive wants to hear from you.
+    </div>
+    <div style="margin-top:20px;">
+      <a class="land-cta" style="font-size:14px;padding:9px 20px;display:inline-block;" href="/contribute/">Contribute →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">D Co. 2/8 CAV · Angry Skipper</div>
+  <div class="footer-right">1st Cavalry Division (Airmobile) · Vietnam 1965–1972<br>Archive initiated April 2026 · Compiled by family</div>
+</footer>
