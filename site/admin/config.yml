@@ -6,7 +6,7 @@ media_folder: "site/soldiers"
 public_folder: "/soldiers"
 
 # Enable Netlify Identity for login
-local_backend: false
+local_backend: true
 
 collections:
 
