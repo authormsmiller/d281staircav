@@ -481,7 +481,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .fg label {
   display: block;
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 5px;
+  text-transform: uppercase; color: var (--ink); margin-bottom: 5px;
 }
 .fg input, .fg textarea, .fg select {
   width: 100%; font-family: 'Crimson Pro', serif; font-size: 17px;
