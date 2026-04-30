@@ -12,8 +12,7 @@ permalink: /intake/
 <div style="background: var(--pg); padding: 48px;">
 <div style="max-width: 780px; margin: 0 auto;">
 
-  <form name="profile-intake" method="POST" action="https://formspree.io/f/xbdwjrkn"
-        onsubmit="handleSubmit(event, 'Received — we\'ll be in touch within a few days.')">
+  <form name="profile-intake" method="POST" action="https://formspree.io/f/xbdwjrkn">
     <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
     {# ── SOLDIER IDENTITY ── #}
@@ -152,19 +151,3 @@ permalink: /intake/
   <div class="footer-right">1st Cavalry Division (Airmobile) · Vietnam 1965–1972<br>Archive initiated April 2026 · Compiled by family</div>
 </footer>
 
-<script>
-function handleSubmit(e, msg) {
-  e.preventDefault();
-  const form = e.target;
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(() => {
-    toast(msg);
-    form.reset();
-  }).catch(() => {
-    toast('Something went wrong — please try again or email us directly.');
-  });
-}
-</script>
