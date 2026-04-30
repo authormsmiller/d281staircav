@@ -1,12 +1,15 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: authormsmiller/d281staircav
   branch: main
 
 media_folder: "site/soldiers"
 public_folder: "/soldiers"
 
 # Enable Netlify Identity for login
-local_backend: false
+local_backend:
+  url: http://localhost:8081/api/v1
+  allowed_hosts: ["app.github.dev"]
 
 collections:
 
