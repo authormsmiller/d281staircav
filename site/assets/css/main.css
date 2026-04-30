@@ -690,7 +690,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .bro-circle.kia { border-color: var(--red); background: var(--red-pale); }
 .bro-init { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--dim); }
 .bro-init.kia { color: var(--red); }
-.bro-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.bro-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 2px; letter-spacing: 0; }
 .bro-detail { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
 .bro-detail.kia { color: var(--red); }
 
