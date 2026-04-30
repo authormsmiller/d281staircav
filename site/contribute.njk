@@ -59,7 +59,7 @@ permalink: /contribute/
     <p class="contrib-panel-deck">Photographs, letters, military documents, field notes, or other materials related to D Co. 2/8 CAV.</p>
 
     <form name="material-submission" method="POST" action="https://formspree.io/f/xbdwjrkn"
-          onsubmit="handleSubmit(event, 'Material received — the archive team will follow up.')">
+          enctype="multipart/form-data">
       <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
       <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
