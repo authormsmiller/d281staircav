@@ -243,7 +243,7 @@ photos:
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
 
- - filename: marvin-miller_larry-cate.jpg
+  - filename: marvin-miller_larry-cate.jpg
     subfolder: field
     contains:
       - miller-marvin-dale
