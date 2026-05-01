@@ -286,6 +286,12 @@ brothers:
     status: Deceased
     kia: false
 
+ - name: Val Romani
+    platoon: Cat
+    dates: "1970–71"
+    status: Archive Contributor
+    kia: false
+ 
  - name: Leroy Sells
     platoon: Cat
     dates: "1970–71"
