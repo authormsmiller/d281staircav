@@ -25,6 +25,23 @@ module.exports = function(eleventyConfig) {
       .filter(s => s.data.status === "KIA");
   });
 
+  // All photos across all soldiers — for cross-soldier contains queries
+  eleventyConfig.addCollection("allPhotos", function(collectionApi) {
+    const soldiers = collectionApi.getFilteredByGlob("./soldiers/*/*.md");
+    const allPhotos = [];
+    for (const soldier of soldiers) {
+      const photos = soldier.data.photos || [];
+      for (const photo of photos) {
+        allPhotos.push({
+          ...photo,
+          source_soldier_slug: soldier.data.slug,
+          source_soldier_name: soldier.data.first_name + " " + soldier.data.last_name,
+        });
+      }
+    }
+    return allPhotos;
+  });
+
   // Filters
   // Format a date string nicely: "December 1970"
   eleventyConfig.addFilter("dateDisplay", function(dateStr) {

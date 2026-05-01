@@ -209,6 +209,36 @@
 </div>
 {% endif %}
 
+{# ── ALSO APPEARS IN ── #}
+{% set crossPhotos = [] %}
+{% for photo in collections.allPhotos %}
+  {% if photo.contains and slug in photo.contains and photo.source_soldier_slug != slug %}
+    {% set crossPhotos = crossPhotos.concat([photo]) %}
+  {% endif %}
+{% endfor %}
+{% if crossPhotos.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Also Appears In</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">{{ crossPhotos.length }} Images</div>
+  </div>
+  <div class="photo-grid">
+    {% for photo in crossPhotos %}
+      <div class="photo-card {{ 'wide' if photo.wide }}"
+           onclick="lb('/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+        <img src="/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}"
+             alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+          <div class="photo-cap-credit">From the {{ photo.source_soldier_name }} collection</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 {# ── DOCUMENTS ── #}
 {% if documents and documents.length %}
 <div class="section">
