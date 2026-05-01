@@ -242,6 +242,19 @@ photos:
     caption_short: Bill Small in the field — 1st Cav patch visible · Photo by Ken Weaver
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
+
+    - filename: marvin-miller_larry-cate.jpg
+    subfolder: field
+    contains:
+      - miller-marvin-dale
+      - cate-larry
+    caption: >
+      Larry Cate (left) and Marvin Miller (right) at Vũng Tàu, early 1971.
+      Vũng Tàu served as an in-country R&R center for American forces throughout the war.
+    caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
+    credit: "Photographer unknown · Vũng Tàu · Early 1971"
+    photographer: unknown-of
+    wide: false
     
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
