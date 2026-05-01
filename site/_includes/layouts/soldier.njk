@@ -49,7 +49,7 @@
     <div class="prof-photo-frame">
       {% if profile_photo %}
         <img
-          src="/soldiers/{{ slug }}/photos/{{ profile_photo }}"
+          src="/soldiers/{{ slug }}/photos/profile/{{ profile_photo }}"
           alt="{{ first_name }} {{ last_name }}"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
         >
@@ -173,8 +173,8 @@
     {% for photo in photos %}
       {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
           </div>
@@ -188,8 +188,8 @@
     {% for photo in photos %}
       {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
           </div>

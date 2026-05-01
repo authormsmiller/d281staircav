@@ -124,6 +124,7 @@ wartime_content_notice: false
 
 photos:
   - filename: larry-cate2.jpg
+    subfolder: field
     caption: >
       Larry Cate at a fire support base, Vietnam 1971. Photograph by SGT Marvin Dale Miller.
     caption_short: Larry Cate — FSB, Vietnam 1971
@@ -131,6 +132,7 @@ photos:
     photographer: unknown-of
 
   - filename: larry-cate1.jpg
+    subfolder: field
     caption: >
       Larry Cate seated on sandbags at a fire support base, Vietnam 1971.
       A belt of machine gun ammunition is visible beside him.
@@ -139,6 +141,7 @@ photos:
     photographer: unknown-of
 
   - filename: larry-cate-w-soldier.jpg
+    subfolder: field
     caption: >
       Larry Cate with an unidentified soldier in a defoliated area, Vietnam 1971.
       Location under research. If you can identify the other soldier or the location,
@@ -149,6 +152,7 @@ photos:
     wide: true
 
   - filename: ken-weaver_larry-fishell_larry-cate.jpg
+    subfolder: field
     caption: >
       Left to right: Ken Weaver (Cat Plt, 1971–72), Larry Fishell (Cat Plt, 1970–71),
       and Larry Cate (Cat Plt, 1970–71). Photographed at a fire support base, 1971.
