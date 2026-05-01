@@ -123,14 +123,6 @@ photo_intro: >
 wartime_content_notice: false
 
 photos:
-  - filename: larry-cate2.jpg
-    subfolder: field
-    caption: >
-      Larry Cate at a fire support base, Vietnam 1971. Photograph by SGT Marvin Dale Miller.
-    caption_short: Larry Cate — FSB, Vietnam 1971
-    credit: "Photographed by SGT Marvin D. Miller · 1971"
-    photographer: unknown-of
-
   - filename: larry-cate1.jpg
     subfolder: field
     caption: >
