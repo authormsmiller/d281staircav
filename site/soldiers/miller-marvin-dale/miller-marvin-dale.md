@@ -254,8 +254,7 @@ photos:
     caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
     credit: "Photographer unknown · Vũng Tàu · Early 1971"
     photographer: unknown-of
-    wide: false
-    
+    wide: false   
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
   - title: DD-214 Report of Transfer or Discharge
