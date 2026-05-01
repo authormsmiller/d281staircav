@@ -242,13 +242,6 @@ photos:
     caption_short: Bill Small in the field — 1st Cav patch visible · Photo by Ken Weaver
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
-
-  - filename: marvin-miller-selfie.jpeg
-    subfolder: field
-    caption: Marvin Dale Miller, Vietnam 1971. Self-portrait taken in the field.
-    caption_short: Marvin — self-portrait, Vietnam 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
-    photographer: subject
     
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
