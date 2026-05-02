@@ -352,12 +352,6 @@ documents:
     type: Official
     icon: "📋"
 
-  - title: '"Duds Hit Firebase" — FSB Fontaine Incident'
-    meta: "Press Clipping · Military publication · Date unknown, 1971 · Submitted by Ken Weaver"
-    note: '"I was there when this happened. Keep it for me. No one was hurt." — Ken Weaver, handwritten'
-    type: Press
-    icon: "📰"
-
   - title: Letters Home — Marvin to His Mother
     meta: "Personal correspondence · Dec 1970 – Nov 1971 · ~20 letters · Digitization in progress"
     type: Personal

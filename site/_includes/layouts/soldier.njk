@@ -290,6 +290,38 @@
 </div>
 {% endif %}
 
+{# ── ALSO APPEARS IN — DOCUMENTS ── #}
+{% set crossDocs = [] %}
+{% for doc in collections.documents %}
+  {% if doc.data.contains and slug in doc.data.contains %}
+    {% set crossDocs = crossDocs.concat([doc]) %}
+  {% endif %}
+{% endfor %}
+{% if crossDocs.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Also Appears In — Documents</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">{{ crossDocs.length }} Record{% if crossDocs.length != 1 %}s{% endif %}</div>
+  </div>
+  <div class="doc-list">
+    {% for doc in crossDocs %}
+      <div class="doc-item">
+        <div class="doc-icon">📰</div>
+        <div style="flex:1;">
+          <a class="doc-title doc-link" href="{{ doc.data.permalink }}">{{ doc.data.title }}</a>
+          <div class="doc-meta">{{ doc.data.type }} · {{ doc.data.date_approx }}{% if doc.data.location %} · {{ doc.data.location }}{% endif %}</div>
+          <div class="doc-meta">Contributed by {{ doc.data.contributor_name }}</div>
+        </div>
+        <div>
+          <div class="doc-type">{{ doc.data.type }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 {# ── SERVED ALONGSIDE ── #}
 {% if brothers and brothers.length %}
 <div class="section">
