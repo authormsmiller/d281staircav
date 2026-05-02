@@ -262,16 +262,28 @@
   </div>
   <div class="doc-list">
     {% for doc in documents %}
-      <div class="doc-item">
+      <div class="doc-item {% if doc.access == 'admin' %}doc-restricted{% endif %}">
         <div class="doc-icon">{{ doc.icon | default("📄") }}</div>
         <div style="flex:1;">
-          <div class="doc-title">{{ doc.title }}</div>
+          {% if doc.url and doc.access != 'admin' %}
+            <a class="doc-title doc-link" href="{{ doc.url }}" target="_blank" rel="noopener">{{ doc.title }}</a>
+          {% else %}
+            <div class="doc-title">{{ doc.title }}</div>
+          {% endif %}
           <div class="doc-meta">{{ doc.meta }}</div>
           {% if doc.note %}
             <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);margin-top:5px;">{{ doc.note }}</div>
           {% endif %}
+          {% if doc.access == 'pending' %}
+            <div class="doc-badge doc-badge-pending">Digitization Pending</div>
+          {% endif %}
         </div>
-        <div class="doc-type">{{ doc.type }}</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+          <div class="doc-type">{{ doc.type }}</div>
+          {% if doc.access == 'admin' %}
+            <div class="doc-badge doc-badge-restricted">Restricted</div>
+          {% endif %}
+        </div>
       </div>
     {% endfor %}
   </div>

@@ -811,4 +811,32 @@ footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 4
 .toast { position: fixed; bottom: 28px; right: 28px; background: var(--blk); border: 1px solid var(--y); border-left: 4px solid var(--y); color: #F0EDD8; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 20px; max-width: 340px; opacity: 0; transform: translateY(8px); transition: opacity 0.25s, transform 0.25s; pointer-events: none; z-index: 3000; }
 .toast.show { opacity: 1; transform: translateY(0); }
 
+/* ── DOCUMENT PAGE ─────────────────────────────────────────── */
+.doc-page-flag { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--y); background: var(--blk); display: inline-block; padding: 4px 10px; margin-bottom: 14px; }
+.doc-page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 5vw, 48px); color: #F0EBD8; line-height: 1.05; margin: 0 0 10px 0; }
+.doc-page-meta { font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: 0.5px; color: var(--dim); margin-bottom: 8px; }
+.doc-page-contrib { font-family: 'Crimson Pro', serif; font-size: 16px; color: #C8C0A0; margin-bottom: 14px; }
+.doc-page-contrib-link { color: #E8E2D0; text-decoration: underline; text-underline-offset: 3px; }
+.doc-page-contrib-link:hover { color: var(--y2); }
+.doc-page-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.doc-page-tags-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
+.doc-page-tag { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink); background: var(--pg2); border: 1px solid var(--rule); padding: 3px 10px; text-decoration: none; text-transform: capitalize; }
+.doc-page-tag:hover { background: var(--y-pale); border-color: var(--y2); }
+
+.doc-image-stack { display: flex; flex-direction: column; gap: 32px; }
+.doc-figure { margin: 0; }
+.doc-scan { max-width: 100%; width: auto; max-height: 80vh; border: 1px solid var(--rule); box-shadow: 0 2px 12px rgba(0,0,0,0.10); cursor: zoom-in; display: block; }
+.doc-figcap { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.5px; color: var(--dim); margin-top: 8px; text-transform: uppercase; }
+
+.doc-transcription { font-family: 'Crimson Pro', serif; font-size: 18px; line-height: 1.75; color: #E8E2D0; max-width: 680px; }
+.doc-transcription p { margin: 0 0 1.2em 0; }
+.doc-transcription strong { font-weight: 600; }
+.doc-transcription em { font-style: italic; }
+
+.doc-archivist-notes { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; line-height: 1.7; color: #A09880; border-left: 3px solid var(--y); padding-left: 16px; max-width: 640px; }
+
+/* badge classes already exist — adding missing ones */
+.doc-badge { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-top: 6px; }
+.doc-badge-restricted { background: var(--red); color: #fff; }
+.doc-badge-pending { background: var(--pg2); color: var(--dim); border: 1px solid var(--rule); }
 

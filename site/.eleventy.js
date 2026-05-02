@@ -4,6 +4,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("soldiers");
+  eleventyConfig.addPassthroughCopy("documents");
+  eleventyConfig.addPassthroughCopy("anecdotes");
   eleventyConfig.addWatchTarget("assets/");
 
   // Collections
@@ -23,6 +25,11 @@ module.exports = function(eleventyConfig) {
     return collectionApi
       .getFilteredByGlob("./soldiers/*/*.md")
       .filter(s => s.data.status === "KIA");
+  });
+
+  // Document pages — sorted by contributor then slug
+  eleventyConfig.addCollection("documents", function(collectionApi) {
+  return collectionApi.getFilteredByGlob("./documents/**/*.md");
   });
 
   // All photos across all soldiers — for cross-soldier contains queries

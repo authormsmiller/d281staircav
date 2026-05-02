@@ -41,6 +41,14 @@ function lbClose(e) {
   }
 }
 
+function lbOpenSingle(src, caption) {
+  _slides = [{ src: src, caption: caption }];
+  _slideIdx = 0;
+  _lbRender();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lightbox').classList.contains('open')) return;
   if (e.key === 'Escape') lbClose({ target: document.getElementById('lightbox') });
