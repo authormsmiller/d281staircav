@@ -173,6 +173,7 @@ wartime_content_notice: true
 
 photos:
   - filename: 042471-hueycrash3.jpg
+    subfolder: field/events
     caption: >
       Wreckage of the Huey that crashed at FSB Fontaine, April 24, 1971.
       Veterans who reviewed this photograph believe Marvin was among the first
@@ -183,6 +184,7 @@ photos:
     wide: true
 
   - filename: 042471-hueycrash4.jpg
+    subfolder: field/events
     caption: >
       Recovery of the downed Huey. Marvin remained through the full recovery
       operation. These are the only known photographs of this incident.
@@ -190,17 +192,20 @@ photos:
     credit: "Photographed by Marvin D. Miller · April 24, 1971"
 
   - filename: chopper-1.jpg
+    subfolder: field
     caption: Soldiers loading into a UH-1 Huey during airmobile operations.
     caption_short: Air assault insertion — soldiers loading a UH-1
     credit: "Photographed by Marvin D. Miller · 1970–1971"
 
   - filename: guy-walking-in-fsb.jpg
+    subfolder: field
     caption: Interior of a fire support base, likely FSB Fontaine or Mace, 1971.
     caption_short: Fire support base interior — mountains of Long Khanh Province beyond
     credit: "Photographed by Marvin D. Miller · 1971"
     wide: true
 
   - filename: larry-cate_leroy-sells_ken-weaver.jpg
+    subfolder: field
     caption: >
       Left to right: Larry Cate (Cat Plt, 1970–71), Leroy Sells (Cat Plt, 1970–71),
       and Ken Weaver (Cat Plt, 1971–72). Larry Cate and Leroy Sells are deceased.
@@ -210,16 +215,19 @@ photos:
     wide: true
 
   - filename: soldiers-w-locals.jpg
+    subfolder: field
     caption: American soldiers interact with Vietnamese civilians near a fire support base.
     caption_short: Soldiers and Vietnamese civilians
     credit: "Photographed by Marvin D. Miller · 1971"
 
   - filename: vc-prisoner-retouch.jpg
+    subfolder: field/events
     caption: A Viet Cong prisoner attended to by soldiers. Historical documentation of ground combat operations.
     caption_short: VC prisoner — wartime documentation
     credit: "Photographed by Marvin D. Miller · 1971 · Wartime imagery"
 
   - filename: 4-soldiers-retouch.jpg
+    subfolder: field
     caption: >
       Marvin Miller (far left) with three fellow soldiers in the field, likely Cat Platoon,
       1970–71. If you can identify the other soldiers, please use the contribute form.
@@ -229,17 +237,24 @@ photos:
     wide: true
 
   - filename: bill-small.jpg
+    subfolder: field
     caption: Bill Small.
     caption_short: Bill Small in the field — 1st Cav patch visible · Photo by Ken Weaver
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
 
-  - filename: marvin-miller-selfie.jpeg
-    caption: Marvin Dale Miller, Vietnam 1971. Self-portrait taken in the field.
-    caption_short: Marvin — self-portrait, Vietnam 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
-    photographer: subject
-
+  - filename: marvin-miller_larry-cate.jpg
+    subfolder: field
+    contains:
+      - miller-marvin-dale
+      - cate-larry
+    caption: >
+      Larry Cate (left) and Marvin Miller (right) at Vũng Tàu, early 1971.
+      Vũng Tàu served as an in-country R&R center for American forces throughout the war.
+    caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
+    credit: "Photographer unknown · Vũng Tàu · Early 1971"
+    photographer: unknown-of
+    wide: false 
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
   - title: DD-214 Report of Transfer or Discharge
@@ -271,6 +286,12 @@ brothers:
     status: Deceased
     kia: false
 
+  - name: Val Romani
+    platoon: Cat
+    dates: "1970–71"
+    status: Archive Contributor
+    kia: false
+ 
   - name: Leroy Sells
     platoon: Cat
     dates: "1970–71"
@@ -288,4 +309,5 @@ brothers:
     dates: "1970–71"
     status: "Deceased - This Profile"
     kia: false
+
 ---

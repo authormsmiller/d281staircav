@@ -167,13 +167,27 @@
     <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
   {% endif %}
 
+  {# Build one flat JS array of all photos for the slideshow #}
+  <script>
+    var PHOTO_SLIDES = [
+      {% for photo in photos %}
+      {
+        src: "/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}",
+        caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
+        credit: {{ (photo.credit or "") | dump | safe }},
+        date: {{ (photo.date_approx or "") | dump | safe }}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+  </script>
+
   {# Iterate photos twice — once for "his", once for "of him" #}
   <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
   <div class="photo-grid">
     {% for photo in photos %}
       {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
           <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
@@ -188,7 +202,7 @@
     {% for photo in photos %}
       {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
           <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
@@ -316,8 +330,16 @@
     <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
     <img id="lb-img" src="" alt="">
     <div class="lb-cap">
+      <div class="lb-cap-meta">
+        <span id="lb-cap-date"></span>
+        <span id="lb-counter"></span>
+      </div>
       <p id="lb-cap-p"></p>
       <small id="lb-cap-s"></small>
+    </div>
+    <div class="lb-nav">
+      <button id="lb-prev" class="lb-arrow" onclick="event.stopPropagation();lbPrev()">← PREV</button>
+      <button id="lb-next" class="lb-arrow" onclick="event.stopPropagation();lbNext()">NEXT →</button>
     </div>
   </div>
 </div>
