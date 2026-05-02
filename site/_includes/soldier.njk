@@ -167,14 +167,29 @@
     <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
   {% endif %}
 
-  {# Iterate photos twice — once for "his", once for "of him" #}
+  {# Build one flat JS array of all photos for the slideshow #}
+  <script>
+    var PHOTO_SLIDES = [
+      {% for photo in photos %}
+      {
+        src: "/soldiers/{{ slug }}/photos/{{ photo.filename }}",
+        caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
+        credit: {{ (photo.credit or "") | dump | safe }},
+        date: {{ (photo.date_approx or "") | dump | safe }}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+  </script>
+
   <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
   <div class="photo-grid">
     {% for photo in photos %}
       {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}"
+               alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
+               loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
           </div>
@@ -188,8 +203,10 @@
     {% for photo in photos %}
       {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lb('/soldiers/{{ slug }}/photos/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}"
+               alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
+               loading="lazy">
           <div class="photo-overlay">
             <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
           </div>
@@ -208,7 +225,6 @@
   {% endif %}
 </div>
 {% endif %}
-
 {# ── DOCUMENTS ── #}
 {% if documents and documents.length %}
 <div class="section">
