@@ -22,11 +22,9 @@ status: Deceased
 year_deceased: 2004
 
 # ── PROFILE PHOTO ─────────────────────────────────
-# Filename of the hero photo — must exist in soldiers/miller-marvin-dale/photos/
 profile_photo: marvin-miller-selfie.jpeg
 
 # ── DECORATIONS ───────────────────────────────────
-# List awards. Add "distinguished: true" to the ones shown in yellow.
 decorations:
   - "Bronze Star Medal"
   - "Combat Infantry Badge"
@@ -39,7 +37,6 @@ distinguished_decorations:
   - "Combat Infantry Badge"
 
 # ── FAMILY CONTACT ────────────────────────────────
-# Set to true to show the "Contact Family" button.
 family_contact: true
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
@@ -160,10 +157,6 @@ timeline:
       California. He returned home to Kittanning, Pennsylvania.
 
 # ── PHOTOS ────────────────────────────────────────
-# Each photo needs a filename (in soldiers/miller-marvin-dale/photos/),
-# a caption, a short caption for the overlay, and credit.
-# photographer: "subject" means Marvin took it
-# photographer: "unknown-of" means someone else took it of him
 photo_intro: >
   Marvin carried a camera throughout his tour. Except where noted, every
   photograph here was taken by him — a first-person visual record of what
@@ -181,7 +174,7 @@ photos:
       The crash killed the pilot, co-pilot, and SP4 Richard Colburn.
     caption_short: Huey wreckage — FSB Fontaine, April 24, 1971
     credit: "Photographed by Marvin D. Miller · April 24, 1971 · Among first on scene"
-    wide: true
+
 
   - filename: 042471-hueycrash4.jpg
     subfolder: field/events
@@ -202,7 +195,7 @@ photos:
     caption: Interior of a fire support base, likely FSB Fontaine or Mace, 1971.
     caption_short: Fire support base interior — mountains of Long Khanh Province beyond
     credit: "Photographed by Marvin D. Miller · 1971"
-    wide: true
+
 
   - filename: larry-cate_leroy-sells_ken-weaver.jpg
     subfolder: field
@@ -212,7 +205,7 @@ photos:
       Ken Weaver contributed additional photographs to this archive.
     caption_short: Larry Cate · Leroy Sells · Ken Weaver — Cat Platoon
     credit: "Photographed by Marvin D. Miller · 1971"
-    wide: true
+
 
   - filename: soldiers-w-locals.jpg
     subfolder: field
@@ -234,7 +227,7 @@ photos:
     caption_short: Marvin (far left) with three fellow soldiers — identities unknown
     credit: "Photographer unknown · Submitted to archive · Retouched 2024"
     photographer: unknown-of
-    wide: true
+
 
   - filename: bill-small.jpg
     subfolder: field
@@ -254,7 +247,104 @@ photos:
     caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
     credit: "Photographer unknown · Vũng Tàu · Early 1971"
     photographer: unknown-of
-    wide: false 
+
+
+  - filename: larry_randt-marvin_miller.jpg
+    subfolder: field
+    caption: >
+      Larry Randt (left, carrying an M72 LAW) and Marvin Miller in the jungle, 1971.
+      Randt and Miller served together in Cat Platoon.
+    caption_short: Larry Randt and Marvin Miller — jungle, 1971
+    credit: "Photographer unknown · 1971"
+    photographer: unknown-of
+    contains:
+      - larry-randt
+
+  - filename: marvin-miller-fb-entrance.jpg
+    subfolder: field
+    caption: >
+      Marvin Miller at the entrance of a fire support base, likely FSB Fontaine or Mace, 1971.
+      Mountains of Long Khanh Province visible in the distance.
+    caption_short: Marvin Miller at firebase entrance — 1971
+    credit: "Photographer unknown · 1971"
+    photographer: unknown-of
+
+  - filename: marvin-miller-jungle1.jpg
+    subfolder: field
+    caption: >
+      Marvin Miller in the jungle during field operations, 1971.
+      Other soldiers of Cat Platoon visible in the background.
+    caption_short: Marvin Miller in the jungle — Cat Platoon, 1971
+    credit: "Photographer unknown · 1971"
+    photographer: unknown-of
+
+  - filename: marvin-miller-w-soldier.jpg
+    subfolder: field
+    caption: >
+      Marvin Miller with a Kit Carson Scout (ARVN) in a defoliated area, 1971.
+      Kit Carson Scouts were former Viet Cong who served as guides and interpreters for U.S. units.
+    caption_short: Marvin Miller with Kit Carson Scout — 1971
+    credit: "Photographer unknown · 1971"
+    photographer: unknown-of
+
+  - filename: marvin-road.jpg
+    subfolder: field
+    caption: >
+      Marvin Miller at a fire support base, mountains visible behind him, 1971.
+    caption_short: Marvin Miller at firebase — Long Khanh Province, 1971
+    credit: "Photographer unknown · 1971"
+    photographer: unknown-of
+
+  - filename: m60-gunners.jpg
+    subfolder: field
+    caption: >
+      Two soldiers of Cat Platoon with an M60 machine gun at a firebase perimeter, 1971.
+      Identities unknown.
+    caption_short: M60 gunners at firebase perimeter — 1971
+    credit: "Photographed by Marvin D. Miller · 1971"
+
+  - filename: m60-pit-retouch.jpg
+    subfolder: field
+    caption: >
+      A soldier mans an M60 machine gun in a sandbagged fighting position, 1971.
+      Image retouched and colorized from original print.
+    caption_short: M60 gunner in fighting position — 1971
+    credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
+
+  - filename: route1-retouch.jpg
+    subfolder: field
+    caption: >
+      Route 1 stretching toward the horizon, photographed from a moving vehicle, 1971.
+      Image retouched and colorized from original print.
+    caption_short: Route 1 — central Vietnam, 1971
+    credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
+
+  - filename: single-soldier.jpg
+    subfolder: field
+    caption: >
+      An unidentified soldier of Cat Platoon standing in tall grass, 1971.
+      If you recognize this soldier, please contact the archive.
+    caption_short: Unidentified soldier — Cat Platoon, 1971
+    credit: "Photographed by Marvin D. Miller · 1971"
+
+  - filename: smoking-guy.jpg
+    subfolder: field
+    caption: >
+      Platoon Sergeant Fred Hurst in the field, 1971.
+      Two additional soldiers are partially visible in the tall grass behind him.
+    caption_short: PSG Fred Hurst — Cat Platoon, 1971
+    credit: "Photographed by Marvin D. Miller · 1971"
+
+  - filename: larry-cate-w-soldier.jpg
+    subfolder: field
+    caption: >
+      Larry Cate with a Kit Carson Scout (ARVN) in a defoliated area, 1971.
+      Kit Carson Scouts were former Viet Cong who served as guides for U.S. units.
+    caption_short: Larry Cate with Kit Carson Scout — 1971
+    credit: "Photographed by Marvin D. Miller · 1971"
+    contains:
+      - cate-larry
+
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
   - title: DD-214 Report of Transfer or Discharge
@@ -291,7 +381,7 @@ brothers:
     dates: "1970–71"
     status: Archive Contributor
     kia: false
- 
+
   - name: Leroy Sells
     platoon: Cat
     dates: "1970–71"

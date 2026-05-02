@@ -174,7 +174,7 @@ photos:
       The crash killed the pilot, co-pilot, and SP4 Richard Colburn.
     caption_short: Huey wreckage — FSB Fontaine, April 24, 1971
     credit: "Photographed by Marvin D. Miller · April 24, 1971 · Among first on scene"
-    wide: true
+
 
   - filename: 042471-hueycrash4.jpg
     subfolder: field/events
@@ -195,7 +195,7 @@ photos:
     caption: Interior of a fire support base, likely FSB Fontaine or Mace, 1971.
     caption_short: Fire support base interior — mountains of Long Khanh Province beyond
     credit: "Photographed by Marvin D. Miller · 1971"
-    wide: true
+
 
   - filename: larry-cate_leroy-sells_ken-weaver.jpg
     subfolder: field
@@ -205,7 +205,7 @@ photos:
       Ken Weaver contributed additional photographs to this archive.
     caption_short: Larry Cate · Leroy Sells · Ken Weaver — Cat Platoon
     credit: "Photographed by Marvin D. Miller · 1971"
-    wide: true
+
 
   - filename: soldiers-w-locals.jpg
     subfolder: field
@@ -227,7 +227,7 @@ photos:
     caption_short: Marvin (far left) with three fellow soldiers — identities unknown
     credit: "Photographer unknown · Submitted to archive · Retouched 2024"
     photographer: unknown-of
-    wide: true
+
 
   - filename: bill-small.jpg
     subfolder: field
@@ -247,7 +247,7 @@ photos:
     caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
     credit: "Photographer unknown · Vũng Tàu · Early 1971"
     photographer: unknown-of
-    wide: false
+
 
   - filename: larry_randt-marvin_miller.jpg
     subfolder: field
