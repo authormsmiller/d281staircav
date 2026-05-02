@@ -286,8 +286,16 @@
     <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
     <img id="lb-img" src="" alt="">
     <div class="lb-cap">
+      <div class="lb-cap-meta">
+        <span id="lb-cap-date"></span>
+        <span id="lb-counter"></span>
+      </div>
       <p id="lb-cap-p"></p>
       <small id="lb-cap-s"></small>
+    </div>
+    <div class="lb-nav">
+      <button id="lb-prev" class="lb-arrow" onclick="event.stopPropagation();lbPrev()">← PREV</button>
+      <button id="lb-next" class="lb-arrow" onclick="event.stopPropagation();lbNext()">NEXT →</button>
     </div>
   </div>
 </div>
