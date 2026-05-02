@@ -243,93 +243,94 @@ photos:
     credit: "Photographed by or contributed by Ken Weaver"
     photographer: unknown-of
 
-  - filename: marvin-miller_larry-cate.jpg
-    subfolder: field
-    contains:
-      - miller-marvin-dale
-      - cate-larry
-    caption: >
-      Larry Cate (left) and Marvin Miller (right) at Vũng Tàu, early 1971.
-      Vũng Tàu served as an in-country R&R center for American forces throughout the war.
-    caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
-    credit: "Photographer unknown · Vũng Tàu · Early 1971"
-    photographer: unknown-of
-    wide: false
+- filename: marvin-miller_larry-cate.jpg
+  subfolder: field
+  contains:
+    - miller-marvin-dale
+    - cate-larry
+  caption: >
+    Larry Cate (left) and Marvin Miller (right) at Vũng Tàu, early 1971. 
+    Vũng Tàu served as an in-country R&R center for American forces throughout the war.
+  caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
+  credit: "Photographer unknown · Vũng Tàu · Early 1971"
+  photographer: unknown-of
+  wide: false
 
 - filename: larry_randt-marvin_miller.jpg
-    subfolder: field
-    caption: Larry Randt (left, carrying an M72 LAW) and Marvin Miller in the jungle, 1971. Randt and Miller served together in Cat Platoon.
-    caption_short: Larry Randt and Marvin Miller — jungle, 1971
-    credit: "Photographer unknown · 1971"
-    photographer: unknown-of
-    contains:
-      - larry-randt
+  subfolder: field
+  caption: Larry Randt (left, carrying an M72 LAW) and Marvin Miller in the jungle, 1971. Randt and Miller served together in Cat Platoon.
+  caption_short: Larry Randt and Marvin Miller — jungle, 1971
+  credit: "Photographer unknown · 1971"
+  photographer: unknown-of
+  contains:
+    - larry-randt
 
-  - filename: marvin-miller-fb-entrance.jpg
-    subfolder: field
-    caption: Marvin Miller at the entrance of a fire support base, likely FSB Fontaine or Mace, 1971. Mountains of Long Khanh Province visible in the distance.
-    caption_short: Marvin Miller at firebase entrance — 1971
-    credit: "Photographer unknown · 1971"
-    photographer: unknown-of
+- filename: marvin-miller-fb-entrance.jpg
+  subfolder: field
+  caption: Marvin Miller at the entrance of a fire support base, likely FSB Fontaine or Mace, 1971. Mountains of Long Khanh Province visible in the distance.
+  caption_short: Marvin Miller at firebase entrance — 1971
+  credit: "Photographer unknown · 1971"
+  photographer: unknown-of
 
-  - filename: marvin-miller-jungle1.jpg
-    subfolder: field
-    caption: Marvin Miller in the jungle during field operations, 1971. Other soldiers of Cat Platoon visible in the background.
-    caption_short: Marvin Miller in the jungle — Cat Platoon, 1971
-    credit: "Photographer unknown · 1971"
-    photographer: unknown-of
+- filename: marvin-miller-jungle1.jpg
+  subfolder: field
+  caption: Marvin Miller in the jungle during field operations, 1971. Other soldiers of Cat Platoon visible in the background.
+  caption_short: Marvin Miller in the jungle — Cat Platoon, 1971
+  credit: "Photographer unknown · 1971"
+  photographer: unknown-of
 
-  - filename: marvin-miller-w-soldier.jpg
-    subfolder: field
-    caption: Marvin Miller with a Kit Carson Scout (ARVN) in a defoliated area, 1971. Kit Carson Scouts were former Viet Cong who served as guides and interpreters for U.S. units.
-    caption_short: Marvin Miller with Kit Carson Scout — 1971
-    credit: "Photographer unknown · 1971"
-    photographer: unknown-of
+- filename: marvin-miller-w-soldier.jpg
+  subfolder: field
+  caption: Marvin Miller with a Kit Carson Scout (ARVN) in a defoliated area, 1971. Kit Carson Scouts were former Viet Cong who served as guides and interpreters for U.S. units.
+  caption_short: Marvin Miller with Kit Carson Scout — 1971
+  credit: "Photographer unknown · 1971"
+  photographer: unknown-of
 
-  - filename: marvin-road.jpg
-    subfolder: field
-    caption: Marvin Miller at a fire support base, mountains visible behind him, 1971.
-    caption_short: Marvin Miller at firebase — Long Khanh Province, 1971
-    credit: "Photographer unknown · 1971"
-    photographer: unknown-of
+- filename: marvin-road.jpg
+  subfolder: field
+  caption: Marvin Miller at a fire support base, mountains visible behind him, 1971.
+  caption_short: Marvin Miller at firebase — Long Khanh Province, 1971
+  credit: "Photographer unknown · 1971"
+  photographer: unknown-of
 
-  - filename: m60-gunners.jpg
-    subfolder: field
-    caption: Two soldiers of Cat Platoon with an M60 machine gun at a firebase perimeter, 1971. Identities unknown.
-    caption_short: M60 gunners at firebase perimeter — 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
+- filename: m60-gunners.jpg
+  subfolder: field
+  caption: Two soldiers of Cat Platoon with an M60 machine gun at a firebase perimeter, 1971. Identities unknown.
+  caption_short: M60 gunners at firebase perimeter — 1971
+  credit: "Photographed by Marvin D. Miller · 1971"
 
-  - filename: m60-pit-retouch.jpg
-    subfolder: field
-    caption: A soldier mans an M60 machine gun in a sandbagged fighting position, 1971. Image retouched and colorized from original print.
-    caption_short: M60 gunner in fighting position — 1971
-    credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
+- filename: m60-pit-retouch.jpg
+  subfolder: field
+  caption: A soldier mans an M60 machine gun in a sandbagged fighting position, 1971. Image retouched and colorized from original print.
+  caption_short: M60 gunner in fighting position — 1971
+  credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
 
-  - filename: route1-retouch.jpg
-    subfolder: field
-    caption: Route 1 stretching toward the horizon, photographed from a moving vehicle or elevated position, 1971. Image retouched and colorized from original print.
-    caption_short: Route 1 — central Vietnam, 1971
-    credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
+- filename: route1-retouch.jpg
+  subfolder: field
+  caption: Route 1 stretching toward the horizon, photographed from a moving vehicle or elevated position, 1971. Image retouched and colorized from original print.
+  caption_short: Route 1 — central Vietnam, 1971
+  credit: "Photographed by Marvin D. Miller · 1971 · Retouched 2024"
 
-  - filename: single-soldier.jpg
-    subfolder: field
-    caption: An unidentified soldier of Cat Platoon standing in tall grass, 1971. Identity unknown — if you recognize this soldier, please contact the archive.
-    caption_short: Unidentified soldier — Cat Platoon, 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
+- filename: single-soldier.jpg
+  subfolder: field
+  caption: An unidentified soldier of Cat Platoon standing in tall grass, 1971. Identity unknown — if you recognize this soldier, please contact the archive.
+  caption_short: Unidentified soldier — Cat Platoon, 1971
+  credit: "Photographed by Marvin D. Miller · 1971"
 
-  - filename: smoking-guy.jpg
-    subfolder: field
-    caption: Platoon Sergeant Fred Hurst in the field, 1971. Two additional soldiers are partially visible in the tall grass behind him.
-    caption_short: PSG Fred Hurst — Cat Platoon, 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
+- filename: smoking-guy.jpg
+  subfolder: field
+  caption: Platoon Sergeant Fred Hurst in the field, 1971. Two additional soldiers are partially visible in the tall grass behind him.
+  caption_short: PSG Fred Hurst — Cat Platoon, 1971
+  credit: "Photographed by Marvin D. Miller · 1971"
 
-  - filename: larry-cate-w-soldier.jpg
-    subfolder: field
-    caption: Larry Cate with a Kit Carson Scout (ARVN) in a defoliated area, 1971. Kit Carson Scouts were former Viet Cong who served as guides for U.S. units.
-    caption_short: Larry Cate with Kit Carson Scout — 1971
-    credit: "Photographed by Marvin D. Miller · 1971"
-    contains:
-      - cate-larry 
+- filename: larry-cate-w-soldier.jpg
+  subfolder: field
+  caption: Larry Cate with a Kit Carson Scout (ARVN) in a defoliated area, 1971. Kit Carson Scouts were former Viet Cong who served as guides for U.S. units.
+  caption_short: Larry Cate with Kit Carson Scout — 1971
+  credit: "Photographed by Marvin D. Miller · 1971"
+  contains:
+    - cate-larry
+
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
   - title: DD-214 Report of Transfer or Discharge
