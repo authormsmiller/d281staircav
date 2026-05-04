@@ -764,7 +764,7 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .pn-body { font-family: 'Crimson Pro', serif; font-size: 16px; color: var(--dim); line-height: 1.65; }
 
 /* ── FOOTER ── */
-footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
+footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; }
 .footer-left { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--y); }
 .footer-right { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); text-align: right; line-height: 1.75; }
 
@@ -841,3 +841,10 @@ footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 4
 .doc-badge-restricted { background: var(--red); color: #fff; }
 .doc-badge-pending { background: var(--pg2); color: var(--dim); border: 1px solid var(--rule); }
 
+/* ── FOOTER RESEARCH LINKS ─────────────────────────────────── */
+.footer-center { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.footer-research-label { font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
+.footer-research-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.footer-link { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--rule); text-decoration: none; letter-spacing: 0.5px; }
+.footer-link:hover { color: var(--y); }
+.footer-link-sep { color: var(--dim); font-size: 11px; }
