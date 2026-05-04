@@ -304,6 +304,40 @@
 </div>
 {% endif %}
 
+{# ── ANECDOTES ── #}
+{% set soldierAnecdotes = [] %}
+{% for anecdote in collections.anecdotes %}
+  {% if anecdote.data.soldiers and slug in anecdote.data.soldiers %}
+    {% set soldierAnecdotes = soldierAnecdotes.concat([anecdote]) %}
+  {% endif %}
+{% endfor %}
+{% if soldierAnecdotes.length %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Anecdotes</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">{{ soldierAnecdotes.length }} Record{% if soldierAnecdotes.length != 1 %}s{% endif %}</div>
+  </div>
+  <div class="doc-list">
+    {% for anecdote in soldierAnecdotes %}
+      <div class="doc-item">
+        <div class="doc-icon">💬</div>
+        <div style="flex:1;">
+          <a class="doc-title doc-link" href="{{ anecdote.data.permalink }}">{{ anecdote.data.title }}</a>
+          <div class="doc-meta">{{ anecdote.data.date_approx }} · {{ anecdote.data.source_short }}</div>
+          {% if anecdote.data.summary %}
+            <div class="doc-meta" style="margin-top:0.25rem;">{{ anecdote.data.summary }}</div>
+          {% endif %}
+        </div>
+        <div>
+          <div class="doc-type">Anecdote</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 {# ── SERVED ALONGSIDE ── #}
 {% if brothers and brothers.length %}
 <div class="section">
