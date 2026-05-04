@@ -1,7 +1,8 @@
 {
   "name": "d281staircav",
-  "compatibility_date": "2026-04-30",
-  "assets": {
-    "directory": "./_site"
-  }
+  "assets": { "directory": "./_site" },
+  "routes": [
+    { "pattern": "angryskipperarchive.org/*", "zone_name": "angryskipperarchive.org" },
+    { "pattern": "www.angryskipperarchive.org/*", "zone_name": "angryskipperarchive.org" }
+  ]
 }
