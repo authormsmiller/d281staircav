@@ -89,6 +89,7 @@ body {
 }
 .nav-btn.cta:hover { background: var(--y2); }
 .nav-btn.cta::after { display: none; }
+.nav-cta-group { display: flex; margin-left: auto; }
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
