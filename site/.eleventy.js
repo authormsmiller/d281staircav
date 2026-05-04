@@ -32,6 +32,10 @@ module.exports = function(eleventyConfig) {
   return collectionApi.getFilteredByGlob("./documents/**/*.md");
   });
 
+  eleventyConfig.addCollection("anecdotes", function(collectionApi) {
+  return collectionApi.getFilteredByGlob("./anecdotes/**/*.md");
+  });
+  
   // All photos across all soldiers — for cross-soldier contains queries
   eleventyConfig.addCollection("allPhotos", function(collectionApi) {
     const soldiers = collectionApi.getFilteredByGlob("./soldiers/*/*.md");

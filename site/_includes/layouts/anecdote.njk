@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} — D Co. 2/8 CAV Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+  {% include "partials/masthead.njk" %}
+
+  <main class="doc-main">
+
+    <div class="doc-eyebrow">
+      <span class="doc-type-badge">Anecdote</span>
+      <span class="doc-meta-item">{{ date_approx }}</span>
+      {% if source_short %}
+        <span class="doc-meta-sep">·</span>
+        <span class="doc-meta-item">{{ source_short }}</span>
+      {% endif %}
+    </div>
+
+    <h1 class="doc-title">{{ title }}</h1>
+
+    {% if soldiers and soldiers.length %}
+      <div class="doc-soldiers">
+        <span class="doc-meta-label">Soldiers</span>
+        {% for slug in soldiers %}
+          <a href="/soldiers/{{ slug }}/" class="doc-soldier-link">{{ slug | replace("-", " ") | title }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <hr class="doc-rule" />
+
+    <div class="doc-body anecdote-body">
+      {{ content | safe }}
+    </div>
+
+    <hr class="doc-rule" />
+
+    <details class="anecdote-notes">
+      <summary class="anecdote-notes-toggle">Archivist Notes</summary>
+      <div class="anecdote-notes-body">
+        <p>Archivist notes for this anecdote are on file and available upon request.</p>
+      </div>
+    </details>
+
+  </main>
+
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
