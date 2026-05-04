@@ -1,8 +1,0 @@
-backend:
-  name: git-gateway
-  branch: main
-
-local_backend: false
-
-media_folder: "site/soldiers"
-public_folder: "/soldiers"
