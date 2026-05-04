@@ -1,57 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title }} — D Co. 2/8 CAV Archive</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/main.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — D Co. 2/8 CAV Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-  {% include "partials/masthead.njk" %}
 
-  <main class="doc-main">
+{% include "partials/masthead.njk" %}
 
-    <div class="doc-eyebrow">
-      <span class="doc-type-badge">Anecdote</span>
-      <span class="doc-meta-item">{{ date_approx }}</span>
-      {% if source_short %}
-        <span class="doc-meta-sep">·</span>
-        <span class="doc-meta-item">{{ source_short }}</span>
-      {% endif %}
+<div class="breadcrumb show">
+  <a class="bc-link" href="/">Archive</a>
+  <span class="bc-sep">›</span>
+  <a class="bc-link" href="/soldiers/miller-marvin-dale/">Marvin Dale Miller</a>
+  <span class="bc-sep">›</span>
+  <span>{{ title }}</span>
+</div>
+
+<main>
+
+{# ── ANECDOTE HEADER ── #}
+<div class="section" style="padding-bottom:0;">
+  <div class="doc-page-flag">Anecdote</div>
+  <h1 class="doc-page-title">{{ title }}</h1>
+  <div class="doc-page-meta">
+    {% if date_approx %}{{ date_approx }}{% endif %}
+    {% if source_short %} · {{ source_short }}{% endif %}
+  </div>
+  {% if soldiers and soldiers.length %}
+    <div class="doc-page-tags">
+      <span class="doc-page-tags-label">Soldiers mentioned:</span>
+      {% for s in soldiers %}
+        <a class="doc-page-tag" href="/soldiers/{{ s }}/">{{ s | replace("-", " ") | title }}</a>
+      {% endfor %}
     </div>
+  {% endif %}
+</div>
 
-    <h1 class="doc-title">{{ title }}</h1>
+{# ── NARRATIVE ── #}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Account</div>
+    <div class="section-rule"></div>
+  </div>
+  <div class="doc-transcription">
+    {{ content | safe }}
+  </div>
+</div>
 
-    {% if soldiers and soldiers.length %}
-      <div class="doc-soldiers">
-        <span class="doc-meta-label">Soldiers</span>
-        {% for slug in soldiers %}
-          <a href="/soldiers/{{ slug }}/" class="doc-soldier-link">{{ slug | replace("-", " ") | title }}</a>
-        {% endfor %}
-      </div>
-    {% endif %}
+{# ── ARCHIVIST NOTES ── #}
+{% if archivist_notes %}
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Archivist Notes</div>
+    <div class="section-rule"></div>
+  </div>
+  <div class="doc-archivist-notes">
+    {{ archivist_notes | nl2br | safe }}
+  </div>
+</div>
+{% endif %}
 
-    <hr class="doc-rule" />
+{# ── CTA ── #}
+<div class="prof-cta">
+  <div>
+    <h3>Do You Have Information About This Incident?</h3>
+    <p>If you served with D Co. 2/8 CAV and remember this or have additional context, we would be grateful to hear from you.</p>
+  </div>
+  <div class="prof-cta-btns">
+    <a class="land-cta" href="/contribute/">Submit Information</a>
+  </div>
+</div>
 
-    <div class="doc-body anecdote-body">
-      {{ content | safe }}
-    </div>
+{% include "partials/footer.njk" %}
 
-    <hr class="doc-rule" />
+</main>
 
-    <details class="anecdote-notes">
-      <summary class="anecdote-notes-toggle">Archivist Notes</summary>
-      <div class="anecdote-notes-body">
-        <p>Archivist notes for this anecdote are on file and available upon request.</p>
-      </div>
-    </details>
-
-  </main>
-
-  {% include "partials/footer.njk" %}
-  <script src="/assets/js/main.js"></script>
-</body>
-</html>
+<script src="/assets/js/main.js"></sc

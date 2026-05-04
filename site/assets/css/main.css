@@ -835,7 +835,15 @@ footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 4
 .doc-transcription em { font-style: italic; }
 
 .doc-archivist-notes { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; line-height: 1.7; color: #A09880; border-left: 3px solid var(--y); padding-left: 16px; max-width: 640px; }
-
+.anecdote-notes-toggle {
+  color: #A09880;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 /* badge classes already exist — adding missing ones */
 .doc-badge { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-top: 6px; }
 .doc-badge-restricted { background: var(--red); color: #fff; }
