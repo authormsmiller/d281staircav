@@ -314,7 +314,7 @@
 {% if soldierAnecdotes.length %}
 <div class="section">
   <div class="section-header">
-    <div class="section-title">Anecdotes</div>
+    <div class="section-title">Verbal Accounts</div>
     <div class="section-rule"></div>
     <div class="section-meta">{{ soldierAnecdotes.length }} Record{% if soldierAnecdotes.length != 1 %}s{% endif %}</div>
   </div>
@@ -330,7 +330,7 @@
           {% endif %}
         </div>
         <div>
-          <div class="doc-type">Anecdote</div>
+          <div class="doc-type">{{ anecdote.data.type }}</div>
         </div>
       </div>
     {% endfor %}

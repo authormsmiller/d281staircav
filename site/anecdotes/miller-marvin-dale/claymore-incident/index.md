@@ -3,6 +3,7 @@ layout: layouts/anecdote.njk
 archive_id: MDM-ANECDOTE-CLAYMORE
 title: The Claymore Incident
 slug: claymore-incident
+type: Anecdote
 summary: "When the claymore rotation left Marvin Miller carrying 75–80 pounds on top of his combat load, his squadmates found the only solution available to them."
 soldiers:
   - miller-marvin-dale
