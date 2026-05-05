@@ -37,8 +37,6 @@ permalink: /search/
 <script>
 (function () {
 
-  // ── Helpers ─────────────────────────────────────────────────────────────
-
   function qs(sel) { return document.querySelector(sel); }
 
   function getParam(key) {
@@ -51,11 +49,8 @@ permalink: /search/
   }
 
   function platoonShort(platoon) {
-    // "Cat (Wild Cat) Platoon · 3rd" → "Cat Platoon · 3rd"
     return platoon ? platoon.replace(/\s*\([^)]*\)/, "") : "";
   }
-
-  // ── Build index ──────────────────────────────────────────────────────────
 
   let lunrIndex = null;
   let records   = {};
@@ -80,7 +75,6 @@ permalink: /search/
         data.forEach(function (s) { this.add(s); }, this);
       });
 
-      // Run search if query already in URL (page load / back navigation)
       const q = getParam("q");
       if (q) {
         qs("#search-input").value = q;
@@ -93,16 +87,13 @@ permalink: /search/
         '<p class="search-error">Search index could not be loaded. Try refreshing the page.</p>';
     });
 
-  // ── Search ───────────────────────────────────────────────────────────────
-
   function runSearch(query) {
     const container = qs("#search-results");
     if (!query.trim()) { container.innerHTML = ""; return; }
-    if (!lunrIndex)    { container.innerHTML = '<p class="search-status">Index loading…</p>'; return; }
+    if (!lunrIndex)    { container.innerHTML = '<p class="search-status">Index loading\u2026</p>'; return; }
 
     let hits;
     try {
-      // Try wildcard first for partial matches, fall back to fuzzy
       hits = lunrIndex.search(query + "*");
       if (!hits.length) hits = lunrIndex.search(query + "~1");
     } catch (e) {
@@ -110,11 +101,8 @@ permalink: /search/
     }
 
     const soldiers = hits.map(function (h) { return records[h.ref]; }).filter(Boolean);
-
     renderResults(query, soldiers, container);
   }
-
-  // ── Render ───────────────────────────────────────────────────────────────
 
   function renderResults(query, soldiers, container) {
     if (!soldiers.length) {
@@ -126,7 +114,6 @@ permalink: /search/
 
     let html = "";
 
-    // ── Soldiers section ────────────────────────────────────────────────
     html += '<section class="result-group">';
     html += '<h2 class="result-group-label">Soldiers <span class="result-count">' + soldiers.length + '</span></h2>';
     html += '<ul class="result-list">';
@@ -134,7 +121,7 @@ permalink: /search/
     soldiers.forEach(function (s) {
       const photo = photoPath(s);
       const platoon = platoonShort(s.platoon);
-      const meta = [s.rank, platoon, s.hometown].filter(Boolean).join(" · ");
+      const meta = [s.rank, platoon, s.hometown].filter(Boolean).join(" \u00b7 ");
 
       html += '<li class="result-item">';
       html += '  <a href="/soldiers/' + s.slug + '/" class="result-link">';
@@ -160,13 +147,11 @@ permalink: /search/
 
     html += '</ul></section>';
 
-    // ── Accounts section (stub) ─────────────────────────────────────────
     html += '<section class="result-group result-group--coming-soon">';
     html += '<h2 class="result-group-label">Verbal Accounts <span class="result-coming">coming soon</span></h2>';
     html += '<p class="result-stub-note">Verbal accounts and recorded testimony will appear here as they are added to the archive.</p>';
     html += '</section>';
 
-    // ── Locations section (stub) ────────────────────────────────────────
     html += '<section class="result-group result-group--coming-soon">';
     html += '<h2 class="result-group-label">Locations &amp; Firebases <span class="result-coming">coming soon</span></h2>';
     html += '<p class="result-stub-note">Firebase and location records will appear here once those pages are built.</p>';
@@ -174,8 +159,6 @@ permalink: /search/
 
     container.innerHTML = html;
   }
-
-  // ── Utilities ────────────────────────────────────────────────────────────
 
   function escHtml(str) {
     return String(str)
@@ -187,7 +170,7 @@ permalink: /search/
 
   function truncate(str, len) {
     if (!str || str.length <= len) return str;
-    return str.slice(0, len).replace(/\s+\S*$/, "") + "…";
+    return str.slice(0, len).replace(/\s+\S*$/, "") + "\u2026";
   }
 
   function initials(s) {
@@ -196,14 +179,11 @@ permalink: /search/
     return (f + l).toUpperCase();
   }
 
-  // ── Form wiring ──────────────────────────────────────────────────────────
-
   qs("#search-form").addEventListener("submit", function (e) {
     e.preventDefault();
     const q = qs("#search-input").value.trim();
     if (!q) return;
 
-    // Push to URL so back button works and result is shareable
     const url = new URL(window.location.href);
     url.searchParams.set("q", q);
     history.pushState({}, "", url);
@@ -213,3 +193,4 @@ permalink: /search/
 
 })();
 </script>
+ENDOFFILE
