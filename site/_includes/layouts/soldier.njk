@@ -55,17 +55,13 @@
     {% endif %}
 
     <div class="prof-name">{{ first_name }}<br>{{ last_name }}</div>
-    <div class="prof-rank">{{ rank }} &nbsp;·&nbsp; {{ mos }}</div>
+    <div class="prof-rank">{{ rank }} &nbsp;·&nbsp; {{ platoon }} &nbsp;·&nbsp; {{ mos }}</div>
 
     {% if nickname %}
       <div class="prof-nickname">Known as <span class="prof-nickname-val">"{{ nickname }}"</span></div>
     {% endif %}
 
     <div class="prof-grid">
-      <div class="pg-item">
-        <div class="pg-label">Platoon</div>
-        <div class="pg-value">{{ platoon }}</div>
-      </div>
       <div class="pg-item">
         <div class="pg-label">In-Country Service</div>
         <div class="pg-value">{{ arrived }} – {{ departed }}</div>
@@ -78,16 +74,11 @@
         <div class="pg-label">Character of Service</div>
         <div class="pg-value">{{ character_of_service | default("Honorable") }}</div>
       </div>
-    </div>
-
-    {% if decorations and decorations.length %}
-      <div class="prof-medals-label">Decorations &amp; Awards</div>
-      <div class="prof-medals">
-        {% for medal in decorations %}
-          <span class="pmed {% if medal.distinguished %}{% else %}dim{% endif %}">{{ medal }}</span>
-        {% endfor %}
+      <div class="pg-item">
+        <div class="pg-label">Archive Status</div>
+        <div class="pg-value">{{ archive_status | default("Active") }}</div>
       </div>
-    {% endif %}
+    </div>
 
     <div class="prof-actions">
       <a class="prof-btn prof-btn-primary" href="/contribute/">Share a Memory</a>
@@ -99,272 +90,381 @@
   </div>
 </div>
 
-{# ── SERVICE TIMELINE ── #}
-{% if timeline and timeline.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Service Timeline</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ arrived }} – {{ departed }}</div>
-  </div>
-
-  {% if timeline_source %}
-    <p class="timeline-intro">{{ timeline_source }}</p>
-  {% endif %}
-
-  <div class="tl">
-    {% for entry in timeline %}
-      <div class="tl-entry">
-        <div class="tl-dot {{ entry.type | default('move') }}"></div>
-        <div class="tl-date">{{ entry.date }}</div>
-        {% if entry.tags %}
-          {% for tag in entry.tags %}
-            <span class="tl-tag tl-tag-{{ tag.type }}">{{ tag.label }}</span>
-          {% endfor %}
-        {% endif %}
-        <div class="tl-hed">{{ entry.headline }}</div>
-        <div class="tl-body">{{ entry.body }}</div>
-        {% if entry.source_notice %}
-          <div class="source-notice">
-            <div class="sn-head">⚠ Source Notice — Multiple Accounts Exist</div>
-            <div class="sn-body">{{ entry.source_notice }}</div>
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
+{# ── TAB BAR ── #}
+<div class="tabs-bar">
+  <div class="tab active" data-tab="timeline">Timeline</div>
+  <div class="tab" data-tab="photos">Photos</div>
+  <div class="tab" data-tab="alongside">Served alongside</div>
+  <div class="tab" data-tab="accounts">Verbal accounts</div>
+  <div class="tab" data-tab="documents">Documents</div>
+  <div class="tab" data-tab="letters">Letters</div>
+  <div class="tab" data-tab="service">Service record</div>
+  <div class="tab" data-tab="external">External resources</div>
 </div>
-{% endif %}
 
-{# ── PHOTO GALLERY ── #}
-{% if photos and photos.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Photographs</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ photos.length }} Images</div>
-  </div>
-
-  {% if photo_intro %}
-    <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
-  {% endif %}
-
-  {# Build one flat JS array of all photos for the slideshow #}
-  <script>
-    var PHOTO_SLIDES = [
-      {% for photo in photos %}
-      {
-        src: "/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}",
-        caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
-        credit: {{ (photo.credit or "") | dump | safe }},
-        date: {{ (photo.date_approx or "") | dump | safe }}
-      }{% if not loop.last %},{% endif %}
+{# ── TAB: TIMELINE ── #}
+<div class="tab-content" id="tab-timeline">
+  {% if timeline and timeline.length %}
+    {% if timeline_source %}
+      <p class="timeline-intro">{{ timeline_source }}</p>
+    {% endif %}
+    <div class="tl">
+      {% for entry in timeline %}
+        <div class="tl-entry">
+          <div class="tl-dot {{ entry.type | default('move') }}"></div>
+          <div class="tl-date">{{ entry.date }}</div>
+          {% if entry.tags %}
+            {% for tag in entry.tags %}
+              <span class="tl-tag tl-tag-{{ tag.type }}">{{ tag.label }}</span>
+            {% endfor %}
+          {% endif %}
+          <div class="tl-hed">{{ entry.headline }}</div>
+          <div class="tl-body">{{ entry.body }}</div>
+          {% if entry.source_notice %}
+            <div class="source-notice">
+              <div class="sn-head">⚠ Source Notice — Multiple Accounts Exist</div>
+              <div class="sn-body">{{ entry.source_notice }}</div>
+            </div>
+          {% endif %}
+        </div>
       {% endfor %}
-    ];
-  </script>
-
-  {# Iterate photos twice — once for "his", once for "of him" #}
-  <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
-  <div class="photo-grid">
-    {% for photo in photos %}
-      {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
-        <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
-          <div class="photo-overlay">
-            <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-
-  <div class="gallery-sublabel">Among His Brothers — Photographs Others Took of {{ first_name }}</div>
-  <div class="photo-grid">
-    {% for photo in photos %}
-      {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
-        <div class="photo-card {{ 'wide' if photo.wide }}"
-             onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
-          <div class="photo-overlay">
-            <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-
-  {% if wartime_content_notice %}
-    <div class="content-notice">
-      <div>
-        <strong>Note on Wartime Content</strong>
-        <p>This gallery includes photographs taken in a combat zone. Some images depict the realities of war. They are preserved here as historical documentation.</p>
-      </div>
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No timeline on record yet.<br>
+      <a href="/contribute/">Know something about {{ first_name }}'s service? Tell us →</a>
     </div>
   {% endif %}
 </div>
-{% endif %}
 
-{# ── ALSO APPEARS IN ── #}
-{% set crossPhotos = [] %}
-{% for photo in collections.allPhotos %}
-  {% if photo.contains and slug in photo.contains and photo.source_soldier_slug != slug %}
-    {% set crossPhotos = crossPhotos.concat([photo]) %}
-  {% endif %}
-{% endfor %}
-{% if crossPhotos.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Also Appears In</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ crossPhotos.length }} Images</div>
-  </div>
-  <div class="photo-grid">
-    {% for photo in crossPhotos %}
-      <div class="photo-card {{ 'wide' if photo.wide }}"
-           onclick="lb('/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-        <img src="/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}"
-             alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
-        <div class="photo-overlay">
-          <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-          <div class="photo-cap-credit">From the {{ photo.source_soldier_name }} collection</div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
+{# ── TAB: PHOTOS ── #}
+<div class="tab-content" id="tab-photos" style="display:none">
+  {% if photos and photos.length %}
+    {% if photo_intro %}
+      <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
+    {% endif %}
 
-{# ── DOCUMENTS ── #}
-{% if documents and documents.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Documents &amp; Records</div>
-    <div class="section-rule"></div>
-  </div>
-  <div class="doc-list">
-    {% for doc in documents %}
-      <div class="doc-item {% if doc.access == 'admin' %}doc-restricted{% endif %}">
-        <div class="doc-icon">{{ doc.icon | default("📄") }}</div>
-        <div style="flex:1;">
-          {% if doc.url and doc.access != 'admin' %}
-            <a class="doc-title doc-link" href="{{ doc.url }}" target="_blank" rel="noopener">{{ doc.title }}</a>
-          {% else %}
-            <div class="doc-title">{{ doc.title }}</div>
-          {% endif %}
-          <div class="doc-meta">{{ doc.meta }}</div>
-          {% if doc.note %}
-            <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);margin-top:5px;">{{ doc.note }}</div>
-          {% endif %}
-          {% if doc.access == 'pending' %}
-            <div class="doc-badge doc-badge-pending">Digitization Pending</div>
-          {% endif %}
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-          <div class="doc-type">{{ doc.type }}</div>
-          {% if doc.access == 'admin' %}
-            <div class="doc-badge doc-badge-restricted">Restricted</div>
-          {% endif %}
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
+    <script>
+      var PHOTO_SLIDES = [
+        {% for photo in photos %}
+        {
+          src: "/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}",
+          caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
+          credit: {{ (photo.credit or "") | dump | safe }},
+          date: {{ (photo.date_approx or "") | dump | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ];
+    </script>
 
-{# ── ALSO APPEARS IN — DOCUMENTS ── #}
-{% set crossDocs = [] %}
-{% for doc in collections.documents %}
-  {% if doc.data.contains and slug in doc.data.contains %}
-    {% set crossDocs = crossDocs.concat([doc]) %}
-  {% endif %}
-{% endfor %}
-{% if crossDocs.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Also Appears In — Documents</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ crossDocs.length }} Record{% if crossDocs.length != 1 %}s{% endif %}</div>
-  </div>
-  <div class="doc-list">
-    {% for doc in crossDocs %}
-      <div class="doc-item">
-        <div class="doc-icon">📰</div>
-        <div style="flex:1;">
-          <a class="doc-title doc-link" href="{{ doc.data.permalink }}">{{ doc.data.title }}</a>
-          <div class="doc-meta">{{ doc.data.type }} · {{ doc.data.date_approx }}{% if doc.data.location %} · {{ doc.data.location }}{% endif %}</div>
-          <div class="doc-meta">Contributed by {{ doc.data.contributor_name }}</div>
-        </div>
-        <div>
-          <div class="doc-type">{{ doc.data.type }}</div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-{# ── ANECDOTES ── #}
-{% set soldierAnecdotes = [] %}
-{% for anecdote in collections.anecdotes %}
-  {% if anecdote.data.soldiers and slug in anecdote.data.soldiers %}
-    {% set soldierAnecdotes = soldierAnecdotes.concat([anecdote]) %}
-  {% endif %}
-{% endfor %}
-{% if soldierAnecdotes.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Verbal Accounts</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ soldierAnecdotes.length }} Record{% if soldierAnecdotes.length != 1 %}s{% endif %}</div>
-  </div>
-  <div class="doc-list">
-    {% for anecdote in soldierAnecdotes %}
-      <div class="doc-item">
-        <div class="doc-icon">💬</div>
-        <div style="flex:1;">
-          <a class="doc-title doc-link" href="{{ anecdote.data.permalink }}">{{ anecdote.data.title }}</a>
-          <div class="doc-meta">{{ anecdote.data.date_approx }} · {{ anecdote.data.source_short }}</div>
-          {% if anecdote.data.summary %}
-            <div class="doc-meta" style="margin-top:0.25rem;">{{ anecdote.data.summary }}</div>
-          {% endif %}
-        </div>
-        <div>
-          <div class="doc-type">{{ anecdote.data.type }}</div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-{# ── SERVED ALONGSIDE ── #}
-{% if brothers and brothers.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Served Alongside</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">{{ platoon }}</div>
-  </div>
-  <div class="bros-grid">
-    {% for bro in brothers %}
-      <div class="bro-card">
-        <div class="bro-circle {% if bro.kia %}kia{% endif %}">
-          <span class="bro-init {{ 'kia' if bro.kia }}">{{ bro.name[0] }}</span>
-        </div>
-        <div class="bro-name">{{ bro.name }}</div>
-        <div class="bro-detail">{{ bro.platoon }} · {{ bro.dates }}</div>
-        {% if bro.status %}
-          <div class="bro-detail {% if bro.kia %}kia{% endif %}">{{ bro.status }}</div>
+    <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
+    <div class="photo-grid">
+      {% for photo in photos %}
+        {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
+          <div class="photo-card {{ 'wide' if photo.wide }}"
+               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+            <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+            </div>
+          </div>
         {% endif %}
-      </div>
+      {% endfor %}
+    </div>
+
+    <div class="gallery-sublabel">Among His Brothers — Photographs Others Took of {{ first_name }}</div>
+    <div class="photo-grid">
+      {% for photo in photos %}
+        {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
+          <div class="photo-card {{ 'wide' if photo.wide }}"
+               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+            <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# Also appears in — cross-soldier photos #}
+    {% set crossPhotos = [] %}
+    {% for photo in collections.allPhotos %}
+      {% if photo.contains and slug in photo.contains and photo.source_soldier_slug != slug %}
+        {% set crossPhotos = crossPhotos.concat([photo]) %}
+      {% endif %}
     {% endfor %}
-  </div>
-  <div style="margin-top:20px;">
-    <a class="tl-link" href="/roster/">View full roster →</a>
+    {% if crossPhotos.length %}
+      <div class="gallery-sublabel">Photographs by Fellow Soldiers</div>
+      <div class="photo-grid">
+        {% for photo in crossPhotos %}
+          <div class="photo-card {{ 'wide' if photo.wide }}"
+               onclick="lb('/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+            <img src="/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}"
+                 alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+              <div class="photo-cap-credit">From the {{ photo.source_soldier_name }} collection</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if wartime_content_notice %}
+      <div class="content-notice">
+        <div>
+          <strong>Note on Wartime Content</strong>
+          <p>This gallery includes photographs taken in a combat zone. Some images depict the realities of war. They are preserved here as historical documentation.</p>
+        </div>
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="tab-empty">
+      No photographs on record yet.<br>
+      <a href="/contribute/">Have a photo to contribute? →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: SERVED ALONGSIDE ── #}
+<div class="tab-content" id="tab-alongside" style="display:none">
+  {% set relatedSoldiers = [] %}
+  {% for rel in relationships %}
+    {% if slug in rel.soldiers %}
+      {% set otherSlug = "" %}
+      {% for s in rel.soldiers %}
+        {% if s != slug %}{% set otherSlug = s %}{% endif %}
+      {% endfor %}
+      {% if otherSlug %}
+        {% set relatedSoldiers = relatedSoldiers.concat([{ slug: otherSlug, basis: rel.basis, notes: rel.notes }]) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if relatedSoldiers.length %}
+    <div class="alongside-grid">
+      {% for rel in relatedSoldiers %}
+        {% set otherProfile = null %}
+        {% for page in collections.all %}
+          {% if page.data.slug == rel.slug %}
+            {% set otherProfile = page.data %}
+          {% endif %}
+        {% endfor %}
+        <div class="alongside-card">
+          <a href="/soldiers/{{ rel.slug }}/" style="text-decoration:none;">
+            <div class="alongside-photo">
+              {% if otherProfile and otherProfile.profile_photo %}
+                <img src="/soldiers/{{ rel.slug }}/photos/profile/{{ otherProfile.profile_photo }}"
+                     alt="{{ rel.slug }}"
+                     style="width:100%;height:100%;object-fit:cover;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <span style="display:none">{{ rel.slug | upper | truncate(2, true, "") }}</span>
+              {% else %}
+                {% if otherProfile %}{{ otherProfile.first_name[0] }}{{ otherProfile.last_name[0] }}
+                {% else %}?{% endif %}
+              {% endif %}
+            </div>
+          </a>
+          <div class="alongside-name">
+            <a href="/soldiers/{{ rel.slug }}/" style="color:inherit;text-decoration:none;">
+              {% if otherProfile %}{{ otherProfile.first_name }} {{ otherProfile.last_name }}
+              {% else %}{{ rel.slug }}{% endif %}
+            </a>
+          </div>
+          {% if otherProfile %}
+            <div class="alongside-meta">{{ otherProfile.platoon }}{% if otherProfile.arrived %} · {{ otherProfile.arrived }}–{{ otherProfile.departed }}{% endif %}</div>
+          {% endif %}
+          <div class="alongside-meta" style="font-style:italic;">{{ rel.basis | replace("-", " ") }}</div>
+        </div>
+      {% endfor %}
+
+      {# Know someone prompt card #}
+      <div class="alongside-card">
+        <a href="/contribute/" style="text-decoration:none;">
+          <div class="alongside-photo" style="background:transparent;border-style:dashed;font-size:20px;color:var(--dim);">+</div>
+        </a>
+        <div class="alongside-name" style="color:var(--dim);">
+          <a href="/contribute/" style="color:var(--dim);text-decoration:none;">Know someone?</a>
+        </div>
+        <div class="alongside-meta">Tell us →</div>
+      </div>
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No confirmed connections on record yet.<br>
+      <a href="/contribute/">Know someone who served alongside {{ first_name }}? Tell us →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: VERBAL ACCOUNTS ── #}
+<div class="tab-content" id="tab-accounts" style="display:none">
+  {% set soldierAnecdotes = [] %}
+  {% for anecdote in collections.anecdotes %}
+    {% if anecdote.data.soldiers and slug in anecdote.data.soldiers %}
+      {% set soldierAnecdotes = soldierAnecdotes.concat([anecdote]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% if soldierAnecdotes.length %}
+    <div class="doc-list">
+      {% for anecdote in soldierAnecdotes %}
+        <div class="doc-item">
+          <div class="doc-icon">💬</div>
+          <div style="flex:1;">
+            <a class="doc-title doc-link" href="{{ anecdote.data.permalink }}">{{ anecdote.data.title }}</a>
+            <div class="doc-meta">{{ anecdote.data.date_approx }} · {{ anecdote.data.source_short }}</div>
+            {% if anecdote.data.summary %}
+              <div class="doc-meta" style="margin-top:0.25rem;">{{ anecdote.data.summary }}</div>
+            {% endif %}
+          </div>
+          <div>
+            <div class="doc-type">{{ anecdote.data.type }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No verbal accounts on record.<br>
+      <a href="/contribute/">Share a memory →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: DOCUMENTS ── #}
+<div class="tab-content" id="tab-documents" style="display:none">
+  {% set hasDocuments = (documents and documents.length) %}
+
+  {% set crossDocs = [] %}
+  {% for doc in collections.documents %}
+    {% if doc.data.contains and slug in doc.data.contains %}
+      {% set crossDocs = crossDocs.concat([doc]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% if hasDocuments or crossDocs.length %}
+
+    {% if hasDocuments %}
+      <div class="doc-list">
+        {% for doc in documents %}
+          <div class="doc-item {% if doc.access == 'admin' %}doc-restricted{% endif %}">
+            <div class="doc-icon">{{ doc.icon | default("📄") }}</div>
+            <div style="flex:1;">
+              {% if doc.url and doc.access != 'admin' %}
+                <a class="doc-title doc-link" href="{{ doc.url }}" target="_blank" rel="noopener">{{ doc.title }}</a>
+              {% else %}
+                <div class="doc-title">{{ doc.title }}</div>
+              {% endif %}
+              <div class="doc-meta">{{ doc.meta }}</div>
+              {% if doc.note %}
+                <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);margin-top:5px;">{{ doc.note }}</div>
+              {% endif %}
+              {% if doc.access == 'pending' %}
+                <div class="doc-badge doc-badge-pending">Digitization Pending</div>
+              {% endif %}
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+              <div class="doc-type">{{ doc.type }}</div>
+              {% if doc.access == 'admin' %}
+                <div class="doc-badge doc-badge-restricted">Restricted</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if crossDocs.length %}
+      <div class="section-header" style="margin-top:24px;">
+        <div class="section-title" style="font-size:13px;">Also Appears In</div>
+        <div class="section-rule"></div>
+        <div class="section-meta">{{ crossDocs.length }} Record{% if crossDocs.length != 1 %}s{% endif %}</div>
+      </div>
+      <div class="doc-list">
+        {% for doc in crossDocs %}
+          <div class="doc-item">
+            <div class="doc-icon">📰</div>
+            <div style="flex:1;">
+              <a class="doc-title doc-link" href="{{ doc.data.permalink }}">{{ doc.data.title }}</a>
+              <div class="doc-meta">{{ doc.data.type }} · {{ doc.data.date_approx }}{% if doc.data.location %} · {{ doc.data.location }}{% endif %}</div>
+              <div class="doc-meta">Contributed by {{ doc.data.contributor_name }}</div>
+            </div>
+            <div>
+              <div class="doc-type">{{ doc.data.type }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="tab-empty">
+      No documents on record.<br>
+      <a href="/contribute/">Have something to contribute? →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: LETTERS ── #}
+<div class="tab-content" id="tab-letters" style="display:none">
+  <div class="tab-empty">
+    Letters system coming soon.<br>
+    <a href="/contribute/">Have a letter to contribute? →</a>
   </div>
 </div>
-{% endif %}
+
+{# ── TAB: SERVICE RECORD ── #}
+<div class="tab-content" id="tab-service" style="display:none">
+
+  <div class="prof-grid" style="margin-bottom:24px;">
+    <div class="pg-item">
+      <div class="pg-label">MOS</div>
+      <div class="pg-value">{{ mos }}</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-label">Component</div>
+      <div class="pg-value">{{ component | default("U.S. Army") }}</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-label">Unit</div>
+      <div class="pg-value">D Co. 2/8 CAV, 1st Air Cavalry Division</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-label">Character of Service</div>
+      <div class="pg-value">{{ character_of_service | default("Honorable") }}</div>
+    </div>
+  </div>
+
+  {% if decorations and decorations.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Decorations &amp; Awards</div>
+      <div class="section-rule"></div>
+    </div>
+    <div class="awards-list">
+      {% for medal in decorations %}
+        <div class="award-row">
+          <span class="award-name {% if medal.distinguished %}{% else %}dim{% endif %}">{{ medal }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="tab-empty" style="padding-top:16px;">
+      No decoration records on file.<br>
+      <a href="/contribute/">Know of awards earned? Tell us →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: EXTERNAL RESOURCES ── #}
+<div class="tab-content" id="tab-external" style="display:none">
+  <div class="tab-empty">
+    No external resources on record.<br>
+    <a href="/contribute/">Know of something that should be here? →</a>
+  </div>
+</div>
 
 {# ── PROFILE CTA ── #}
 <div class="prof-cta">
@@ -402,5 +502,18 @@
 </div>
 
 <script src="/assets/js/main.js"></script>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
+    tab.classList.add('active');
+    var target = document.getElementById('tab-' + tab.dataset.tab);
+    if (target) target.style.display = 'block';
+  });
+});
+</script>
+
 </body>
 </html>

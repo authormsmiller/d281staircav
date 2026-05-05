@@ -232,9 +232,9 @@ photos:
   - filename: bill-small.jpg
     subfolder: field
     caption: Bill Small.
-    caption_short: Bill Small in the field — 1st Cav patch visible · Photo by Ken Weaver
+    caption_short: Bill Small in the field — 1st Cav patch visible
     credit: "Photographed by or contributed by Ken Weaver"
-    photographer: unknown-of
+    photographer: unknown
 
   - filename: marvin-miller_larry-cate.jpg
     subfolder: field

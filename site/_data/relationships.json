@@ -1,0 +1,38 @@
+[
+  {
+    "soldiers": [
+      "miller-marvin-dale",
+      "cate-larry"
+    ],
+    "basis": "verbal-account",
+    "source": "claymore-incident",
+    "notes": "Cate recounts incident involving Miller, confirmed by Capt. Neal"
+  },
+  {
+    "soldiers": [
+      "miller-marvin-dale",
+      "weaver-ken"
+    ],
+    "basis": "document",
+    "source": "duds-hit-firebase",
+    "notes": "Both appear in FSB Fontaine incident"
+  },
+  {
+    "soldiers": [
+      "miller-marvin-dale",
+      "sells-leroy"
+    ],
+    "basis": "same-platoon",
+    "source": "",
+    "notes": "Both Cat Platoon, confirmed via photograph larry-cate_leroy-sells_ken-weaver.jpg"
+  },
+  {
+    "soldiers": [
+      "miller-marvin-dale",
+      "romani-val"
+    ],
+    "basis": "verbal-account",
+    "source": "romani-testimony",
+    "notes": "Romani provided verbal account of service alongside Miller"
+  }
+]

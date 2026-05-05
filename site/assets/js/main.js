@@ -100,3 +100,20 @@ if (window.netlifyIdentity) {
     }
   });
 }
+// Hamburger nav toggle
+const hamburger = document.getElementById('nav-hamburger');
+const drawer = document.getElementById('nav-drawer');
+const overlay = document.getElementById('nav-overlay');
+
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', function () {
+    const open = drawer.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+    this.setAttribute('aria-expanded', open);
+  });
+  overlay.addEventListener('click', function () {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+}
