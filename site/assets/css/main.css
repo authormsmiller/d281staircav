@@ -856,3 +856,222 @@ footer { background: var(--blk); border-top: 4px solid var(--y); padding: 20px 4
 .footer-link { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--rule); text-decoration: none; letter-spacing: 0.5px; }
 .footer-link:hover { color: var(--y); }
 .footer-link-sep { color: var(--dim); font-size: 11px; }
+
+/* ── Search Page ────────────────────────────────────────────────────────── */
+
+.search-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.search-header {
+  margin-bottom: 2rem;
+}
+
+.search-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.search-subtitle {
+  color: var(--ink2);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ── Form ── */
+
+.search-form {
+  margin-bottom: 2.5rem;
+}
+
+.search-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 1rem;
+  padding: 0.6rem 0.875rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--pg);
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--ink2);
+}
+
+.search-btn {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--pg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  opacity: 0.85;
+}
+
+/* ── Result groups ── */
+
+.result-group {
+  margin-bottom: 2.5rem;
+}
+
+.result-group-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.5rem;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.result-count {
+  font-weight: 400;
+  color: var(--ink2);
+}
+
+.result-coming {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: var(--ink2);
+  opacity: 0.7;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.result-group--coming-soon {
+  opacity: 0.55;
+}
+
+.result-stub-note {
+  font-size: 0.875rem;
+  color: var(--ink2);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Result list ── */
+
+.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.result-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.result-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.result-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.result-link:hover .result-name {
+  text-decoration: underline;
+}
+
+/* ── Photo / initials ── */
+
+.result-photo {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.result-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.result-photo--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink2);
+  letter-spacing: 0.03em;
+}
+
+/* ── Result body ── */
+
+.result-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  color: var(--ink);
+}
+
+.result-meta {
+  font-size: 0.8rem;
+  color: var(--ink2);
+  margin: 0 0 0.25rem;
+}
+
+.result-excerpt {
+  font-size: 0.8rem;
+  color: var(--ink2);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── States ── */
+
+.search-no-results,
+.search-status,
+.search-error {
+  font-size: 0.95rem;
+  color: var(--ink2);
+  margin: 0;
+}
+
+.search-error {
+  color: var(--ink);
+  opacity: 0.7;
+}
