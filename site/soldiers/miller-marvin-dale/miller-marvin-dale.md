@@ -113,8 +113,7 @@ timeline:
       and watched it go down from the firebase. Veterans who reviewed the
       photographs believe Marvin was among the first soldiers on scene — the
       wreckage is undisturbed, consistent with the moments just after casualties
-      were removed. He remained through the full recovery operation, producing
-      what are believed to be the only known photographs of this incident.
+      were removed. He remained through the full recovery operation.
       FSB Fanning was later named in honor of the pilot who died.
 
   - date: "19 Jun 1971"
@@ -130,9 +129,9 @@ timeline:
     type: move
     tags:
       - { type: m, label: FSB Movement }
-    headline: Company Moves to FSB Jeffreys
+    headline: Company Moves to FSB Jeffries
     body: >
-      The unit established at FSB Jeffreys, not far from a Vietnamese village.
+      The unit established at FSB Jeffries, not far from a Vietnamese village.
       This firebase does not appear in official unit records but is documented
       in Marvin's letters.
 
@@ -180,7 +179,7 @@ photos:
     subfolder: field/events
     caption: >
       Recovery of the downed Huey. Marvin remained through the full recovery
-      operation. These are the only known photographs of this incident.
+      operation.
     caption_short: Huey recovery — Marvin documented from arrival through extraction
     credit: "Photographed by Marvin D. Miller · April 24, 1971"
 
@@ -200,8 +199,8 @@ photos:
   - filename: larry-cate_leroy-sells_ken-weaver.jpg
     subfolder: field
     caption: >
-      Left to right: Larry Cate (Cat Plt, 1970–71), Leroy Sells (Cat Plt, 1970–71),
-      and Ken Weaver (Cat Plt, 1971–72). Larry Cate and Leroy Sells are deceased.
+      Left to right: Larry Cate (Cat Plt, 1970–71), Ken Weaver (Cat Plt, 1971–72),
+      and Leroy Sells (foreground, Cat Plt, 1970–71). Larry Cate and Leroy Sells are deceased.
       Ken Weaver contributed additional photographs to this archive.
     caption_short: Larry Cate · Leroy Sells · Ken Weaver — Cat Platoon
     credit: "Photographed by Marvin D. Miller · 1971"
@@ -224,7 +223,7 @@ photos:
     caption: >
       Marvin Miller (far left) with three fellow soldiers in the field, likely Cat Platoon,
       1970–71. If you can identify the other soldiers, please use the contribute form.
-    caption_short: Marvin (far left) with three fellow soldiers — identities unknown
+    caption_short: Marvin (far left) with Larry Randt, Bill Small and an unknown trooper.
     credit: "Photographer unknown · Submitted to archive · Retouched 2024"
     photographer: unknown-of
 
