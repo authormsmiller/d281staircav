@@ -19,7 +19,7 @@ module.exports = function () {
   const soldiers = [];
 
   for (const slug of slugs) {
-    const indexPath = path.join(soldiersDir, slug, "index.md");
+  const indexPath = path.join(soldiersDir, slug, slug + ".md");
     if (!fs.existsSync(indexPath)) continue;
 
     const raw  = fs.readFileSync(indexPath, "utf8");

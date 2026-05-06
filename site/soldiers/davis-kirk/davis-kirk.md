@@ -1,3 +1,6 @@
+The merge kept the old version — it still has profile_photo: photos/field/... which the template can't resolve, and it's missing everything below decorations (timeline, photos block, documents).
+Replace the whole file with the corrected version:
+bashcat > site/soldiers/davis-kirk/davis-kirk.md << 'EOF'
 ---
 layout: layouts/soldier.njk
 title: Kirk Davis
@@ -15,10 +18,13 @@ platoon: "Range (Rifle Range) Platoon · 2nd"
 
 # ── SERVICE ───────────────────────────────────────
 arrived: "1971"
-departed: null
-hometown: null
-current_location: Lake Jackson, TX
-status: veteran
+departed:
+hometown:
+current_location: "Lake Jackson, TX"
+character_of_service:
+status: Veteran
+
+# ── PROFILE PHOTO ─────────────────────────────────
 profile_photo: davis-kirk-field-binh-tuy-1971.png
 
 # ── DECORATIONS ───────────────────────────────────
