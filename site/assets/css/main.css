@@ -740,6 +740,14 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
 .tab-empty a { color: var(--ink); }
 .tab-empty a:hover { color: var(--y); }
 
+/* ── SERVICE TAB ── */
+#tab-service .pg-label,
+#tab-service .pg-value,
+#tab-service .section-title,
+#tab-service .award-name {
+  color: var(--ink);
+}
+
 /* ═══════════════════════════════════════════
    DATA MODEL
 ═══════════════════════════════════════════ */
