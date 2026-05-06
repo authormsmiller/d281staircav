@@ -15,14 +15,11 @@ platoon: "Range (Rifle Range) Platoon · 2nd"
 
 # ── SERVICE ───────────────────────────────────────
 arrived: "1971"
-departed:
-hometown:
-current_location: "Lake Jackson, TX"
-character_of_service:
-status: Veteran
-
-# ── PROFILE PHOTO ─────────────────────────────────
-profile_photo: ../field/davis-kirk-field-binh-tuy-1971.png
+departed: null
+hometown: null
+current_location: Lake Jackson, TX
+status: veteran
+profile_photo: davis-kirk-field-binh-tuy-1971.png
 
 # ── DECORATIONS ───────────────────────────────────
 decorations:
