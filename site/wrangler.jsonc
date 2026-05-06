@@ -1,5 +1,6 @@
 {
   "name": "d281staircav",
+  "compatibility_date": "2026-05-05",
   "account_id": "a147c21894e80723027ad746a073a7e9",
   "assets": { "directory": "./_site" },
   "routes": [
