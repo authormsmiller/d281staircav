@@ -14,11 +14,11 @@ mos:
 platoon: "Cat (Wild Cat) Platoon · 3rd"
 
 # ── SERVICE ───────────────────────────────────────
-arrived:
-departed:
+arrived: "1971"
+departed: "1972"
 hometown:
 character_of_service: Honorable
-status: researching
+status: veteran
 
 # ── PROFILE PHOTO ─────────────────────────────────
 profile_photo: weaver-off-the-line.jpg
@@ -28,8 +28,13 @@ decorations:
 
 distinguished_decorations:
 
-# ── FAMILY CONTACT ────────────────────────────────
-family_contact: false
+# ── CONTACT ───────────────────────────────────────
+# Full contact details live in _private/contacts.json (gitignored)
+# This block carries only what is safe to commit
+share_contact: false
+contact:
+  name: Ken Weaver
+  relation:
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
 timeline_source: >
@@ -145,6 +150,7 @@ photos:
       - miller-marvin-dale
     source_soldier_slug: weaver-ken
     source_soldier_name: Ken Weaver
+
 # ── DOCUMENTS ─────────────────────────────────────
 documents:
   - title: '"Duds Hit Firebase" — FSB Fontaine Incident'
@@ -157,31 +163,4 @@ documents:
     contains:
       - miller-marvin-dale
       - weaver-ken
-
-# ── BROTHERS IN ARMS ──────────────────────────────
-brothers:
-  - name: Marvin Miller
-    platoon: Cat
-    dates: "1970–71"
-    status: Deceased
-    kia: false
-
-  - name: Larry Cate
-    platoon: Cat
-    dates: "1970–71"
-    status: Deceased
-    kia: false
-
-  - name: Leroy Sells
-    platoon: Cat
-    dates: "1970–71"
-    status: Deceased
-    kia: false
-
-  - name: Ken Weaver
-    platoon: Cat
-    dates: "1971–72"
-    status: "This Profile"
-    kia: false
-
 ---

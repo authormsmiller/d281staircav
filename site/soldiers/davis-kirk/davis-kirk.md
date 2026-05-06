@@ -1,6 +1,3 @@
-The merge kept the old version — it still has profile_photo: photos/field/... which the template can't resolve, and it's missing everything below decorations (timeline, photos block, documents).
-Replace the whole file with the corrected version:
-bashcat > site/soldiers/davis-kirk/davis-kirk.md << 'EOF'
 ---
 layout: layouts/soldier.njk
 title: Kirk Davis
