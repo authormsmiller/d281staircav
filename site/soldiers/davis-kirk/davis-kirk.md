@@ -11,7 +11,7 @@ departed: null
 hometown: null
 current_location: Lake Jackson, TX
 status: veteran
-profile_photo: null
+profile_photo: davis-kirk-field-binh-tuy-1971.png
 
 timeline_source: |
   Late June 1971 — SE of FSB Fontaine, Binh Tuy Province. Davis's platoon (Range) 
