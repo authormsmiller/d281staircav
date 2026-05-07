@@ -2,9 +2,17 @@
   "name": "d281staircav",
   "compatibility_date": "2026-05-05",
   "account_id": "a147c21894e80723027ad746a073a7e9",
-  "assets": { "directory": "./_site" },
+  "main": "src/worker.js",
+  "assets": { 
+    "directory": "./_site",
+    "binding": "ASSETS"
+  },
   "routes": [
     { "pattern": "angryskipperarchive.org/*", "zone_name": "angryskipperarchive.org" },
     { "pattern": "www.angryskipperarchive.org/*", "zone_name": "angryskipperarchive.org" }
+  ],
+  "r2_buckets": [
+    { "binding": "PHOTOS", "bucket_name": "angryskipperarchive-photos" },
+    { "binding": "DOCUMENTS", "bucket_name": "angryskipperarchive-documents" }
   ]
 }
