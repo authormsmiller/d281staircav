@@ -124,7 +124,7 @@ PROFILE_EXTRAS=()
 # ── READ EXISTING FRONT MATTER ───────────────────────────────────────────────
 # Extract filenames already in the photos: array
 existing_photo_filenames() {
-  grep -E '^\s+filename:' "$SOLDIER_FILE" | sed 's/.*filename:\s*//' | tr -d '"' | tr -d "'" || true
+  grep 'filename:' "$SOLDIER_FILE" | sed 's/.*filename: //' | tr -d '\r' || true
 }
 
 # Get current profile_photo value
