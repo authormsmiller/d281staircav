@@ -91,7 +91,7 @@ type: ""
 author: "${author}"
 recipient: ""
 event: ""
-date: ""
+doc_date: ""
 date_known: true
 source: ""
 status: draft

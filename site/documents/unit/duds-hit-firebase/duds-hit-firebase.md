@@ -4,7 +4,7 @@ type: official
 author: ""
 recipient: ""
 event: ""
-date: 1971
+doc_date: 1971
 date_known: false
 source: "Military publication (name unknown)"
 status: draft

@@ -4,7 +4,7 @@ type: verbal
 author: davis-kirk
 recipient: ""
 event: ""
-date: 1971-06
+doc_date: 1971-06
 date_known: false
 source: "Walking Point, Issue 18, January 2013"
 status: draft
