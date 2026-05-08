@@ -336,67 +336,101 @@
 
 {# ── TAB: DOCUMENTS ── #}
 <div class="tab-content" id="tab-documents" style="display:none">
-  {% set hasDocuments = (documents and documents.length) %}
+  {% set soldierDocs = documentsBySlug[slug] %}
 
-  {% set crossDocs = [] %}
-  {% for doc in collections.documents %}
-    {% if doc.data.contains and slug in doc.data.contains %}
-      {% set crossDocs = crossDocs.concat([doc]) %}
-    {% endif %}
-  {% endfor %}
+  {% if soldierDocs %}
 
-  {% if hasDocuments or crossDocs.length %}
-
-    {% if hasDocuments %}
-      <div class="doc-list">
-        {% for doc in documents %}
-          <div class="doc-item {% if doc.access == 'admin' %}doc-restricted{% endif %}">
-            <div class="doc-icon">{{ doc.icon | default("📄") }}</div>
-            <div style="flex:1;">
-              {% if doc.url and doc.access != 'admin' %}
-                <a class="doc-title doc-link" href="{{ doc.url }}" target="_blank" rel="noopener">{{ doc.title }}</a>
-              {% else %}
-                <div class="doc-title">{{ doc.title }}</div>
-              {% endif %}
-              <div class="doc-meta">{{ doc.meta }}</div>
-              {% if doc.note %}
-                <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);margin-top:5px;">{{ doc.note }}</div>
-              {% endif %}
-              {% if doc.access == 'pending' %}
-                <div class="doc-badge doc-badge-pending">Digitization Pending</div>
-              {% endif %}
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-              <div class="doc-type">{{ doc.type }}</div>
-              {% if doc.access == 'admin' %}
-                <div class="doc-badge doc-badge-restricted">Restricted</div>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    {% if crossDocs.length %}
-      <div class="section-header" style="margin-top:24px;">
-        <div class="section-title" style="font-size:13px;">Also Appears In</div>
+    {# ── Authored by ── #}
+    {% set authored = [] %}
+    {% for doc in soldierDocs.authored %}
+      {% if doc.type != "letter" and doc.type != "verbal" %}
+        {% set authored = authored.concat([doc]) %}
+      {% endif %}
+    {% endfor %}
+    {% if authored.length %}
+      <div class="section-header">
+        <div class="section-title" style="font-size:13px;">Authored by {{ first_name }}</div>
         <div class="section-rule"></div>
-        <div class="section-meta">{{ crossDocs.length }} Record{% if crossDocs.length != 1 %}s{% endif %}</div>
+        <div class="section-meta">{{ authored.length }} Record{% if authored.length != 1 %}s{% endif %}</div>
       </div>
       <div class="doc-list">
-        {% for doc in crossDocs %}
+        {% for doc in authored %}
           <div class="doc-item">
-            <div class="doc-icon">📰</div>
+            <div class="doc-icon">📄</div>
             <div style="flex:1;">
-              <a class="doc-title doc-link" href="{{ doc.data.permalink }}">{{ doc.data.title }}</a>
-              <div class="doc-meta">{{ doc.data.type }} · {{ doc.data.date_approx }}{% if doc.data.location %} · {{ doc.data.location }}{% endif %}</div>
-              <div class="doc-meta">Contributed by {{ doc.data.contributor_name }}</div>
+              <a class="doc-title doc-link" href="/documents/{{ doc.path }}/">{{ doc.title if doc.title else doc.slug }}</a>
+              <div class="doc-meta">
+                {{ doc.type }}
+                {% if doc.doc_date %} · {{ doc.doc_date }}{% endif %}
+                {% if not doc.date_known %}<span class="doc-badge doc-badge-pending">Date unknown</span>{% endif %}
+              </div>
+              {% if doc.source %}<div class="doc-meta">{{ doc.source }}</div>{% endif %}
             </div>
-            <div>
-              <div class="doc-type">{{ doc.data.type }}</div>
-            </div>
+            <div class="doc-type">{{ doc.type }}</div>
           </div>
         {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ── Explicitly referenced ── #}
+    {% set referenced = soldierDocs.referenced %}
+    {% if referenced.length %}
+      <div class="section-header" style="margin-top:24px;">
+        <div class="section-title" style="font-size:13px;">Explicitly Referenced</div>
+        <div class="section-rule"></div>
+        <div class="section-meta">{{ referenced.length }} Record{% if referenced.length != 1 %}s{% endif %}</div>
+      </div>
+      <div class="doc-list">
+        {% for doc in referenced %}
+          <div class="doc-item">
+            <div class="doc-icon">📄</div>
+            <div style="flex:1;">
+              <a class="doc-title doc-link" href="/documents/{{ doc.path }}/">{{ doc.title if doc.title else doc.slug }}</a>
+              <div class="doc-meta">
+                {{ doc.type }}
+                {% if doc.doc_date %} · {{ doc.doc_date }}{% endif %}
+                {% if not doc.date_known %}<span class="doc-badge doc-badge-pending">Date unknown</span>{% endif %}
+              </div>
+              {% if doc.source %}<div class="doc-meta">{{ doc.source }}</div>{% endif %}
+            </div>
+            <div class="doc-type">{{ doc.type }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ── Tagged ── #}
+    {% set tagged = soldierDocs.tagged %}
+    {% if tagged.length %}
+      <div class="section-header" style="margin-top:24px;">
+        <div class="section-title" style="font-size:13px;">Also Present</div>
+        <div class="section-rule"></div>
+        <div class="section-meta">{{ tagged.length }} Record{% if tagged.length != 1 %}s{% endif %}</div>
+      </div>
+      <div class="doc-list">
+        {% for doc in tagged %}
+          <div class="doc-item">
+            <div class="doc-icon">📄</div>
+            <div style="flex:1;">
+              <a class="doc-title doc-link" href="/documents/{{ doc.path }}/">{{ doc.title if doc.title else doc.slug }}</a>
+              <div class="doc-meta">
+                {{ doc.type }}
+                {% if doc.doc_date %} · {{ doc.doc_date }}{% endif %}
+                {% if not doc.date_known %}<span class="doc-badge doc-badge-pending">Date unknown</span>{% endif %}
+              </div>
+              {% if doc.source %}<div class="doc-meta">{{ doc.source }}</div>{% endif %}
+            </div>
+            <div class="doc-type doc-type-tagged">Also present</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ── Nothing found ── #}
+    {% if not authored.length and not referenced.length and not tagged.length %}
+      <div class="tab-empty">
+        No documents on record.<br>
+        <a href="/contribute/">Have something to contribute? →</a>
       </div>
     {% endif %}
 
@@ -410,10 +444,39 @@
 
 {# ── TAB: LETTERS ── #}
 <div class="tab-content" id="tab-letters" style="display:none">
-  <div class="tab-empty">
-    Letters system coming soon.<br>
-    <a href="/contribute/">Have a letter to contribute? →</a>
-  </div>
+  {% set soldierDocs = documentsBySlug[slug] %}
+  {% set letters = [] %}
+
+  {% if soldierDocs %}
+    {% for doc in soldierDocs.authored %}
+      {% if doc.type == "letter" %}
+        {% set letters = letters.concat([doc]) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if letters.length %}
+    <div class="doc-list">
+      {% for doc in letters %}
+        <div class="doc-item">
+          <div class="doc-icon">✉️</div>
+          <div style="flex:1;">
+            <a class="doc-title doc-link" href="/documents/{{ doc.path }}/">{{ doc.title if doc.title else doc.slug }}</a>
+            <div class="doc-meta">
+              {% if doc.doc_date %}{{ doc.doc_date }}{% endif %}
+              {% if not doc.date_known %}<span class="doc-badge doc-badge-pending">Date unknown</span>{% endif %}
+            </div>
+            {% if doc.source %}<div class="doc-meta">{{ doc.source }}</div>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No letters on record.<br>
+      <a href="/contribute/">Have a letter to contribute? →</a>
+    </div>
+  {% endif %}
 </div>
 
 {# ── TAB: SERVICE RECORD ── #}

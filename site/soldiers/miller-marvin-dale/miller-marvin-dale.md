@@ -343,21 +343,3 @@ photos:
     credit: "Photographed by Marvin D. Miller · 1971"
     contains:
       - cate-larry
-
-# ── DOCUMENTS ─────────────────────────────────────
-documents:
-  - title: DD-214 Report of Transfer or Discharge
-    meta: "Official Record · US Army · 2 December 1971 · Admin access only"
-    type: Official
-    icon: "📋"
-
-  - title: Letters Home — Marvin to His Mother
-    meta: "Personal correspondence · Dec 1970 – Nov 1971 · ~20 letters · Digitization in progress"
-    type: Personal
-    icon: "✉️"
-
-  - title: "D/2-8 Movement Timeline, Dec 1970 – Dec 1971"
-    meta: "Compiled by family from letters and unit records · 2024–2025"
-    type: Compiled
-    icon: "📝"
----
