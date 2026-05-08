@@ -301,6 +301,8 @@
 
 {# ── TAB: VERBAL ACCOUNTS ── #}
 <div class="tab-content" id="tab-accounts" style="display:none">
+
+  {# ── Archive-assembled anecdotes (collections.anecdotes) ── #}
   {% set soldierAnecdotes = [] %}
   {% for anecdote in collections.anecdotes %}
     {% if anecdote.data.soldiers and slug in anecdote.data.soldiers %}
@@ -308,24 +310,66 @@
     {% endif %}
   {% endfor %}
 
-  {% if soldierAnecdotes.length %}
-    <div class="doc-list">
-      {% for anecdote in soldierAnecdotes %}
-        <div class="doc-item">
-          <div class="doc-icon">💬</div>
-          <div style="flex:1;">
-            <a class="doc-title doc-link" href="{{ anecdote.data.permalink }}">{{ anecdote.data.title }}</a>
-            <div class="doc-meta">{{ anecdote.data.date_approx }} · {{ anecdote.data.source_short }}</div>
-            {% if anecdote.data.summary %}
-              <div class="doc-meta" style="margin-top:0.25rem;">{{ anecdote.data.summary }}</div>
-            {% endif %}
+  {# ── First-person verbal documents (documentsBySlug crawler) ── #}
+  {% set verbalDocs = [] %}
+  {% set soldierDocs = documentsBySlug[slug] %}
+  {% if soldierDocs %}
+    {% for doc in soldierDocs.authored %}
+      {% if doc.type == "verbal" %}
+        {% set verbalDocs = verbalDocs.concat([doc]) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if soldierAnecdotes.length or verbalDocs.length %}
+
+    {% if verbalDocs.length %}
+      <div class="section-header">
+        <div class="section-title" style="font-size:13px;">In {{ first_name }}'s Own Words</div>
+        <div class="section-rule"></div>
+        <div class="section-meta">{{ verbalDocs.length }} Account{% if verbalDocs.length != 1 %}s{% endif %}</div>
+      </div>
+      <div class="doc-list">
+        {% for doc in verbalDocs %}
+          <div class="doc-item">
+            <div class="doc-icon">✍️</div>
+            <div style="flex:1;">
+              <a class="doc-title doc-link" href="/documents/{{ doc.path }}/">{{ doc.title if doc.title else doc.slug }}</a>
+              <div class="doc-meta">
+                {% if doc.doc_date %}{{ doc.doc_date }}{% endif %}
+                {% if not doc.date_known %}<span class="doc-badge doc-badge-pending">Date unknown</span>{% endif %}
+              </div>
+              {% if doc.source %}<div class="doc-meta">{{ doc.source }}</div>{% endif %}
+            </div>
+            <div class="doc-type">Verbal</div>
           </div>
-          <div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if soldierAnecdotes.length %}
+      <div class="section-header" {% if verbalDocs.length %}style="margin-top:24px;"{% endif %}>
+        <div class="section-title" style="font-size:13px;">Archive Accounts</div>
+        <div class="section-rule"></div>
+        <div class="section-meta">{{ soldierAnecdotes.length }} Account{% if soldierAnecdotes.length != 1 %}s{% endif %}</div>
+      </div>
+      <div class="doc-list">
+        {% for anecdote in soldierAnecdotes %}
+          <div class="doc-item">
+            <div class="doc-icon">💬</div>
+            <div style="flex:1;">
+              <a class="doc-title doc-link" href="{{ anecdote.data.permalink }}">{{ anecdote.data.title }}</a>
+              <div class="doc-meta">{{ anecdote.data.date_approx }} · {{ anecdote.data.source_short }}</div>
+              {% if anecdote.data.summary %}
+                <div class="doc-meta" style="margin-top:0.25rem;">{{ anecdote.data.summary }}</div>
+              {% endif %}
+            </div>
             <div class="doc-type">{{ anecdote.data.type }}</div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
   {% else %}
     <div class="tab-empty">
       No verbal accounts on record.<br>
