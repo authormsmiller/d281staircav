@@ -49,7 +49,7 @@
     <div class="prof-photo-frame">
       {% if profile_photo %}
         <img
-          src="/soldiers/{{ slug }}/photos/{{ profile_photo }}"
+          src="/media/photos/soldiers/{{ slug }}/{{ profile_photo }}"
           alt="{{ first_name }} {{ last_name }}"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
         >
@@ -172,7 +172,7 @@
     var PHOTO_SLIDES = [
       {% for photo in photos %}
       {
-        src: "/soldiers/{{ slug }}/photos/{{ photo.filename }}",
+        src: "/media/photos/soldiers/{{ slug }}/{{ photo.filename }}",
         caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
         credit: {{ (photo.credit or "") | dump | safe }},
         date: {{ (photo.date_approx or "") | dump | safe }}
@@ -187,7 +187,7 @@
       {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
              onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}"
+          <img src="/media/photos/soldiers/{{ slug }}/{{ photo.filename }}"
                alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
                loading="lazy">
           <div class="photo-overlay">
@@ -204,7 +204,7 @@
       {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
         <div class="photo-card {{ 'wide' if photo.wide }}"
              onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-          <img src="/soldiers/{{ slug }}/photos/{{ photo.filename }}"
+          <img src="/media/photos/soldiers/{{ slug }}/{{ photo.filename }}"
                alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
                loading="lazy">
           <div class="photo-overlay">

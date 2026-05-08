@@ -7,7 +7,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Alloway",
@@ -17,7 +18,8 @@
     "years": "70-71",
     "platoon": "Cat 6",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Angelos",
@@ -27,7 +29,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Armatige",
@@ -37,7 +40,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Aulenbach",
@@ -47,7 +51,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Bassford",
@@ -57,7 +62,8 @@
     "years": "",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Bedsole",
@@ -67,7 +73,8 @@
     "years": "70",
     "platoon": "Skipper 6",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Bieberich",
@@ -77,7 +84,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Blair",
@@ -86,8 +94,9 @@
     "rank": "",
     "years": "70-71",
     "platoon": "Wild Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Boler",
@@ -97,7 +106,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Brumbelow",
@@ -107,7 +117,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Bryram",
@@ -117,7 +128,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Burchett",
@@ -127,7 +139,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Buttermore",
@@ -137,7 +150,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Clonch",
@@ -147,7 +161,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Cobb",
@@ -157,7 +172,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Cooke",
@@ -167,7 +183,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Cooper",
@@ -177,7 +194,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "David",
@@ -187,7 +205,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Dewey",
@@ -197,7 +216,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Dismuke",
@@ -207,7 +227,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Dyer",
@@ -217,17 +238,19 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Fishell",
     "first_name": "Larry",
-    "nickname": "",
+    "nickname": "Pops",
     "rank": "SP4",
     "years": "70-71",
     "platoon": "Wild/Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "Larry Fishell", "relation": "" }
   },
   {
     "last_name": "Fitzpatrick",
@@ -237,7 +260,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Fults",
@@ -246,8 +270,9 @@
     "rank": "",
     "years": "71-72",
     "platoon": "Wild/Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "John Fults", "relation": "" }
   },
   {
     "last_name": "Galway",
@@ -257,7 +282,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Green",
@@ -267,7 +293,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Hensley",
@@ -277,7 +304,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Hryniw",
@@ -287,7 +315,8 @@
     "years": "71-72",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Hurst",
@@ -297,7 +326,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "III",
@@ -307,7 +337,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Jackson",
@@ -317,7 +348,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Johnson",
@@ -327,7 +359,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Kint",
@@ -337,7 +370,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Kotzian",
@@ -347,7 +381,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Kutter",
@@ -356,8 +391,9 @@
     "rank": "CAPT",
     "years": "71-72",
     "platoon": "Skipper 6",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "Wolf Kutter", "relation": "" }
   },
   {
     "last_name": "Lockhart",
@@ -367,7 +403,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Lyons",
@@ -377,7 +414,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Moore",
@@ -387,7 +425,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Murray",
@@ -397,7 +436,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Neal",
@@ -406,8 +446,9 @@
     "rank": "CAPT",
     "years": "71",
     "platoon": "Skipper 6",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "William Neal", "relation": "" }
   },
   {
     "last_name": "Peszynski",
@@ -417,7 +458,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Price",
@@ -427,7 +469,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Randt",
@@ -436,8 +479,9 @@
     "rank": "",
     "years": "70-71",
     "platoon": "Wild/Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "Lawrence Randt", "relation": "" }
   },
   {
     "last_name": "Robinson",
@@ -447,17 +491,8 @@
     "years": "71-72",
     "platoon": "Wild Cat",
     "status": "researching",
-    "status_label": "Researching"
-  },
-  {
-    "last_name": "Romani",
-    "first_name": "Waleriy 'Val'",
-    "nickname": "",
-    "rank": "LT",
-    "years": "71-72",
-    "platoon": "Cat6",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Schaffer",
@@ -467,7 +502,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Schofield",
@@ -477,17 +513,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
-  },
-  {
-    "last_name": "Sells",
-    "first_name": "Leroy",
-    "nickname": "",
-    "rank": "",
-    "years": "70-71",
-    "platoon": "Wild/Cat",
-    "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Sheppard",
@@ -497,7 +524,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Small",
@@ -506,8 +534,9 @@
     "rank": "",
     "years": "70-71",
     "platoon": "Wild/Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "William Small", "relation": "" }
   },
   {
     "last_name": "Smith",
@@ -517,7 +546,8 @@
     "years": "70-71",
     "platoon": "Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Smith",
@@ -527,7 +557,8 @@
     "years": "70-71",
     "platoon": "Skipper 6",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Snyder",
@@ -537,7 +568,8 @@
     "years": "71",
     "platoon": "Skipper 6",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Stevens",
@@ -547,7 +579,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Sykora",
@@ -557,7 +590,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Tincher",
@@ -566,8 +600,9 @@
     "rank": "LT",
     "years": "70-71",
     "platoon": "Cat6",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "status": "veteran",
+    "share_contact": false,
+    "contact": { "name": "Dale Tincher", "relation": "" }
   },
   {
     "last_name": "Ward",
@@ -577,17 +612,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "researching",
-    "status_label": "Researching"
-  },
-  {
-    "last_name": "Weaver",
-    "first_name": "Ken",
-    "nickname": "",
-    "rank": "",
-    "years": "70-71",
-    "platoon": "Wild/Cat",
-    "status": "confirmed",
-    "status_label": "Confirmed"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Webb",
@@ -597,7 +623,8 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   },
   {
     "last_name": "Whiteside",
@@ -607,6 +634,7 @@
     "years": "70-71",
     "platoon": "Wild/Cat",
     "status": "deceased",
-    "status_label": "Deceased"
+    "share_contact": false,
+    "contact": { "name": "", "relation": "" }
   }
 ]

@@ -18,7 +18,7 @@ arrived: "4 Dec 1970"
 departed: "2 Dec 1971"
 hometown: "Kittanning, Armstrong Co., PA"
 character_of_service: Honorable
-status: Deceased
+status: deceased
 year_deceased: 2004
 
 # ── PROFILE PHOTO ─────────────────────────────────
@@ -36,8 +36,13 @@ distinguished_decorations:
   - "Bronze Star Medal"
   - "Combat Infantry Badge"
 
-# ── FAMILY CONTACT ────────────────────────────────
-family_contact: true
+# ── CONTACT ───────────────────────────────────────
+# Full contact details live in _private/contacts.json (gitignored)
+# This block carries only what is safe to commit
+share_contact: false
+contact:
+  name: Michael Miller
+  relation: son
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
 timeline_source: >
@@ -174,7 +179,6 @@ photos:
     caption_short: Huey wreckage — FSB Fontaine, April 24, 1971
     credit: "Photographed by Marvin D. Miller · April 24, 1971 · Among first on scene"
 
-
   - filename: 042471-hueycrash4.jpg
     subfolder: field/events
     caption: >
@@ -195,7 +199,6 @@ photos:
     caption_short: Fire support base interior — mountains of Long Khanh Province beyond
     credit: "Photographed by Marvin D. Miller · 1971"
 
-
   - filename: larry-cate_leroy-sells_ken-weaver.jpg
     subfolder: field
     caption: >
@@ -204,7 +207,6 @@ photos:
       Ken Weaver contributed additional photographs to this archive.
     caption_short: Larry Cate · Leroy Sells · Ken Weaver — Cat Platoon
     credit: "Photographed by Marvin D. Miller · 1971"
-
 
   - filename: soldiers-w-locals.jpg
     subfolder: field
@@ -227,7 +229,6 @@ photos:
     credit: "Photographer unknown · Submitted to archive · Retouched 2024"
     photographer: unknown-of
 
-
   - filename: bill-small.jpg
     subfolder: field
     caption: Bill Small.
@@ -246,7 +247,6 @@ photos:
     caption_short: Larry Cate and Marvin Miller — Vũng Tàu R&R, early 1971
     credit: "Photographer unknown · Vũng Tàu · Early 1971"
     photographer: unknown-of
-
 
   - filename: larry_randt-marvin_miller.jpg
     subfolder: field
@@ -360,37 +360,4 @@ documents:
     meta: "Compiled by family from letters and unit records · 2024–2025"
     type: Compiled
     icon: "📝"
-
-# ── BROTHERS IN ARMS ──────────────────────────────
-brothers:
-  - name: Larry Cate
-    platoon: Cat
-    dates: "1970–71"
-    status: Deceased
-    kia: false
-
-  - name: Val Romani
-    platoon: Cat
-    dates: "1970–71"
-    status: Archive Contributor
-    kia: false
-
-  - name: Leroy Sells
-    platoon: Cat
-    dates: "1970–71"
-    status: Deceased
-    kia: false
-
-  - name: Ken Weaver
-    platoon: Cat
-    dates: "1971–72"
-    status: Archive Contributor
-    kia: false
-
-  - name: Marvin Miller
-    platoon: Cat
-    dates: "1970–71"
-    status: "Deceased - This Profile"
-    kia: false
-
 ---

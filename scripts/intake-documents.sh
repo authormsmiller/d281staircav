@@ -12,7 +12,7 @@ set -euo pipefail
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-BUCKET="documents"
+BUCKET="angryskipperarchive-documents"
 DOCUMENTS_DIR="site/documents"
 DRY_RUN=true
 FILTER_SLUG=""
@@ -87,10 +87,16 @@ create_stub() {
   cat > "$doc_file" <<STUB
 ---
 title: ""
-author: "${author}"
 type: ""
+author: "${author}"
+recipient: ""
+event: ""
+date: ""
+date_known: true
+source: ""
 status: draft
 contains: []
+tagged: []
 files:
   - filename: ${filename}
     caption: ""
@@ -138,7 +144,7 @@ for top_slug_dir in "$DOCUMENTS_DIR"/*/; do
         echo "    [dry] would upload → ${BUCKET}/${r2_key}"
       else
         echo "    uploading → ${BUCKET}/${r2_key}"
-        wrangler r2 object put "${BUCKET}/${r2_key}" \
+          npx wrangler r2 object put "${BUCKET}/${r2_key}" \
           --file "$filepath" \
           --remote 2>&1 | tail -1
       fi

@@ -31,7 +31,7 @@
     <div class="prof-photo-frame">
       {% if profile_photo %}
         <img
-          src="/soldiers/{{ slug }}/photos/profile/{{ profile_photo }}"
+          src="/media/photos/soldiers/{{ slug }}/profile/{{ profile_photo }}"
           alt="{{ first_name }} {{ last_name }}"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
         >
@@ -148,7 +148,7 @@
       var PHOTO_SLIDES = [
         {% for photo in photos %}
         {
-          src: "/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}",
+          src: "/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}",
           caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
           credit: {{ (photo.credit or "") | dump | safe }},
           date: {{ (photo.date_approx or "") | dump | safe }}
@@ -163,7 +163,7 @@
         {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
           <div class="photo-card {{ 'wide' if photo.wide }}"
                onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-            <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+            <img src="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
             <div class="photo-overlay">
               <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
             </div>
@@ -178,7 +178,7 @@
         {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
           <div class="photo-card {{ 'wide' if photo.wide }}"
                onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-            <img src="/soldiers/{{ slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+            <img src="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
             <div class="photo-overlay">
               <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
             </div>
@@ -199,8 +199,8 @@
       <div class="photo-grid">
         {% for photo in crossPhotos %}
           <div class="photo-card {{ 'wide' if photo.wide }}"
-               onclick="lb('/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-            <img src="/soldiers/{{ photo.source_soldier_slug }}/photos/{{ photo.subfolder }}/{{ photo.filename }}"
+               onclick="lb('/media/photos/soldiers/{{ photo.source_soldier_slug }}/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+            <img src="/media/photos/soldiers/{{ photo.source_soldier_slug }}/{{ photo.subfolder }}/{{ photo.filename }}"
                  alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
             <div class="photo-overlay">
               <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
@@ -256,7 +256,7 @@
           <a href="/soldiers/{{ rel.slug }}/" style="text-decoration:none;">
             <div class="alongside-photo">
               {% if otherProfile and otherProfile.profile_photo %}
-                <img src="/soldiers/{{ rel.slug }}/photos/profile/{{ otherProfile.profile_photo }}"
+                <img src="/media/photos/soldiers/{{ rel.slug }}/profile/{{ otherProfile.profile_photo }}"
                      alt="{{ rel.slug }}"
                      style="width:100%;height:100%;object-fit:cover;"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">

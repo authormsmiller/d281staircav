@@ -1,30 +1,20 @@
 ---
-layout: null
-title: 30 Minutes Later
-slug: davis-kirk-essay-19710600
-type: essay
-author: Kirk Davis
-author_slug: davis-kirk
-author_callsign: Range 71
-source: Walking Point, Issue 18, January 2013
-date_of_events: Late June 1971
-date_published: January 2013
-locations:
-  - FSB Fontaine (SE of)
-  - Binh Tuy Province
-  - High saddle, unnamed mountain
-soldiers_mentioned:
-  - name: Frank Guidara
-    callsign: Range 6
-    role: Platoon leader
-  - name: Mike Martin
-    callsign: null
-    role: Background contributor
-  - name: Bill Neal
-    callsign: null
-    role: Background contributor
-verified: false
-last_verified: null
+title: "30 Minutes Later"
+type: verbal
+author: davis-kirk
+recipient: ""
+event: ""
+date: 1971-06
+date_known: false
+source: "Walking Point, Issue 18, January 2013"
+status: draft
+contains:
+  - guidara-frank
+  - martin-mike
+  - neal-bill
+tagged: []
+files: []
+transcript: ""
 ---
 Hard to believe but that's me all soaked in sweat, sitting in the middle of a bunker complex about 30 minutes after finding the black, bloated, fly-covered body of a VC under a huge rock outcrop. This was late June 1971 and our company was southeast of FSB Fontaine up in a high saddle of a small mountain. We had just entered this bunker complex/supply depot in Binh Tuy Province minutes earlier and pulled a sweep to locate any remaining VC if they were still in our AO. Right after Range arrived at the entrance to the complex, my platoon leader, Lt. Frank Guidara (Range 6), had me belly-crawl under the outcrop to check for weapons, intel, or anything of military importance. And man, was I in for a surprise! It was pitch black under the rock and I couldn't see my hand in front of my face, all except for a sliver of light at the opposite end, and I crawled towards that ... at least until I heard the flies buzzing all around me. That's when I shifted my position and noticed a body within a couple feet of my face. At first I thought he was alive and it scared the hell out of me! I was ready to light him up with my 16 until I noticed he was already beyond anything I could do to him. Apparently the VC hadn't taken the time to bury their comrade killed in the air strike, so they drug his body about 20 feet back under the outcrop and left it there.
 

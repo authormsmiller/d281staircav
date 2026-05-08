@@ -19,7 +19,7 @@ departed:
 hometown:
 current_location: "Lake Jackson, TX"
 character_of_service:
-status: Veteran
+status: veteran
 
 # ── PROFILE PHOTO ─────────────────────────────────
 profile_photo: davis-kirk-field-binh-tuy-1971.png
@@ -29,8 +29,13 @@ decorations:
 
 distinguished_decorations:
 
-# ── FAMILY CONTACT ────────────────────────────────
-family_contact: false
+# ── CONTACT ───────────────────────────────────────
+# Full contact details live in _private/contacts.json (gitignored)
+# This block carries only what is safe to commit
+share_contact: false
+contact:
+  name: Kirk Davis
+  relation:
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
 timeline_source: >
@@ -88,5 +93,4 @@ documents:
     meta: "Personal essay · Walking Point Issue 25 · January 2017"
     type: Essay
     icon: "✍️"
-
 ---

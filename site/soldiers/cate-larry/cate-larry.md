@@ -21,12 +21,10 @@ character_of_service: Honorable
 status: deceased
 
 # ── PROFILE PHOTO ─────────────────────────────────
-profile_photo:
+profile_photo: larry-cate2.jpg
 
 # ── DECORATIONS ───────────────────────────────────
 decorations:
-
-distinguished_decorations:
 
 # ── CONTACT ───────────────────────────────────────
 # Full contact details live in _private/contacts.json (gitignored)
@@ -45,8 +43,6 @@ timeline_source: >
 timeline:
 
 # ── PHOTOS ────────────────────────────────────────
-photo_intro:
-
 wartime_content_notice: false
 
 photos:

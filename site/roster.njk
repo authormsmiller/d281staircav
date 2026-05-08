@@ -4,90 +4,631 @@ title: Roster
 permalink: /roster/
 ---
 
+<style>
+  /* ── ROSTER FILTERS ───────────────────────────────────────── */
+  .roster-filters {
+    background: var(--pg2);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 48px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .roster-filters select {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--pg);
+    border: 1px solid var(--rule);
+    border-bottom: 2px solid var(--rule);
+    padding: 7px 32px 7px 10px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235A5448'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    min-width: 160px;
+  }
+  .roster-filters select:focus {
+    outline: none;
+    border-color: var(--ink);
+    border-bottom-color: var(--y);
+  }
+  .roster-filter-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* ── LEGEND ───────────────────────────────────────────────── */
+  .roster-legend {
+    background: var(--pg);
+    border-bottom: 1px solid var(--rule2);
+    padding: 10px 48px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .r-icon {
+    width: 22px; height: 22px;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .r-icon svg {
+    width: 13px; height: 13px;
+    stroke-width: 2; fill: none;
+    stroke: currentColor;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .ri-profile  { background: #E6F1FB; color: #185FA5; }
+  .ri-kia      { background: #FAECE7; color: #993C1D; }
+  .ri-green    { background: #EAF3DE; color: #3B6D11; }
+  .ri-red      { background: #FCEBEB; color: #A32D2D; }
+  .ri-deceased { background: var(--pg2); color: var(--dim); border: 1px solid var(--rule); }
+  .ri-unknown  { background: #FAEEDA; color: #854F0B; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; }
+
+  /* ── DESKTOP TABLE ────────────────────────────────────────── */
+  .roster-table-wrap { background: var(--pg); }
+
+  table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
+  .rtable thead {
+    background: var(--blk);
+    position: sticky;
+    top: 56px;
+    z-index: 10;
+  }
+  .rtable th {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--y); padding: 12px 20px; text-align: left;
+    border-right: 1px solid #1e1e1a;
+  }
+  .rtable th:last-child { border-right: none; }
+  .rtable td {
+    padding: 10px 20px; border-bottom: 1px solid var(--rule2);
+    font-family: 'Crimson Pro', serif; font-size: 16px; color: var(--dim);
+    border-right: 1px solid var(--rule2); vertical-align: middle;
+  }
+  .rtable td:last-child { border-right: none; }
+  .rtable tbody tr:nth-child(even) { background: var(--pg2); }
+  .rtable tbody tr:hover { background: var(--y-pale); }
+  .rtable tbody tr.row-dim { opacity: 0.6; }
+
+  .rname {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px;
+    color: var(--ink); line-height: 1;
+  }
+  .rname a { color: var(--ink); text-decoration: none; }
+  .rname a:hover { color: var(--y2); }
+  .rnick {
+    font-family: 'Crimson Pro', serif; font-style: italic;
+    font-size: 14px; color: var(--dim); font-weight: 400;
+    letter-spacing: 0; text-transform: none;
+  }
+
+  .plt-badge {
+    display: inline-block; font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 2px 8px;
+  }
+  .plt-cat    { background: #E1F5EE; color: #0F6E56; }
+  .plt-range  { background: #E6F1FB; color: #185FA5; }
+  .plt-recon  { background: #FAEEDA; color: #854F0B; }
+  .plt-hq     { background: var(--pg2); color: var(--dim); }
+  .plt-other  { background: var(--pg2); color: var(--dim); }
+
+  .icon-cluster { display: flex; gap: 6px; align-items: center; }
+
+  /* ── MODAL ────────────────────────────────────────────────── */
+  .roster-modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,10,8,0.7); z-index: 2000;
+    align-items: center; justify-content: center;
+  }
+  .roster-modal-bg.open { display: flex; }
+  .roster-modal {
+    background: var(--pg); border-top: 4px solid var(--y);
+    padding: 28px 32px; max-width: 360px; width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+  .roster-modal h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px;
+    color: var(--ink); margin: 0 0 10px;
+  }
+  .roster-modal p {
+    font-family: 'Crimson Pro', serif; font-size: 17px; line-height: 1.7;
+    color: var(--dim); margin: 0 0 20px;
+  }
+  .roster-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .modal-btn-close {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dim); background: none;
+    border: 1px solid var(--rule); padding: 8px 16px; cursor: pointer;
+  }
+  .modal-btn-close:hover { border-color: var(--ink); color: var(--ink); }
+  .modal-btn-contribute {
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px;
+    background: var(--blk); color: var(--y);
+    border: none; padding: 8px 20px; cursor: pointer; transition: background 0.15s;
+  }
+  .modal-btn-contribute:hover { background: var(--ink2); }
+
+  /* ── MOBILE CARDS ─────────────────────────────────────────── */
+  .roster-cards { display: none; padding: 12px 16px; background: var(--pg); }
+  .roster-card {
+    background: #fff; border: 1px solid var(--rule2);
+    border-left: 3px solid var(--rule);
+    padding: 12px 14px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .roster-card.card-dim { opacity: 0.6; }
+  .roster-card-body { flex: 1; min-width: 0; }
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px;
+    color: var(--ink); line-height: 1; margin-bottom: 2px;
+  }
+  .card-name a { color: var(--ink); text-decoration: none; }
+  .card-name a:hover { color: var(--y2); }
+  .card-nick {
+    font-family: 'Crimson Pro', serif; font-style: italic;
+    font-size: 14px; color: var(--dim);
+  }
+  .card-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 4px; flex-wrap: wrap;
+  }
+  .card-dates {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; letter-spacing: 1px; color: var(--dim);
+  }
+  .card-icons {
+    display: flex; flex-direction: column;
+    gap: 5px; flex-shrink: 0; align-items: flex-end;
+  }
+  .m-icon {
+    width: 26px; height: 26px; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .m-icon svg {
+    width: 14px; height: 14px;
+    stroke-width: 2; fill: none; stroke: currentColor;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* Mobile legend toggle */
+  .legend-toggle {
+    font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--y2); background: none; border: none;
+    padding: 0; cursor: pointer; margin-bottom: 10px;
+    display: none;
+  }
+  .roster-legend.collapsible { display: none; flex-wrap: wrap; }
+  .roster-legend.collapsible.open { display: flex; }
+
+  /* ── RESPONSIVE ───────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .roster-filters { padding: 12px 16px; }
+    .roster-legend { padding: 10px 16px; display: none; }
+    .legend-toggle { display: block; }
+    .roster-table-wrap { display: none; }
+    .roster-cards { display: block; }
+  }
+</style>
+
 <div class="roster-masthead">
   <div>
     <div class="roster-hed">Company<br><span>Roster</span></div>
-    <div class="roster-stamp">Sensitive — Contact Info Redacted</div>
+    <div class="roster-stamp">Contact Info Redacted</div>
   </div>
   <div class="roster-deck">
     Compiled from unit records, the McGrew field calendar, ASA newsletters,
-    and ongoing contact research. Research status indicates current confidence level.
-    Personal contact details are maintained in restricted access only.
+    and ongoing contact research. Personal contact details are maintained
+    in restricted access only.
   </div>
 </div>
 
-<table class="rtable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Known As</th>
-      <th>Rank</th>
-      <th>Platoon</th>
-      <th>Service Dates</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
+{# ── FILTERS ──────────────────────────────────────────────────────────── #}
+<div class="roster-filters">
+  <span class="roster-filter-label">Filter</span>
+  <select id="filter-platoon" onchange="applyFilters()">
+    <option value="">All platoons</option>
+    <option value="cat">Cat</option>
+    <option value="range">Range</option>
+    <option value="recon">Recon</option>
+    <option value="hq">HQ / Skipper</option>
+  </select>
+  <select id="filter-year" onchange="applyFilters()">
+    <option value="">All years</option>
+    <option value="69">1969</option>
+    <option value="70">1970</option>
+    <option value="71">1971</option>
+    <option value="72">1972</option>
+  </select>
+</div>
 
-    {# Auto-generated rows from soldier profile data files #}
-    {% for soldier in collections.soldiers %}
-      <tr onclick="window.location='{{ soldier.url }}'" style="cursor:pointer;">
-        <td><div class="rname rname-link">{{ soldier.data.last_name }}, {{ soldier.data.first_name }}</div></td>
-        <td>
-          {% if soldier.data.nickname %}
-            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"{{ soldier.data.nickname }}"</span>
-          {% else %}
-            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
-          {% endif %}
-        </td>
-        <td><span class="rank-tag">{{ soldier.data.rank }}</span></td>
-        <td>{{ soldier.data.platoon }}</td>
-        <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">
-          {{ soldier.data.arrived }} – {{ soldier.data.departed }}
-        </td>
-        <td>
-          {% if soldier.data.status == "KIA" %}
-            <span class="sdot sdot-kia">KIA</span>
-          {% elif soldier.data.status == "Deceased" %}
-            <span class="sdot sdot-kia">Deceased</span>
-          {% else %}
-            <span class="sdot sdot-ok">Profile Live</span>
-          {% endif %}
-        </td>
-      </tr>
-    {% endfor %}
+{# ── LEGEND ───────────────────────────────────────────────────────────── #}
+<button class="legend-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Hide legend ↑':'Legend / icon guide ↓'">Legend / icon guide ↓</button>
+<div class="roster-legend collapsible">
+  <div class="legend-item">
+    <div class="r-icon ri-profile">
+      <svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+    </div>
+    Profile
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-kia">
+      <svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+    </div>
+    KIA
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-green">
+      <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+    </div>
+    Contact available
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-red">
+      <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+    </div>
+    Contact via admin
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-deceased">
+      <svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg>
+    </div>
+    Deceased
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-unknown">?</div>
+    Researching
+  </div>
+</div>
 
-    {# Rows from roster.json — edit that file to add/update soldiers #}
-    {% for s in roster %}
+{# Desktop legend — always visible above sticky header #}
+<div class="roster-legend" style="display:flex;">
+  <div class="legend-item">
+    <div class="r-icon ri-profile">
+      <svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+    </div>
+    Profile
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-kia">
+      <svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+    </div>
+    KIA
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-green">
+      <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+    </div>
+    Contact available
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-red">
+      <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+    </div>
+    Contact via admin
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-deceased">
+      <svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg>
+    </div>
+    Deceased
+  </div>
+  <div class="legend-item">
+    <div class="r-icon ri-unknown">?</div>
+    Researching
+  </div>
+</div>
+
+{# ── DESKTOP TABLE ────────────────────────────────────────────────────── #}
+<div class="roster-table-wrap">
+  <table class="rtable" id="roster-table">
+    <thead>
       <tr>
-        <td><div class="rname">{{ s.last_name }}, {{ s.first_name }}</div></td>
-        <td>
-          {% if s.nickname %}
-            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">"{{ s.nickname }}"</span>
-          {% else %}
-            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
-          {% endif %}
-        </td>
-        <td>
-          {% if s.rank %}
-            <span class="rank-tag">{{ s.rank }}</span>
-          {% else %}
-            <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--dim);">—</span>
-          {% endif %}
-        </td>
-        <td>{{ s.platoon }}</td>
-        <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;">{{ s.years }}</td>
-        <td>
-          {% if s.status == "deceased" %}
-            <span class="sdot sdot-kia">{{ s.status_label }}</span>
-          {% elif s.status == "confirmed" %}
-            <span class="sdot sdot-ok">{{ s.status_label }}</span>
-          {% else %}
-            <span class="sdot sdot-unk">{{ s.status_label }}</span>
-          {% endif %}
-        </td>
+        <th style="width:35%">Name</th>
+        <th style="width:20%">Platoon</th>
+        <th style="width:25%">Service dates</th>
+        <th style="width:20%"></th>
       </tr>
-    {% endfor %}
+    </thead>
+    <tbody>
 
-  </tbody>
-</table>
+      {# ── Soldiers with full profiles ── #}
+      {% for soldier in collections.soldiers | sort(false, false, 'data.last_name') %}
+        {% set s = soldier.data %}
+        {% set platoonKey = s.platoon | lower %}
+        {% set isDim = s.status == "researching" %}
+        <tr class="roster-row{% if isDim %} row-dim{% endif %}"
+            data-platoon="{{ platoonKey }}"
+            data-years="{{ s.arrived }}{{ s.departed }}">
+          <td>
+            <div class="rname">
+              <a href="{{ soldier.url }}">{{ s.last_name }}, {{ s.first_name }}</a>
+              {% if s.nickname %}<span class="rnick">&nbsp;"{{ s.nickname }}"</span>{% endif %}
+            </div>
+          </td>
+          <td>
+            {% if "cat" in platoonKey %}
+              <span class="plt-badge plt-cat">Cat</span>
+            {% elif "range" in platoonKey %}
+              <span class="plt-badge plt-range">Range</span>
+            {% elif "recon" in platoonKey %}
+              <span class="plt-badge plt-recon">Recon</span>
+            {% elif "hq" in platoonKey or "skipper" in platoonKey or "6" in platoonKey %}
+              <span class="plt-badge plt-hq">HQ</span>
+            {% else %}
+              <span class="plt-badge plt-other">{{ s.platoon }}</span>
+            {% endif %}
+          </td>
+          <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;color:var(--dim);">
+            {{ s.arrived }}{% if s.departed %} – {{ s.departed }}{% endif %}
+          </td>
+          <td>
+            <div class="icon-cluster">
+              {# Profile icon — always shown for profile rows #}
+              <a href="{{ soldier.url }}" title="View profile">
+                <div class="r-icon ri-profile">
+                  <svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+                </div>
+              </a>
+              {# KIA #}
+              {% if s.status == "kia" %}
+                <div class="r-icon ri-kia" title="Killed in action">
+                  <svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+                </div>
+              {% endif %}
+              {# Deceased #}
+              {% if s.status == "deceased" %}
+                <div class="r-icon ri-deceased" title="Deceased">
+                  <svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg>
+                </div>
+              {% endif %}
+              {# Contact #}
+              {% if s.contact and s.contact.name %}
+                {% if s.share_contact %}
+                  <div class="r-icon ri-green" title="Contact available" style="cursor:pointer;">
+                    <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+                  </div>
+                {% else %}
+                  <div class="r-icon ri-red" title="Contact via admin" style="cursor:pointer;">
+                    <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+
+      {# ── Roster-only entries ── #}
+      {% for s in roster | sort(false, false, 'last_name') %}
+        {% set platoonKey = s.platoon | lower %}
+        {% set isDim = s.status == "researching" and not s.contact.name %}
+        <tr class="roster-row{% if isDim %} row-dim{% endif %}"
+            data-platoon="{{ platoonKey }}"
+            data-years="{{ s.years }}">
+          <td>
+            <div class="rname">
+              {{ s.last_name }}, {{ s.first_name }}
+              {% if s.nickname %}<span class="rnick">&nbsp;"{{ s.nickname }}"</span>{% endif %}
+            </div>
+          </td>
+          <td>
+            {% if "cat" in platoonKey or "wild" in platoonKey %}
+              <span class="plt-badge plt-cat">Cat</span>
+            {% elif "range" in platoonKey %}
+              <span class="plt-badge plt-range">Range</span>
+            {% elif "recon" in platoonKey %}
+              <span class="plt-badge plt-recon">Recon</span>
+            {% elif "skipper" in platoonKey or "6" in platoonKey %}
+              <span class="plt-badge plt-hq">HQ</span>
+            {% else %}
+              <span class="plt-badge plt-other">{{ s.platoon }}</span>
+            {% endif %}
+          </td>
+          <td style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1px;color:var(--dim);">
+            {{ s.years }}
+          </td>
+          <td>
+            <div class="icon-cluster">
+              {# KIA #}
+              {% if s.status == "kia" %}
+                <div class="r-icon ri-kia" title="Killed in action">
+                  <svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+                </div>
+              {% endif %}
+              {# Deceased #}
+              {% if s.status == "deceased" %}
+                <div class="r-icon ri-deceased" title="Deceased">
+                  <svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg>
+                </div>
+              {% endif %}
+              {# Contact #}
+              {% if s.contact and s.contact.name %}
+                {% if s.share_contact %}
+                  <div class="r-icon ri-green" title="Contact available" style="cursor:pointer;">
+                    <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+                  </div>
+                {% else %}
+                  <div class="r-icon ri-red" title="Contact via admin" style="cursor:pointer;">
+                    <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg>
+                  </div>
+                {% endif %}
+              {% elif s.status == "researching" %}
+                <div class="r-icon ri-unknown" title="Researching" style="cursor:pointer;"
+                     onclick="document.getElementById('modal-researching').classList.add('open')">?</div>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+{# ── MOBILE CARDS ─────────────────────────────────────────────────────── #}
+<div class="roster-cards" id="roster-cards">
+
+  {# Profile soldiers #}
+  {% for soldier in collections.soldiers | sort(false, false, 'data.last_name') %}
+    {% set s = soldier.data %}
+    {% set platoonKey = s.platoon | lower %}
+    <div class="roster-card{% if s.status == 'researching' %} card-dim{% endif %}"
+         data-platoon="{{ platoonKey }}"
+         data-years="{{ s.arrived }}{{ s.departed }}">
+      <div class="roster-card-body">
+        <div class="card-name">
+          <a href="{{ soldier.url }}">{{ s.last_name }}, {{ s.first_name }}</a>
+          {% if s.nickname %}<span class="card-nick">&nbsp;"{{ s.nickname }}"</span>{% endif %}
+        </div>
+        <div class="card-meta">
+          {% if "cat" in platoonKey %}
+            <span class="plt-badge plt-cat">Cat</span>
+          {% elif "range" in platoonKey %}
+            <span class="plt-badge plt-range">Range</span>
+          {% elif "recon" in platoonKey %}
+            <span class="plt-badge plt-recon">Recon</span>
+          {% else %}
+            <span class="plt-badge plt-hq">HQ</span>
+          {% endif %}
+          <span class="card-dates">{{ s.arrived }}{% if s.departed %} – {{ s.departed }}{% endif %}</span>
+        </div>
+      </div>
+      <div class="card-icons">
+        <a href="{{ soldier.url }}">
+          <div class="m-icon ri-profile" title="Profile">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+          </div>
+        </a>
+        {% if s.status == "kia" %}
+          <div class="m-icon ri-kia"><svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg></div>
+        {% endif %}
+        {% if s.status == "deceased" %}
+          <div class="m-icon ri-deceased"><svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg></div>
+        {% endif %}
+        {% if s.contact and s.contact.name %}
+          {% if s.share_contact %}
+            <div class="m-icon ri-green"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg></div>
+          {% else %}
+            <div class="m-icon ri-red"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg></div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+  {# Roster-only entries #}
+  {% for s in roster | sort(false, false, 'last_name') %}
+    {% set platoonKey = s.platoon | lower %}
+    <div class="roster-card{% if s.status == 'researching' and not s.contact.name %} card-dim{% endif %}"
+         data-platoon="{{ platoonKey }}"
+         data-years="{{ s.years }}">
+      <div class="roster-card-body">
+        <div class="card-name">
+          {{ s.last_name }}, {{ s.first_name }}
+          {% if s.nickname %}<span class="card-nick">&nbsp;"{{ s.nickname }}"</span>{% endif %}
+        </div>
+        <div class="card-meta">
+          {% if "cat" in platoonKey or "wild" in platoonKey %}
+            <span class="plt-badge plt-cat">Cat</span>
+          {% elif "range" in platoonKey %}
+            <span class="plt-badge plt-range">Range</span>
+          {% elif "recon" in platoonKey %}
+            <span class="plt-badge plt-recon">Recon</span>
+          {% else %}
+            <span class="plt-badge plt-hq">HQ</span>
+          {% endif %}
+          <span class="card-dates">{{ s.years }}</span>
+        </div>
+      </div>
+      <div class="card-icons">
+        {% if s.status == "kia" %}
+          <div class="m-icon ri-kia"><svg viewBox="0 0 16 16"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg></div>
+        {% endif %}
+        {% if s.status == "deceased" %}
+          <div class="m-icon ri-deceased"><svg viewBox="0 0 16 16"><path d="M8 2v12M4 6h8M4 10h6"/></svg></div>
+        {% endif %}
+        {% if s.contact and s.contact.name %}
+          {% if s.share_contact %}
+            <div class="m-icon ri-green"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg></div>
+          {% else %}
+            <div class="m-icon ri-red"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M2 5l6 5 6-5"/></svg></div>
+          {% endif %}
+        {% elif s.status == "researching" %}
+          <div class="m-icon ri-unknown" onclick="document.getElementById('modal-researching').classList.add('open')">?</div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
+
+{# ── RESEARCHING MODAL ────────────────────────────────────────────────── #}
+<div class="roster-modal-bg" id="modal-researching"
+     onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="roster-modal">
+    <h3>Still Researching</h3>
+    <p>We have a name on record but nothing more at this point — no dates, photo, or account. If you served with this soldier or have information to share, we'd love to hear from you.</p>
+    <div class="roster-modal-actions">
+      <button class="modal-btn-close" onclick="document.getElementById('modal-researching').classList.remove('open')">Close</button>
+      <button class="modal-btn-contribute" onclick="window.location='/contribute/'">Contribute</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function platoonMatch(rowVal, filterVal) {
+    if (!filterVal) return true;
+    if (filterVal === 'cat') return rowVal.includes('cat') || rowVal.includes('wild');
+    if (filterVal === 'range') return rowVal.includes('range');
+    if (filterVal === 'recon') return rowVal.includes('recon');
+    if (filterVal === 'hq') return rowVal.includes('skipper') || rowVal.includes('hq') || rowVal.includes('cat 6') || rowVal.includes('cat6');
+    return true;
+  }
+
+  function yearMatch(rowVal, filterVal) {
+    if (!filterVal) return true;
+    return rowVal.includes(filterVal);
+  }
+
+  function applyFilters() {
+    const platoon = document.getElementById('filter-platoon').value;
+    const year    = document.getElementById('filter-year').value;
+
+    document.querySelectorAll('.roster-row').forEach(row => {
+      const p = (row.dataset.platoon || '').toLowerCase();
+      const y = (row.dataset.years  || '').toLowerCase();
+      row.style.display = (platoonMatch(p, platoon) && yearMatch(y, year)) ? '' : 'none';
+    });
+
+    document.querySelectorAll('.roster-card').forEach(card => {
+      const p = (card.dataset.platoon || '').toLowerCase();
+      const y = (card.dataset.years   || '').toLowerCase();
+      card.style.display = (platoonMatch(p, platoon) && yearMatch(y, year)) ? '' : 'none';
+    });
+  }
+</script>
