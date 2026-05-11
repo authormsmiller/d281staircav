@@ -6,6 +6,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("soldiers");
   eleventyConfig.addPassthroughCopy("documents");
   eleventyConfig.addPassthroughCopy("anecdotes");
+  eleventyConfig.addPassthroughCopy("events");
   eleventyConfig.addWatchTarget("assets/");
 
   // Collections
@@ -34,6 +35,9 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("anecdotes", function(collectionApi) {
   return collectionApi.getFilteredByGlob("./anecdotes/**/*.md");
+  });
+  eleventyConfig.addCollection("events", function(collectionApi) {
+  return collectionApi.getFilteredByGlob("./events/**/*.md");
   });
   
   // All photos across all soldiers — for cross-soldier contains queries
