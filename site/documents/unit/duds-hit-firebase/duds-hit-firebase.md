@@ -1,26 +1,27 @@
 ---
+layout: layouts/document.njk
+slug: duds-hit-firebase
 title: '"Duds Hit Firebase" — FSB Fontaine Incident'
-type: official
-author: ""
-recipient: ""
-event: ""
-doc_date: 1971
+type: verbal
+date: 1971-00-00
 date_known: false
 source: "Military publication (name unknown)"
 status: draft
+event: ""
 contains:
-  - miller-marvin-dale
   - weaver-ken
 tagged:
   - miller-marvin-dale
 files:
   - filename: dud-article-clean.jpg
-    caption: "Cleaned scan of press clipping"
-    credit: ""
+    caption: Cleaned scan of press clipping
   - filename: dud-article-note.jpg
-    caption: "Ken Weaver's handwritten note"
-    credit: ""
-transcript: ""
+    caption: Ken Weaver's handwritten note
+archivist_notes: >
+  Original clipping contributed by Ken Weaver, Cat Platoon, 1971–72.
+  Handwritten note reads: "I was there when this happened. Keep it for me. No one was hurt."
+  Publication name unknown. Date unknown, 1971. Transcribed from original scan by archive, 2026.
+permalink: /documents/unit/duds-hit-firebase/
 ---
 **FSB FONTAINE** — As the first round exploded, the cry "incoming" was heard all over the firebase. Skytroopers of the 3d Bde., 2d Bn., 8th Cav. and C Btry., 1st Bn., 21st Arty, anxiously awaited for the calm of the night to return.
 
