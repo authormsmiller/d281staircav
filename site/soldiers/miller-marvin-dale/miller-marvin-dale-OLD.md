@@ -161,10 +161,6 @@ timeline:
       California. He returned home to Kittanning, Pennsylvania.
 
 # ── PHOTOS ────────────────────────────────────────
-# NOTE: This array is retained for the profile template.
-# Canonical photo metadata lives in photos/[subfolder]/index.md.
-# Do not add new photos here — add them to the index files only.
-
 photo_intro: >
   Marvin carried a camera throughout his tour. Except where noted, every
   photograph here was taken by him — a first-person visual record of what
@@ -261,7 +257,7 @@ photos:
     credit: "Photographer unknown · 1971"
     photographer: unknown-of
     contains:
-      - randt-larry
+      - larry-randt
 
   - filename: marvin-miller-fb-entrance.jpg
     subfolder: field
