@@ -82,8 +82,8 @@ archivist_notes:
   created: 2026-05-11
   session: 18
   sources:
-    - kutter-wolf-account-102171 (unpublished memoir; restricted; document record not yet created)
-    - McGrew calendar — October 21–22: "Contact, Contact"; October 23: "Back to Jeff(ries)"
+    - kutter-wolf-account-102171
+    - McGrew calendar Oct 21-22 and Oct 23
   access_note: >
     The Kutter memoir is the sole documentary source for this event at present.
     It is permanently restricted and must not surface publicly in any form until
@@ -92,7 +92,7 @@ archivist_notes:
 
 ## Summary
 
-On October 21, 1971, D Company made contact with enemy forces in the Nui Ba Mountains. PFC William Makowski was killed in action. A dog handler, Escue, was wounded. The following day the unit conducted a follow-through sweep of an enemy bunker complex in the same area. Howard McGrew's calendar records "Contact" on both October 21 and October 22, and "Back to Jeff(ries)" on October 23, providing independent date corroboration.
+On October 21, 1971, D Company made contact with enemy forces in the Nui Ba Mountains. PFC William Makowski was killed in action. A dog handler, Escue, was wounded. The following day the unit conducted a follow-through sweep of an enemy bunker complex in the same area. Howard McGrew's calendar records Contact on both October 21 and October 22, and Back to Jeffries on October 23, providing independent date corroboration.
 
 The primary narrative source for this event is an unpublished memoir by Capt. Wolf Kutter, the company commander at the time. The memoir is restricted and may not be published or quoted without authorization.
 
