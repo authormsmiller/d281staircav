@@ -261,7 +261,10 @@ display: flex;
 .ov-about-text {
   font-family: 'Crimson Pro', serif; font-size: 17px; line-height: 1.8; color: var(--dim);
 }
-
+.evt-no-record {
+  opacity: 0.5;
+  cursor: default;
+}
 /* ═══════════════════════════════════════════
    ROSTER
 ═══════════════════════════════════════════ */
@@ -765,6 +768,282 @@ table.rtable { width: 100%; border-collapse: collapse; background: var(--pg); }
   height: 100%;
   object-fit: cover;
 }
+.alongside-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* ── Tab overrides ─────────────────────────── */
+#tab-documents .section-title {
+  color: var(--ink) !important;
+}
+#tab-accounts .section-title {
+  color: var(--ink) !important;
+}
+#tab-doc-soldiers .section-title {
+  color: var(--ink) !important;
+}
+#tab-evt-summary .section-title {
+  color: var(--ink) !important;
+}
+#tab-evt-soldiers .section-title {
+  color: var(--ink) !important;
+}
+/* ── DOCUMENT PAGE (tabbed layout) ─────────────────────────── */
+.doc-hero {
+  background: var(--blk);
+  padding: 40px 48px 36px;
+  border-bottom: 4px solid var(--y);
+}
+.doc-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.doc-type-pill {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--y);
+  color: var(--blk);
+  padding: 4px 10px;
+}
+.doc-hero-date {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.doc-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  color: #F0EDD8;
+  letter-spacing: 2px;
+  line-height: 0.95;
+  margin: 0 0 10px;
+}
+.doc-hero-byline {
+  font-family: 'Crimson Pro', serif;
+  font-size: 18px;
+  color: rgba(240,237,216,0.6);
+  margin-bottom: 22px;
+}
+.doc-hero-link {
+  color: var(--y);
+  text-decoration: none;
+}
+.doc-hero-link:hover { color: var(--y2); }
+.doc-hero-actions {
+  display: flex;
+  gap: 10px;
+  margin: 8px;
+}
+.doc-btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.doc-btn-share {
+  background: transparent;
+  color: rgba(240,237,216,0.6);
+  border: 1px solid #333;
+}
+.doc-btn-share:hover { border-color: var(--y); color: var(--y); }
+
+.doc-body {
+  font-family: 'Crimson Pro', serif;
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--ink);
+  max-width: 680px;
+}
+.doc-body p { margin: 0 0 1.2em; }
+.doc-body p:last-child { margin-bottom: 0; }
+.doc-body em { font-style: italic; }
+.doc-body strong { font-weight: 600; }
+
+.doc-meta-table {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+}
+.dmt-row {
+  display: flex;
+  gap: 24px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule2);
+  align-items: baseline;
+}
+.dmt-row:last-child { border-bottom: none; }
+.dmt-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+.dmt-value {
+  font-family: 'Crimson Pro', serif;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.doc-link { text-decoration: none; color: inherit; }
+.doc-link:hover { color: var(--y2); }
+.doc-type-tagged { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--rule); color: var(--dim); padding: 3px 8px; white-space: nowrap; margin-left: auto; }
+
+/* ── EVENT & UNIT HISTORY CSS ──────────────────────────────────────────────
+   Add these rules to main.css
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Casualty pills — event hero and unit history cards */
+.evt-casualties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.evt-cas-pill {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 99px;
+}
+
+.evt-cas-kia  { background: #FDECEA; color: #8B1A1A; }
+.evt-cas-dow  { background: #FDF3E0; color: #7A4A0A; }
+.evt-cas-wia  { background: #E8F0FB; color: #1A3F7A; }
+.evt-cas-mia  { background: #EEE8FB; color: #3A2880; }
+.evt-cas-nc   { background: #F0EEE8; color: #5A5448; }
+
+/* Unit History index page */
+.uh-section-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rule);
+  margin: 2rem 0 0.5rem;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+  padding-left: 10px;
+}
+
+.uh-section-label:first-of-type {
+  margin-top: 1rem;
+}
+
+.uh-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.uh-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 0px;
+  border-bottom: 0.5px solid var(--rule);
+  cursor: pointer;
+  background-color: var( --pg);
+}
+
+.uh-card:hover .uh-title {
+  color: var(--y2);
+}
+
+.uh-date-col {
+  min-width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.uh-date-day {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.uh-divider {
+  width: 1px;
+  background: var(--rule);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.uh-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.uh-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 3px;
+  transition: color 0.15s;
+}
+
+.uh-location {
+  font-family: 'Crimson Pro', serif;
+  font-size: 13px;
+  color: var(--dim);
+  margin: 0 0 8px;
+}
+
+.uh-casualties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Open questions block on event Summary tab */
+.evt-open-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.evt-oq-item {
+  border-left: 3px solid var(--y);
+  padding-left: 14px;
+}
+
+.evt-oq-item p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px;
+  color: var(--ink2);
+  margin: 0 0 6px;
+}
+
+.evt-oq-cta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--dim);
+  text-decoration: none;
+}
+
+.evt-oq-cta:hover {
+  color: var(--ink);
+}
+
 /* ═══════════════════════════════════════════
    DATA MODEL
 ═══════════════════════════════════════════ */
@@ -1274,9 +1553,24 @@ html { overflow-x: hidden; }
   /* Roster */
   .rtable-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table.rtable { min-width: 600px; }
-
+  
+/* Mobile adjustments for doc hero */
+  .doc-hero { padding: 28px 20px 24px; }
+  .doc-hero-title { font-size: 36px; }
+}
   /* Search page */
   .search-page { padding: 1.5rem 1rem 3rem; }
   .search-input-row { flex-direction: column; }
   .search-btn { width: 100%; }
+/* Mobile */
+@media (max-width: 600px) {
+  .uh-date-col {
+    min-width: 56px;
+  }
+  .uh-date-day {
+    font-size: 11px;
+  }
+  .uh-title {
+    font-size: 14px;
+  }
 }

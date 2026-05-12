@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — {{ site.title }}</title>
+<meta name="description" content="Unit history: {{ title }}{% if location %}, {{ location }}{% endif %}{% if date %}, {{ date }}{% endif %}.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+{% include "partials/masthead.njk" %}
+
+<div class="breadcrumb show">
+  <a class="bc-link" href="/">Archive</a>
+  <span class="bc-sep">›</span>
+  <a class="bc-link" href="/unit-history/">Unit History</a>
+  <span class="bc-sep">›</span>
+  <span>{{ title }}</span>
+</div>
+
+<main>
+
+{# ── EVENT HERO ── #}
+<div class="doc-hero">
+  <div class="doc-hero-meta">
+    <span class="doc-type-pill">{{ type | capitalize if type else "Event" }}</span>
+    {% if date %}<span class="doc-hero-date">{{ date }}</span>{% endif %}
+    {% if date_end and date_end != date %}<span class="doc-hero-date">– {{ date_end }}</span>{% endif %}
+  </div>
+
+  <h1 class="doc-hero-title">{{ title }}</h1>
+
+  {% if location %}
+    <div class="doc-hero-byline">{{ location }}</div>
+  {% endif %}
+
+  {# ── CASUALTIES SUMMARY ── #}
+  {% set kia_count    = casualties.kia    | length if casualties.kia    else 0 %}
+  {% set dow_count    = casualties.dow    | length if casualties.dow    else 0 %}
+  {% set wia_count    = casualties.wia    | length if casualties.wia    else 0 %}
+  {% set mia_count    = casualties.mia    | length if casualties.mia    else 0 %}
+  {% set nc_count     = casualties.non_combat | length if casualties.non_combat else 0 %}
+  {% set total_cas    = kia_count + dow_count + wia_count + mia_count + nc_count %}
+
+  {% if total_cas > 0 %}
+    <div class="evt-casualties">
+      {% if kia_count > 0 %}
+        <span class="evt-cas-pill evt-cas-kia">{{ kia_count }} KIA</span>
+      {% endif %}
+      {% if dow_count > 0 %}
+        <span class="evt-cas-pill evt-cas-dow">{{ dow_count }} DOW</span>
+      {% endif %}
+      {% if wia_count > 0 %}
+        <span class="evt-cas-pill evt-cas-wia">{{ wia_count }} WIA</span>
+      {% endif %}
+      {% if mia_count > 0 %}
+        <span class="evt-cas-pill evt-cas-mia">{{ mia_count }} MIA</span>
+      {% endif %}
+      {% if nc_count > 0 %}
+        <span class="evt-cas-pill evt-cas-nc">{{ nc_count }} Non-combat</span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="doc-hero-actions">
+    <button class="doc-btn doc-btn-share" onclick="evtShare()">Share</button>
+  </div>
+</div>
+
+{# ── DETERMINE WHICH TABS SHOW ── #}
+
+{% set hasDocuments = false %}
+{% for doc in collections.documents %}
+  {% if doc.data.event == slug %}{% set hasDocuments = true %}{% endif %}
+{% endfor %}
+
+{% set hasSoldiers = false %}
+{% if casualties.kia    and casualties.kia.length    %}{% set hasSoldiers = true %}{% endif %}
+{% if casualties.dow    and casualties.dow.length    %}{% set hasSoldiers = true %}{% endif %}
+{% if casualties.wia    and casualties.wia.length    %}{% set hasSoldiers = true %}{% endif %}
+{% if casualties.mia    and casualties.mia.length    %}{% set hasSoldiers = true %}{% endif %}
+{% if tagged            and tagged.length            %}{% set hasSoldiers = true %}{% endif %}
+
+{% set hasAnecdotes = false %}
+{% for anecdote in collections.anecdotes %}
+  {% if anecdote.data.event == slug %}{% set hasAnecdotes = true %}{% endif %}
+{% endfor %}
+
+{% set hasImages = images and images.length %}
+
+{# ── TAB BAR ── #}
+<div class="tabs-bar">
+  <div class="tab active" data-tab="evt-summary">Summary</div>
+  <div class="tab" data-tab="evt-documents">Documents</div>
+  {% if hasSoldiers %}
+    <div class="tab" data-tab="evt-soldiers">Soldiers</div>
+  {% endif %}
+  {% if hasAnecdotes %}
+    <div class="tab" data-tab="evt-anecdotes">Anecdotes</div>
+  {% endif %}
+  <div class="tab" data-tab="evt-images">Images</div>
+</div>
+
+{# ── TAB: SUMMARY ── #}
+<div class="tab-content" id="tab-evt-summary">
+  <div class="doc-body">
+    {{ content | safe }}
+  </div>
+
+  {# Open questions — published ones only #}
+  {% set publishedQs = [] %}
+  {% for q in open_questions %}
+    {% if q.publish %}{% set publishedQs = (publishedQs.push(q), publishedQs) %}{% endif %}
+  {% endfor %}
+  {% if publishedQs.length %}
+    <div class="section-header" style="margin-top:2rem;">
+      <div class="section-title" style="font-size:13px;">Open Questions</div>
+      <div class="section-rule"></div>
+    </div>
+    <div class="evt-open-questions">
+      {% for q in open_questions %}
+        {% if q.publish %}
+          <div class="evt-oq-item">
+            <p>{{ q.question }}</p>
+            <a href="/contribute/" class="evt-oq-cta">Share what you know →</a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: DOCUMENTS ── #}
+<div class="tab-content" id="tab-evt-documents" style="display:none">
+  {% if hasDocuments %}
+    <div class="alongside-grid">
+      {% for doc in collections.documents %}
+        {% if doc.data.event == slug %}
+          <div class="alongside-card">
+            <a href="{{ doc.data.permalink }}" style="text-decoration:none;">
+              <div class="alongside-photo" style="font-size:11px;letter-spacing:0.03em;">
+                {{ doc.data.type | upper if doc.data.type else "DOC" }}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="{{ doc.data.permalink }}" style="color:inherit;text-decoration:none;">
+                {{ doc.data.title }}
+              </a>
+            </div>
+            <div class="alongside-meta">
+  {% for s in collections.soldiers %}
+    {% if s.data.slug == doc.data.author %}
+      {{ s.data.first_name }} {{ s.data.last_name }}
+    {% endif %}
+  {% endfor %}
+</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No documents have been linked to this event yet.<br>
+      <a href="/contribute/">Have a document, photo, or letter to contribute? →</a>
+    </div>
+  {% endif %}
+</div>
+
+{# ── TAB: SOLDIERS ── #}
+{% if hasSoldiers %}
+<div class="tab-content" id="tab-evt-soldiers" style="display:none">
+
+  {# KIA #}
+  {% if casualties.kia and casualties.kia.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Killed in Action</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ casualties.kia.length }}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for person in casualties.kia %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo" style="border-color:#8B1A1A;">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record" style="border-color:#8B1A1A;">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# DOW #}
+  {% if casualties.dow and casualties.dow.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Died of Wounds</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ casualties.dow.length }}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for person in casualties.dow %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo" style="border-color:#8B1A1A;">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record" style="border-color:#8B1A1A;">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# WIA #}
+  {% if casualties.wia and casualties.wia.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Wounded in Action</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ casualties.wia.length }}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for person in casualties.wia %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% if wia_count_note %}
+      <p class="dim" style="font-size:12px;margin-top:-16px;margin-bottom:24px;">{{ wia_count_note }}</p>
+    {% endif %}
+  {% endif %}
+
+  {# MIA #}
+  {% if casualties.mia and casualties.mia.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Missing in Action</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ casualties.mia.length }}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for person in casualties.mia %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+    {# Referenced (contains) — confirmed present, explicitly named in accounts #}
+  {% if contains and contains.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Referenced</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ contains.length }}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for person in contains %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Also Present (tagged) — implied present, unconfirmed individually #}
+  {% if tagged and tagged.length %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Also Present</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ tagged.length }}</div>
+    </div>
+    <div class="alongside-grid">
+      {% for person in tagged %}
+        {% set soldierRecord = null %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+        {% endfor %}
+
+        {% if soldierRecord %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+              <div class="alongside-photo">
+                {% if soldierRecord.data.profile_photo %}
+                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                       alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}</span>
+                {% else %}
+                  {{ soldierRecord.data.first_name[0] }}{{ soldierRecord.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+                {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% else %}
+          <div class="alongside-card">
+            <div class="alongside-photo evt-no-record">
+              {{ person.name | truncate(2, true, "") if person.name else "?" }}
+            </div>
+            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-meta">{{ person.note if person.note }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</div>
+{% endif %}
+
+{# ── TAB: ANECDOTES ── #}
+{% if hasAnecdotes %}
+<div class="tab-content" id="tab-evt-anecdotes" style="display:none">
+  {% for anecdote in collections.anecdotes %}
+    {% if anecdote.data.event == slug %}
+      <div class="doc-meta-table" style="margin-bottom:16px;">
+        <div class="dmt-row">
+          <div class="dmt-label">Title</div>
+          <div class="dmt-value">
+            <a href="{{ anecdote.url }}" class="doc-hero-link">{{ anecdote.data.title }}</a>
+          </div>
+        </div>
+        {% if anecdote.data.summary %}
+        <div class="dmt-row">
+          <div class="dmt-label">Summary</div>
+          <div class="dmt-value">{{ anecdote.data.summary }}</div>
+        </div>
+        {% endif %}
+        {% if anecdote.data.source_short %}
+        <div class="dmt-row">
+          <div class="dmt-label">Source</div>
+          <div class="dmt-value">{{ anecdote.data.source_short }}</div>
+        </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{# ── TAB: IMAGES ── #}
+<div class="tab-content" id="tab-evt-images" style="display:none">
+  {% if hasImages %}
+
+    <script>
+      var EVT_IMAGE_SLIDES = [
+        {% for img in images %}
+        {
+          src: "{{ img.src }}",
+          caption: {{ (img.caption or img.filename or "") | dump | safe }},
+          credit: {{ (img.credit or "") | dump | safe }},
+          date: {{ (img.date or "") | dump | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ];
+    </script>
+
+    <div class="photo-grid">
+      {% for img in images %}
+        <div class="photo-card" onclick="lbOpen({{ loop.index0 }}, EVT_IMAGE_SLIDES)">
+          <img src="{{ img.src }}" alt="{{ img.caption if img.caption else img.filename }}" loading="lazy">
+          <div class="photo-overlay">
+            <div class="photo-cap-text">{{ img.caption if img.caption else img.filename }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="tab-empty">
+      No images have been added to this event yet.<br>
+      <a href="/contribute/">Have a photo, scan, or map to contribute? →</a>
+    </div>
+  {% endif %}
+</div>
+
+{% include "partials/footer.njk" %}
+
+</main>
+
+{# ── LIGHTBOX ── #}
+<div class="lightbox" id="lightbox" onclick="lbClose(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap">
+      <div class="lb-cap-meta">
+        <span id="lb-cap-date"></span>
+        <span id="lb-counter"></span>
+      </div>
+      <p id="lb-cap-p"></p>
+      <small id="lb-cap-s"></small>
+    </div>
+    <div class="lb-nav">
+      <button id="lb-prev" class="lb-arrow" onclick="event.stopPropagation();lbPrev()">← PREV</button>
+      <button id="lb-next" class="lb-arrow" onclick="event.stopPropagation();lbNext()">NEXT →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toastEl"></div>
+
+<script src="/assets/js/main.js"></script>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
+    tab.classList.add('active');
+    var target = document.getElementById('tab-' + tab.dataset.tab);
+    if (target) target.style.display = 'block';
+  });
+});
+
+function evtShare() {
+  var url = window.location.href;
+  var title = {{ title | dump | safe }};
+  if (navigator.share) {
+    navigator.share({ title: title, url: url });
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      var toast = document.getElementById('toastEl');
+      if (toast) {
+        toast.textContent = 'Link copied';
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2000);
+      }
+    });
+  }
+}
+</script>
+
+</body>
+</html>
