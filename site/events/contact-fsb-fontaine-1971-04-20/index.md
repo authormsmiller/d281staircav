@@ -1,9 +1,10 @@
 ---
 slug: contact-fsb-fontaine-1971-04-20
 title: Enemy Contact Near FSB Fontaine
-status: draft
+status: published
+type: contact
 
-date: 1971-04-20
+date: "1971-04-20"
 date_end: 1971-04-23
 date_known: true
 
@@ -70,8 +71,7 @@ casualties:
       note: Took over M60 from Schneck; carried Dillon across stream; among last to cross
     - slug: vollmar-tom
       name: Tom Vollmar
-      note: Role unconfirmed — source document not yet identified; do not create record until verified
-      todo: true
+      note: Role unconfirmed — source document not yet identified; do not create record until verified   
   wia_count_note: Approximately 15 WIA total per multiple accounts; only named individuals above confirmed from sources
 
 tagged:

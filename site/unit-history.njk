@@ -1,0 +1,147 @@
+---
+permalink: /unit-history/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit History — {{ site.title }}</title>
+<meta name="description" content="Unit history records for D Company, 2nd Battalion, 8th Cavalry (Airmobile), 1970–1972.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+{% include "partials/masthead.njk" %}
+
+<div class="breadcrumb show">
+  <a class="bc-link" href="/">Archive</a>
+  <span class="bc-sep">›</span>
+  <span>Unit History</span>
+</div>
+
+<main>
+
+<div class="doc-hero">
+  <h1 class="doc-hero-title">Unit History</h1>
+  <div class="doc-hero-byline">D Company, 2nd Battalion, 8th Cavalry (Airmobile) · 1970–1972</div>
+</div>
+
+{# ── Collect published events ── #}
+{% set publishedEvents = [] %}
+{% for evt in collections.events %}
+  {% if evt.data.status == "published" %}
+    {% set publishedEvents = (publishedEvents.push(evt), publishedEvents) %}
+  {% endif %}
+{% endfor %}
+
+{% if publishedEvents.length == 0 %}
+  <div class="tab-empty">
+    No unit history records have been published yet. Check back soon.
+  </div>
+{% else %}
+
+  {% set typeOrder = ["contact", "crash", "incident", "memorial"] %}
+
+  {% for eventType in typeOrder %}
+    {% set typeEvents = [] %}
+    {% for evt in publishedEvents %}
+      {% if evt.data.type == eventType %}
+        {% set typeEvents = (typeEvents.push(evt), typeEvents) %}
+      {% endif %}
+    {% endfor %}
+
+    {% if typeEvents.length %}
+      <div class="uh-section-label">{{ eventType | capitalize }}</div>
+
+      {% for evt in typeEvents %}
+        {% set kia_count = evt.data.casualties.kia    | length if evt.data.casualties and evt.data.casualties.kia    else 0 %}
+        {% set dow_count = evt.data.casualties.dow    | length if evt.data.casualties and evt.data.casualties.dow    else 0 %}
+        {% set wia_count = evt.data.casualties.wia    | length if evt.data.casualties and evt.data.casualties.wia    else 0 %}
+        {% set mia_count = evt.data.casualties.mia    | length if evt.data.casualties and evt.data.casualties.mia    else 0 %}
+        {% set nc_count  = evt.data.casualties.non_combat | length if evt.data.casualties and evt.data.casualties.non_combat else 0 %}
+        {% set total_cas = kia_count + dow_count + wia_count + mia_count + nc_count %}
+
+        <a href="/events/{{ evt.data.slug }}/" class="uh-card-link">
+          <div class="uh-card">
+            <div class="uh-date-col">
+              <div class="uh-date-day">{{ evt.data.date }}</div>
+            </div>
+            <div class="uh-divider"></div>
+            <div class="uh-body">
+              <p class="uh-title">{{ evt.data.title }}</p>
+              {% if evt.data.location %}
+                <p class="uh-location">{{ evt.data.location }}</p>
+              {% endif %}
+              {% if total_cas > 0 %}
+                <div class="uh-casualties">
+                  {% if kia_count > 0 %}<span class="evt-cas-pill evt-cas-kia">{{ kia_count }} KIA</span>{% endif %}
+                  {% if dow_count > 0 %}<span class="evt-cas-pill evt-cas-dow">{{ dow_count }} DOW</span>{% endif %}
+                  {% if wia_count > 0 %}<span class="evt-cas-pill evt-cas-wia">{{ wia_count }} WIA</span>{% endif %}
+                  {% if mia_count > 0 %}<span class="evt-cas-pill evt-cas-mia">{{ mia_count }} MIA</span>{% endif %}
+                  {% if nc_count  > 0 %}<span class="evt-cas-pill evt-cas-nc">{{ nc_count }} Non-combat</span>{% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  {# Catch-all for unlisted types #}
+  {% set coveredTypes = ["contact", "crash", "incident", "memorial"] %}
+  {% set otherEvents = [] %}
+  {% for evt in publishedEvents %}
+    {% if evt.data.type not in coveredTypes %}
+      {% set otherEvents = (otherEvents.push(evt), otherEvents) %}
+    {% endif %}
+  {% endfor %}
+
+  {% if otherEvents.length %}
+    <div class="uh-section-label">Other</div>
+    {% for evt in otherEvents %}
+      {% set kia_count = evt.data.casualties.kia | length if evt.data.casualties and evt.data.casualties.kia else 0 %}
+      {% set dow_count = evt.data.casualties.dow | length if evt.data.casualties and evt.data.casualties.dow else 0 %}
+      {% set wia_count = evt.data.casualties.wia | length if evt.data.casualties and evt.data.casualties.wia else 0 %}
+      {% set mia_count = evt.data.casualties.mia | length if evt.data.casualties and evt.data.casualties.mia else 0 %}
+      {% set nc_count  = evt.data.casualties.non_combat | length if evt.data.casualties and evt.data.casualties.non_combat else 0 %}
+      {% set total_cas = kia_count + dow_count + wia_count + mia_count + nc_count %}
+
+      <a href="/events/{{ evt.data.slug }}/" class="uh-card-link">
+        <div class="uh-card">
+          <div class="uh-date-col">
+            <div class="uh-date-day">{{ evt.data.date }}</div>
+          </div>
+          <div class="uh-divider"></div>
+          <div class="uh-body">
+            <p class="uh-title">{{ evt.data.title }}</p>
+            {% if evt.data.location %}<p class="uh-location">{{ evt.data.location }}</p>{% endif %}
+            {% if total_cas > 0 %}
+              <div class="uh-casualties">
+                {% if kia_count > 0 %}<span class="evt-cas-pill evt-cas-kia">{{ kia_count }} KIA</span>{% endif %}
+                {% if dow_count > 0 %}<span class="evt-cas-pill evt-cas-dow">{{ dow_count }} DOW</span>{% endif %}
+                {% if wia_count > 0 %}<span class="evt-cas-pill evt-cas-wia">{{ wia_count }} WIA</span>{% endif %}
+                {% if mia_count > 0 %}<span class="evt-cas-pill evt-cas-mia">{{ mia_count }} MIA</span>{% endif %}
+                {% if nc_count  > 0 %}<span class="evt-cas-pill evt-cas-nc">{{ nc_count }} Non-combat</span>{% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  {% endif %}
+
+{% endif %}
+
+</main>
+
+{% include "partials/footer.njk" %}
+
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

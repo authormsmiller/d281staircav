@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }} — D Co. 2/8 CAV Archive</title>
-<meta name="description" content="Archival document: {{ title }}. Contributed by {{ contributor_name }}.">
+<title>{{ title }} — {{ site.title }}</title>
+<meta name="description" content="Archive document: {{ title }}{% if author %}, authored by {{ author }}{% endif %}{% if doc_date %}, {{ doc_date }}{% endif %}.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css">
@@ -16,98 +16,260 @@
 <div class="breadcrumb show">
   <a class="bc-link" href="/">Archive</a>
   <span class="bc-sep">›</span>
-  <a class="bc-link" href="/soldiers/{{ contributor_slug }}/">{{ contributor_name }}</a>
-  <span class="bc-sep">›</span>
   <span>{{ title }}</span>
 </div>
 
 <main>
 
-{# ── DOCUMENT HEADER ── #}
-<div class="section" style="padding-bottom:0;">
-  <div class="doc-page-flag">{{ type }}</div>
-  <h1 class="doc-page-title">{{ title }}</h1>
-  <div class="doc-page-meta">
-    {% if publication %}{{ publication }}{% endif %}
-    {% if date_approx %} · {{ date_approx }}{% endif %}
-    {% if location %} · {{ location }}{% endif %}
+{# ── DOCUMENT HERO ── #}
+<div class="doc-hero">
+  <div class="doc-hero-meta">
+    <span class="doc-type-pill">{{ type | capitalize }}</span>
+    {% if doc_date %}<span class="doc-hero-date">{{ doc_date }}</span>{% endif %}
   </div>
-  <div class="doc-page-contrib">
-    Contributed by <a class="doc-page-contrib-link" href="/soldiers/{{ contributor_slug }}/">{{ contributor_name }}</a>
-  </div>
-  {% if contains and contains.length %}
-    <div class="doc-page-tags">
-      <span class="doc-page-tags-label">Soldiers mentioned:</span>
-      {% for s in contains %}
-        <a class="doc-page-tag" href="/soldiers/{{ s }}/">{{ s | replace("-", " ") | title }}</a>
+  <h1 class="doc-hero-title">{{ title }}</h1>
+  {% if author %}
+    <div class="doc-hero-byline">
+      {% for s in collections.soldiers %}
+        {% if s.data.slug == author %}
+          By <a href="/soldiers/{{ author }}/" class="doc-hero-link">{{ s.data.first_name }} {{ s.data.last_name }}</a>
+        {% endif %}
       {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="doc-hero-actions">
+    <button class="doc-btn doc-btn-share" onclick="docShare()">Share</button>
+  </div>
+</div>
+
+{# ── TAB BAR ── #}
+<div class="tabs-bar">
+  <div class="tab active" data-tab="doc-document">Document</div>
+
+  {% if images and images.length %}
+    <div class="tab" data-tab="doc-images">Images</div>
+  {% endif %}
+
+  <div class="tab" data-tab="doc-source">Source</div>
+
+  {% set hasSoldiers = false %}
+  {% if author %}{% set hasSoldiers = true %}{% endif %}
+  {% if contains and contains.length %}{% set hasSoldiers = true %}{% endif %}
+  {% if tagged and tagged.length %}{% set hasSoldiers = true %}{% endif %}
+  {% if hasSoldiers %}
+    <div class="tab" data-tab="doc-soldiers">Soldiers</div>
+  {% endif %}
+</div>
+
+{# ── TAB: DOCUMENT ── #}
+<div class="tab-content" id="tab-doc-document">
+  {% if content and content | trim %}
+    <div class="doc-body">
+      {{ content | safe }}
+    </div>
+  {% else %}
+    <div class="tab-empty">
+      No transcript available for this document.<br>
+      <a href="/contribute/">Have a transcription to contribute? →</a>
     </div>
   {% endif %}
 </div>
 
-{# ── DOCUMENT IMAGES ── #}
+{# ── TAB: IMAGES ── #}
 {% if images and images.length %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Original Document</div>
-    <div class="section-rule"></div>
-  </div>
-  <div class="doc-image-stack">
+<div class="tab-content" id="tab-doc-images" style="display:none">
+
+  <script>
+    var DOC_IMAGE_SLIDES = [
+      {% for img in images %}
+      {
+        src: "{{ img.src }}",
+        caption: {{ (img.caption or img.filename or "") | dump | safe }},
+        credit: {{ (img.credit or "") | dump | safe }},
+        date: {{ (img.date or "") | dump | safe }}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+  </script>
+
+  <div class="photo-grid">
     {% for img in images %}
-      <figure class="doc-figure">
-        <img
-          class="doc-scan"
-          src="/documents/{{ contributor_slug }}/{{ slug }}/{{ img.filename }}"
-          alt="{{ img.caption }}"
-          onclick="lbOpenSingle(this.src, '{{ img.caption }}')"
-        >
-        <figcaption class="doc-figcap">{{ img.caption }}</figcaption>
-      </figure>
+      <div class="photo-card" onclick="lbOpen({{ loop.index0 }}, DOC_IMAGE_SLIDES)">
+        <img src="{{ img.src }}" alt="{{ img.caption if img.caption else img.filename }}" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-cap-text">{{ img.caption if img.caption else img.filename }}</div>
+        </div>
+      </div>
     {% endfor %}
   </div>
 </div>
 {% endif %}
 
-{# ── TRANSCRIPTION ── #}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Transcription</div>
-    <div class="section-rule"></div>
-  </div>
-  <div class="doc-transcription">
-    {{ content | safe }}
+{# ── TAB: SOURCE ── #}
+<div class="tab-content" id="tab-doc-source" style="display:none">
+  <div class="doc-meta-table">
+
+    <div class="dmt-row">
+      <div class="dmt-label">Type</div>
+      <div class="dmt-value">{{ type | capitalize }}</div>
+    </div>
+
+    <div class="dmt-row">
+      <div class="dmt-label">Date</div>
+      <div class="dmt-value">
+        {% if doc_date %}{{ doc_date }}{% else %}<span class="dim">Unknown</span>{% endif %}
+        {% if not date_known %}<span class="doc-badge doc-badge-pending">Date uncertain</span>{% endif %}
+      </div>
+    </div>
+
+    {% if source %}
+    <div class="dmt-row">
+      <div class="dmt-label">Source</div>
+      <div class="dmt-value">{{ source }}</div>
+    </div>
+    {% endif %}
+
+    {% if event %}
+    <div class="dmt-row">
+      <div class="dmt-label">Event</div>
+      <div class="dmt-value">
+        <a href="/events/{{ event }}/" class="doc-hero-link">{{ event }}</a>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="dmt-row">
+      <div class="dmt-label">Status</div>
+      <div class="dmt-value">{{ status | capitalize }}</div>
+    </div>
+
   </div>
 </div>
 
-{# ── ARCHIVIST NOTES ── #}
-{% if archivist_notes %}
-<div class="section">
-  <div class="section-header">
-    <div class="section-title">Archivist Notes</div>
-    <div class="section-rule"></div>
-  </div>
-  <div class="doc-archivist-notes">
-    {{ archivist_notes }}
-  </div>
+{# ── TAB: SOLDIERS ── #}
+{% if hasSoldiers %}
+<div class="tab-content" id="tab-doc-soldiers" style="display:none">
+
+  {# ── Author ── #}
+  {% if author %}
+    <div class="section-header">
+      <div class="section-title" style="font-size:13px;">Author</div>
+      <div class="section-rule"></div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for s in collections.soldiers %}
+        {% if s.data.slug == author %}
+          <div class="alongside-card">
+            <a href="/soldiers/{{ author }}/" style="text-decoration:none;">
+              <div class="alongside-photo">
+                {% if s.data.profile_photo %}
+                  <img src="/soldiers/{{ author }}/photos/profile/{{ s.data.profile_photo }}"
+                       alt="{{ s.data.first_name }} {{ s.data.last_name }}"
+                       style="width:100%;height:100%;object-fit:cover;"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <span style="display:none">{{ s.data.first_name[0] }}{{ s.data.last_name[0] }}</span>
+                {% else %}
+                  {{ s.data.first_name[0] }}{{ s.data.last_name[0] }}
+                {% endif %}
+              </div>
+            </a>
+            <div class="alongside-name">
+              <a href="/soldiers/{{ author }}/" style="color:inherit;text-decoration:none;">
+                {{ s.data.first_name }} {{ s.data.last_name }}
+              </a>
+            </div>
+            <div class="alongside-meta">{{ s.data.platoon }}{% if s.data.arrived %} · {{ s.data.arrived }}–{{ s.data.departed }}{% endif %}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# ── Contains (explicitly referenced) ── #}
+  {% if contains and contains.length %}
+    <div class="section-header" {% if author %}style="margin-top:8px;"{% endif %}>
+      <div class="section-title" style="font-size:13px;">Referenced</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ contains.length }} Soldier{% if contains.length != 1 %}s{% endif %}</div>
+    </div>
+    <div class="alongside-grid" style="margin-bottom:24px;">
+      {% for soldierSlug in contains %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == soldierSlug %}
+            <div class="alongside-card">
+              <a href="/soldiers/{{ soldierSlug }}/" style="text-decoration:none;">
+                <div class="alongside-photo">
+                  {% if s.data.profile_photo %}
+                    <img src="/soldiers/{{ soldierSlug }}/photos/profile/{{ s.data.profile_photo }}"
+                         alt="{{ s.data.first_name }} {{ s.data.last_name }}"
+                         style="width:100%;height:100%;object-fit:cover;"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <span style="display:none">{{ s.data.first_name[0] }}{{ s.data.last_name[0] }}</span>
+                  {% else %}
+                    {{ s.data.first_name[0] }}{{ s.data.last_name[0] }}
+                  {% endif %}
+                </div>
+              </a>
+              <div class="alongside-name">
+                <a href="/soldiers/{{ soldierSlug }}/" style="color:inherit;text-decoration:none;">
+                  {{ s.data.first_name }} {{ s.data.last_name }}
+                </a>
+              </div>
+              <div class="alongside-meta">{{ s.data.platoon }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# ── Tagged (also present) ── #}
+  {% if tagged and tagged.length %}
+    <div class="section-header" {% if author or (contains and contains.length) %}style="margin-top:8px;"{% endif %}>
+      <div class="section-title" style="font-size:13px;">Also present</div>
+      <div class="section-rule"></div>
+      <div class="section-meta">{{ tagged.length }} Soldier{% if tagged.length != 1 %}s{% endif %}</div>
+    </div>
+    <div class="alongside-grid">
+      {% for soldierSlug in tagged %}
+        {% for s in collections.soldiers %}
+          {% if s.data.slug == soldierSlug %}
+            <div class="alongside-card">
+              <a href="/soldiers/{{ soldierSlug }}/" style="text-decoration:none;">
+                <div class="alongside-photo">
+                  {% if s.data.profile_photo %}
+                    <img src="/soldiers/{{ soldierSlug }}/photos/profile/{{ s.data.profile_photo }}"
+                         alt="{{ s.data.first_name }} {{ s.data.last_name }}"
+                         style="width:100%;height:100%;object-fit:cover;"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <span style="display:none">{{ s.data.first_name[0] }}{{ s.data.last_name[0] }}</span>
+                  {% else %}
+                    {{ s.data.first_name[0] }}{{ s.data.last_name[0] }}
+                  {% endif %}
+                </div>
+              </a>
+              <div class="alongside-name">
+                <a href="/soldiers/{{ soldierSlug }}/" style="color:inherit;text-decoration:none;">
+                  {{ s.data.first_name }} {{ s.data.last_name }}
+                </a>
+              </div>
+              <div class="alongside-meta">{{ s.data.platoon }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
 </div>
 {% endif %}
-
-{# ── PROFILE CTA ── #}
-<div class="prof-cta">
-  <div>
-    <h3>Do You Have Additional Information About This Document?</h3>
-   <p>If you can identify the publication, confirm the date, or add context to this record, we would be grateful to hear from you.</p>
-
-</div>
-  <div class="prof-cta-btns">
-    <a class="land-cta" href="/contribute/">Submit Information</a>
-  </div>
-</div>
 
 {% include "partials/footer.njk" %}
 
 </main>
 
+{# ── LIGHTBOX (reuse site-wide component) ── #}
 <div class="lightbox" id="lightbox" onclick="lbClose(event)">
   <div class="lb-inner">
     <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
@@ -127,6 +289,38 @@
   </div>
 </div>
 
+<div class="toast" id="toastEl"></div>
+
 <script src="/assets/js/main.js"></script>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
+    tab.classList.add('active');
+    var target = document.getElementById('tab-' + tab.dataset.tab);
+    if (target) target.style.display = 'block';
+  });
+});
+
+function docShare() {
+  var url = window.location.href;
+  var title = {{ title | dump | safe }};
+  if (navigator.share) {
+    navigator.share({ title: title, url: url });
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      var toast = document.getElementById('toastEl');
+      if (toast) {
+        toast.textContent = 'Link copied';
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2000);
+      }
+    });
+  }
+}
+</script>
+
 </body>
-</html>   
+</html>

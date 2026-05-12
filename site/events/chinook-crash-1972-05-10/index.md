@@ -3,7 +3,7 @@ slug: chinook-crash-1972-05-10
 title: Chinook Crash — Loss of Skull Platoon
 status: draft
 
-date: 1972-05-10
+date: "1972-05-10"
 date_known: true
 
 location: RVN (specific site not yet confirmed)

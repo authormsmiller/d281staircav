@@ -1,9 +1,10 @@
 ---
 slug: crash-fsb-fontaine-1971-04-24
 title: UH-1H Crash at FSB Fontaine
-status: draft
+status: published
+type: crash
 
-date: 1971-04-24
+date: "1971-04-24"
 date_known: true
 
 location: FSB Fontaine, Long Khanh Province, RVN
@@ -57,6 +58,18 @@ related_events:
   - slug: memorial-colburn-2021
     relationship: commemorative
     note: Memorial service held in 2021 for Richard Colburn
+
+images:
+  - src: /soldiers/miller-marvin-dale/photos/field/events/042471-hueycrash3.jpg
+    caption: Immediate aftermath of the crash
+    credit: Marvin Dale Miller
+    credit_slug: miller-marvin-dale
+    date: "1971-04-24"
+  - src: /soldiers/miller-marvin-dale/photos/field/events/042471-hueycrash4.jpg
+    caption: The crashed Huey being lifted from the jungle by a Sikorsky Sky Crane
+    credit: Marvin Dale Miller
+    credit_slug: miller-marvin-dale
+    date: "1971-04-24"
 
 open_questions:
   - id: oq-01

@@ -1,9 +1,10 @@
 ---
 slug: chieu-hoi-fsb-fontaine-1971-05
 title: Chieu Hoi Rallier — Highway 331 Near FSB Fontaine
-status: draft
+status: published
+type: incident
 
-date: 1971-05
+date: "1971-05"
 date_known: false
 date_note: >
   Date confirmed as pre-August 4, 1971 by the presence of Dennis Alloway as

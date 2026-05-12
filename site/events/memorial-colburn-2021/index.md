@@ -3,7 +3,7 @@ slug: memorial-colburn-2021
 title: Memorial Service for Richard Colburn
 status: draft
 
-date: 2021
+date: "2021"
 date_known: false
 date_note: Year confirmed; specific date not known to this archive.
 
