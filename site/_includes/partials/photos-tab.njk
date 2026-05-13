@@ -1,0 +1,137 @@
+{#
+  Photos tab — reads from photosBySlug data file (Phase 4 crawler output)
+  Drop this into soldier.njk to replace the existing photos: array loop.
+
+  Usage in soldier.njk:
+    {% set soldierPhotos = photosBySlug[slug] %}
+    {% include "partials/photos-tab.njk" %}
+
+  Or inline (if not breaking into partials yet):
+    {% set soldierPhotos = photosBySlug[slug] %}
+    ... (this file's contents) ...
+
+  soldierPhotos shape (from photosBySlug.js):
+  {
+    profile: [ { filename, caption, caption_short, url, credit, date, event, contains, tagged } ],
+    field:   [ ... ],
+    "field/events": [ ... ]
+  }
+#}
+
+{% set soldierPhotos = photosBySlug[slug] %}
+
+{# -------------------------------------------------------------------------
+   Profile photo — first photo in profile subfolder, or fallback to initials
+   Used in hero section, not in the photos tab itself.
+   In Phase 5, remove profile_photo: from soldier front matter and use this.
+------------------------------------------------------------------------- #}
+{% if soldierPhotos and soldierPhotos.profile and soldierPhotos.profile.length %}
+  {% set resolvedProfilePhoto = soldierPhotos.profile[0].url %}
+{% elif profile_photo %}
+  {# Fallback: hand-set profile_photo field in soldier front matter #}
+  {% set resolvedProfilePhoto = "/media/photos/soldiers/" + slug + "/profile/" + profile_photo %}
+{% else %}
+  {% set resolvedProfilePhoto = null %}
+{% endif %}
+
+
+{# -------------------------------------------------------------------------
+   Photos tab content
+   Renders all photos from all subfolders in a grid.
+   Each card shows the image, caption_short, date, and event link if present.
+------------------------------------------------------------------------- #}
+{% if soldierPhotos %}
+
+  {# Flatten all photos from all subfolders into one array for the grid #}
+  {% set allPhotos = [] %}
+  {% if soldierPhotos.profile %}
+    {% for p in soldierPhotos.profile %}
+      {% set allPhotos = (allPhotos.push(p), allPhotos) %}
+    {% endfor %}
+  {% endif %}
+  {% if soldierPhotos.field %}
+    {% for p in soldierPhotos.field %}
+      {% set allPhotos = (allPhotos.push(p), allPhotos) %}
+    {% endfor %}
+  {% endif %}
+  {% if soldierPhotos["field/events"] %}
+    {% for p in soldierPhotos["field/events"] %}
+      {% set allPhotos = (allPhotos.push(p), allPhotos) %}
+    {% endfor %}
+  {% endif %}
+
+  {% if allPhotos.length %}
+  <div class="photo-grid">
+    {% for photo in allPhotos %}
+    <figure class="photo-card" data-subfolder="{{ photo.subfolder }}">
+      <a href="{{ photo.url }}"
+         class="photo-lightbox-trigger"
+         data-caption="{{ photo.caption | escape }}"
+         data-credit="{{ photo.credit | escape }}"
+         aria-label="View full size: {{ photo.caption_short or photo.filename }}">
+        <img
+          src="{{ photo.url }}"
+          alt="{{ photo.caption_short or photo.caption or photo.filename }}"
+          loading="lazy"
+        >
+      </a>
+      <figcaption>
+        {% if photo.caption_short %}
+          <span class="photo-caption-short">{{ photo.caption_short }}</span>
+        {% endif %}
+        {% if photo.date %}
+          <span class="photo-date">
+            {{- photo.date | replace("-00", "") -}}
+            {%- if not photo.date_known %}<abbr title="Approximate date"> ~</abbr>{% endif %}
+          </span>
+        {% endif %}
+        {% if photo.event %}
+          <a class="photo-event-link" href="/events/{{ photo.event }}/">View event</a>
+        {% endif %}
+        {% if photo.credit %}
+          <span class="photo-credit">{{ photo.credit }}</span>
+        {% endif %}
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-tab-message">No photos on file for this soldier.</p>
+  {% endif %}
+
+{% else %}
+  {#
+    Fallback: photosBySlug has no entry for this soldier.
+    This means either:
+    a) No photo index.md files exist yet (use old photos: array from front matter), or
+    b) Soldier has no photos at all.
+
+    During Phase 4/5 transition, fall back to the old photos: array.
+    Once all soldiers have index.md files, remove this fallback.
+  #}
+  {% if photos and photos.length %}
+  <div class="photo-grid photo-grid--legacy">
+    {% for photo in photos %}
+    <figure class="photo-card">
+      <a href="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder | default('field') }}/{{ photo.filename }}"
+         class="photo-lightbox-trigger"
+         data-caption="{{ photo.caption | escape }}"
+         aria-label="View full size: {{ photo.filename }}">
+        <img
+          src="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder | default('field') }}/{{ photo.filename }}"
+          alt="{{ photo.caption or photo.filename }}"
+          loading="lazy"
+        >
+      </a>
+      <figcaption>
+        {% if photo.caption %}
+          <span class="photo-caption-short">{{ photo.caption }}</span>
+        {% endif %}
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-tab-message">No photos on file for this soldier.</p>
+  {% endif %}
+{% endif %}

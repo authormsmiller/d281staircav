@@ -139,72 +139,135 @@
 
 {# ── TAB: PHOTOS ── #}
 <div class="tab-content" id="tab-photos" style="display:none">
-  {% if photos and photos.length %}
+
+  {#
+    Pull from crawler output first.
+    photosBySlug is keyed by soldier slug; each entry has subfolders as keys.
+    Flatten all subfolders into a single allPhotos array for the PHOTO_SLIDES
+    script and the gallery loops — same shape the old `photos` array had,
+    with `soldier_slug` added so cross-soldier lookups work.
+  #}
+  {% set crawlerEntry = photosBySlug[slug] %}
+  {% set allPhotos = [] %}
+  {% if crawlerEntry %}
+    {% if crawlerEntry.profile %}
+      {% for p in crawlerEntry.profile %}{% set allPhotos = (allPhotos.push(p), allPhotos) %}{% endfor %}
+    {% endif %}
+    {% if crawlerEntry.field %}
+      {% for p in crawlerEntry.field %}{% set allPhotos = (allPhotos.push(p), allPhotos) %}{% endfor %}
+    {% endif %}
+    {% if crawlerEntry["field/events"] %}
+      {% for p in crawlerEntry["field/events"] %}{% set allPhotos = (allPhotos.push(p), allPhotos) %}{% endfor %}
+    {% endif %}
+  {% else %}
+    {# Fallback: no index.md files yet — use old front matter photos array #}
+    {% set allPhotos = photos %}
+  {% endif %}
+
+  {% if allPhotos and allPhotos.length %}
+
     {% if photo_intro %}
       <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
     {% endif %}
 
+    {#
+      PHOTO_SLIDES — build from allPhotos.
+      url field comes from crawler; fall back to constructed path for legacy entries.
+    #}
     <script>
       var PHOTO_SLIDES = [
-        {% for photo in photos %}
+        {% for photo in allPhotos %}
         {
-          src: "/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}",
+          src: {{ (photo.url if photo.url else ("/media/photos/soldiers/" + slug + "/" + photo.subfolder + "/" + photo.filename)) | dump | safe }},
           caption: {{ (photo.caption or photo.caption_short or photo.filename) | dump | safe }},
           credit: {{ (photo.credit or "") | dump | safe }},
-          date: {{ (photo.date_approx or "") | dump | safe }}
+          date: {{ (photo.date or photo.date_approx or "") | dump | safe }}
         }{% if not loop.last %},{% endif %}
         {% endfor %}
       ];
     </script>
 
-    <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
-    <div class="photo-grid">
-      {% for photo in photos %}
-        {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
-          <div class="photo-card {{ 'wide' if photo.wide }}"
-               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-            <img src="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
-            <div class="photo-overlay">
-              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <div class="gallery-sublabel">Among His Brothers — Photographs Others Took of {{ first_name }}</div>
-    <div class="photo-grid">
-      {% for photo in photos %}
-        {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
-          <div class="photo-card {{ 'wide' if photo.wide }}"
-               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
-            <img src="/media/photos/soldiers/{{ slug }}/{{ photo.subfolder }}/{{ photo.filename }}" alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
-            <div class="photo-overlay">
-              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {# Also appears in — cross-soldier photos #}
-    {% set crossPhotos = [] %}
-    {% for photo in collections.allPhotos %}
-      {% if photo.contains and slug in photo.contains and photo.source_soldier_slug != slug %}
-        {% set crossPhotos = crossPhotos.concat([photo]) %}
+    {# ── Gallery 1: Photos he took ── #}
+    {% set tookPhotos = [] %}
+    {% for photo in allPhotos %}
+      {% if photo.photographer != "unknown-of" and photo.photographer != "known-of" %}
+        {% set tookPhotos = (tookPhotos.push(photo), tookPhotos) %}
       {% endif %}
     {% endfor %}
-    {% if crossPhotos.length %}
-      <div class="gallery-sublabel">Photographs by Fellow Soldiers</div>
+
+    {% if tookPhotos.length %}
+      <div class="gallery-sublabel">Through His Eyes — Photographs He Took</div>
       <div class="photo-grid">
-        {% for photo in crossPhotos %}
+        {% for photo in tookPhotos %}
+          {% set photoSrc = photo.url if photo.url else ("/media/photos/soldiers/" + slug + "/" + photo.subfolder + "/" + photo.filename) %}
           <div class="photo-card {{ 'wide' if photo.wide }}"
-               onclick="lb('/media/photos/soldiers/{{ photo.source_soldier_slug }}/{{ photo.subfolder }}/{{ photo.filename }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
-            <img src="/media/photos/soldiers/{{ photo.source_soldier_slug }}/{{ photo.subfolder }}/{{ photo.filename }}"
-                 alt="{{ photo.caption_short if photo.caption_short else photo.filename }}" loading="lazy">
+               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+            <img src="{{ photoSrc }}"
+                 alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
+                 loading="lazy">
             <div class="photo-overlay">
               <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
-              <div class="photo-cap-credit">From the {{ photo.source_soldier_name }} collection</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ── Gallery 2: Photos others took of him ── #}
+    {% set ofPhotos = [] %}
+    {% for photo in allPhotos %}
+      {% if photo.photographer == "unknown-of" or photo.photographer == "known-of" %}
+        {% set ofPhotos = (ofPhotos.push(photo), ofPhotos) %}
+      {% endif %}
+    {% endfor %}
+
+    {% if ofPhotos.length %}
+      <div class="gallery-sublabel">Among His Brothers — Photographs Others Took of {{ first_name }}</div>
+      <div class="photo-grid">
+        {% for photo in ofPhotos %}
+          {% set photoSrc = photo.url if photo.url else ("/media/photos/soldiers/" + slug + "/" + photo.subfolder + "/" + photo.filename) %}
+          <div class="photo-card {{ 'wide' if photo.wide }}"
+               onclick="lbOpen({{ loop.index0 }}, PHOTO_SLIDES)">
+            <img src="{{ photoSrc }}"
+                 alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
+                 loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ── Gallery 3: Cross-soldier photos (this soldier appears in another's collection) ── #}
+    {#
+      Sourced from photosBySlug._byContains[slug], which the crawler populates
+      at build time from all soldiers' index.md files.
+      _byContains is non-enumerable so it won't appear in template iteration,
+      but direct property access works fine.
+    #}
+    {% set crossPhotos = photosBySlug._byContains[slug] if photosBySlug._byContains else [] %}
+    {% set filteredCrossPhotos = [] %}
+    {% if crossPhotos %}
+      {% for photo in crossPhotos %}
+        {% if photo.soldier_slug != slug %}
+          {% set filteredCrossPhotos = (filteredCrossPhotos.push(photo), filteredCrossPhotos) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if filteredCrossPhotos.length %}
+      <div class="gallery-sublabel">Photographs by Fellow Soldiers</div>
+      <div class="photo-grid">
+        {% for photo in filteredCrossPhotos %}
+          <div class="photo-card {{ 'wide' if photo.wide }}"
+               onclick="lb('{{ photo.url }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
+            <img src="{{ photo.url }}"
+                 alt="{{ photo.caption_short if photo.caption_short else photo.filename }}"
+                 loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-cap-text">{{ photo.caption_short if photo.caption_short else photo.filename }}</div>
+              <div class="photo-cap-credit">From the {{ photo.soldier_slug | replace("-", " ") | title }} collection</div>
             </div>
           </div>
         {% endfor %}

@@ -12,7 +12,7 @@ source: "Walking Point, Issue 18, January 2013"
 status: draft
 contains:
   - guidara-frank
-  - martin-mike
+  - martin-michael
   - neal-bill
 tagged: []
 files: []
