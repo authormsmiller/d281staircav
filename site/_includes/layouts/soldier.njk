@@ -144,8 +144,7 @@
     Pull from crawler output first.
     photosBySlug is keyed by soldier slug; each entry has subfolders as keys.
     Flatten all subfolders into a single allPhotos array for the PHOTO_SLIDES
-    script and the gallery loops — same shape the old `photos` array had,
-    with `soldier_slug` added so cross-soldier lookups work.
+    script and the gallery loops.
   #}
   {% set crawlerEntry = photosBySlug[slug] %}
   {% set allPhotos = [] %}
@@ -164,16 +163,29 @@
     {% set allPhotos = photos %}
   {% endif %}
 
-  {% if allPhotos and allPhotos.length %}
+  {#
+    Cross-soldier photos — this soldier appears in another soldier's collection.
+    Sourced from photosBySlug.byContains[slug], built by the crawler across all
+    soldiers' index.md files. Runs independently of whether this soldier has
+    their own photos — a stub profile with no index.md can still show up here.
+  #}
+  {% set crossPhotos = [] %}
+  {% if photosBySlug.byContains and photosBySlug.byContains[slug] %}
+    {% for photo in photosBySlug.byContains[slug] %}
+      {% if photo.soldier_slug != slug %}
+        {% set crossPhotos = (crossPhotos.push(photo), crossPhotos) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if (allPhotos and allPhotos.length) or crossPhotos.length %}
 
     {% if photo_intro %}
       <p class="timeline-intro" style="font-style:italic;">{{ photo_intro }}</p>
     {% endif %}
 
-    {#
-      PHOTO_SLIDES — build from allPhotos.
-      url field comes from crawler; fall back to constructed path for legacy entries.
-    #}
+    {# PHOTO_SLIDES — includes own photos only (cross-photos use inline lb() call) #}
+    {% if allPhotos and allPhotos.length %}
     <script>
       var PHOTO_SLIDES = [
         {% for photo in allPhotos %}
@@ -238,28 +250,13 @@
         {% endfor %}
       </div>
     {% endif %}
+    {% endif %}{# end if allPhotos #}
 
-    {# ── Gallery 3: Cross-soldier photos (this soldier appears in another's collection) ── #}
-    {#
-      Sourced from photosBySlug._byContains[slug], which the crawler populates
-      at build time from all soldiers' index.md files.
-      _byContains is non-enumerable so it won't appear in template iteration,
-      but direct property access works fine.
-    #}
-    {% set crossPhotos = photosBySlug._byContains[slug] if photosBySlug._byContains else [] %}
-    {% set filteredCrossPhotos = [] %}
-    {% if crossPhotos %}
-      {% for photo in crossPhotos %}
-        {% if photo.soldier_slug != slug %}
-          {% set filteredCrossPhotos = (filteredCrossPhotos.push(photo), filteredCrossPhotos) %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
-    {% if filteredCrossPhotos.length %}
+    {# ── Gallery 3: Cross-soldier photos ── #}
+    {% if crossPhotos.length %}
       <div class="gallery-sublabel">Photographs by Fellow Soldiers</div>
       <div class="photo-grid">
-        {% for photo in filteredCrossPhotos %}
+        {% for photo in crossPhotos %}
           <div class="photo-card {{ 'wide' if photo.wide }}"
                onclick="lb('{{ photo.url }}','{{ photo.caption_short if photo.caption_short else photo.filename }}','{{ photo.credit }}')">
             <img src="{{ photo.url }}"

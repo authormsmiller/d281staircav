@@ -194,8 +194,8 @@ module.exports = function () {
 
   // Attach reverse lookup maps as non-enumerable properties
   // so templates can use photosBySlug._byContains["weaver-ken"]
-  Object.defineProperty(result, "_byContains", { value: byContains, enumerable: false });
-  Object.defineProperty(result, "_byTagged",   { value: byTagged,   enumerable: false });
+result.byContains = byContains;
+result.byTagged = byTagged;
 
-  return result;
+return result;
 };

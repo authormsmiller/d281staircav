@@ -9,7 +9,7 @@ export default {
     }
 
     // Everything else — pass through to static assets
-    return env.ASSETS.fetch(request);
+    return fetch("https://d281staircav.pages.dev" + url.pathname + url.search, request);
   },
 };
 
