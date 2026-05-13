@@ -35,6 +35,8 @@ tagged:
     note: |
       Photographer; likely present as escort or observer. Not named in the caption of his own photographs, but presence is probable given his Cat Platoon association and the photograph sequence.
   - davis-kirk
+  - hilts-doug
+  - weaver-ken
 images:
   - filename: HLMVietnam1971_0147positiveEdit.jpg
     caption: |
