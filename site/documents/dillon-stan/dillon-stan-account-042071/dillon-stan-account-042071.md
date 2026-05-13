@@ -1,12 +1,12 @@
 ---
 layout: layouts/document.njk
 slug: dillon-stan-account-042071
-title: "I Couldn't Find My Arm"
+title: I Couldn't Find My Arm
 type: account
 author: dillon-stan
 date: "1971-04-20"
 date_known: true
-source: "Written account submitted by SSG Stan Dillon"
+source: Written account submitted by SSG Stan Dillon
 status: draft
 event: contact-fsb-fontaine-1971-04-20
 contains:
@@ -28,6 +28,7 @@ contains:
     name: Capt. Bill Neal
   - slug: vollmar-tom
     name: Tom Vollmar
+  - cardwell-james
 tagged: []
 files: []
 permalink: /documents/dillon-stan/dillon-stan-account-042071/
