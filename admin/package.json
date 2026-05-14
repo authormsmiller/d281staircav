@@ -1,0 +1,16 @@
+{
+  "name": "d28-admin",
+  "version": "1.0.0",
+  "description": "D Co. 2/8 CAV Archive — admin tool",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "simple-git": "^3.22.0"
+  }
+}

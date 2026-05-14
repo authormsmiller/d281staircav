@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D Co. Archive — Admin</title>
+<style>
+  /* ── reset & tokens ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #1a1a18;
+    --paper:     #f5f0e8;
+    --cream:     #ede8da;
+    --rule:      #c8c0a8;
+    --yellow:    #e8c830;
+    --red:       #8b1a1a;
+    --green:     #2d6a2d;
+    --blue:      #1a3a5c;
+    --muted:     #6b6456;
+    --font-ui:   'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Crimson Pro', Georgia, serif;
+    --font-disp: 'Bebas Neue', 'Impact', sans-serif;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+  html, body {
+    height: 100%;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── layout ── */
+  .app {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    height: 100vh;
+  }
+
+  /* ── masthead ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 4px solid var(--yellow);
+  }
+  .masthead-title {
+    font-family: var(--font-disp);
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--yellow);
+  }
+  .masthead-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rule);
+  }
+
+  /* ── session bar ── */
+  .session-bar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+  }
+  .session-branch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--blue);
+  }
+  .session-branch::before {
+    content: '⎇';
+    font-size: 13px;
+  }
+  .session-changes {
+    color: var(--muted);
+    flex: 1;
+  }
+  .session-changes.has-changes { color: var(--red); font-weight: 500; }
+  .session-actions { display: flex; gap: 8px; }
+
+  /* ── tabs ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    padding: 0 20px;
+    background: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 18px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--paper); }
+  .tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+  .tab-btn.disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ── main content area ── */
+  .content {
+    overflow-y: auto;
+    padding: 24px 20px;
+    max-width: 860px;
+  }
+
+  /* ── panels ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── section headers ── */
+  .section-head {
+    font-family: var(--font-disp);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+    font-style: italic;
+  }
+
+  /* ── form ── */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 12px 16px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+  .form-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--muted);
+    padding-top: 8px;
+  }
+  .form-field { display: flex; flex-direction: column; gap: 4px; }
+  .form-hint { font-size: 11px; color: var(--muted); }
+
+  select, input[type="text"] {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--rule);
+    background: #fff;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--ink);
+    border-radius: 2px;
+    appearance: none;
+  }
+  select:focus, input:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 1px;
+  }
+
+  /* ── field-type pill ── */
+  .field-type-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .pill-array { background: #dbeafe; color: #1e40af; }
+  .pill-scalar { background: #fef3c7; color: #92400e; }
+
+  /* ── multi-select value list ── */
+  select[multiple] {
+    height: auto;
+    min-height: 120px;
+    padding: 4px;
+  }
+  select[multiple] option { padding: 4px 8px; border-radius: 2px; }
+  select[multiple] option:checked { background: var(--blue); color: #fff; }
+  .value-field.is-scalar select[multiple] { display: none; }
+  .value-field.is-scalar input[type="text"] { display: block; }
+  .value-field.is-multi input[type="text"] { display: none; }
+  .value-field.is-multi select[multiple] { display: block; }
+
+  /* ── action row ── */
+  .action-row { display: flex; gap: 10px; align-items: center; padding-top: 4px; flex-wrap: wrap; }
+
+  /* ── buttons ── */
+  .btn {
+    padding: 7px 16px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-primary:hover { background: var(--blue); border-color: var(--blue); }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: var(--rule); }
+  .btn-secondary:hover { background: var(--cream); }
+  .btn-danger { background: transparent; color: var(--red); border-color: var(--red); }
+  .btn-danger:hover { background: var(--red); color: #fff; }
+  .btn-commit { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-commit:hover { background: #1e4d1e; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── record preview ── */
+  .record-preview {
+    margin-top: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .preview-header {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preview-body { padding: 12px; }
+  .fm-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2px 12px;
+    font-size: 12px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--cream);
+  }
+  .fm-row:last-child { border-bottom: none; }
+  .fm-key { color: var(--muted); font-weight: 500; }
+  .fm-val { font-family: 'Courier New', monospace; word-break: break-all; }
+  .fm-val.is-array { color: var(--blue); }
+  .fm-val.is-empty { color: var(--rule); font-style: italic; }
+  .fm-val.just-changed { background: #fef9c3; border-radius: 2px; padding: 0 3px; }
+
+  /* ── changelog ── */
+  .changelog {
+    margin-top: 20px;
+  }
+  .changelog-head {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .changelog-entry {
+    padding: 8px 12px;
+    border-left: 3px solid var(--green);
+    background: #f0fdf0;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+  }
+  .changelog-entry.warn { border-color: var(--yellow); background: #fefce8; }
+
+  /* ── toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    z-index: 100;
+    max-width: 340px;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.error { background: var(--red); }
+  .toast.success { background: var(--green); }
+
+  /* ── commit modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 50;
+    display: none;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 24px;
+    width: 480px;
+    max-width: 95vw;
+  }
+  .modal h2 {
+    font-family: var(--font-disp);
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .modal textarea {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 12px;
+  }
+  .modal-changes {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 16px;
+    max-height: 160px;
+    overflow-y: auto;
+    color: var(--muted);
+  }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+  /* ── loading ── */
+  .loading { color: var(--muted); font-style: italic; font-size: 13px; }
+
+  /* ── separator ── */
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <span class="masthead-title">D Co. 2/8 CAV — Archive Admin</span>
+    <span class="masthead-sub">D28FirstAirCav</span>
+  </header>
+
+  <!-- Session bar -->
+  <div class="session-bar" id="sessionBar">
+    <span class="session-branch" id="branchName">loading…</span>
+    <span class="session-changes" id="changeCount">checking status…</span>
+    <div class="session-actions">
+      <button class="btn btn-commit" id="btnCommit" disabled onclick="openCommitModal()">Commit</button>
+      <button class="btn btn-secondary" id="btnPush" disabled onclick="pushBranch()">Push</button>
+    </div>
+  </div>
+
+  <!-- Tab nav -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('attach')">Attach Record</button>
+    <button class="tab-btn" onclick="switchTab('edit')">Edit Record</button>
+    <button class="tab-btn disabled" title="Coming soon">New Record</button>
+    <button class="tab-btn disabled" title="Coming soon">Todo / Flags</button>
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Tab 1: Attach Record -->
+    <div class="panel active" id="panel-attach">
+      <h1 class="section-head">Attach Record</h1>
+      <p class="section-desc">Connect a value to a front matter field. Array fields (contains, tagged…) append the value. Scalar fields (author, event…) set it.</p>
+
+      <div class="form-grid">
+
+        <label class="form-label">Record type</label>
+        <div class="form-field">
+          <select id="recType" onchange="onTypeChange()">
+            <option value="">— select type —</option>
+            <option value="document">Document</option>
+            <option value="soldier">Soldier</option>
+            <option value="event">Event</option>
+            <option value="anecdote">Anecdote</option>
+          </select>
+        </div>
+
+        <label class="form-label">Slug</label>
+        <div class="form-field">
+          <select id="recSlug" onchange="onSlugChange()" disabled>
+            <option value="">— select a type first —</option>
+          </select>
+          <span class="form-hint" id="slugHint"></span>
+        </div>
+
+        <label class="form-label">Field</label>
+        <div class="form-field">
+          <select id="recField" onchange="onFieldChange()">
+            <option value="">— select field —</option>
+          </select>
+          <span class="form-hint" id="fieldHint"></span>
+        </div>
+
+        <label class="form-label">Value</label>
+        <div class="form-field value-field is-scalar" id="valueField">
+          <input type="text" id="recValueScalar" placeholder="slug or string value" list="valueList">
+          <select multiple id="recValueMulti" size="6"></select>
+          <datalist id="valueList"></datalist>
+          <span class="form-hint" id="valueHint"></span>
+        </div>
+
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-primary" id="btnAttachContinue" onclick="doAttach('continue')" disabled>Attach &amp; Continue</button>
+        <button class="btn btn-primary" id="btnAttachDone" onclick="doAttach('done')" disabled>Done</button>
+        <button class="btn btn-danger" id="btnDetach" onclick="doDetach()" disabled style="margin-left: auto;">Detach</button>
+      </div>
+
+      <!-- Record preview -->
+      <div id="previewArea"></div>
+
+      <!-- Changelog for this session -->
+      <div class="changelog" id="changelogArea" style="display:none">
+        <div class="changelog-head">Changes this session</div>
+        <div id="changelogEntries"></div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Edit Record -->
+    <div class="panel" id="panel-edit">
+      <h1 class="section-head">Edit Record</h1>
+      <p class="section-desc">Select a record, choose a tab, pick a field. Current value shown on the left — enter new value on the right.</p>
+
+      <div class="form-grid">
+
+        <label class="form-label">Record type</label>
+        <div class="form-field">
+          <select id="editType" onchange="onEditTypeChange()">
+            <option value="">— select type —</option>
+            <option value="document">Document</option>
+            <option value="soldier">Soldier</option>
+            <option value="event">Event</option>
+            <option value="anecdote">Anecdote</option>
+          </select>
+        </div>
+
+        <label class="form-label">Slug</label>
+        <div class="form-field">
+          <select id="editSlug" onchange="onEditSlugChange()" disabled>
+            <option value="">— select a type first —</option>
+          </select>
+          <span class="form-hint" id="editSlugHint"></span>
+        </div>
+
+        <label class="form-label">Tab</label>
+        <div class="form-field">
+          <select id="editTab" onchange="onEditTabChange()" disabled>
+            <option value="">— select a record first —</option>
+          </select>
+        </div>
+
+        <label class="form-label">Field</label>
+        <div class="form-field">
+          <select id="editField" onchange="onEditFieldChange()" disabled>
+            <option value="">— select a tab first —</option>
+          </select>
+          <span class="form-hint" id="editFieldHint"></span>
+        </div>
+
+        <label class="form-label">Value</label>
+        <div class="form-field" id="editValueArea" style="display:none">
+          <!-- Scalar: current + new side by side -->
+          <div id="editScalarArea" style="display:none">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div>
+                <div id="editCurrentVal" style="padding:7px 10px;border:1px solid var(--rule);border-radius:2px;background:var(--cream);font-size:13px;font-family:'Courier New',monospace;min-height:32px;word-break:break-all;color:var(--muted);"></div>
+                <span class="form-hint" style="margin-top:3px;display:block;">Current value</span>
+              </div>
+              <div>
+                <input type="text" id="editNewVal" placeholder="New value…" list="editValueList">
+                <datalist id="editValueList"></datalist>
+                <span class="form-hint" style="margin-top:3px;display:block;">New value</span>
+              </div>
+            </div>
+          </div>
+          <!-- Array: current list + add new -->
+          <div id="editArrayArea" style="display:none">
+            <div style="margin-bottom:10px;">
+              <div class="form-hint" style="margin-bottom:4px;">Current entries — click to select for removal</div>
+              <div id="editArrayCurrent" style="border:1px solid var(--rule);border-radius:2px;background:var(--cream);min-height:40px;padding:6px;display:flex;flex-wrap:wrap;gap:4px;"></div>
+            </div>
+            <div>
+              <div class="form-hint" style="margin-bottom:4px;">Add entries</div>
+              <select multiple id="editArrayAdd" size="6" style="width:100%"></select>
+              <span class="form-hint" id="editArrayHint" style="margin-top:3px;display:block;"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="action-row" id="editActionRow" style="display:none">
+        <button class="btn btn-primary" id="btnEditApply" onclick="doEdit('continue')" disabled>Apply &amp; Continue</button>
+        <button class="btn btn-primary" id="btnEditDone" onclick="doEdit('done')" disabled>Done</button>
+        <button class="btn btn-danger" id="btnEditRemove" onclick="doRemove()" disabled style="margin-left:auto;display:none">Remove</button>
+      </div>
+
+      <div id="editPreviewArea"></div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Commit modal -->
+<div class="modal-overlay" id="commitModal">
+  <div class="modal">
+    <h2>Commit Changes</h2>
+    <div class="modal-changes" id="modalChangesList">Loading…</div>
+    <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;">Commit message</label>
+    <textarea id="commitMsg" placeholder="Describe what you changed…"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeCommitModal()">Cancel</button>
+      <button class="btn btn-commit" onclick="doCommit()">Commit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── state ──────────────────────────────────────────────────────────────────
+const API = '/api';
+let sessionData = null;
+let currentRecord = null;
+let sessionChangelog = [];
+let slugCache = {}; // type → [{slug, path}]
+
+// ── init ───────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  loadSession();
+  // Pre-load slug lists for autocomplete
+  ['soldier', 'document', 'event', 'anecdote'].forEach(t => prefetchSlugs(t));
+});
+
+async function loadSession() {
+  try {
+    const data = await api('GET', '/session');
+    sessionData = data;
+    document.getElementById('branchName').textContent = data.branch;
+    updateChangeCount(data.pendingCount);
+    if (data.branchCreated) {
+      toast(`Working branch created: ${data.branch}`, 'success');
+    }
+  } catch (e) {
+    document.getElementById('branchName').textContent = 'error';
+    document.getElementById('changeCount').textContent = 'Could not connect to admin server';
+  }
+}
+
+function updateChangeCount(n) {
+  const el = document.getElementById('changeCount');
+  el.textContent = n === 0 ? 'No uncommitted changes' : `${n} uncommitted change${n !== 1 ? 's' : ''}`;
+  el.className = 'session-changes' + (n > 0 ? ' has-changes' : '');
+  document.getElementById('btnCommit').disabled = n === 0;
+  // Only enable push after a commit (we check last commit in session data)
+  document.getElementById('btnPush').disabled = !sessionData?.lastCommit;
+}
+
+// ── slug prefetch ──────────────────────────────────────────────────────────
+async function prefetchSlugs(type) {
+  try {
+    const data = await api('GET', `/slugs?type=${type}`);
+    slugCache[type] = data;
+  } catch { /* ignore */ }
+}
+
+// ── tab 1: form interactions ───────────────────────────────────────────────
+function onTypeChange() {
+  const type = document.getElementById('recType').value;
+  const slugSelect = document.getElementById('recSlug');
+
+  slugSelect.innerHTML = '<option value="">— loading… —</option>';
+  slugSelect.disabled = true;
+  document.getElementById('slugHint').textContent = '';
+  clearPreview();
+  updateAttachButton();
+
+  if (!type) {
+    slugSelect.innerHTML = '<option value="">— select a type first —</option>';
+    return;
+  }
+
+  // If already cached, populate immediately
+  if (slugCache[type]?.length) {
+    populateSlugSelect(type);
+    return;
+  }
+
+  // Otherwise fetch then populate
+  fetch(`${API}/slugs?type=${type}`)
+    .then(r => r.json())
+    .then(data => { slugCache[type] = data; populateSlugSelect(type); })
+    .catch(() => {
+      slugSelect.innerHTML = '<option value="">— error loading slugs —</option>';
+    });
+}
+
+function populateSlugSelect(type) {
+  const slugSelect = document.getElementById('recSlug');
+  const items = slugCache[type] || [];
+  slugSelect.innerHTML = '<option value="">— select slug —</option>';
+  items.forEach(({ slug }) => {
+    const opt = document.createElement('option');
+    opt.value = slug;
+    opt.textContent = slug;
+    slugSelect.appendChild(opt);
+  });
+  slugSelect.disabled = false;
+  document.getElementById('slugHint').textContent = `${items.length} record${items.length !== 1 ? 's' : ''} available`;
+}
+
+function onSlugChange() {
+  const type = document.getElementById('recType').value;
+  const slug = document.getElementById('recSlug').value;
+
+  clearPreview();
+  updateAttachButton();
+
+  if (type && slug) loadPreview();
+}
+
+// ── field definitions by record type ──────────────────────────────────────
+const FIELDS_BY_TYPE = {
+  document: {
+    array:  ['contains', 'tagged', 'related_events'],
+    scalar: ['author', 'event', 'status', 'title', 'doc_type'],
+  },
+  soldier: {
+    array:  ['contains', 'tagged'],
+    scalar: ['status', 'rank', 'mos', 'platoon', 'hometown'],
+  },
+  event: {
+    array:  ['contains', 'tagged', 'casualties', 'related_events', 'accounts'],
+    scalar: ['status', 'title', 'location'],
+  },
+  anecdote: {
+    array:  ['contains', 'tagged'],
+    scalar: ['event', 'status', 'title'],
+  },
+};
+
+// Which array fields pull from which slug cache
+const ARRAY_FIELD_SOURCE = {
+  contains:       'soldier',
+  tagged:         'soldier',
+  casualties:     'soldier',
+  accounts:       'document',
+  related_events: 'event',
+};
+
+// Fixed option sets for scalar fields
+const SCALAR_OPTIONS = {
+  status: ['draft', 'published', 'redacted'],
+};
+
+function onTypeChange() {
+  const type = document.getElementById('recType').value;
+  const slugSelect = document.getElementById('recSlug');
+  const fieldSelect = document.getElementById('recField');
+
+  // Reset downstream
+  slugSelect.innerHTML = '<option value="">— loading… —</option>';
+  slugSelect.disabled = true;
+  fieldSelect.innerHTML = '<option value="">— select field —</option>';
+  document.getElementById('slugHint').textContent = '';
+  document.getElementById('fieldHint').textContent = '';
+  clearPreview();
+  resetValueField();
+  updateAttachButton();
+
+  if (!type) {
+    slugSelect.innerHTML = '<option value="">— select a type first —</option>';
+    return;
+  }
+
+  // Populate field select based on type
+  const fields = FIELDS_BY_TYPE[type];
+  if (fields) {
+    const arrGroup = document.createElement('optgroup');
+    arrGroup.label = 'Array fields (append)';
+    fields.array.forEach(f => { const o = new Option(f, f); arrGroup.appendChild(o); });
+    fieldSelect.appendChild(arrGroup);
+
+    const scalarGroup = document.createElement('optgroup');
+    scalarGroup.label = 'Scalar fields (set)';
+    fields.scalar.forEach(f => { const o = new Option(f, f); scalarGroup.appendChild(o); });
+    fieldSelect.appendChild(scalarGroup);
+  }
+
+  // Populate slug select
+  if (slugCache[type]?.length) {
+    populateSlugSelect(type);
+  } else {
+    fetch(`${API}/slugs?type=${type}`)
+      .then(r => r.json())
+      .then(data => { slugCache[type] = data; populateSlugSelect(type); })
+      .catch(() => { slugSelect.innerHTML = '<option value="">— error loading slugs —</option>'; });
+  }
+}
+
+function onFieldChange() {
+  const field = document.getElementById('recField').value;
+  const hint  = document.getElementById('fieldHint');
+  const vHint = document.getElementById('valueHint');
+  const vField = document.getElementById('valueField');
+  const multiSelect = document.getElementById('recValueMulti');
+  const scalarInput = document.getElementById('recValueScalar');
+
+  resetValueField();
+  if (!field) { hint.textContent = ''; updateAttachButton(); return; }
+
+  const type = document.getElementById('recType').value;
+  const isArr = FIELDS_BY_TYPE[type]?.array.includes(field);
+
+  hint.innerHTML = `<span class="field-type-pill ${isArr ? 'pill-array' : 'pill-scalar'}">${isArr ? 'array · appends' : 'scalar · overwrites'}</span>`;
+
+  if (isArr) {
+    vField.className = 'form-field value-field is-multi';
+    const source = ARRAY_FIELD_SOURCE[field];
+    if (source && slugCache[source]) {
+      multiSelect.innerHTML = '';
+      slugCache[source].forEach(({ slug }) => {
+        const o = new Option(slug, slug);
+        multiSelect.appendChild(o);
+      });
+      vHint.textContent = `Ctrl/Cmd+click to select multiple · ${slugCache[source].length} options`;
+    } else if (source) {
+      // Fetch if not cached
+      fetch(`${API}/slugs?type=${source}`)
+        .then(r => r.json())
+        .then(data => {
+          slugCache[source] = data;
+          multiSelect.innerHTML = '';
+          data.forEach(({ slug }) => { multiSelect.appendChild(new Option(slug, slug)); });
+          vHint.textContent = `Ctrl/Cmd+click to select multiple · ${data.length} options`;
+        });
+    }
+  } else {
+    vField.className = 'form-field value-field is-scalar';
+    scalarInput.value = '';
+    // Fixed options for known scalar fields
+    const datalist = document.getElementById('valueList');
+    datalist.innerHTML = '';
+    if (SCALAR_OPTIONS[field]) {
+      SCALAR_OPTIONS[field].forEach(v => datalist.appendChild(new Option(v, v)));
+      vHint.textContent = SCALAR_OPTIONS[field].join(' | ');
+    } else {
+      vHint.textContent = '';
+    }
+  }
+
+  updateAttachButton();
+}
+
+function resetValueField() {
+  document.getElementById('valueField').className = 'form-field value-field is-scalar';
+  document.getElementById('recValueScalar').value = '';
+  document.getElementById('recValueMulti').innerHTML = '';
+  document.getElementById('valueHint').textContent = '';
+  document.getElementById('valueList').innerHTML = '';
+}
+
+function getSelectedValues() {
+  const vField = document.getElementById('valueField');
+  if (vField.classList.contains('is-multi')) {
+    return Array.from(document.getElementById('recValueMulti').selectedOptions).map(o => o.value);
+  } else {
+    const v = document.getElementById('recValueScalar').value.trim();
+    return v ? [v] : [];
+  }
+}
+
+function updateAttachButton() {
+  const type  = document.getElementById('recType').value;
+  const slug  = document.getElementById('recSlug').value;
+  const field = document.getElementById('recField').value;
+  const hasAll = type && slug && field;
+  document.getElementById('btnAttachContinue').disabled = !hasAll;
+  document.getElementById('btnAttachDone').disabled = !hasAll;
+  document.getElementById('btnDetach').disabled = !hasAll;
+}
+
+// ── preview ────────────────────────────────────────────────────────────────
+async function loadPreview(highlightField = null) {
+  const type = document.getElementById('recType').value;
+  const slug = document.getElementById('recSlug').value.trim();
+  if (!type || !slug) return;
+
+  const area = document.getElementById('previewArea');
+  area.innerHTML = '<div class="record-preview"><div class="preview-body"><span class="loading">Loading record…</span></div></div>';
+
+  try {
+    const data = await api('GET', `/record?type=${type}&slug=${encodeURIComponent(slug)}`);
+    currentRecord = data;
+    renderPreview(data.data, data.filePath, highlightField);
+  } catch (e) {
+    area.innerHTML = `<div class="record-preview"><div class="preview-body" style="color:var(--red)">${e.message}</div></div>`;
+  }
+}
+
+function renderPreview(fm, filePath, highlightField) {
+  const skipKeys = ['layout', 'permalink'];
+  const rows = Object.entries(fm)
+    .filter(([k]) => !skipKeys.includes(k))
+    .map(([k, v]) => {
+      const isArr = Array.isArray(v);
+      const isEmpty = v === '' || v === null || v === undefined || (isArr && v.length === 0);
+      const display = isArr ? (v.length ? v.join(', ') : '(empty)') : (isEmpty ? '(empty)' : String(v));
+      const cls = `fm-val${isArr ? ' is-array' : ''}${isEmpty ? ' is-empty' : ''}${k === highlightField ? ' just-changed' : ''}`;
+      return `<div class="fm-row"><span class="fm-key">${k}</span><span class="${cls}">${escHtml(display)}</span></div>`;
+    }).join('');
+
+  const shortPath = filePath.replace(/^.*\/site\//, 'site/');
+  document.getElementById('previewArea').innerHTML = `
+    <div class="record-preview">
+      <div class="preview-header">
+        <span>Front matter preview</span>
+        <span style="font-family:monospace;font-weight:400">${escHtml(shortPath)}</span>
+      </div>
+      <div class="preview-body">${rows}</div>
+    </div>`;
+}
+
+function clearPreview() {
+  document.getElementById('previewArea').innerHTML = '';
+  currentRecord = null;
+}
+
+// ── attach / detach ────────────────────────────────────────────────────────
+async function doAttach(mode = 'done') {
+  const type  = document.getElementById('recType').value;
+  const slug  = document.getElementById('recSlug').value;
+  const field = document.getElementById('recField').value;
+  const values = getSelectedValues();
+
+  if (!values.length) { toast('Select at least one value to attach.', 'error'); return; }
+
+  let anyChanged = false;
+  const attached = [];
+
+  for (const value of values) {
+    try {
+      const result = await api('POST', '/attach', { type, slug, field, value });
+      if (result.changed) { anyChanged = true; attached.push(value); }
+    } catch (e) {
+      toast(`Error attaching "${value}": ${e.message}`, 'error');
+      return;
+    }
+  }
+
+  if (!anyChanged) {
+    toast('No changes — all values already present.', '');
+  } else {
+    const label = attached.join(', ');
+    toast(`Attached: ${field} ← ${label}`, 'success');
+    logChange(`ATTACH  ${type}:${slug}  ${field} ← ${label}`);
+    await loadPreview(field);
+    await refreshSessionStatus();
+  }
+
+  if (mode === 'continue') {
+    // Clear value only — keep type, slug, field
+    resetValueField();
+    onFieldChange(); // re-populate the value list
+  } else {
+    // Clear everything
+    document.getElementById('recType').value = '';
+    document.getElementById('recSlug').innerHTML = '<option value="">— select a type first —</option>';
+    document.getElementById('recSlug').disabled = true;
+    document.getElementById('recField').innerHTML = '<option value="">— select field —</option>';
+    document.getElementById('slugHint').textContent = '';
+    document.getElementById('fieldHint').textContent = '';
+    resetValueField();
+    clearPreview();
+    updateAttachButton();
+  }
+}
+
+async function doDetach() {
+  const type   = document.getElementById('recType').value;
+  const slug   = document.getElementById('recSlug').value;
+  const field  = document.getElementById('recField').value;
+  const values = getSelectedValues();
+
+  if (!values.length) { toast('Select at least one value to detach.', 'error'); return; }
+
+  const label = values.join(', ');
+  if (!confirm(`Remove "${label}" from ${field} on ${slug}?`)) return;
+
+  let anyChanged = false;
+  for (const value of values) {
+    try {
+      const result = await api('POST', '/detach', { type, slug, field, value });
+      if (result.changed) anyChanged = true;
+    } catch (e) {
+      toast(`Error detaching "${value}": ${e.message}`, 'error');
+      return;
+    }
+  }
+
+  if (!anyChanged) {
+    toast(`Values not found in ${field} — no change.`, '');
+  } else {
+    toast(`Detached: ${field} — ${label}`, 'success');
+    logChange(`DETACH  ${type}:${slug}  ${field} — ${label}`);
+    await loadPreview(field);
+    await refreshSessionStatus();
+  }
+}
+
+// ── session controls ───────────────────────────────────────────────────────
+async function refreshSessionStatus() {
+  try {
+    const data = await api('GET', '/session');
+    sessionData = data;
+    updateChangeCount(data.pendingCount);
+  } catch { /* ignore */ }
+}
+
+function openCommitModal() {
+  const changes = sessionData?.changes || [];
+  const listEl = document.getElementById('modalChangesList');
+  listEl.textContent = changes.length
+    ? changes.map(c => `${c.status}  ${c.path}`).join('\n')
+    : 'No changes tracked yet.';
+
+  // Generate a default message from session changelog
+  const msg = sessionChangelog.length
+    ? sessionChangelog.slice(0, 3).join('; ')
+    : 'Admin tool: front matter updates';
+  document.getElementById('commitMsg').value = msg;
+
+  document.getElementById('commitModal').classList.add('open');
+}
+
+function closeCommitModal() {
+  document.getElementById('commitModal').classList.remove('open');
+}
+
+async function doCommit() {
+  const message = document.getElementById('commitMsg').value.trim();
+  if (!message) { toast('Commit message required.', 'error'); return; }
+
+  try {
+    const result = await api('POST', '/session/commit', { message });
+    toast(`Committed: ${result.hash}`, 'success');
+    closeCommitModal();
+    sessionChangelog = [];
+    await refreshSessionStatus();
+    document.getElementById('btnPush').disabled = false;
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+async function pushBranch() {
+  if (!confirm(`Push ${sessionData?.branch} to origin?`)) return;
+  try {
+    const result = await api('POST', '/session/push', {});
+    toast(`Pushed: ${result.branch}`, 'success');
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+// ── changelog ──────────────────────────────────────────────────────────────
+function logChange(entry) {
+  sessionChangelog.push(entry);
+  const area = document.getElementById('changelogArea');
+  const entries = document.getElementById('changelogEntries');
+  area.style.display = 'block';
+  const div = document.createElement('div');
+  div.className = 'changelog-entry';
+  div.textContent = entry;
+  entries.insertBefore(div, entries.firstChild);
+}
+
+// ── tab switching ──────────────────────────────────────────────────────────
+function switchTab(name) {
+  const tabNames = ['attach', 'edit'];
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', tabNames[i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById(`panel-${name}`);
+  if (panel) panel.classList.add('active');
+}
+
+// ── edit record — field map ────────────────────────────────────────────────
+// Maps record type → tab label → array of { field, type, source? }
+// type: 'scalar' | 'array'
+// source: slug cache key to populate add-list (for array fields)
+const EDIT_TABS = {
+  document: {
+    'Record info': [
+      { field: 'title',       type: 'scalar' },
+      { field: 'status',      type: 'scalar', options: ['draft','published','redacted'] },
+      { field: 'date',        type: 'scalar' },
+      { field: 'date_known',  type: 'scalar', options: ['true','false'] },
+      { field: 'doc_type',    type: 'scalar' },
+      { field: 'author',     type: 'scalar', source: 'soldier' },
+      { field: 'archive_id',  type: 'scalar' },
+    ],
+    'Soldiers': [
+      { field: 'author',    type: 'scalar', source: 'soldier' },
+      { field: 'contains',  type: 'array',  source: 'soldier' },
+      { field: 'tagged',    type: 'array',  source: 'soldier' },
+    ],
+    'Source': [
+      { field: 'source_url',  type: 'scalar' },
+      { field: 'source_type', type: 'scalar' },
+    ],
+    'Images': [
+      { field: 'images', type: 'array' },
+    ],
+  },
+  event: {
+    'Record info': [
+      { field: 'title',      type: 'scalar' },
+      { field: 'status',     type: 'scalar', options: ['draft','published'] },
+      { field: 'date',       type: 'scalar' },
+      { field: 'date_known', type: 'scalar', options: ['true','false'] },
+      { field: 'location',   type: 'scalar' },
+      { field: 'type',       type: 'scalar' },
+    ],
+    'Soldiers': [
+      { field: 'contains',   type: 'array', source: 'soldier' },
+      { field: 'tagged',     type: 'array', source: 'soldier' },
+    ],
+    'Documents': [
+      { field: 'accounts',        type: 'array', source: 'document' },
+      { field: 'related_events',  type: 'array', source: 'event' },
+    ],
+    'Context': [
+      { field: 'date_note',       type: 'scalar' },
+      { field: 'location_note',   type: 'scalar' },
+    ],
+  },
+  soldier: {
+    'Record info': [
+      { field: 'title',     type: 'scalar' },
+      { field: 'status',    type: 'scalar', options: ['veteran','deceased','kia','researching'] },
+      { field: 'rank',      type: 'scalar' },
+      { field: 'mos',       type: 'scalar' },
+      { field: 'platoon',   type: 'scalar' },
+      { field: 'hometown',  type: 'scalar' },
+    ],
+  },
+  anecdote: {
+    'Record info': [
+      { field: 'title',      type: 'scalar' },
+      { field: 'status',     type: 'scalar', options: ['draft','published'] },
+      { field: 'archive_id', type: 'scalar' },
+    ],
+    'Soldiers': [
+      { field: 'contains', type: 'array', source: 'soldier' },
+      { field: 'tagged',   type: 'array', source: 'soldier' },
+    ],
+    'Source': [
+      { field: 'event', type: 'scalar', source: 'event' },
+    ],
+  },
+};
+
+// ── edit record — state ────────────────────────────────────────────────────
+let editRecord = null;       // current loaded record { data, filePath }
+let editFieldDef = null;     // current field definition { field, type, source?, options? }
+let editSelectedIndex = null; // for array remove — which index is selected
+
+// ── edit record — cascade ──────────────────────────────────────────────────
+function onEditTypeChange() {
+  const type = document.getElementById('editType').value;
+  const slugSel = document.getElementById('editSlug');
+  const tabSel  = document.getElementById('editTab');
+  const fieldSel = document.getElementById('editField');
+
+  slugSel.innerHTML = '<option value="">— loading… —</option>';
+  slugSel.disabled = true;
+  tabSel.innerHTML = '<option value="">— select a record first —</option>';
+  tabSel.disabled = true;
+  fieldSel.innerHTML = '<option value="">— select a tab first —</option>';
+  fieldSel.disabled = true;
+  hideEditValue();
+  editRecord = null;
+
+  if (!type) { slugSel.innerHTML = '<option value="">— select a type first —</option>'; return; }
+
+  const populate = (items) => {
+    slugSel.innerHTML = '<option value="">— select slug —</option>';
+    items.forEach(({ slug }) => slugSel.appendChild(new Option(slug, slug)));
+    slugSel.disabled = false;
+    document.getElementById('editSlugHint').textContent = `${items.length} record${items.length !== 1 ? 's' : ''} available`;
+  };
+
+  if (slugCache[type]?.length) { populate(slugCache[type]); return; }
+  fetch(`${API}/slugs?type=${type}`)
+    .then(r => r.json())
+    .then(d => { slugCache[type] = d; populate(d); })
+    .catch(() => { slugSel.innerHTML = '<option value="">— error loading slugs —</option>'; });
+}
+
+async function onEditSlugChange() {
+  const type = document.getElementById('editType').value;
+  const slug = document.getElementById('editSlug').value;
+  const tabSel = document.getElementById('editTab');
+  const fieldSel = document.getElementById('editField');
+
+  tabSel.innerHTML = '<option value="">— select tab —</option>';
+  tabSel.disabled = true;
+  fieldSel.innerHTML = '<option value="">— select a tab first —</option>';
+  fieldSel.disabled = true;
+  hideEditValue();
+  editRecord = null;
+  document.getElementById('editPreviewArea').innerHTML = '';
+
+  if (!type || !slug) return;
+
+  // Load the record
+  try {
+    const data = await api('GET', `/record?type=${type}&slug=${encodeURIComponent(slug)}`);
+    editRecord = data;
+    renderEditPreview(data.data, data.filePath);
+  } catch (e) {
+    toast(`Could not load record: ${e.message}`, 'error');
+    return;
+  }
+
+  // Populate tab dropdown
+  const tabs = EDIT_TABS[type];
+  if (tabs) {
+    Object.keys(tabs).forEach(tabName => tabSel.appendChild(new Option(tabName, tabName)));
+    tabSel.disabled = false;
+  }
+}
+
+function onEditTabChange() {
+  const type    = document.getElementById('editType').value;
+  const tabName = document.getElementById('editTab').value;
+  const fieldSel = document.getElementById('editField');
+
+  fieldSel.innerHTML = '<option value="">— select field —</option>';
+  fieldSel.disabled = true;
+  hideEditValue();
+  editFieldDef = null;
+
+  if (!tabName || !EDIT_TABS[type]?.[tabName]) return;
+
+  const fields = EDIT_TABS[type][tabName];
+  fields.forEach(f => fieldSel.appendChild(new Option(f.field, f.field)));
+  fieldSel.disabled = false;
+}
+
+async function onEditFieldChange() {
+  const type     = document.getElementById('editType').value;
+  const tabName  = document.getElementById('editTab').value;
+  const fieldKey = document.getElementById('editField').value;
+
+  hideEditValue();
+  editFieldDef = null;
+  editSelectedIndex = null;
+
+  if (!fieldKey) return;
+
+  const fields = EDIT_TABS[type]?.[tabName] || [];
+  editFieldDef = fields.find(f => f.field === fieldKey);
+  if (!editFieldDef) return;
+
+  const currentVal = editRecord?.data?.[fieldKey];
+  const hint = document.getElementById('editFieldHint');
+
+  document.getElementById('editValueArea').style.display = 'block';
+  document.getElementById('editActionRow').style.display = 'flex';
+
+  if (editFieldDef.type === 'scalar') {
+    document.getElementById('editScalarArea').style.display = 'block';
+    document.getElementById('editArrayArea').style.display = 'none';
+    document.getElementById('btnEditRemove').style.display = 'none';
+
+    // Show current value
+    const cur = document.getElementById('editCurrentVal');
+    cur.textContent = (currentVal === null || currentVal === undefined || currentVal === '')
+      ? '(empty)' : String(currentVal);
+
+    // Populate datalist for known options
+    const dl = document.getElementById('editValueList');
+    dl.innerHTML = '';
+    if (editFieldDef.options) {
+      editFieldDef.options.forEach(o => dl.appendChild(new Option(o, o)));
+      hint.textContent = editFieldDef.options.join(' | ');
+    } else if (editFieldDef.source && slugCache[editFieldDef.source]) {
+      slugCache[editFieldDef.source].forEach(({ slug }) => dl.appendChild(new Option(slug, slug)));
+      hint.textContent = `${editFieldDef.source} slug`;
+    } else {
+      hint.textContent = '';
+    }
+
+    document.getElementById('editNewVal').value = '';
+    document.getElementById('btnEditApply').disabled = false;
+    document.getElementById('btnEditDone').disabled = false;
+
+  } else {
+    // Array field
+    document.getElementById('editScalarArea').style.display = 'none';
+    document.getElementById('editArrayArea').style.display = 'block';
+    document.getElementById('btnEditRemove').style.display = 'block';
+    document.getElementById('btnEditRemove').disabled = true;
+
+    // Render current entries as removable chips
+    renderArrayCurrent(currentVal || []);
+
+    // Populate add-list
+    const addSel = document.getElementById('editArrayAdd');
+    addSel.innerHTML = '';
+    const source = editFieldDef.source;
+    if (source) {
+      const populate = (items) => {
+        items.forEach(({ slug }) => addSel.appendChild(new Option(slug, slug)));
+        document.getElementById('editArrayHint').textContent =
+          `Ctrl/Cmd+click to select multiple · ${items.length} options`;
+      };
+      if (slugCache[source]?.length) { populate(slugCache[source]); }
+      else {
+        fetch(`${API}/slugs?type=${source}`)
+          .then(r => r.json())
+          .then(d => { slugCache[source] = d; populate(d); });
+      }
+    }
+
+    hint.textContent = 'array field';
+    document.getElementById('btnEditApply').disabled = false;
+    document.getElementById('btnEditDone').disabled = false;
+  }
+}
+
+function renderArrayCurrent(arr) {
+  const container = document.getElementById('editArrayCurrent');
+  container.innerHTML = '';
+  editSelectedIndex = null;
+
+  if (!arr.length) {
+    container.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">(empty)</span>';
+    return;
+  }
+
+  arr.forEach((item, i) => {
+    const label = typeof item === 'object' ? (item.slug || JSON.stringify(item)) : String(item);
+    const chip = document.createElement('div');
+    chip.style.cssText = 'padding:3px 8px;border:1px solid var(--rule);border-radius:2px;font-size:12px;font-family:monospace;cursor:pointer;background:#fff;';
+    chip.textContent = label;
+    chip.dataset.index = i;
+    chip.onclick = () => {
+      container.querySelectorAll('div').forEach(c => c.style.background = '#fff');
+      chip.style.background = '#fee2e2';
+      chip.style.borderColor = 'var(--red)';
+      editSelectedIndex = i;
+      document.getElementById('btnEditRemove').disabled = false;
+    };
+    container.appendChild(chip);
+  });
+}
+
+function hideEditValue() {
+  document.getElementById('editValueArea').style.display = 'none';
+  document.getElementById('editActionRow').style.display = 'none';
+  document.getElementById('editScalarArea').style.display = 'none';
+  document.getElementById('editArrayArea').style.display = 'none';
+  document.getElementById('editFieldHint').textContent = '';
+  document.getElementById('btnEditApply').disabled = true;
+  document.getElementById('btnEditDone').disabled = true;
+}
+
+// ── edit record — actions ──────────────────────────────────────────────────
+async function doEdit(mode = 'done') {
+  const type  = document.getElementById('editType').value;
+  const slug  = document.getElementById('editSlug').value;
+  const field = editFieldDef?.field;
+
+  if (!field) return;
+
+  if (editFieldDef.type === 'scalar') {
+    const newVal = document.getElementById('editNewVal').value.trim();
+    if (!newVal) { toast('Enter a new value.', 'error'); return; }
+
+    try {
+      await api('POST', '/edit', { type, slug, field, value: newVal });
+      toast(`Updated: ${field} → ${newVal}`, 'success');
+      logChange(`EDIT  ${type}:${slug}  ${field} → "${newVal}"`);
+      const rec = await api('GET', `/record?type=${type}&slug=${encodeURIComponent(slug)}`);
+      editRecord = rec;
+      renderEditPreview(rec.data, rec.filePath);
+      document.getElementById('editCurrentVal').textContent = newVal;
+      document.getElementById('editNewVal').value = '';
+      await refreshSessionStatus();
+    } catch (e) { toast(e.message, 'error'); return; }
+
+  } else {
+    // Array — add selected items
+    const addSel = document.getElementById('editArrayAdd');
+    const toAdd = Array.from(addSel.selectedOptions).map(o => o.value);
+    if (!toAdd.length) { toast('Select at least one value to add.', 'error'); return; }
+
+    for (const value of toAdd) {
+      try {
+        await api('POST', '/attach', { type, slug, field, value });
+      } catch (e) { toast(`Error adding "${value}": ${e.message}`, 'error'); return; }
+    }
+    toast(`Added to ${field}: ${toAdd.join(', ')}`, 'success');
+    logChange(`EDIT  ${type}:${slug}  ${field} += ${toAdd.join(', ')}`);
+    const rec = await api('GET', `/record?type=${type}&slug=${encodeURIComponent(slug)}`);
+    editRecord = rec;
+    renderEditPreview(rec.data, rec.filePath);
+    renderArrayCurrent(rec.data[field] || []);
+    await refreshSessionStatus();
+  }
+
+  if (mode === 'done') {
+    document.getElementById('editType').value = '';
+    document.getElementById('editSlug').innerHTML = '<option value="">— select a type first —</option>';
+    document.getElementById('editSlug').disabled = true;
+    document.getElementById('editTab').innerHTML = '<option value="">— select a record first —</option>';
+    document.getElementById('editTab').disabled = true;
+    document.getElementById('editField').innerHTML = '<option value="">— select a tab first —</option>';
+    document.getElementById('editField').disabled = true;
+    document.getElementById('editSlugHint').textContent = '';
+    hideEditValue();
+    document.getElementById('editPreviewArea').innerHTML = '';
+    editRecord = null;
+    editFieldDef = null;
+  }
+}
+
+async function doRemove() {
+  const type  = document.getElementById('editType').value;
+  const slug  = document.getElementById('editSlug').value;
+  const field = editFieldDef?.field;
+
+  if (editSelectedIndex === null || editSelectedIndex === undefined) {
+    toast('Select an entry to remove.', 'error'); return;
+  }
+
+  const arr = editRecord?.data?.[field] || [];
+  const label = typeof arr[editSelectedIndex] === 'object'
+    ? (arr[editSelectedIndex].slug || JSON.stringify(arr[editSelectedIndex]))
+    : String(arr[editSelectedIndex]);
+
+  if (!confirm(`Remove "${label}" from ${field}?`)) return;
+
+  try {
+    await api('POST', '/remove-from-array', { type, slug, field, index: editSelectedIndex });
+    toast(`Removed "${label}" from ${field}`, 'success');
+    logChange(`REMOVE  ${type}:${slug}  ${field} − "${label}"`);
+    const rec = await api('GET', `/record?type=${type}&slug=${encodeURIComponent(slug)}`);
+    editRecord = rec;
+    renderEditPreview(rec.data, rec.filePath);
+    renderArrayCurrent(rec.data[field] || []);
+    editSelectedIndex = null;
+    document.getElementById('btnEditRemove').disabled = true;
+    await refreshSessionStatus();
+  } catch (e) { toast(e.message, 'error'); }
+}
+
+function renderEditPreview(fm, filePath) {
+  const skipKeys = ['layout', 'permalink'];
+  const rows = Object.entries(fm)
+    .filter(([k]) => !skipKeys.includes(k))
+    .map(([k, v]) => {
+      const isArr = Array.isArray(v);
+      const isEmpty = v === '' || v === null || v === undefined || (isArr && v.length === 0);
+      const display = isArr ? (v.length ? v.map(i => typeof i === 'object' ? (i.slug || JSON.stringify(i)) : i).join(', ') : '(empty)')
+                            : (isEmpty ? '(empty)' : String(v));
+      const cls = `fm-val${isArr ? ' is-array' : ''}${isEmpty ? ' is-empty' : ''}`;
+      return `<div class="fm-row"><span class="fm-key">${k}</span><span class="${cls}">${escHtml(display)}</span></div>`;
+    }).join('');
+
+  const shortPath = filePath.replace(/^.*\/site\//, 'site/');
+  document.getElementById('editPreviewArea').innerHTML = `
+    <div class="record-preview" style="margin-top:20px;">
+      <div class="preview-header">
+        <span>Front matter preview</span>
+        <span style="font-family:monospace;font-weight:400">${escHtml(shortPath)}</span>
+      </div>
+      <div class="preview-body">${rows}</div>
+    </div>`;
+}
+
+
+// ── utilities ──────────────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(API + path, opts);
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
+  return json;
+}
+
+let toastTimer;
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show${type ? ' ' + type : ''}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
