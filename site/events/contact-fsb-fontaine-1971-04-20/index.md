@@ -132,7 +132,6 @@ archivist_notes:
   sources:
     - 20Apr71_Cap_Neal_Deposition.docx
     - 20Apr71_Stan_Dillon_Deposition.docx
-    - 20Apr71_Col_Bacon_Deposition.docx
     - davis-kirk-account-042071.docx
     - interviewwithlindamartintranscript.pdf
 accounts:
