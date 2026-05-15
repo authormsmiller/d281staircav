@@ -1,55 +1,31 @@
 ---
 layout: layouts/soldier.njk
-title: Denny Alloway
+title: Dennis Alloway
 slug: alloway-denny
 breadcrumb: Denny Alloway
-
-# ── IDENTITY ──────────────────────────────────────
 first_name: Denny
 last_name: Alloway
-nickname: 
-middle_name: 
-rank: 
-mos: 
-platoon: "Cat Platoon"
-
-# ── SERVICE ───────────────────────────────────────
-arrived:
-departed:
-hometown:
+nickname: null
+middle_name: null
+rank: null
+mos: null
+platoon: Cat Platoon
+arrived: null
+departed: null
+hometown: null
 character_of_service: Honorable
 status: deceased
-
-# ── PROFILE PHOTO ─────────────────────────────────
-profile_photo:
-
-# ── DECORATIONS ───────────────────────────────────
-decorations:
-
-distinguished_decorations:
-
-# ── FAMILY CONTACT ────────────────────────────────
+profile_photo: null
+decorations: null
+distinguished_decorations: null
 family_contact: false
-
-# ── TIMELINE SOURCE NOTE ──────────────────────────
-timeline_source: >
+timeline_source: |
   Service timeline not yet compiled. If you served with or knew Denny Alloway, please use the contribute form to share what you remember.
-
-# ── SERVICE TIMELINE ──────────────────────────────
-timeline:
-
-# ── PHOTOS ────────────────────────────────────────
-photo_intro: >
+timeline: null
+photo_intro: |
   Photographs pending.
-
 wartime_content_notice: false
-
-photos:
-
-# ── DOCUMENTS ─────────────────────────────────────
-documents:
-
-# ── BROTHERS IN ARMS ──────────────────────────────
-brothers:
-
+photos: null
+documents: null
+brothers: null
 ---
