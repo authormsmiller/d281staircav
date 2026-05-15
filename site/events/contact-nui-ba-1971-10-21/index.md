@@ -2,34 +2,28 @@
 slug: contact-nui-ba-1971-10-21
 title: Contact at Nui Ba Mountains — Death of PFC Makowski
 status: draft
-
 date: "1971-10-21"
-date_end: 1971-10-22
+date_end: 1971-10-22T00:00:00.000Z
 date_known: true
-
 location: Nui Ba Mountains, RVN
-
 units:
   primary:
     - slug: d-co-2-8-cav
       name: D Company, 2nd Battalion, 8th Cavalry (Airmobile)
       role: Engaged; follow-through sweep of bunker complex day two
-
 platoons:
   - name: Range Platoon
     role: Lead element on contact; follow-through sweep October 22
-
 casualties:
   kia:
     - slug: makowski-william
       name: PFC William Makowski
-      date: 1971-10-21
+      date: 1971-10-21T00:00:00.000Z
       note: KIA in contact; FSB subsequently named Makowski in his honor
   wia:
     - name: Escue (first name unknown)
       role: Dog handler
       note: WIA; non-infantry specialist; first name not yet confirmed
-
 tagged:
   - slug: kutter-wolf
     name: Capt. Wolf Kutter
@@ -40,54 +34,41 @@ tagged:
   - slug: blais-dizzy
     name: Dizzy Blais
     note: RTO, Range Platoon; present October 21–22
-
 accounts:
   - slug: kutter-wolf-account-102171
     type: account
     status: draft
     access: restricted
     note: Unpublished memoir; not to be published without explicit authorization from Kutter or estate
-
 related_events:
   - slug: contact-nui-ba-1971-10-22
     relationship: continuation
     note: Follow-through sweep of bunker complex on October 22; record not yet created
-
 open_questions:
   - id: oq-01
     publish: true
-    question: >
-      PFC William Makowski was killed in contact on October 21, 1971 in the
-      Nui Ba Mountains. If you were with Range Platoon at that time, or knew
-      Makowski, we want to hear from you.
+    question: |
+      PFC William Makowski was killed in contact on October 21, 1971 in the Nui Ba Mountains. If you were with Range Platoon at that time, or knew Makowski, we want to hear from you.
   - id: oq-02
     publish: true
-    question: >
-      A dog handler named Escue was wounded in this engagement. We do not have
-      his first name or further information. If you can identify him, please
-      contact us.
+    question: |
+      A dog handler named Escue was wounded in this engagement. We do not have his first name or further information. If you can identify him, please contact us.
   - id: oq-03
     publish: false
-    question: >
-      Confirm FSB Makowski naming — was the fire support base formally named
-      after PFC Makowski, and when? Check battalion records.
+    question: |
+      Confirm FSB Makowski naming — was the fire support base formally named after PFC Makowski, and when? Check battalion records.
   - id: oq-04
     publish: false
-    question: >
-      Kutter memoir is the only account currently available for this event.
-      Locate and contact Hilts and Blais for independent accounts before
-      publishing this event record.
-
+    question: |
+      Kutter memoir is the only account currently available for this event. Locate and contact Hilts and Blais for independent accounts before publishing this event record.
 archivist_notes:
-  created: 2026-05-11
+  created: 2026-05-11T00:00:00.000Z
   session: 18
   sources:
     - kutter-wolf-account-102171
     - McGrew calendar Oct 21-22 and Oct 23
-  access_note: >
-    The Kutter memoir is the sole documentary source for this event at present.
-    It is permanently restricted and must not surface publicly in any form until
-    authorization is obtained. Draft status reflects this dependency.
+  access_note: |
+    The Kutter memoir is the sole documentary source for this event at present. It is permanently restricted and must not surface publicly in any form until authorization is obtained. Draft status reflects this dependency.
 ---
 
 ## Summary
