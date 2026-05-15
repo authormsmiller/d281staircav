@@ -2,6 +2,7 @@
 slug: contact-nui-ba-1971-10-21
 title: Contact at Nui Ba Mountains — Death of PFC Makowski
 status: published
+type: contact
 date: "1971-10-21"
 date_end: 1971-10-22T00:00:00.000Z
 date_known: true
@@ -24,6 +25,10 @@ casualties:
     - name: Escue (first name unknown)
       role: Dog handler
       note: WIA; non-infantry specialist; first name not yet confirmed
+    - slug: blais-dizzy
+      name: Jean Blais
+      role: RTO
+      note: WIA; hit by shrapnel
 tagged:
   - slug: kutter-wolf
     name: Capt. Wolf Kutter
@@ -69,6 +74,8 @@ archivist_notes:
     - McGrew calendar Oct 21-22 and Oct 23
   access_note: |
     The Kutter memoir is the sole documentary source for this event at present. It is permanently restricted and must not surface publicly in any form until authorization is obtained. Draft status reflects this dependency.
+contains:
+  - hilts-doug
 ---
 
 ## Summary
