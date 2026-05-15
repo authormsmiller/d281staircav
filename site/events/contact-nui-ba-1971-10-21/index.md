@@ -1,7 +1,7 @@
 ---
 slug: contact-nui-ba-1971-10-21
 title: Contact at Nui Ba Mountains — Death of PFC Makowski
-status: draft
+status: published
 date: "1971-10-21"
 date_end: 1971-10-22T00:00:00.000Z
 date_known: true

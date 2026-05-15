@@ -16,45 +16,6 @@ contains:
 tagged: []
 ---
 
----
-slug: kutter-wolf-commemoration-makowski-20211021
-title: "50th Year Commemoration of PFC William J. Makowski"
-layout: layouts/document.njk
-permalink: /documents/kutter-wolf/kutter-wolf-commemoration-makowski-20211021/
-
-type: essay
-subtype: commemoration
-
-author: kutter-wolf
-
-date: 2021-10-21
-date_known: true
-
-event: contact-nui-ba-1971-10-21
-
-status: published
-
-contains:
-  - makowski-william
-  - hilts-doug
-  - blais-dizzy
-  - blagg-thomas
-
-tagged:
-
-source: >
-  Speech delivered by Wolf D. Kutter at the gravesite of PFC William J. Makowski
-  on the 50th anniversary of his death, October 21, 2021.
-
-open_questions:
-  - Confirm slug for Jean "Dizzy" Blais — blais-dizzy currently nickname-only; real name now confirmed as Jean Blais, update slug to blais-jean
-  - Firebase Makowski — named in Makowski's honor per Kutter; document on event record
-  - Makowski's hometown — Kensington High School mentioned, Arcata Graphics; locate city
-  - Girlfriend "JoJo" — surname unknown
-  - Assistant Gunner on the M-60 — unnamed in text
-  - Contact date confirmed October 21 1971; confirm location coordinates for Nui Ba Mountain Range foothills, Binh Tuy Province
----
-
 Dear family members, neighbors, friends, fellow Vietnam Veterans, who are here to commemorate and mark the 50th anniversary when William John Makowski, "Bill," was killed in direct action with an enemy force in Binh Tuy Province, Republic of Vietnam on 21 October 1971.
 
 We stand here on very Hallowed Ground, this Field of Valor! Fifty-Five of our nations combat fallen have been laid here to rest. Bill Makowski was interred here on 28 October 1971 leaving behind a deeply bereaved mother and father — and two sisters. And he also left behind comrades in arms --- who immensely respected his valorous actions --- in the late afternoon/early evening hours of 21 October 1971.

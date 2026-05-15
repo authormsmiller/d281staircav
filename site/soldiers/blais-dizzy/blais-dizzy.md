@@ -1,13 +1,13 @@
 ---
 layout: layouts/soldier.njk
-title: Dizzy Blais
+title: Jean "Dizzy" Blais
 slug: blais-dizzy
 breadcrumb: Dizzy Blais
 
 # ── IDENTITY ──────────────────────────────────────
-first_name: Dizzy
+first_name: Jean
 last_name: Blais
-nickname: 
+nickname: Dizzy
 middle_name: 
 rank: 
 mos: 
@@ -27,7 +27,7 @@ profile_photo:
 decorations:
 
 distinguished_decorations:
-
+  - "Purple Heart"
 # ── FAMILY CONTACT ────────────────────────────────
 family_contact: false
 
