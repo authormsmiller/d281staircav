@@ -10,8 +10,8 @@ middle_name: null
 rank: null
 mos: null
 platoon: Range Platoon
-arrived: null
-departed: null
+arrived: August 1971
+departed: October 21, 1971 (KIA)
 hometown: Buffalo, NY
 character_of_service: Honorable
 status: kia
