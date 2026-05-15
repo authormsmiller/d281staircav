@@ -10,7 +10,6 @@ contains:
   - blagg-thomas
   - vitucci-stephen
   - kutter-wolf
-  - rosenberg-kenneth
 tagged: []
 ---
 

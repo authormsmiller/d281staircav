@@ -1,26 +1,26 @@
 ---
 layout: layouts/soldier.njk
-title: Dennis Alloway
-slug: alloway-denny
-breadcrumb: Dennis Alloway
-first_name: Dennis
-last_name: Alloway
+title: Wolf Kutter
+slug: kutter-wolf
+breadcrumb: Wolf Kutter
+first_name: Wolf
+last_name: Kutter
 nickname: null
 middle_name: null
-rank: null
+rank: CPT
 mos: null
-platoon: Cat Platoon
+platoon: HQ
 arrived: null
 departed: null
 hometown: null
 character_of_service: Honorable
-status: deceased
+status: researching
 profile_photo: null
 decorations: null
 distinguished_decorations: null
 family_contact: false
 timeline_source: |
-  Service timeline not yet compiled. If you served with or knew Dennis Alloway, please use the contribute form to share what you remember.
+  Service timeline not yet compiled. If you served with or knew Wolf Kutter, please use the contribute form to share what you remember.
 timeline: null
 photo_intro: |
   Photographs pending.

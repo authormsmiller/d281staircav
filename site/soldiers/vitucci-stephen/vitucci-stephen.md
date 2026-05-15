@@ -1,24 +1,24 @@
 ---
 layout: layouts/soldier.njk
-title: Ken Rosenberg
-slug: rosenberg-ken
-breadcrumb: Ken Rosenberg
+title: Stephen Vitucci
+slug: vitucci-stephen
+breadcrumb: Stephen Vitucci
 
 # ── IDENTITY ──────────────────────────────────────
-first_name: Ken
-last_name: Rosenberg
+first_name: Stephen
+last_name: Vitucci
 nickname: 
 middle_name: 
 rank: 
 mos: 
-platoon: ""
+platoon: 
 
 # ── SERVICE ───────────────────────────────────────
 arrived:
 departed:
-hometown:
+hometown: 
 character_of_service: Honorable
-status: kia
+status: researching
 
 # ── PROFILE PHOTO ─────────────────────────────────
 profile_photo:
@@ -33,7 +33,7 @@ family_contact: false
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
 timeline_source: >
-  Service timeline not yet compiled. If you served with or knew Ken Rosenberg, please use the contribute form to share what you remember.
+  Service timeline not yet compiled. If you served with or knew Stephen Vitucci, please use the contribute form to share what you remember.
 
 # ── SERVICE TIMELINE ──────────────────────────────
 timeline:
