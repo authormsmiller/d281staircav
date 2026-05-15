@@ -15,7 +15,7 @@ departed: null
 hometown: null
 character_of_service: Honorable
 status: researching
-profile_photo: null
+profile_photo: kutter-wolf-profile.jpg
 decorations: null
 distinguished_decorations: null
 family_contact: false

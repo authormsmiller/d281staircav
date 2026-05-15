@@ -1,17 +1,20 @@
 ---
 layout: layouts/soldier.njk
-title: LTC Thomas Blagg
-slug: blagg-thomas
-breadcrumb: Thomas Blagg
+title: Robin Woo
+slug: woo-robin
+breadcrumb: Robin Woo
+permalink: /soldiers/woo-robin/
+tags:
+  - soldier
 
 # ── IDENTITY ──────────────────────────────────────
-first_name: Thomas
-last_name: Blagg
+first_name: Robin
+last_name: Woo
 nickname: 
 middle_name: 
-rank: LTC
+rank: 
 mos: 
-platoon: 
+platoon: Skull
 
 # ── SERVICE ───────────────────────────────────────
 arrived:
@@ -21,7 +24,7 @@ character_of_service: Honorable
 status: researching
 
 # ── PROFILE PHOTO ─────────────────────────────────
-profile_photo: blagg-thomas-profile.jpg
+profile_photo:
 
 # ── DECORATIONS ───────────────────────────────────
 decorations:
@@ -33,7 +36,7 @@ family_contact: false
 
 # ── TIMELINE SOURCE NOTE ──────────────────────────
 timeline_source: >
-  Service timeline not yet compiled. If you served with or knew Thomas Blagg, please use the contribute form to share what you remember.
+  Service timeline not yet compiled. If you served with or knew Robin Woo, please use the contribute form to share what you remember.
 
 # ── SERVICE TIMELINE ──────────────────────────────
 timeline:
