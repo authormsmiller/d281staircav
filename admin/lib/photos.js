@@ -200,6 +200,16 @@ function getKnownEvents() {
 }
 
 // ---------------------------------------------------------------------------
+// YAML scalar helper — wraps a value in double quotes, escaping any
+// embedded backslashes and double quotes so the output is always valid YAML.
+// Use for any free-text field that could contain colons or special chars.
+// ---------------------------------------------------------------------------
+function yamlStr(val) {
+  const s = (val || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  return `"${s}"`;
+}
+
+// ---------------------------------------------------------------------------
 // Flush buffer to disk
 // Each entry in buffer: { filename, dest, eventSlug, caption, caption_short,
 //   credit, contains, tagged, quality, date, date_known }
@@ -210,10 +220,13 @@ async function flushBuffer(slug, buffer) {
   const soldiersDir = path.join(SITE_SOLDIERS, slug);
 
   // Group by destination
-  const byDest = { field: [], profile: [], event: {} };
+  // Profile entries use subjectSlug override if provided, otherwise fall back to folder slug
+  const byDest = { field: [], profile: {}, event: {} };
   for (const entry of buffer) {
     if (entry.dest === 'profile') {
-      byDest.profile.push(entry);
+      const subject = (entry.subjectSlug && entry.subjectSlug.trim()) ? entry.subjectSlug.trim() : slug;
+      if (!byDest.profile[subject]) byDest.profile[subject] = [];
+      byDest.profile[subject].push(entry);
     } else if (entry.dest === 'event') {
       const es = entry.eventSlug || 'unknown';
       if (!byDest.event[es]) byDest.event[es] = [];
@@ -226,9 +239,11 @@ async function flushBuffer(slug, buffer) {
   const results = { moved: [], written: [], errors: [] };
 
   // Helper: ensure dir, copy photo, append to index.md
-  async function processEntries(entries, photosSubdir) {
+  // targetSlug: optional override for which soldier folder to write into (for profile subject overrides)
+  async function processEntries(entries, photosSubdir, targetSlug) {
     if (!entries.length) return;
-    const destPhotoDir = path.join(soldiersDir, 'photos', photosSubdir);
+    const targetSoldiersDir = targetSlug ? path.join(SITE_SOLDIERS, targetSlug) : soldiersDir;
+    const destPhotoDir = path.join(targetSoldiersDir, 'photos', photosSubdir);
     await fsp.mkdir(destPhotoDir, { recursive: true });
     const indexPath = path.join(destPhotoDir, 'index.md');
 
@@ -250,11 +265,12 @@ async function flushBuffer(slug, buffer) {
         `  - filename: ${e.filename}`,
         `    caption: >`,
         `      ${(e.caption || '').replace(/\n/g, '\n      ')}`,
-        `    caption_short: ${e.caption_short || ''}`,
-        `    credit: "${e.credit || ''}"`,
+        `    caption_short: ${yamlStr(e.caption_short)}`,
+        `    credit: ${yamlStr(e.credit)}`,
+        `    photographer: ${yamlStr(e.photographer)}`,
         `    date: ${e.date || ''}`,
         `    date_known: ${e.date_known === true || e.date_known === 'true' ? 'true' : 'false'}`,
-        `    event: ""`,
+        `    event: ${e.eventSlug || '""'}`,
         `    quality: ${e.quality || ''}`,
         contains.length ? `    contains:\n${contains.map(c => `      - ${c}`).join('\n')}` : `    contains: []`,
         tagged.length ? `    tagged:\n${tagged.map(t => `      - ${t}`).join('\n')}` : `    tagged: []`,
@@ -266,7 +282,7 @@ async function flushBuffer(slug, buffer) {
 
     // Append to index.md or create it
     if (!fs.existsSync(indexPath)) {
-      const header = `---\nsolider: ${slug}\nsubfolder: ${photosSubdir}\nphotos:\n`;
+      const header = `---\nsoldier: ${targetSlug || slug}\nsubfolder: ${photosSubdir}\nphotos:\n`;
       await fsp.writeFile(indexPath, header + yamlBlocks.join('\n') + '\n---\n', 'utf-8');
     } else {
       // Insert before closing ---
@@ -284,7 +300,9 @@ async function flushBuffer(slug, buffer) {
   }
 
   await processEntries(byDest.field, 'field');
-  await processEntries(byDest.profile, 'profile');
+  for (const [subject, entries] of Object.entries(byDest.profile)) {
+    await processEntries(entries, 'profile', subject);
+  }
   for (const [eventSlug, entries] of Object.entries(byDest.event)) {
     await processEntries(entries, `field/events/${eventSlug}`);
   }
@@ -306,6 +324,18 @@ async function flushBuffer(slug, buffer) {
 // Register all routes
 // ---------------------------------------------------------------------------
 export function registerPhotosRoutes(app) {
+
+  // GET /api/photos/staging/:slug/image/:filename — serve a staging photo file
+  app.get('/api/photos/staging/:slug/image/:filename', (req, res) => {
+    try {
+      const { slug, filename } = req.params;
+      const filePath = path.join(STAGING_PHOTOS, slug, filename);
+      if (!fs.existsSync(filePath)) return res.status(404).json({ error: 'File not found' });
+      res.sendFile(filePath);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   // GET /api/photos/raw — list raw folders with counts
   app.get('/api/photos/raw', (req, res) => {

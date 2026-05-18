@@ -14,6 +14,8 @@ import { fileURLToPath } from 'url';
 import { resolvePath, listSlugs } from './lib/records.js';
 import { readRecord, attachValue, detachValue, writeRecord, isArrayField, isReadonlyField } from './lib/frontmatter.js';
 import { sessionStatus, ensureWorkingBranch, commitChanges, pushBranch } from './lib/session.js';
+import { registerPhotosRoutes } from './lib/photos.js';
+import registerTodoRoutes from './lib/todo.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -250,6 +252,14 @@ app.post('/api/remove-from-array', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// ─── tab 4: photo intake ──────────────────────────────────────────────────────
+
+registerPhotosRoutes(app);
+
+// ─── tab 5: todo / flags ──────────────────────────────────────────────────────
+
+registerTodoRoutes(app);
 
 // ─── start ────────────────────────────────────────────────────────────────────
 
