@@ -11,7 +11,7 @@ nickname:
 middle_name: 
 rank: LTC
 mos: 
-platoon: 
+platoon: HQ
 
 # ── SERVICE ───────────────────────────────────────
 arrived:
