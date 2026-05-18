@@ -104,30 +104,105 @@
 
 {# ── TAB: TIMELINE ── #}
 <div class="tab-content" id="tab-timeline">
-  {% if timeline and timeline.length %}
+  {# ── Build event-injected entries from collections.events ── #}
+  {% set injectedEvents = [] %}
+  {% for event in collections.events %}
+    {% if event.data.status == "published" %}
+      {% set matched = false %}
+      {% set matchTier = "" %}
+
+      {# Check casualties (all sub-arrays) #}
+      {% if event.data.casualties %}
+        {% for tier in ["kia","dow","wia","mia"] %}
+          {% if event.data.casualties[tier] %}
+            {% for p in event.data.casualties[tier] %}
+              {% set pSlug = p.slug if p.slug else p %}
+              {% if pSlug == slug %}{% set matched = true %}{% set matchTier = "casualty" %}{% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {# Check contains #}
+      {% if event.data.contains %}
+        {% for p in event.data.contains %}
+          {% set pSlug = p.slug if p.slug else p %}
+          {% if pSlug == slug %}{% set matched = true %}{% set matchTier = "confirmed" %}{% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {# Check tagged #}
+      {% if event.data.tagged %}
+        {% for p in event.data.tagged %}
+          {% set pSlug = p.slug if p.slug else p %}
+          {% if pSlug == slug %}{% set matched = true %}{% set matchTier = "probable" %}{% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if matched %}
+        {% set injectedEvents = (injectedEvents.push({
+          date: event.data.date,
+          headline: event.data.title,
+          body: event.data.location if event.data.location else "",
+          type: "event",
+          tier: matchTier,
+          url: event.url
+        }), injectedEvents) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% set hasTimeline = (timeline and timeline.length) or injectedEvents.length %}
+
+  {% if hasTimeline %}
     {% if timeline_source %}
       <p class="timeline-intro">{{ timeline_source }}</p>
     {% endif %}
     <div class="tl">
-      {% for entry in timeline %}
+
+      {# ── Hand-authored timeline entries ── #}
+      {% if timeline and timeline.length %}
+        {% for entry in timeline %}
+          <div class="tl-entry">
+            <div class="tl-dot {{ entry.type | default('move') }}"></div>
+            <div class="tl-date">{{ entry.date }}</div>
+            {% if entry.tags %}
+              {% for tag in entry.tags %}
+                <span class="tl-tag tl-tag-{{ tag.type }}">{{ tag.label }}</span>
+              {% endfor %}
+            {% endif %}
+            <div class="tl-hed">{{ entry.headline }}</div>
+            <div class="tl-body">{{ entry.body }}</div>
+            {% if entry.source_notice %}
+              <div class="source-notice">
+                <div class="sn-head">⚠ Source Notice — Multiple Accounts Exist</div>
+                <div class="sn-body">{{ entry.source_notice }}</div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {# ── Event-injected entries ── #}
+      {% for evt in injectedEvents %}
         <div class="tl-entry">
-          <div class="tl-dot {{ entry.type | default('move') }}"></div>
-          <div class="tl-date">{{ entry.date }}</div>
-          {% if entry.tags %}
-            {% for tag in entry.tags %}
-              <span class="tl-tag tl-tag-{{ tag.type }}">{{ tag.label }}</span>
-            {% endfor %}
-          {% endif %}
-          <div class="tl-hed">{{ entry.headline }}</div>
-          <div class="tl-body">{{ entry.body }}</div>
-          {% if entry.source_notice %}
-            <div class="source-notice">
-              <div class="sn-head">⚠ Source Notice — Multiple Accounts Exist</div>
-              <div class="sn-body">{{ entry.source_notice }}</div>
-            </div>
+          <div class="tl-dot event"></div>
+          <div class="tl-date">{{ evt.date }}</div>
+          <span class="tl-tag tl-tag-{{ evt.tier }}">
+            {% if evt.tier == "casualty" %}Casualty record
+            {% elif evt.tier == "confirmed" %}Confirmed present
+            {% else %}Probably present
+            {% endif %}
+          </span>
+          <div class="tl-hed">
+            <a href="{{ evt.url }}" style="color:inherit;">{{ evt.headline }}</a>
+          </div>
+          {% if evt.body %}
+            <div class="tl-body">{{ evt.body }}</div>
           {% endif %}
         </div>
       {% endfor %}
+
     </div>
   {% else %}
     <div class="tab-empty">
@@ -136,7 +211,6 @@
     </div>
   {% endif %}
 </div>
-
 {# ── TAB: PHOTOS ── #}
 <div class="tab-content" id="tab-photos" style="display:none">
 

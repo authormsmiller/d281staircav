@@ -357,7 +357,7 @@ permalink: /roster/
     <tbody>
 
       {# ── Soldiers with full profiles ── #}
-      {% for soldier in collections.soldiers | sort(false, false, 'data.last_name') %}
+      {% for soldier in collections.soldiers %}
         {% set s = soldier.data %}
         {% set platoonKey = s.platoon | lower %}
         {% set isDim = s.status == "researching" %}

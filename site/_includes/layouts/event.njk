@@ -183,16 +183,17 @@
     <div class="alongside-grid" style="margin-bottom:24px;">
       {% for person in casualties.kia %}
         {% set soldierRecord = null %}
+        {% set personSlug = person.slug if person.slug else person %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo" style="border-color:#8B1A1A;">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -203,7 +204,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -214,7 +215,7 @@
             <div class="alongside-photo evt-no-record" style="border-color:#8B1A1A;">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}
@@ -233,15 +234,15 @@
       {% for person in casualties.dow %}
         {% set soldierRecord = null %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo" style="border-color:#8B1A1A;">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -252,7 +253,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -263,7 +264,7 @@
             <div class="alongside-photo evt-no-record" style="border-color:#8B1A1A;">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}
@@ -282,15 +283,15 @@
       {% for person in casualties.wia %}
         {% set soldierRecord = null %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -301,7 +302,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -312,7 +313,7 @@
             <div class="alongside-photo evt-no-record">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}
@@ -334,15 +335,15 @@
       {% for person in casualties.mia %}
         {% set soldierRecord = null %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -353,7 +354,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -364,7 +365,7 @@
             <div class="alongside-photo evt-no-record">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}
@@ -381,17 +382,18 @@
     </div>
     <div class="alongside-grid" style="margin-bottom:24px;">
       {% for person in contains %}
+        {% set personSlug = person.slug if person.slug else person %}
         {% set soldierRecord = null %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -402,7 +404,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -413,7 +415,7 @@
             <div class="alongside-photo evt-no-record">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}
@@ -430,17 +432,18 @@
     </div>
     <div class="alongside-grid">
       {% for person in tagged %}
+        {% set personSlug = person.slug if person.slug else person %}
         {% set soldierRecord = null %}
         {% for s in collections.soldiers %}
-          {% if s.data.slug == person.slug %}{% set soldierRecord = s %}{% endif %}
+          {% if s.data.slug == personSlug %}{% set soldierRecord = s %}{% endif %}
         {% endfor %}
 
         {% if soldierRecord %}
           <div class="alongside-card">
-            <a href="/soldiers/{{ person.slug }}/" style="text-decoration:none;">
+            <a href="/soldiers/{{ personSlug }}/" style="text-decoration:none;">
               <div class="alongside-photo">
                 {% if soldierRecord.data.profile_photo %}
-                  <img src="/soldiers/{{ person.slug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
+                  <img src="/soldiers/{{ personSlug }}/photos/profile/{{ soldierRecord.data.profile_photo }}"
                        alt="{{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}"
                        style="width:100%;height:100%;object-fit:cover;"
                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -451,7 +454,7 @@
               </div>
             </a>
             <div class="alongside-name">
-              <a href="/soldiers/{{ person.slug }}/" style="color:inherit;text-decoration:none;">
+              <a href="/soldiers/{{ personSlug }}/" style="color:inherit;text-decoration:none;">
                 {{ soldierRecord.data.first_name }} {{ soldierRecord.data.last_name }}
               </a>
             </div>
@@ -462,7 +465,7 @@
             <div class="alongside-photo evt-no-record">
               {{ person.name | truncate(2, true, "") if person.name else "?" }}
             </div>
-            <div class="alongside-name">{{ person.name if person.name else person.slug }}</div>
+            <div class="alongside-name">{{ person.name if person.name else personSlug }}</div>
             <div class="alongside-meta">{{ person.note if person.note }}</div>
           </div>
         {% endif %}

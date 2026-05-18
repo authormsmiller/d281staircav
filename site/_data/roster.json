@@ -330,7 +330,7 @@
     "contact": { "name": "", "relation": "" }
   },
   {
-    "last_name": "III",
+    "last_name": "Trumbull III",
     "first_name": "Aaron",
     "nickname": "",
     "rank": "",
@@ -383,17 +383,6 @@
     "status": "researching",
     "share_contact": false,
     "contact": { "name": "", "relation": "" }
-  },
-  {
-    "last_name": "Kutter",
-    "first_name": "Wolf",
-    "nickname": "",
-    "rank": "CAPT",
-    "years": "71-72",
-    "platoon": "Skipper 6",
-    "status": "veteran",
-    "share_contact": false,
-    "contact": { "name": "Wolf Kutter", "relation": "" }
   },
   {
     "last_name": "Lockhart",

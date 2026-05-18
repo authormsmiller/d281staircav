@@ -3,13 +3,10 @@ slug: contact-fsb-fontaine-1971-04-20
 title: Enemy Contact Near FSB Fontaine
 status: published
 type: contact
-
 date: "1971-04-20"
-date_end: 1971-04-23
+date_end: 1971-04-23T00:00:00.000Z
 date_known: true
-
 location: Near FSB Fontaine, Long Khanh Province, RVN
-
 units:
   primary:
     - slug: d-co-2-8-cav
@@ -26,32 +23,30 @@ units:
       role: Close air support, late afternoon; 500-lb bombs on bunker complex
     - name: Skull Platoon (D Co.)
       role: Choppered in as reinforcement after engagement
-
 platoons:
   - name: Range Platoon
     role: Lead element; ambushed on north bank of stream
   - name: Cat Platoon
     role: South bank; fire support and medevac coordination during withdrawal
-
 casualties:
   kia:
     - slug: cardwell-james
       name: CPL James Melvin Cardwell
-      date: 1971-04-20
+      date: 1971-04-20T00:00:00.000Z
       note: Walking point with Drinkard; killed by Chicom mine blast
     - slug: drinkard-danny
       name: CPL Danny George Drinkard
-      date: 1971-04-20
+      date: 1971-04-20T00:00:00.000Z
       note: Walking point with Cardwell; killed by Chicom mine blast
     - slug: hall-joseph
       name: CPL Joseph Lindsey Hall
-      date: 1971-04-20
+      date: 1971-04-20T00:00:00.000Z
       note: Moved forward from rear of column to assist Dillon; killed covering the withdrawal
   dow:
     - slug: sargent-stan
       name: PFC Stanton Gerald Sargent
-      date_wounded: 1971-04-20
-      date_of_death: 1971-04-21
+      date_wounded: 1971-04-20T00:00:00.000Z
+      date_of_death: 1971-04-21T00:00:00.000Z
       note: Severely wounded by Chicom mine; medevaced; died April 21
   wia:
     - slug: dillon-stan
@@ -71,9 +66,8 @@ casualties:
       note: Took over M60 from Schneck; carried Dillon across stream; among last to cross
     - slug: vollmar-tom
       name: Tom Vollmar
-      note: Role unconfirmed — source document not yet identified; do not create record until verified   
+      note: Role unconfirmed — source document not yet identified; do not create record until verified
   wia_count_note: Approximately 15 WIA total per multiple accounts; only named individuals above confirmed from sources
-
 tagged:
   - slug: marr-bill
     name: Bill Marr
@@ -90,7 +84,6 @@ tagged:
   - slug: martin-michael
     name: LT Michael Martin
     note: Skull Platoon leader; took command of perimeter defense after reinforcement
-
 citations:
   - slug: hall-joseph
     award: unknown
@@ -104,63 +97,45 @@ citations:
     award: unknown
     status: unconfirmed
     note: Actions consistent with valor citation; no award documentation found
-
 related_events:
   - slug: crash-fsb-fontaine-1971-04-24
     relationship: causal
     note: UH-1H crash four days later occurred in context of post-contact operations; FSB subsequently renamed Fanning
-
 open_questions:
   - id: oq-01
     publish: true
-    question: >
-      The three KIA — Cardwell, Drinkard, and Hall — could not be recovered
-      from the ambush site on April 20. McGrew's calendar places a CA to
-      Fontaine on April 23, corroborating recovery, but no source explicitly
-      documents that mission. If you were there or know what happened, we want
-      to hear from you.
+    question: |
+      The three KIA — Cardwell, Drinkard, and Hall — could not be recovered from the ambush site on April 20. McGrew's calendar places a CA to Fontaine on April 23, corroborating recovery, but no source explicitly documents that mission. If you were there or know what happened, we want to hear from you.
   - id: oq-02
     publish: true
-    question: >
-      Hall, Collins, and Schneck all performed actions that multiple accounts
-      describe in terms consistent with valor citations. We have found no
-      award documentation for any of them. If you have copies of citations or
-      know what awards were issued for April 20, 1971, please contact us.
+    question: |
+      Hall, Collins, and Schneck all performed actions that multiple accounts describe in terms consistent with valor citations. We have found no award documentation for any of them. If you have copies of citations or know what awards were issued for April 20, 1971, please contact us.
   - id: oq-03
     publish: false
-    question: >
-      Can the ambush site be mapped? Bacon's description — stream, flat
-      heavily vegetated terrain, north of HWY 1, Long Khanh Province — may
-      be sufficient to identify it on period maps. Check against 1971
-      topographic maps and aerial imagery at NARA.
+    question: |
+      Can the ambush site be mapped? Bacon's description — stream, flat heavily vegetated terrain, north of HWY 1, Long Khanh Province — may be sufficient to identify it on period maps. Check against 1971 topographic maps and aerial imagery at NARA.
   - id: oq-04
     publish: false
-    question: >
-      Was the bunker complex subsequently swept or occupied? Multiple sources
-      confirm it was bombarded through the night of 4/20–21. Check
-      battalion logs and after-action reports via NARA.
+    question: |
+      Was the bunker complex subsequently swept or occupied? Multiple sources confirm it was bombarded through the night of 4/20–21. Check battalion logs and after-action reports via NARA.
   - id: oq-05
     publish: false
-    question: >
-      Tom Vollmar appears in the testing brief as having crossed the stream
-      under fire with a medical kit. The originating source has not been
-      identified. Do not create his soldier record until this is confirmed.
+    question: |
+      Tom Vollmar appears in the testing brief as having crossed the stream under fire with a medical kit. The originating source has not been identified. Do not create his soldier record until this is confirmed.
   - id: oq-06
     publish: false
-    question: >
-      Wayne Robinson is mentioned by Davis as having given a disputed account
-      of the initial contact. Has his account been collected? Check ASA roster
-      for contact information.
-
+    question: |
+      Wayne Robinson is mentioned by Davis as having given a disputed account of the initial contact. Has his account been collected? Check ASA roster for contact information.
 archivist_notes:
-  created: 2026-05-11
+  created: 2026-05-11T00:00:00.000Z
   session: 16
   sources:
     - 20Apr71_Cap_Neal_Deposition.docx
     - 20Apr71_Stan_Dillon_Deposition.docx
-    - 20Apr71_Col_Bacon_Deposition.docx
     - davis-kirk-account-042071.docx
     - interviewwithlindamartintranscript.pdf
+accounts:
+  - bacon-wg-account-042071
 ---
 
 ## Summary
