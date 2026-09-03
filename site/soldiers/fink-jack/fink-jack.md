@@ -15,8 +15,8 @@ birth_year: null
 rank: null
 mos: null
 platoon: Range
-arrived: null
-departed: null
+arrived: ""
+departed: 1971-07
 character_of_service: Honorable
 status: researching
 hometown: null
