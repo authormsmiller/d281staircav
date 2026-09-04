@@ -49,8 +49,8 @@ casualties:
       note: >
         Davis believes Marr was also medevaced ("I believe Bill Marr was
         too") but states it with less certainty than Hall's case. Unconfirmed.
-    - slug: bedsole-jim
-      name: Capt. Jim Bedsole
+    - slug: snyder-albert
+      name: Capt. Albert Snyder
       role: Commanding Officer, D Co.
       note: >
         Reaction to stings was severe enough that he could not continue in
@@ -210,7 +210,7 @@ archivist_notes:
 
 ## Summary
 
-On March 22, 1971, Range Platoon — humping toward a night location in the mountains roughly 90 km east-northeast of Bien Hoa — disturbed a large and aggressive colony of ground bees. Panic and chaos followed: men ran, some without their weapons, smoke grenades were popped in a failed attempt to calm the swarm, and the platoon scattered before regrouping about an hour later. Five soldiers were medevaced that evening, per Jack Fink's diary — four now identified with reasonable confidence: Howard McGrew, Kirk Davis, Joe Hall, and (less certainly) Bill Marr. Kirk Davis was hit worst, his breathing nearly paralyzed by the volume of stings; he was hauled out on a rigid litter rather than a standard jungle penetrator because he kept fading in and out of consciousness. A second, partial medevac was needed the next morning for delayed reactions among men who hadn't been evacuated the first night, though it was initially grounded by weather. Separately, company commander Capt. Jim Bedsole is remembered as having been stung severely enough that he could not continue in command — though none of the six soldiers who discussed the incident in a recovered 2026 Facebook thread mention him, so it isn't yet clear this is the same incident (see open questions).
+On March 22, 1971, Range Platoon — humping toward a night location in the mountains roughly 90 km east-northeast of Bien Hoa — disturbed a large and aggressive colony of ground bees. Panic and chaos followed: men ran, some without their weapons, smoke grenades were popped in a failed attempt to calm the swarm, and the platoon scattered before regrouping about an hour later. Five soldiers were medevaced that evening, per Jack Fink's diary — four now identified with reasonable confidence: Howard McGrew, Kirk Davis, Joe Hall, and (less certainly) Bill Marr. Kirk Davis was hit worst, his breathing nearly paralyzed by the volume of stings; he was hauled out on a rigid litter rather than a standard jungle penetrator because he kept fading in and out of consciousness. A second, partial medevac was needed the next morning for delayed reactions among men who hadn't been evacuated the first night, though it was initially grounded by weather. Separately, company commander Capt. Albert Snyder is remembered as having been stung severely enough that he could not continue in command — though none of the six soldiers who discussed the incident in a recovered 2026 Facebook thread mention him, so it isn't yet clear this is the same incident (see open questions).
 
 The exact trigger is still disputed, though one of the two long-standing accounts now has a name attached. Howard McGrew's own written narrative describes a soldier collapsing from exhaustion against a stump that turned out to be a camouflaged bee nest — matching this record's earlier "accidental contact with a rotted tree trunk" account, now attributable to him. Doug Hilts instead recalls a soldier setting his backpack down over the nest, then deliberately pulling it back off once the platoon leader gave the OK to move — closer to the record's other long-standing account of a deliberate disturbance. Whatever the exact sequence, the reaction was immediate and overwhelming: men ran without their weapons, an unusual breakdown of weapons discipline that measures how severe the assault was.
 

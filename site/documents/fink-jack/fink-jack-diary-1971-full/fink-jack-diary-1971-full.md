@@ -4,7 +4,7 @@ slug: fink-jack-diary-1971-full
 title: Jack Fink's Diary, January–August 1971
 author: fink-jack
 event: null
-date: 1971
+date: "1971-01-01"
 type: source
 subtype: diary-full
 status: published

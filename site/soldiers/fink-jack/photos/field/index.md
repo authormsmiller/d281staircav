@@ -13,6 +13,7 @@ photos:
     event: ""
     location: ""
     quality: 
-    contains: []
+    contains:
+      - fink-jack
     tagged: []
 ---

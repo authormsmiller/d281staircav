@@ -58,6 +58,21 @@ timeline:
     type: service
     headline: First Combat Assault
     body: Went on Combat Assault for the first time, on his 21st birthday
+  - date: 1971-03
+    phase: in-country
+    type: service
+    headline: Assigned to CP
+    body: Tom carried an experimental AM radio to test the capabilities in the jungle and also served as the field supply sergeant for the company.
+  - date: 1971-03
+    phase: in-country
+    type: service
+    headline: Assigned to CP
+    body: Tom carried an experimental AM radio to test the capabilities in the jungle and also served as the field supply sergeant for the company.
+  - date: "1971-04-23"
+    phase: in-country
+    type: service
+    headline: Assigned as Battalion Supply
+    body: Sgt. Vollmar took an assignment on FSB Fontaine to serve as the battalion supply sergeant, flying almost daily to resupply companies in the field with food, water, supplies and mail.
   - date: "1971-07-22"
     phase: in-country
     type: service
