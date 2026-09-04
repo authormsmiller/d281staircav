@@ -17,4 +17,19 @@ photos:
       - buttermore-carl
       - knipstein-jay
     tagged: []
+  - filename: 1970 Jay is pissed at Carl for whipping him in a little one on one. Vietnam 1971.jpg
+    caption: >
+      Carl Buttermore celebrating a victory over Jay Knipstein in a little one-on-one basketball
+    caption_short: ""
+    credit: "Collection of Carl Buttermore"
+    photographer: ""
+    date: 1971
+    date_known: true
+    event: ""
+    location: ""
+    quality: 
+    contains:
+      - buttermore-carl
+      - knipstein-jay
+    tagged: []
 ---
