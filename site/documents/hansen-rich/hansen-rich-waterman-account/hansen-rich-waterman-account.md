@@ -3,7 +3,7 @@ layout: layouts/document.njk
 slug: hansen-rich-waterman-account
 title: Startled Awake by Gunfire
 author: hansen-rich
-event: ""
+event: contact-binh-tuy-1970-09-03
 date: "2018-08-11"
 type: account
 status: published

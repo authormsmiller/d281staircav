@@ -41,9 +41,23 @@ contact:
 links:
   wall: null
   other: null
-timeline_source: |
-  Service timeline not yet compiled. If you served with or knew Rich Hansen, please use the contribute form to share what you remember.
-timeline: null
+timeline_source: ""
+timeline:
+  - date: 1969-10
+    phase: training
+    type: other
+    headline: Received Draft Notice
+    body: Rich received his draft notice in October 1969 and reported to the Iowa Draft Board on Feb. 10, 1970. He boarded a bus expecting to be assigned to Fort Leonard Wood (in Missouri, the nearest of the main training bases at the time), but was instead shipped to Fort Lewis, WA, where he completed both Basic and AIT.
+  - date: "1970-07-20"
+    phase: in-country
+    type: service
+    headline: Arrived in Vietnam
+    body: Arrived in country. Rich was assigned to Delta Company shortly thereafter, where he was reunited with Don Miller, who he had met at Fort Lewis during his training.
+  - date: 1971-03
+    phase: in-country
+    type: service
+    headline: Posted to Relay Mountain
+    body: Rich was assigned to the Relay Mountain post. He remained at this post during the April 20, 1971, contact that claimed the lives of his fellow members of Range.
 photo_intro: |
   Photographs pending.
 wartime_content_notice: false
