@@ -15,7 +15,7 @@ birth_year: null
 rank: null
 mos: null
 platoon: Range
-arrived: 1970-07-20T00:00:00.000Z
+arrived: 1970-07-20
 departed: 1971-07
 character_of_service: Honorable
 status: deceased
