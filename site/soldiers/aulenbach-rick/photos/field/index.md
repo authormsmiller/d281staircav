@@ -151,4 +151,18 @@ photos:
     contains:
       - anderson-andy
     tagged: []
+  - filename: 1970-11 Jim-Harrison new guy FB-Silver Aulenbach-Photo-043.jpg
+    caption: >
+      Jim Harrison at FSB Silver
+    caption_short: ""
+    credit: "Photo by Rick Aulenbach"
+    photographer: "aulenbach-rick"
+    date: 
+    date_known: false
+    event: ""
+    location: ""
+    quality: 
+    contains:
+      - harrison-jim
+    tagged: []
 ---

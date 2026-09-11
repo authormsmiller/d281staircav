@@ -10,10 +10,11 @@ status: published
 contains:
   - garvin-jim
   - dillon-stan
+  - spivla-john  
 tagged: []
 permalink: /documents/hansen-rich/hansen-rich-waterman-account/
 ---
-The following account has been modified to read in the first person, based on an interview with Rich before he passed away in 2021. The details have not been altered, other than references to who may have fired that night.
+***The following account has been modified to read in the first person, based on an interview with Rich before he passed away in 2021. The details have not been altered, other than references to who may have fired that night.***
 
 In the days leading up to Sept. 3, 1970, we were working in platoon strength and were all on edge because we had had 9 contacts in 8 days. I was startled awake by gunfire.
 
