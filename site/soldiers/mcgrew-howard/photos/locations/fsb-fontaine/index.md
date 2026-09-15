@@ -5,10 +5,8 @@ photos:
   - filename: 1971-fontaine-bicycle-01.jpg
     caption: >
       Looking across FSB Fontaine — the firebase flag flying from the antenna mast,
-      sandbagged bunkers, and stacked ammunition crates. An M274 "Mule" (the Army's small
-      flatbed utility carrier) sits just above the bicycle, and a field-expedient shower —
-      a water can rigged on a tripod — stands at right. A bicycle leans against the crates
-      at left: quiet corroboration of the battalion's "Vietnam-style '500'" bicycle races
+      sandbagged bunkers, and stacked ammunition crates. A soldier driving an M274 "Mule" (the Army's small
+      flatbed utility carrier) is hauling a block of ice, likely to the mess tent. Soldiers would often hijack some of the ice to take back to the hooches to cool off their beverages. A bicycle leans against the crates at left: quiet corroboration of the battalion's "Vietnam-style '500'" bicycle races
       at the firebase that spring (see the event "The '500' — Bicycle Races at FSB Fontaine").
     caption_short: "A bicycle in the frame at FSB Fontaine"
     credit: "From the Collection of Howard McGrew"
