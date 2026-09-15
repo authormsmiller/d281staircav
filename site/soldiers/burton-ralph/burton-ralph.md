@@ -12,7 +12,7 @@ middle_name: null
 suffix: null
 nickname: null
 birth_year: null
-rank: SP4
+rank: SSG
 mos: null
 platoon: Cat
 arrived: null
