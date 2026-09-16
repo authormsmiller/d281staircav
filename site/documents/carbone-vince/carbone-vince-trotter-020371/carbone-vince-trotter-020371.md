@@ -3,7 +3,7 @@ layout: layouts/document.njk
 slug: carbone-vince-trotter-020371
 title: I Thought We Were Both Goners
 author: carbone-vince
-event: ""
+event: contact-trotter-1971-02-02
 date: ""
 type: account
 status: published
