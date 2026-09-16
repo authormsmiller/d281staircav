@@ -15,8 +15,8 @@ birth_year: null
 rank: null
 mos: null
 platoon: Range
-arrived: null
-departed: null
+arrived: 22 July 1970
+departed: 22 July 1971
 character_of_service: Honorable
 status: researching
 hometown: null
@@ -24,8 +24,15 @@ current_location: null
 year_deceased: null
 cause_of_death: null
 profile_photo: vollmar-tom-profile.jpg
-decorations: null
-distinguished_decorations: null
+decorations:
+  - Bronze Star Medal
+  - Combat Infantryman Badge
+  - Vietnam Service Medal
+  - Vietnam Campaign Medal
+  - National Defense Service Medal
+distinguished_decorations:
+  - Bronze Star Medal w/V device
+  - Combat Infantryman Badge
 decorations_unconfirmed: null
 service_record:
   induction:
@@ -58,6 +65,16 @@ timeline:
     type: service
     headline: First Combat Assault
     body: Went on Combat Assault for the first time, on his 21st birthday
+  - date: 1971-03
+    phase: in-country
+    type: service
+    headline: Assigned to CP
+    body: Tom carried an experimental AM radio to test the capabilities in the jungle and also served as the field supply sergeant for the company.
+  - date: "1971-04-23"
+    phase: in-country
+    type: service
+    headline: Assigned as Battalion Supply
+    body: Sgt. Vollmar took an assignment on FSB Fontaine to serve as the battalion supply sergeant, flying almost daily to resupply companies in the field with food, water, supplies and mail.
   - date: "1971-07-22"
     phase: in-country
     type: service

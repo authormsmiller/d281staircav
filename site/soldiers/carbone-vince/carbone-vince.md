@@ -23,7 +23,7 @@ hometown: null
 current_location: null
 year_deceased: null
 cause_of_death: null
-profile_photo: null
+profile_photo: carbone-vince-profile.jpg
 decorations: null
 distinguished_decorations: null
 decorations_unconfirmed: null

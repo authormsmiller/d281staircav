@@ -18,4 +18,18 @@ photos:
     contains:
       - dillon-stan
     tagged: []
+  - filename: IMG_2635 LT-Druner Dillon-Photo.jpg
+    caption: >
+      Ron Druener modeling a local's hat in a hooch
+    caption_short: ""
+    credit: "Photo by Stan Dillon"
+    photographer: "dillon-stan"
+    date: 1971-03
+    date_known: true
+    event: ""
+    location: ""
+    quality: 
+    contains:
+      - druener-ron
+    tagged: []
 ---

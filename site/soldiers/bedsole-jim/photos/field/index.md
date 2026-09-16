@@ -34,7 +34,7 @@ photos:
       Thanksgiving in the bush, 1970. Capt. Jim Bedsole is seated in the center holding the plate of food.
     caption_short: ""
     credit: "Courtesy of Jim Garvin"
-    photographer: ""
+    photographer: "hansen-rich"
     date: 1970-11
     date_known: true
     event: ""
